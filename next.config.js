@@ -4,7 +4,7 @@ module.exports = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'mat.stenberg.io',
+        hostname: 'mat.old.stenberg.io',
         port: '',
         pathname: '/images/**'
       }

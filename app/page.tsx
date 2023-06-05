@@ -24,10 +24,9 @@ export default async function Home({ searchParams }: Props) {
 
   return (
     <>
-      <header>
+      <div className={styles['search-wrapper']}>
         <Search />
-        <DummyComponent />
-      </header>
+      </div>
       <main>
         <div className={styles.grid}>
           {recipes?.map((recipe) => (
@@ -53,7 +52,7 @@ function RecipeData({ recipe }: { recipe: Recipe }) {
       {image ? (
         <div
           className={styles['image-container']}
-          style={{ backgroundImage: `url(https://mat.stenberg.io/images/${image}-840.jpg)` }}
+          style={{ backgroundImage: `url(https://mat.old.stenberg.io/images/${image}-840.jpg)` }}
         ></div>
       ) : (
         <div className={styles['no-image']}></div>

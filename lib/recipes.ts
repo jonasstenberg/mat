@@ -13,13 +13,13 @@ export async function getRecipes(search: string): Promise<Recipe[]> {
 }
 
 export async function getAllRecipeIds() {
-  const recipeResult = await fetch('https://mat.stenberg.io/api/recipes?select=id')
+  const recipeResult = await fetch('https://mat.old.stenberg.io/api/recipes?select=id')
   const recipeData = await recipeResult.json()
   return recipeData
 }
 
 export async function getRecipe(id: string | undefined): Promise<Recipe> {
-  const recipeResult = await fetch(`https://mat.stenberg.io/api/recipes?id=eq.${id}&select=*,categories(*)`, {
+  const recipeResult = await fetch(`https://mat.old.stenberg.io/api/recipes?id=eq.${id}&select=*,categories(*)`, {
     next: { revalidate: 3600 }
   })
   const recipeData = await recipeResult.json()

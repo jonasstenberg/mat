@@ -34,7 +34,7 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
       description: `Recept till ${recipe.name}`,
       images: recipe.image && [
         {
-          url: `https://mat.stenberg.io/images/${recipe.image}-840.jpg`,
+          url: `https://mat.old.stenberg.io/images/${recipe.image}-840.jpg`,
           width: 840,
           height: 630
         }
@@ -60,7 +60,7 @@ export default async function Page({ params, searchParams }: Props) {
     <main>
       <div className={styles.recipe}>
         <div className={styles.data}>
-          <h1 className={clsx(lora.className, styles.heading)}>{recipe.name}</h1>
+          <h2 className={clsx(lora.className, styles.heading)}>{recipe.name}</h2>
           <div className={styles.description}>
             {recipe.description.split('\n').map((str) => {
               if (str.startsWith('#')) {
@@ -76,21 +76,19 @@ export default async function Page({ params, searchParams }: Props) {
             <Ingredients recipe={recipe} />
           </div>
         </div>
-        <div className={styles.image}>
-          {recipe.image ? (
-            <Image
-              priority
-              src={`https://mat.stenberg.io/images/${recipe.image}-840.jpg`}
-              className={styles.image}
-              height={600}
-              width={600}
-              quality={100}
-              alt={recipe.name}
-            />
-          ) : (
-            <div className={styles['no-image']}></div>
-          )}
-        </div>
+        {recipe.image ? (
+          <Image
+            priority
+            src={`https://mat.old.stenberg.io/images/${recipe.image}-840.jpg`}
+            className={styles.image}
+            height={600}
+            width={600}
+            quality={100}
+            alt={recipe.name}
+          />
+        ) : (
+          <div className={styles['no-image']}></div>
+        )}
       </div>
     </main>
   )

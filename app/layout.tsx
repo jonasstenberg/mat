@@ -1,7 +1,10 @@
+import Link from 'next/link'
 import Providers from '../components/Providers'
+import DummyComponent from './DummyComponent'
 
+import styles from './page.module.css'
 import './globals.css'
-import { openSans } from '@/fonts'
+import { lora, openSans } from '@/fonts'
 
 export const metadata = {
   generator: 'Next.js',
@@ -27,7 +30,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="sv" className={openSans.className}>
       <head />
       <Providers>
-        <body>{children}</body>
+        <body>
+          <header className={lora.className}>
+            <h1 className={styles['header-heading']}>
+              <Link href="/">stenberg&apos;s receptsida</Link>
+            </h1>
+            <DummyComponent />
+          </header>
+          {children}
+        </body>
       </Providers>
     </html>
   )

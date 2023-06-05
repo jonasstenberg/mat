@@ -4,7 +4,7 @@
   --medium: 832px;
   --large: 1088px;
   --extra-large: 80rem;
-  --border-radius: 12px;
+  --border-radius: 0.25rem;
   --shadow-card-standard: 0px 2px 4px 0px rgb(0 0 0 / 4%), 0px 1px 6px 0px rgb(0 0 0 / 2%);
   --font-mono: ui-monospace, menlo, monaco, 'Cascadia Mono', 'Segoe UI Mono', 'Roboto Mono', 'Oxygen Mono',
     'Ubuntu Monospace', 'Source Code Pro', 'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
@@ -12,6 +12,7 @@
   --color-black: #000;
   --color-ivory: rgb(253 253 242);
   --color-alabaster: #ededdf;
+  --color-isabelline: #f5f5ea;
   --color-black-olive: #3a3a3a;
   --color-cultured: #f5f9f9;
   --color-gray: #bdbbb9;
@@ -88,15 +89,22 @@ li {
 
 header {
   display: flex;
+  position: relative;
   align-items: center;
   justify-content: center;
-  height: 12rem;
+  border-bottom: 1px solid var(--color-alabaster);
+  background-color: var(--color-white);
+  width: 100%;
+  height: 8rem;
 }
 
-@media only screen and (width <= 1088px) {
-  header {
-    height: 8rem;
-  }
+header h1 a::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: '';
 }
 
 main {
@@ -106,5 +114,5 @@ main {
   padding: 0 1.25rem 2rem;
   width: 100%;
   max-width: var(--extra-large);
-  min-height: 10rem;
+  min-height: 24rem;
 }

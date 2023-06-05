@@ -6,12 +6,10 @@ import { Recipe } from '../types/recipe'
 export default async function Loading() {
   return (
     <>
-      <header>
+      <div className={styles['search-wrapper']}>
         <Search />
-      </header>
+      </div>
       <main>
-        {' '}
-        <LoginButton />
         <div className={styles.grid}>
           {[...Array(12)]
             .map((u, i) => ({ id: `${i}` }))
