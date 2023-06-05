@@ -1,0 +1,110 @@
+:root {
+  --extra-small: 448px;
+  --small: 600px;
+  --medium: 832px;
+  --large: 1088px;
+  --extra-large: 80rem;
+  --border-radius: 12px;
+  --shadow-card-standard: 0px 2px 4px 0px rgb(0 0 0 / 4%), 0px 1px 6px 0px rgb(0 0 0 / 2%);
+  --font-mono: ui-monospace, menlo, monaco, 'Cascadia Mono', 'Segoe UI Mono', 'Roboto Mono', 'Oxygen Mono',
+    'Ubuntu Monospace', 'Source Code Pro', 'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+  --color-white: #fff;
+  --color-black: #000;
+  --color-ivory: rgb(253 253 242);
+  --color-alabaster: #ededdf;
+  --color-black-olive: #3a3a3a;
+  --color-cultured: #f5f9f9;
+  --color-gray: #bdbbb9;
+  --color-dark-gray: #2f6147;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  background: var(--color-ivory);
+  color: var(--color-black-olive);
+  font-family: var(--font-open-sans), sans-serif, Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue';
+  font-size: 0.875rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 1rem 0 0.5rem;
+  padding: 0;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+h4 {
+  font-size: 1.125rem;
+}
+
+h5 {
+  font-size: 1rem;
+}
+
+h6 {
+  font-size: 0.75rem;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 12rem;
+}
+
+@media only screen and (width <= 1088px) {
+  header {
+    height: 8rem;
+  }
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 0 1.25rem 2rem;
+  width: 100%;
+  max-width: var(--extra-large);
+  min-height: 10rem;
+}

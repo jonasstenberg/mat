@@ -3,20 +3,44 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "next dev --turbo",
+    "build": "NODE_ENV=production next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint:js": "next lint",
+    "lint:js:fix": "next lint --fix",
+    "lint:css": "stylelint **/*.{css}",
+    "lint:css:fix": "stylelint --fix **/*.{css}",
+    "lint": "npm run lint:js && npm run lint:css"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint --verbose -E HUSKY_GIT_PARAMS",
+      "pre-commit": "npm run lint"
+    }
   },
   "dependencies": {
+    "@types/jsonwebtoken": "^9.0.2",
     "@types/node": "20.2.5",
     "@types/react": "18.2.7",
     "@types/react-dom": "18.2.4",
+    "clsx": "^1.2.1",
+    "date-fns": "^2.30.0",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.4",
+    "jsonwebtoken": "^9.0.0",
     "next": "13.4.4",
+    "next-auth": "^4.22.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "sharp": "^0.32.1",
     "typescript": "5.0.4"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.6.5",
+    "@commitlint/config-conventional": "^17.6.5",
+    "husky": "^8.0.3",
+    "stylelint": "^15.6.2",
+    "stylelint-config-concentric-order": "^5.1.0",
+    "stylelint-config-standard": "^33.0.0"
   }
 }
