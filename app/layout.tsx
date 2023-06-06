@@ -1,10 +1,14 @@
 import Link from 'next/link'
-import Providers from '../components/Providers'
-import DummyComponent from './DummyComponent'
+import { getServerSession } from 'next-auth'
+import LoginButton from '@/components/LoginButton'
 
+import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+import Providers from '@/components/Providers'
+
+import '@/styles/globals.css'
 import styles from './page.module.css'
-import './globals.css'
-import { lora, openSans } from '@/fonts'
+import { azeretMono, openSans, lora } from '@/styles/fonts'
+import clsx from 'clsx'
 
 export const metadata = {
   generator: 'Next.js',
@@ -25,17 +29,19 @@ export const metadata = {
   }
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const session = await getServerSession(authOptions)
+
   return (
-    <html lang="sv" className={openSans.className}>
+    <html lang="sv" className={clsx(openSans.variable, azeretMono.variable, lora.variable)}>
       <head />
-      <Providers>
+      <Providers session={session}>
         <body>
-          <header className={lora.className}>
+          <header className={styles.header}>
             <h1 className={styles['header-heading']}>
               <Link href="/">stenberg&apos;s receptsida</Link>
             </h1>
-            <DummyComponent />
+            <LoginButton />
           </header>
           {children}
         </body>

@@ -1,11 +1,11 @@
 export interface Recipe {
-  id: string
+  id?: string
   name: string
-  date_added: string
-  date_updated: string
+  date_added?: string
+  date_updated?: string
   ingredients: string[] | Ingredient[]
   description: string
-  image: string
-  thumbnail: string
-  categories: Category[]
+  image?: string
+  thumbnail?: string
+  categories?: Category[]
 }

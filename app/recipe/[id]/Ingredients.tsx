@@ -1,9 +1,8 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 
-import { Ingredient } from '@/types/ingredient'
 import { Recipe } from '@/types/recipe'
-import styles from './page.module.css'
+import styles from '@/app/page.module.css'
 
 interface Props {
   recipe: Recipe

@@ -11,7 +11,9 @@ export async function GET(req: NextRequest) {
   const baseQuery = '?order=name&select=*,categories(*)'
   const searchQuery = search?.length && `&full_tsv=fts(swedish).${search}:*`
 
-  const recipeResult = await fetch(`${baseUrl}${baseQuery}${searchQuery}`)
+  const url = `${baseUrl}${baseQuery}${searchQuery}`
+
+  const recipeResult = await fetch(url)
   const recipeData = await recipeResult.json()
 
   return NextResponse.json(recipeData)
