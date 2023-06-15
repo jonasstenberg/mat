@@ -1,5 +1,6 @@
 import { getToken } from 'next-auth/jwt'
 import { NextRequest, NextResponse } from 'next/server'
+import { parse } from 'path'
 
 const baseUrl = `${process.env.API_ENDPOINT}/recipes_and_categories`
 

@@ -1,7 +1,5 @@
 import Search from '../components/Search'
-import LoginButton from '../components/LoginButton'
 import styles from './page.module.css'
-import { Recipe } from '../types/recipe'
 
 export default async function Loading() {
   return (

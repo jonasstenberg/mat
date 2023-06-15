@@ -1,11 +1,11 @@
 import { ResolvingMetadata, Metadata } from 'next'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
+import React from 'react'
 
 import { getAllRecipeIds, getRecipe } from '@/lib/recipes'
 import { Recipe } from '@/types/recipe'
 import styles from '@/app/page.module.css'
-import React from 'react'
 import Ingredients from './ingredients'
 
 type Props = {
@@ -13,8 +13,7 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined }
 }
 
-export async function generateMetadata({ params, searchParams }: Props, parent: ResolvingMetadata): Promise<Metadata> {
-  const id = params.id
+export async function generateMetadata({ params }: Props, parent: ResolvingMetadata): Promise<Metadata> {
   const recipe = await getRecipe(params.id)
 
   if (!recipe) {
@@ -51,7 +50,7 @@ export async function generateStaticParams() {
   return ids
 }
 
-export default async function Page({ params, searchParams }: Props) {
+export default async function Page({ params }: Props) {
   const recipe = await getRecipe(params.id)
 
   return (
