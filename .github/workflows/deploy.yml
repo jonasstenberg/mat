@@ -1,0 +1,56 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 8
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install and test
+        run: |
+          pnpm install
+          pnpm lint
+
+      - name: Deploy
+        env:
+          DOMAIN: mat.stenberg.io
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.APP_SERVER_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H $DOMAIN >> ~/.ssh/known_hosts
+          rsync -azvHd ./ root@$DOMAIN:/usr/local/bin/matv2.stenberg.io/
+          ssh -o StrictHostKeyChecking=no root@$DOMAIN 'systemctl restart matv2.service'

@@ -8,7 +8,7 @@
     "start": "next start",
     "lint:js": "next lint",
     "lint:js:fix": "next lint --fix",
-    "lint:css": "stylelint **/*.{css}",
+    "lint:css": "stylelint \"**/*.css\"",
     "lint:css:fix": "stylelint --fix **/*.{css}",
     "lint": "npm run lint:js && npm run lint:css"
   },

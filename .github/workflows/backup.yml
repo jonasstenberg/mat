@@ -1,0 +1,29 @@
+name: Backup
+
+on:
+  schedule:
+    - cron: '0 4 * * *'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Get and push data
+        env:
+          DOMAIN: mat.stenberg.io
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.APP_SERVER_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H $DOMAIN >> ~/.ssh/known_hosts
+          scp -o StrictHostKeyChecking=no root@$DOMAIN:/var/lib/postgres/backups/main.sql data/data.sql
+          rsync --delete -azrv root@$DOMAIN:/var/mat.stenberg.io/uploads/ data/files
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git status
+          (git add . && git commit -u -m 'Data backup' && git push) || echo "No changes to commit"
