@@ -10,12 +10,13 @@
     "lint:js:fix": "next lint --fix",
     "lint:css": "stylelint \"**/*.css\"",
     "lint:css:fix": "stylelint --fix **/*.{css}",
-    "lint": "npm run lint:js && npm run lint:css"
+    "lint": "pnpm lint:js && npm run lint:css",
+    "prepare": "husky install"
   },
   "husky": {
     "hooks": {
       "commit-msg": "commitlint --verbose -E HUSKY_GIT_PARAMS",
-      "pre-commit": "npm run lint"
+      "pre-commit": "pnpm lint"
     }
   },
   "dependencies": {
