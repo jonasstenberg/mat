@@ -35,7 +35,7 @@ export default async function Home({ searchParams }: Props) {
 function Recipes({ recipe }: { recipe: Recipe }) {
   const { id, name, ingredients, image } = recipe || {};
   return (
-    <div className={styles.restaurant} key={id}>
+    <div className={styles.recipe} key={id}>
       {image ? (
         <div className={styles["image-container"]}>
           <Image
@@ -49,11 +49,11 @@ function Recipes({ recipe }: { recipe: Recipe }) {
       ) : (
         <div className={styles["no-image"]}></div>
       )}
-      <div className={styles["restaurant-info"]}>
+      <div className={styles["recipe-info"]}>
         <h2 className={styles["recipe-title"]}>
           <Link href={`/recipe/${id}`}>{name}</Link>
         </h2>
-        <div className={styles.metadata}>{ingredients.length} ingredients </div>
+        <div className={styles["recipe-metadata"]}>{ingredients.length} ingredients </div>
       </div>
     </div>
   );
