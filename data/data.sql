@@ -5,7 +5,7 @@
 -- Dumped from database version 14.8 (Debian 14.8-1.pgdg100+1)
 -- Dumped by pg_dump version 14.8 (Debian 14.8-1.pgdg100+1)
 
--- Started on 2023-07-09 02:01:20 CEST
+-- Started on 2023-07-10 02:03:55 CEST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -192,7 +192,7 @@ COPY public.recipe_categories (date_added, recipe, category, owner) FROM stdin;
 \.
 
 
--- Completed on 2023-07-09 02:01:20 CEST
+-- Completed on 2023-07-10 02:03:55 CEST
 
 --
 -- PostgreSQL database dump complete
