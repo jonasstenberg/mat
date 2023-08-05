@@ -6,18 +6,18 @@ module.exports = {
         protocol: 'https',
         hostname: 'mat.stenberg.io',
         port: '',
-        pathname: '/images/**'
-      }
-    ]
+        pathname: '/images/**',
+      },
+    ],
   },
   headers:
     process.env.NODE_ENV === 'development'
       ? () => [
-        {
-          source: '/_next/static/css/_app-client_src_app_globals_css.css',
-          headers: [{ key: 'Vary', value: '*' }]
-        }
-      ]
+          {
+            source: '/_next/static/css/_app-client_src_app_globals_css.css',
+            headers: [{ key: 'Vary', value: '*' }],
+          },
+        ]
       : undefined,
-}
-
+  swcMinify: true,
+};

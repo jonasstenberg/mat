@@ -3,8 +3,8 @@
   position: relative;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid var(--color-alabaster);
-  background-color: var(--color-white);
+  border-bottom: 1px solid var(--mantine-color-gray-2);
+  background-color: var(--mantine-color-white);
   width: 100%;
   height: 4rem;
 }
@@ -13,6 +13,7 @@
   margin: 0 0 0 1rem;
   font-size: 1.25rem;
   font-weight: 400;
+  font-family: var(--font-lora);
 }
 
 .header-heading a {
@@ -50,10 +51,10 @@
   display: flex;
   flex-flow: column-reverse;
   margin: 0 1rem;
-  border: 1px solid var(--color-alabaster);
+  border: 1px solid var(--mantine-color-gray-2);
   border-radius: 2rem;
-  box-shadow: var(--shadow-card-standard);
-  background-color: var(--color-white);
+  box-shadow: var(--mantine-shadow-md);
+  background-color: var(--mantine-color-white);
   width: 100%;
   max-width: 36rem;
 }
@@ -68,7 +69,7 @@
   width: 100%;
   min-width: 2rem;
   height: 3.5rem;
-  color: var(--color-black-olive);
+  color: var(--mantine-color-black);
   font-size: 1rem;
 }
 
@@ -105,14 +106,36 @@
   display: none;
 }
 
+.recipe-individual {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(10px, 1fr));
+  grid-gap: 0.5rem;
+  row-gap: 0.5rem;
+  column-gap: 0.5rem;
+  margin: 2rem auto;
+  border-radius: var(--mantine-radius-sm);
+  box-shadow: var(--mantine-shadow-md);
+  background-color: var(--mantine-color-white);
+  padding: 0;
+  width: 100%;
+  max-width: var(--extra-large);
+  min-height: 24rem;
+}
+
+@media only screen and (width <= 832px) {
+  .recipe-individual {
+    margin: 0 auto;
+  }
+}
+
 .recipe {
   display: flex;
   position: relative;
   flex-flow: column nowrap;
   justify-content: space-between;
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow-card-standard);
-  background-color: var(--color-white);
+  border-radius: var(--mantine-radius-sm);
+  box-shadow: var(--mantine-shadow-md);
+  background-color: var(--mantine-color-white);
   padding: 0;
   height: 24rem;
   min-height: 12rem;
@@ -121,7 +144,7 @@
 .image-container,
 .no-image {
   position: relative;
-  background-color: var(--color-alabaster);
+  background-color: var(--mantine-color-orange-1);
   width: 100%;
   height: 100%;
   min-height: auto;
@@ -130,7 +153,7 @@
 .image-container .image {
   position: absolute;
   inset: 0;
-  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  border-radius: var(--mantine-radius-sm) var(--mantine-radius-sm) 0 0;
   width: 100%;
   height: 100%;
   color: transparent;
@@ -159,10 +182,10 @@
   align-items: center;
   justify-content: center;
   margin: 0.25rem;
-  background-color: var(--color-isabelline);
+  background-color: var(--mantine-color-orange-0);
   padding: 0.5rem 0;
   text-align: center;
-  color: var(--color-dark-gray);
+  color: var(--mantine-color-gray-7);
   font-size: 0.75rem;
   font-weight: 600;
 }
@@ -175,9 +198,9 @@
 .recipe-image,
 .recipe-image-no-image {
   grid-column: span 6;
-  border-radius: 0 var(--border-radius) var(--border-radius) 0;
-  background-color: var(--color-alabaster);
-  width: auto;
+  border-radius: 0 var(--mantine-radius-sm) var(--mantine-radius-sm) 0;
+  background-color: var(--mantine-color-orange-1);
+  width: 100%;
   max-width: 100%;
   height: 100%;
   object-fit: cover;
@@ -204,9 +227,18 @@
 
 .recipe-description {
   display: inline;
-  line-height: 100%;
   white-space: pre-line;
   word-wrap: break-word;
+}
+
+.recipe-description h1,
+.recipe-description h2,
+.recipe-description h3,
+.recipe-description h4,
+.recipe-description h5,
+.recipe-description h6 {
+  margin: 0;
+  padding: 0;
 }
 
 .ingredients {
@@ -221,7 +253,7 @@
 }
 
 .ingredient-topic {
-  border-bottom: 1px solid var(--color-black);
+  border-bottom: 1px solid var(--mantine-color-black);
   width: 100%;
 }
 
@@ -232,7 +264,7 @@
   cursor: pointer;
   padding-left: 3rem;
   min-height: 2.25rem;
-  color: var(--color-black);
+  color: var(--mantine-color-black);
 }
 
 .ingredient-span {
@@ -265,8 +297,8 @@
 }
 
 .ingredient-input[type='checkbox']:checked + .ingredient-span {
-  border-color: var(--color-black);
-  background-color: var(--color-black);
+  border-color: var(--mantine-color-black);
+  background-color: var(--mantine-color-black);
 }
 
 .ingredient {

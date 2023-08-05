@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from 'next/link';
 
 export default function NotFound() {
   return (
@@ -8,5 +8,5 @@ export default function NotFound() {
         Testa att gå tillbaka till <Link href="/">startsidan</Link>
       </p>
     </>
-  )
+  );
 }

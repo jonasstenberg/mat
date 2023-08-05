@@ -16,11 +16,11 @@ I recommend you fork the repository to push changes to your personal fork. When 
 
 1. Install dependencies
    ```sh
-   pnpm install
+   npm install
    ```
 2. Run the server and the client
    ```sh
-   pnpm dev
+   npm run dev
    ```
 
 That's it!

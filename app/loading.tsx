@@ -1,5 +1,18 @@
-import Search from '../components/Search'
-import styles from './page.module.css'
+import Search from '../components/Search';
+import styles from './page.module.css';
+
+function RecipeData({ recipe }: { recipe: { id: string } }) {
+  const { id } = recipe || {};
+  return (
+    <div className={styles.restaurant} key={id}>
+      <div className={styles['restaurant-info']}>
+        <h2 className={styles.title}> </h2>
+        <div className={styles.metadata} />
+      </div>
+      <div className={styles['no-image']} />
+    </div>
+  );
+}
 
 export default async function Loading() {
   return (
@@ -10,25 +23,12 @@ export default async function Loading() {
       <main>
         <div className={styles.grid}>
           {[...Array(12)]
-            .map((u, i) => ({ id: `${i}` }))
+            .map((_, i) => ({ id: `${i}` }))
             ?.map((recipe) => (
               <RecipeData key={recipe.id} recipe={recipe} />
             ))}
         </div>
       </main>
     </>
-  )
-}
-
-function RecipeData({ recipe }: { recipe: { id: string } }) {
-  const { id } = recipe || {}
-  return (
-    <div className={styles.restaurant} key={id}>
-      <div className={styles['restaurant-info']}>
-        <h2 className={styles.title}></h2>
-        <div className={styles.metadata}></div>
-      </div>
-      <div className={styles['no-image']}></div>
-    </div>
-  )
+  );
 }

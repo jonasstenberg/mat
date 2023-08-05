@@ -23,13 +23,6 @@ SET row_security = off;
 -- Name: main; Type: DATABASE; Schema: -; Owner: postgres
 --
 
-CREATE DATABASE main WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'en_US.UTF-8';
-
-
-ALTER DATABASE main OWNER TO postgres;
-
-\connect main
-
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;

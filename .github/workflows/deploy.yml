@@ -18,31 +18,19 @@ jobs:
         with:
           node-version: 18
 
-      - uses: pnpm/action-setup@v2
-        name: Install pnpm
-        id: pnpm-install
-        with:
-          version: 8
-          run_install: false
-
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-      - uses: actions/cache@v3
-        name: Setup pnpm cache
-        with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
       - name: Install and test
         run: |
-          pnpm install
-          pnpm lint
+          npm install
+          npm run lint
+
+      - name: Build
+        env:
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+          NEXTAUTH_URL: ${{ vars.NEXTAUTH_URL }}
+          NEXT_PUBLIC_BASE_URL: ${{ vars.NEXT_PUBLIC_BASE_URL }}
+          NEXT_PUBLIC_API_ENDPOINT: ${{ vars.NEXT_PUBLIC_API_ENDPOINT }}
+          NEXT_PUBLIC_DEFAULT_SERVINGS: ${{ vars.NEXT_PUBLIC_DEFAULT_SERVINGS }}
+        run: npm run build
 
       - name: Deploy
         env:
@@ -52,5 +40,5 @@ jobs:
           echo "${{ secrets.APP_SERVER_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H $DOMAIN >> ~/.ssh/known_hosts
-          rsync -azvHd ./ root@$DOMAIN:/usr/local/bin/matv2.stenberg.io/
+          rsync -azHd ./.next ./package.json ./node_modules root@$DOMAIN:/usr/local/bin/matv2.stenberg.io/
           ssh -o StrictHostKeyChecking=no root@$DOMAIN 'systemctl restart matv2.service'

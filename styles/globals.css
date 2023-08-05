@@ -4,17 +4,6 @@
   --medium: 832px;
   --large: 1088px;
   --extra-large: 80rem;
-  --border-radius: 0.25rem;
-  --shadow-card-standard: 0px 2px 4px 0px rgb(0 0 0 / 4%), 0px 1px 6px 0px rgb(0 0 0 / 2%);
-  --color-white: #fff;
-  --color-black: #000;
-  --color-ivory: rgb(253 253 242);
-  --color-alabaster: #ededdf;
-  --color-isabelline: #f5f5ea;
-  --color-black-olive: #3a3a3a;
-  --color-cultured: #f5f9f9;
-  --color-gray: #bdbbb9;
-  --color-dark-gray: #2f6147;
 }
 
 * {
@@ -23,18 +12,11 @@
   padding: 0;
 }
 
-html,
-body {
-  overflow: auto;
-}
-
 body {
   margin: 0;
-  background: var(--color-ivory);
-  color: var(--color-black-olive);
-  font-family: var(--font-open-sans), sans-serif, Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans',
-    'Helvetica Neue';
-  font-size: 0.875rem;
+  background-color: var(--mantine-color-orange-0);
+  color: var(--mantine-color-gray-8);
+  font-size: var(--mantine-font-size-sm);
 }
 
 h1,
@@ -45,7 +27,6 @@ h5,
 h6 {
   margin: 1rem 0 0.5rem;
   padding: 0;
-  font-family: var(--font-lora);
 }
 
 h1 {
@@ -92,4 +73,18 @@ main {
   width: 100%;
   max-width: var(--extra-large);
   min-height: 24rem;
+}
+
+@media only screen and (width <= 832px) {
+  main {
+    padding: 0;
+  }
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select,
+  textarea,
+  input {
+    font-size: 16px;
+  }
 }
