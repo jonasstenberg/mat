@@ -5,7 +5,7 @@
 -- Dumped from database version 14.8 (Debian 14.8-1.pgdg100+1)
 -- Dumped by pg_dump version 14.8 (Debian 14.8-1.pgdg100+1)
 
--- Started on 2023-08-05 02:04:32 CEST
+-- Started on 2023-08-06 02:06:18 CEST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -22,6 +22,13 @@ SET row_security = off;
 -- TOC entry 3376 (class 1262 OID 16451)
 -- Name: main; Type: DATABASE; Schema: -; Owner: postgres
 --
+
+CREATE DATABASE main WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'en_US.UTF-8';
+
+
+ALTER DATABASE main OWNER TO postgres;
+
+\connect main
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -119,9 +126,10 @@ a7f351df-a980-49b4-b5b5-38d6f191a3b6	2023-08-04 12:31:16.591547	2023-08-04 12:32
 ae627ce3-5e81-48b1-a04e-4a3216d9f6b9	2020-11-24 20:51:42.560464	2023-08-04 13:31:07.810644	Bönchili med koriander och nachos	Finhacka gullöken, vitlöken och chilin. Skär morötterna och bleksellerin i små kuber.\n\nStek alla grönsaker i rikligt med olivolja. Ha i tomatpurén när löken är genomskinlig och låt fräsa med någon minut.\nBlanda ner timjan, oregano, paprikapulver och spiskummit. Ha i burktomaterna och en burk vatten.\n\nLåt koka upp.\n\nBlanda ner bönorna och kakaon och låt koka ca. 10 minuter.\n\nSalta och peppra.\n\nSkär bort båda stammen och bladen på koriandern. Finhacka stammen och lägg ner i grytan innan servering.\nGrovhacka bladen och servera vid sidan om.	ae627ce3-5e81-48b1-a04e-4a3216d9f6b9.webp	\N	jonas@stenberg.io	'10':64 'blad':74,87 'bland':38,55 'bleksellerin':14 'bort':70 'burk':50 'burktomat':47 'båd':71 'bön':57 'bönchili':1 'ca':63 'chilin':10 'finhack':6,77 'fräs':34 'genomskin':31 'grovhack':86 'grytan':83 'grönsak':20 'gullök':7 'innan':84 'kakaon':59 'kok':53,62 'koriand':3,76 'kub':17 'lägg':80 'låt':33,52,61 'lök':29 'minut':37,65 'moröt':12 'nacho':5 'ner':39,56,81 'olivolj':24 'oregano':41 'paprikapulv':42 'peppr':68 'rik':22 'salt':66 'server':89 'servering':85 'sidan':91 'skär':11,69 'små':16 'spiskummit':44 'stamm':72,78 'stek':18 'timjan':40 'tomatpurén':27 'vatt':51 'vitlök':8	4	60	15
 41bc608a-d07b-45f2-a533-2085726ae280	2020-11-16 20:46:51.50334	2023-08-04 12:52:14.680508	Chipotlegryta	Hacka gullökarna, vitlöksklyftorna och ingefäran fint.\nFräs i kokosolja i några minuter tills löken är genomskinlig.\nTillsätt tomatpuren och adobo chipotlen och fräs ytterliggare en minut.\n\nGrovriv morötterna under tiden.\n\nHa i krossade tomater och morötterna och puttra i minst 30 minuter. Tillsätt kokosmjölken och de röda linserna och koka tills linserna är klara.	41bc608a-d07b-45f2-a533-2085726ae280.webp	\N	jonas@stenberg.io	'30':42 'adobo':21 'chipotl':22 'chipotlegryt':1 'fint':7 'fräs':8,24 'genomskin':17 'grovriv':28 'gullök':3 'hack':2 'ingefäran':6 'klar':55 'kok':51 'kokosmjölk':45 'kokosolj':10 'kross':34 'lins':49,53 'lök':15 'minst':41 'minut':13,27,43 'moröt':29,37 'puttr':39 'röd':48 'tid':31 'till':14,52 'tillsät':18,44 'tomat':35 'tomatpur':19 'vitlöksklyft':4 'ytterligg':25	4	\N	\N
 a644a7d4-a57f-45ae-97d4-1ae39a0638a5	2022-12-29 12:40:19.597625	2023-08-03 22:19:09.756675	Mammas kardemummaskorpor	Blanda alla torra ingredienserna och finfördela smöret i. Blanda i mjölken.\nGör små bullar som gräddas i 225-250 grader, ca 8 minuter.\nDela bullarna och rosta i 150 grader.	a644a7d4-a57f-45ae-97d4-1ae39a0638a5.webp	\N	jonas@stenberg.io	'-250':21 '150':31 '225':20 '8':24 'bland':3,11 'bull':16,27 'ca':23 'del':26 'finfördel':8 'grad':22,32 'grädd':18 'gör':14 'ingrediens':6 'kardemummaskorp':2 'mamm':1 'minut':25 'mjölk':13 'rost':29 'små':15 'smöret':9 'torr':5	4	\N	\N
-bc0a6a05-bc49-49dc-89e3-37933fc145e9	2023-08-04 16:56:05.373362	2023-08-04 16:56:05.731292	Enkla frukostfrallor	Rör ihop allt utom salt for hand i en bunke. Låt vila 30 minuter, tillsätt salt och blanda någon minut. Täck med plast och låt jäsa 1-1½ timme. Stjälp upp degen på ett mjölat bakbord och dela den i sex bitar. Rundriv bitarna, lägg dem pa ett bak-plätspapper pa en bricka och ställ in i kylskåpet.\n\nDag 2, morgon\nTa fram bullarna ur kylskåpet och sätt ugnen på 275 grader med en plat i mitten och en oöm plåt på nedersta hyllan. Låt ugnen bli riktigt varm. Pensla eller spreja på lite vatten och strö på lite solroskärnor och linfrön. Sätt in bröden i ugnen och lägg några isbitar på den nedre plåten. Sänk värmen till 250 grader och låt bröden stå 15-20 minuter eller tills de fått fin färg.	bc0a6a05-bc49-49dc-89e3-37933fc145e9.webp	\N	jonas@stenberg.io	'-1':30 '-20':129 '1':29 '15':128 '2':63 '250':122 '275':74 '30':15 'bak':52 'bak-plätspapp':51 'bakbord':38 'bit':44,46 'bland':20 'brick':56 'bröd':108,126 'bull':67 'bunk':12 'dag':62 'deg':34 'del':40 'enkl':1 'fin':135 'for':8 'fram':66 'frukostfrall':2 'färg':136 'fått':134 'grad':75,123 'hand':9 'hyllan':87 'ihop':4 'in':59,107 'isbit':114 'jäs':28 'kylskåpet':61,69 'linfrön':105 'lit':97,102 'lägg':47,112 'låt':13,27,88,125 'minut':16,22,130 'mitt':80 'mjöl':37 'morgon':64 'nederst':86 'nedr':117 'oöm':83 'pa':49,54 'pensl':93 'plast':25 'plat':78 'plätspapp':53 'plåt':84,118 'rikt':91 'rundriv':45 'rör':3 'salt':7,18 'sex':43 'solroskärn':103 'sprej':95 'stjälp':32 'strö':100 'ställ':58 'stå':127 'sänk':119 'sätt':71,106 'ta':65 'till':132 'tillsät':17 'timm':31 'täck':23 'ugn':72,89,110 'ur':68 'utom':6 'varm':92 'vatt':98 'vil':14 'värm':120	6	25	15
+bc0a6a05-bc49-49dc-89e3-37933fc145e9	2023-08-04 16:56:05.373362	2023-08-05 17:19:28.17676	Enkla frukostfrallor	Rör ihop allt utom salt for hand i en bunke. Låt vila några minuter (max 30), tillsätt salt och blanda någon minut.  Stjälp upp degen på ett mjölat bakbord och dela den i sex bitar. Rundriv bitarna, lägg dem på ett bakplåtspapper på en bricka och ställ in i en avstängd och kall ugn med några kylklampar och isbitar på en plåt i botten.\n\nDag 2, morgon\nTa fram bullarna ur ugnen och sätt den på 275 grader med en plåt i mitten och en oöm plåt på nedersta hyllan. Låt ugnen bli riktigt varm. Pensla eller spreja på lite vatten och strö på lite solroskärnor och linfrön. Sätt in bröden i ugnen och lägg några isbitar på den nedre plåten. Sänk värmen till 250 grader och låt bröden stå 15-20 minuter eller tills de fått fin färg.	bc0a6a05-bc49-49dc-89e3-37933fc145e9.webp	\N	jonas@stenberg.io	'-20':134 '15':133 '2':68 '250':127 '275':79 '30':18 'avstäng':53 'bakbord':31 'bakplåtspapp':44 'bit':37,39 'bland':22 'bott':66 'brick':47 'bröd':113,131 'bull':72 'bunk':12 'dag':67 'deg':27 'del':33 'enkl':1 'fin':140 'for':8 'fram':71 'frukostfrall':2 'färg':141 'fått':139 'grad':80,128 'hand':9 'hyllan':92 'ihop':4 'in':50,112 'isbit':61,119 'kall':55 'kylklamp':59 'linfrön':110 'lit':102,107 'lägg':40,117 'låt':13,93,130 'max':17 'minut':16,24,135 'mitt':85 'mjöl':30 'morgon':69 'nederst':91 'nedr':122 'oöm':88 'pensl':98 'plåt':64,83,89,123 'rikt':96 'rundriv':38 'rör':3 'salt':7,20 'sex':36 'solroskärn':108 'sprej':100 'stjälp':25 'strö':105 'ställ':49 'stå':132 'sänk':124 'sätt':76,111 'ta':70 'till':137 'tillsät':19 'ugn':56,74,94,115 'ur':73 'utom':6 'varm':97 'vatt':103 'vil':14 'värm':125	6	25	15
+24194bad-e62c-49a3-8e4b-3b8a35e8c724	2023-08-05 10:08:37.352644	2023-08-05 17:21:27.999822	Mommakakor	Rör socker och smör poröst. Tillsätt övriga ingredienser och blanda till jämn deg. Rulla ut 4 längder, lägg dom på bakplåtspapper och tryck ut dom med fingrarna. Grädda i 200 grader, ca 15 minuter eller tills kakorna blivit gyllenbruna. Skär dem i den storlek som önskas.	24194bad-e62c-49a3-8e4b-3b8a35e8c724.webp	\N	jonas@stenberg.io	'15':34 '200':31 '4':17 'bakplåtspapp':22 'bland':11 'ca':33 'deg':14 'dom':20,26 'fingr':28 'grad':32 'grädd':29 'gyllenbrun':40 'ingrediens':9 'jämn':13 'kak':38 'lägg':19 'läng':18 'minut':35 'mommakak':1 'poröst':6 'rull':15 'rör':2 'skär':41 'smör':5 'sock':3 'storlek':45 'till':37 'tillsät':7 'tryck':24 'önsk':47 'övr':8	4	0	0
 8ecc7ec6-54e8-466b-bd41-36d4a05539e7	2022-12-29 12:57:11.352181	2023-08-03 22:19:09.756675	Mammas äppelkaka i svampskogen	Blanda alla ingredienser och lägg i en pajform.\nLägg på äppelklyftorna. Lägg på smörklickar och kanel.\n\nGrädda i 30-40 minuter på 175 grader.	8ecc7ec6-54e8-466b-bd41-36d4a05539e7.webp	\N	jonas@stenberg.io	'-40':24 '175':27 '30':23 'bland':5 'grad':28 'grädd':21 'ingrediens':7 'kanel':20 'lägg':9,13,16 'mamm':1 'minut':25 'pajform':12 'smörklick':18 'svampskog':4 'äppelkak':2 'äppelklyft':15	4	\N	\N
-04ecefde-1b56-44df-9aef-401c9e48c34a	2023-08-04 11:15:45.48476	2023-08-04 11:57:57.917029	Amerikanska blåbärsmuffins	Vispa smör och socker vitt och pösigt. Rör i äggen , ett i taget. Tillsätt vaniljsocker och mjölk. Blanda mjöl och bakpulver och rör i smeten. Fyll formarna med\nsmeten.\n\nTryck i blåbären med en sked.\nGrädda mitt i ugnen på 200° i ca 15 min.	04ecefde-1b56-44df-9aef-401c9e48c34a.webp	\N	jonas@stenberg.io	'15':46 '200':43 'amerikansk':1 'bakpulv':23 'bland':20 'blåbär':34 'blåbärsmuffin':2 'ca':45 'form':29 'fyll':28 'grädd':38 'mjöl':21 'mjölk':19 'pös':9 'rör':10,25 'sked':37 'smet':27,31 'smör':4 'sock':6 'taget':15 'tillsät':16 'tryck':32 'ugn':41 'vaniljsock':17 'visp':3 'vitt':7 'ägg':12	12	\N	\N
+04ecefde-1b56-44df-9aef-401c9e48c34a	2023-08-04 11:15:45.48476	2023-08-05 17:19:40.126108	Amerikanska blåbärsmuffins	Vispa smör och socker vitt och pösigt. Rör i äggen , ett i taget. Tillsätt vaniljsocker och mjölk. Blanda mjöl och bakpulver och rör i smeten. Fyll formarna med\nsmeten.\n\nTryck i blåbären med en sked.\nGrädda mitt i ugnen på 200° i ca 15 min.	04ecefde-1b56-44df-9aef-401c9e48c34a.webp	\N	jonas@stenberg.io	'15':46 '200':43 'amerikansk':1 'bakpulv':23 'bland':20 'blåbär':34 'blåbärsmuffin':2 'ca':45 'form':29 'fyll':28 'grädd':38 'mjöl':21 'mjölk':19 'pös':9 'rör':10,25 'sked':37 'smet':27,31 'smör':4 'sock':6 'taget':15 'tillsät':16 'tryck':32 'ugn':41 'vaniljsock':17 'visp':3 'vitt':7 'ägg':12	12	0	0
 dd534f07-426c-4dcc-87e0-8174d44d03f7	2020-11-21 15:32:01.748489	2023-08-03 22:19:09.756675	Spaghetti och (veg)köttfärssås	Hacka gullök. Skiva morötter och rotselleri i ca. 0.5 cm stora bitar. Finhacka vitlöken.\nFräs gullöken, vitlöken, morötterna och rotselleri i olivoljan tills löken är genomskinlig. Ha i anammafärsen och fräs med ytterliggare några minuter. Ha i tomatpuren och fräs med en minut.\nHa i vinet och låt det vätskan puttra bort någon minut.\nTillsätt burktomaterna och den torkade basilikan och låt puttra. Desto längre desto bättre. Tillsätt vatten om det blir torrt. \nSmaka av med salt och peppar.	dd534f07-426c-4dcc-87e0-8174d44d03f7.webp	\N	jonas@stenberg.io	'0.5':13 'anammafärs':33 'basilikan':64 'bit':16 'bort':56 'burktomat':60 'bättr':71 'ca':12 'cm':14 'desto':68,70 'finhack':17 'fräs':19,35,44 'genomskin':30 'gullök':6,20 'hack':5 'köttfärssås':4 'längr':69 'låt':52,66 'lök':28 'minut':39,47,58 'moröt':8,22 'olivoljan':26 'pepp':83 'puttr':55,67 'rotselleri':10,24 'salt':81 'skiv':7 'smak':78 'spaghetti':1 'stor':15 'till':27 'tillsät':59,72 'tomatpur':42 'tork':63 'torrt':77 'vatt':73 'veg':3 'vinet':50 'vitlök':18,21 'vätskan':54 'ytterligg':37	4	\N	\N
 9bbf4e07-645f-44a4-88e2-ca7d23f31746	2022-12-29 17:35:36.149884	2023-08-03 22:19:09.756675	Stekta kroppkakor med svamp och hasselnötter	Skala och koka potatisen i lättsaltat vatten. Pressa genom en potatispress och låt svalna. Vispa ihop ägget.\nBlanda potatis, ägg, mjöl och 1 tsk salt till en jämn deg.\n\nFyllning: Skala och finhacka löken. Fräs löken i 2 msk smör på låg värme tills den mjuknar ca 10 minuter. Höj värmen och tillsätt svamp, kryddpeppar, ½ tsk salt och stek vtterligare några minuter. Rör ner nötterna.	9bbf4e07-645f-44a4-88e2-ca7d23f31746.webp	\N	jonas@stenberg.io	'1':29 '10':54 '2':44 'bland':24 'ca':53 'deg':35 'finhack':39 'fräs':41 'fyllning':36 'genom':15 'hasselnöt':6 'höj':56 'ihop':22 'jämn':34 'kok':9 'kroppkak':2 'kryddpepp':61 'lättsalt':12 'låg':48 'låt':19 'lök':40,42 'minut':55,68 'mjukn':52 'mjöl':27 'msk':45 'ner':70 'nött':71 'potatis':10,25 'potatispress':17 'press':14 'rör':69 'salt':31,63 'skal':7,37 'smör':46 'stek':65 'stekt':1 'svaln':20 'svamp':4,60 'till':50 'tillsät':59 'tsk':30,62 'vatt':13 'visp':21 'vtter':66 'värm':49,57 'ägg':26 'ägget':23	4	\N	\N
 \.
@@ -498,6 +506,11 @@ d25b2c8a-b836-4261-a4e7-160ed618412f	2023-08-03 22:18:51.869911	2023-08-03 22:18
 a64534d1-da10-46c3-b507-1d7a26fd4cd9	2023-08-03 22:18:51.869911	2023-08-03 22:18:51.869911	9b6996db-e837-44a4-bd55-46f9ed31f515	# Till servering			postgres
 0659dd0f-8922-4314-acbf-6abb37cb63cc	2023-08-03 22:18:51.869911	2023-08-03 22:18:51.869911	9b6996db-e837-44a4-bd55-46f9ed31f515	Krasse			postgres
 c9be4706-ab65-47cd-8ded-0114e538ed70	2023-08-03 22:18:51.869911	2023-08-03 22:18:51.869911	9b6996db-e837-44a4-bd55-46f9ed31f515	Finriven pepparrot			postgres
+0aefcca7-c26d-4cd7-a266-1b2876fd6d7a	2023-08-05 17:19:28.17676	2023-08-05 17:19:28.17676	bc0a6a05-bc49-49dc-89e3-37933fc145e9	vetesurdegsgrund (ca 0.5 dl)	g	50	jonas@stenberg.io
+e2293656-a697-42b4-bc59-af95970dee3a	2023-08-05 17:19:28.17676	2023-08-05 17:19:28.17676	bc0a6a05-bc49-49dc-89e3-37933fc145e9	vatten (2.5 dl)	g	250	jonas@stenberg.io
+416e4db0-d631-475a-b572-00e7a8e1ead9	2023-08-05 17:19:28.17676	2023-08-05 17:19:28.17676	bc0a6a05-bc49-49dc-89e3-37933fc145e9	jäst	g	3	jonas@stenberg.io
+87e7951c-db78-4c85-87bd-125b3e52b099	2023-08-05 17:19:28.17676	2023-08-05 17:19:28.17676	bc0a6a05-bc49-49dc-89e3-37933fc145e9	vetemjöl special (6 dl)	g	350	jonas@stenberg.io
+e0622d95-1316-469d-950c-52793b335a49	2023-08-05 17:19:28.17676	2023-08-05 17:19:28.17676	bc0a6a05-bc49-49dc-89e3-37933fc145e9	salt (1 tsk)	g	7	jonas@stenberg.io
 11d2cecc-3d01-4fa7-aeda-11c0300c9d22	2023-08-03 22:18:51.869911	2023-08-03 22:18:51.869911	33c62ccb-4f03-4528-8d4e-e29b0b71bf16	# För 4 personer			postgres
 84834a7c-7659-4608-94df-bd08e59d88a5	2023-08-03 22:18:51.869911	2023-08-03 22:18:51.869911	33c62ccb-4f03-4528-8d4e-e29b0b71bf16	4 stora filéer saltsill (ca 400g)			postgres
 e026e065-92fb-4377-bc44-e611d3551b8a	2023-08-03 22:18:51.869911	2023-08-03 22:18:51.869911	33c62ccb-4f03-4528-8d4e-e29b0b71bf16	2 gula lökar			postgres
@@ -510,6 +523,16 @@ e6f5d592-b48c-454b-a537-4803d7c249ff	2023-08-03 22:18:51.869911	2023-08-03 22:18
 1bdd010d-7c13-477c-882e-d968a9b7d2a4	2023-08-03 22:18:51.869911	2023-08-03 22:18:51.869911	33c62ccb-4f03-4528-8d4e-e29b0b71bf16	1 dl ättiksprit			postgres
 540ba7ea-4f68-44bf-9d48-e3a796fa56bc	2023-08-03 22:18:51.869911	2023-08-03 22:18:51.869911	33c62ccb-4f03-4528-8d4e-e29b0b71bf16	2 dl vatten			postgres
 bf68b439-17d1-4c2f-8cb6-db87d708af22	2023-08-03 22:18:51.869911	2023-08-03 22:18:51.869911	33c62ccb-4f03-4528-8d4e-e29b0b71bf16	1 1/2 dl socker			postgres
+c8081190-b130-4050-9a6d-8c956fcf0ee3	2023-08-05 17:19:28.17676	2023-08-05 17:19:28.17676	bc0a6a05-bc49-49dc-89e3-37933fc145e9	hela linfrön	msk	1	jonas@stenberg.io
+037c5c29-1e6a-4a2a-91b0-ce0016d8d221	2023-08-05 17:19:28.17676	2023-08-05 17:19:28.17676	bc0a6a05-bc49-49dc-89e3-37933fc145e9	solroskärnor	msk	2	jonas@stenberg.io
+95444272-8f4b-463a-a015-0c8f24f9cee8	2023-08-05 17:19:40.126108	2023-08-05 17:19:40.126108	04ecefde-1b56-44df-9aef-401c9e48c34a	rumstempererat smör	g	150	jonas@stenberg.io
+84dc6cc6-3fc3-49f1-9f19-7222d0f6620d	2023-08-05 17:19:40.126108	2023-08-05 17:19:40.126108	04ecefde-1b56-44df-9aef-401c9e48c34a	socker	dl	2	jonas@stenberg.io
+e9de9ffe-891c-4357-b5e2-e95429afdee5	2023-08-05 17:19:40.126108	2023-08-05 17:19:40.126108	04ecefde-1b56-44df-9aef-401c9e48c34a	ägg		2	jonas@stenberg.io
+0bfe43b1-5974-4903-a1db-41bf0565c4f7	2023-08-05 17:19:40.126108	2023-08-05 17:19:40.126108	04ecefde-1b56-44df-9aef-401c9e48c34a	vaniljsocker	tsk	1	jonas@stenberg.io
+5c962049-c96f-4d5d-af9b-ef9692a2cb76	2023-08-05 17:19:40.126108	2023-08-05 17:19:40.126108	04ecefde-1b56-44df-9aef-401c9e48c34a	mjölk	dl	0.5	jonas@stenberg.io
+3bf5e5ff-d795-4a66-8ab8-4f347716fb4c	2023-08-05 17:19:40.126108	2023-08-05 17:19:40.126108	04ecefde-1b56-44df-9aef-401c9e48c34a	vetemjöl	dl	3	jonas@stenberg.io
+c8a0ef9d-6850-4c30-9948-c2237b0621db	2023-08-05 17:19:40.126108	2023-08-05 17:19:40.126108	04ecefde-1b56-44df-9aef-401c9e48c34a	bakpulver	tsk	1	jonas@stenberg.io
+f69df06e-ce21-461a-a359-711e24f9a2bb	2023-08-05 17:19:40.126108	2023-08-05 17:19:40.126108	04ecefde-1b56-44df-9aef-401c9e48c34a	blåbär	dl	2	jonas@stenberg.io
 2fac4dcf-ea09-46f9-ad84-8fc7f0834e87	2023-08-03 22:18:51.869911	2023-08-03 22:18:51.869911	076be509-1a06-41b5-946a-31693a6a8079	Vatten			postgres
 a604391d-f29e-4e63-8d57-387a2df2656b	2023-08-03 22:18:51.869911	2023-08-03 22:18:51.869911	076be509-1a06-41b5-946a-31693a6a8079	Fiskkrydda			postgres
 e8cbe797-3a8d-4c34-9abf-3ecf3b596b06	2023-08-03 22:18:51.869911	2023-08-03 22:18:51.869911	076be509-1a06-41b5-946a-31693a6a8079	Kryddpepparkorn			postgres
@@ -702,14 +725,13 @@ b9fc78db-a40d-4490-aa2b-c9333df0b1ba	2023-08-03 22:18:51.869911	2023-08-03 22:18
 ad5c7107-6982-457b-91f5-9d1f55bc306c	2023-08-03 22:18:51.869911	2023-08-03 22:18:51.869911	1ff2ca0d-e96e-4256-b9e6-2aa2dd53ea50	2 tsk salt			postgres
 6bb0359c-9992-4684-b922-a28bec8acd11	2023-08-03 22:18:51.869911	2023-08-03 22:18:51.869911	1ff2ca0d-e96e-4256-b9e6-2aa2dd53ea50	2 dl finrivna morötter ca 70 g			postgres
 a7eb0bbd-8fc9-475e-aba3-b2dcf236bf50	2023-08-03 22:18:51.869911	2023-08-03 22:18:51.869911	1ff2ca0d-e96e-4256-b9e6-2aa2dd53ea50	2 dI rivet äpple ca 60 g			postgres
-9192107b-cb86-466d-9316-9cd0c02eb601	2023-08-04 11:57:57.917029	2023-08-04 11:57:57.917029	04ecefde-1b56-44df-9aef-401c9e48c34a	rumstempererat smör	g	150	jonas@stenberg.io
-034612a1-8b35-4dc9-b874-de85bb6f75b6	2023-08-04 11:57:57.917029	2023-08-04 11:57:57.917029	04ecefde-1b56-44df-9aef-401c9e48c34a	socker	dl	2	jonas@stenberg.io
-ea70af88-4a9a-4e49-b4c2-a01a24888d7d	2023-08-04 11:57:57.917029	2023-08-04 11:57:57.917029	04ecefde-1b56-44df-9aef-401c9e48c34a	ägg		2	jonas@stenberg.io
-bdd2aeca-61d6-46f7-a04b-7151a9e832f0	2023-08-04 11:57:57.917029	2023-08-04 11:57:57.917029	04ecefde-1b56-44df-9aef-401c9e48c34a	vaniljsocker	tsk	1	jonas@stenberg.io
-df212a6b-71c3-4f4b-9af2-757b358b8690	2023-08-04 11:57:57.917029	2023-08-04 11:57:57.917029	04ecefde-1b56-44df-9aef-401c9e48c34a	mjölk	dl	0.5	jonas@stenberg.io
-9f1cc964-a45b-4044-b74f-fbedadb80042	2023-08-04 11:57:57.917029	2023-08-04 11:57:57.917029	04ecefde-1b56-44df-9aef-401c9e48c34a	vetemjöl	dl	3	jonas@stenberg.io
-14353f71-bb2e-4afa-9e36-728e7d16f259	2023-08-04 11:57:57.917029	2023-08-04 11:57:57.917029	04ecefde-1b56-44df-9aef-401c9e48c34a	bakpulver	tsk	1	jonas@stenberg.io
-0c7b6106-7f79-47c6-ab9a-7abb28ff707b	2023-08-04 11:57:57.917029	2023-08-04 11:57:57.917029	04ecefde-1b56-44df-9aef-401c9e48c34a	blåbär	dl	2	jonas@stenberg.io
+f7df67ac-fc40-4a7d-8261-3e05777dfda8	2023-08-05 17:21:27.999822	2023-08-05 17:21:27.999822	24194bad-e62c-49a3-8e4b-3b8a35e8c724	smör	g	200	jonas@stenberg.io
+15b97d70-3768-4090-8981-26dc04cac010	2023-08-05 17:21:27.999822	2023-08-05 17:21:27.999822	24194bad-e62c-49a3-8e4b-3b8a35e8c724	socker	dl	2.25	jonas@stenberg.io
+18acf536-b6bd-4f51-b71c-b4dd51c38bce	2023-08-05 17:21:27.999822	2023-08-05 17:21:27.999822	24194bad-e62c-49a3-8e4b-3b8a35e8c724	sirap	msk	1	jonas@stenberg.io
+ad74fd67-4405-477c-8ce0-493d93eb6385	2023-08-05 17:21:27.999822	2023-08-05 17:21:27.999822	24194bad-e62c-49a3-8e4b-3b8a35e8c724	vaniljsocker	tsk	1	jonas@stenberg.io
+9f2f4460-e9e3-4761-8821-ea4cb5f9862c	2023-08-05 17:21:27.999822	2023-08-05 17:21:27.999822	24194bad-e62c-49a3-8e4b-3b8a35e8c724	bakpulver	tsk	2	jonas@stenberg.io
+e5ff56f6-e583-4590-9adf-55a3cf25ec49	2023-08-05 17:21:27.999822	2023-08-05 17:21:27.999822	24194bad-e62c-49a3-8e4b-3b8a35e8c724	vetemjöl	dl	5	jonas@stenberg.io
+1698f45d-80ab-4c76-a284-f2727e0b42e4	2023-08-05 17:21:27.999822	2023-08-05 17:21:27.999822	24194bad-e62c-49a3-8e4b-3b8a35e8c724	solroskärnor	dl	1	jonas@stenberg.io
 e277b835-51ac-4218-af0e-f4a01509e5b5	2023-08-04 12:32:26.198563	2023-08-04 12:32:26.198563	a7f351df-a980-49b4-b5b5-38d6f191a3b6	dillkronor	knippa(en)	1	jonas@stenberg.io
 63fcb1e3-2376-4a41-be42-bc08e0f80865	2023-08-04 12:32:26.198563	2023-08-04 12:32:26.198563	a7f351df-a980-49b4-b5b5-38d6f191a3b6	västerårsgurka(or)	kg	1	jonas@stenberg.io
 91203a03-d0d7-4777-b9e8-dc0201396ebe	2023-08-04 12:32:26.198563	2023-08-04 12:32:26.198563	a7f351df-a980-49b4-b5b5-38d6f191a3b6	senapsfrön, gula	msk	3	jonas@stenberg.io
@@ -764,13 +786,6 @@ f4f15d1d-3f91-443b-9947-aca4bb0bbd9e	2023-08-04 13:31:07.810644	2023-08-04 13:31
 808681e7-d342-440d-bd68-356f3fde1ec4	2023-08-04 13:31:07.810644	2023-08-04 13:31:07.810644	ae627ce3-5e81-48b1-a04e-4a3216d9f6b9	salt och svartpeppar			jonas@stenberg.io
 0eaa0dfb-5e4b-4e9b-9f1f-5deccace3a49	2023-08-04 13:31:07.810644	2023-08-04 13:31:07.810644	ae627ce3-5e81-48b1-a04e-4a3216d9f6b9	färsk koriander	kruka	1	jonas@stenberg.io
 97415119-b63c-493a-b499-4909f658891f	2023-08-04 13:31:07.810644	2023-08-04 13:31:07.810644	ae627ce3-5e81-48b1-a04e-4a3216d9f6b9	nachos och creme fraiche till servering			jonas@stenberg.io
-5626007f-8469-4d64-9a19-7f2ec8fbfc12	2023-08-04 16:56:05.731292	2023-08-04 16:56:05.731292	bc0a6a05-bc49-49dc-89e3-37933fc145e9	vetesurdegsgrund (ca 0.5 dl)	g	50	jonas@stenberg.io
-823b14fc-3554-4e85-94b2-34838535179c	2023-08-04 16:56:05.731292	2023-08-04 16:56:05.731292	bc0a6a05-bc49-49dc-89e3-37933fc145e9	vatten (2.5 dl)	g	250	jonas@stenberg.io
-789da592-02ae-49f0-bfad-ae25dbd3d169	2023-08-04 16:56:05.731292	2023-08-04 16:56:05.731292	bc0a6a05-bc49-49dc-89e3-37933fc145e9	jäst	g	3	jonas@stenberg.io
-a6f3d444-8fc7-44bb-8d2f-8b0161264b6c	2023-08-04 16:56:05.731292	2023-08-04 16:56:05.731292	bc0a6a05-bc49-49dc-89e3-37933fc145e9	vetemjöl special (6 dl)	g	350	jonas@stenberg.io
-b26fed6e-d731-486b-9552-53721b7e9e94	2023-08-04 16:56:05.731292	2023-08-04 16:56:05.731292	bc0a6a05-bc49-49dc-89e3-37933fc145e9	salt (1 tsk)	g	7	jonas@stenberg.io
-ca8bbdad-cfe9-477d-bb53-4f2fd91dc9c5	2023-08-04 16:56:05.731292	2023-08-04 16:56:05.731292	bc0a6a05-bc49-49dc-89e3-37933fc145e9	hela linfrön	msk	1	jonas@stenberg.io
-3dc75b75-53bf-4db3-9a5e-224192d494b7	2023-08-04 16:56:05.731292	2023-08-04 16:56:05.731292	bc0a6a05-bc49-49dc-89e3-37933fc145e9	solroskärnor	msk	2	jonas@stenberg.io
 \.
 
 
@@ -840,18 +855,19 @@ COPY public.recipe_categories (date_added, recipe, category, owner) FROM stdin;
 2023-06-05 09:23:32.834338	fb5328c4-5e22-41d7-a1e1-35448e96b4af	008625e8-ada4-4412-b20f-feb6f2f5c6ed	jonas@stenberg.io
 2023-06-05 19:39:47.740156	1ff2ca0d-e96e-4256-b9e6-2aa2dd53ea50	1e92d3e7-8a5e-4d0d-a52e-737a519666c5	jonas@stenberg.io
 2023-08-04 09:24:52.199875	3b6206a8-4ed8-4228-a66b-1e0c05ac2af4	008625e8-ada4-4412-b20f-feb6f2f5c6ed	jonas@stenberg.io
-2023-08-04 11:57:57.917029	04ecefde-1b56-44df-9aef-401c9e48c34a	74b57792-fa68-4efb-be46-e8d194d86ed3	jonas@stenberg.io
 2023-08-04 12:32:26.198563	a7f351df-a980-49b4-b5b5-38d6f191a3b6	fcbddad5-f66b-4142-949f-af475423a834	jonas@stenberg.io
 2023-08-04 12:51:24.035833	8f4f0cd3-b2b8-4e78-8110-15459b651d18	1e92d3e7-8a5e-4d0d-a52e-737a519666c5	jonas@stenberg.io
 2023-08-04 12:52:14.680508	41bc608a-d07b-45f2-a533-2085726ae280	008625e8-ada4-4412-b20f-feb6f2f5c6ed	jonas@stenberg.io
 2023-08-04 12:52:14.680508	41bc608a-d07b-45f2-a533-2085726ae280	5a9ca809-e24a-40f0-bf36-dfb3c56e9e10	jonas@stenberg.io
 2023-08-04 13:31:07.810644	ae627ce3-5e81-48b1-a04e-4a3216d9f6b9	008625e8-ada4-4412-b20f-feb6f2f5c6ed	jonas@stenberg.io
 2023-08-04 13:31:07.810644	ae627ce3-5e81-48b1-a04e-4a3216d9f6b9	5a9ca809-e24a-40f0-bf36-dfb3c56e9e10	jonas@stenberg.io
-2023-08-04 16:56:05.731292	bc0a6a05-bc49-49dc-89e3-37933fc145e9	73f14622-6755-4c5a-a610-ad8bf0f28071	jonas@stenberg.io
+2023-08-05 17:19:28.17676	bc0a6a05-bc49-49dc-89e3-37933fc145e9	73f14622-6755-4c5a-a610-ad8bf0f28071	jonas@stenberg.io
+2023-08-05 17:19:40.126108	04ecefde-1b56-44df-9aef-401c9e48c34a	74b57792-fa68-4efb-be46-e8d194d86ed3	jonas@stenberg.io
+2023-08-05 17:21:27.999822	24194bad-e62c-49a3-8e4b-3b8a35e8c724	74b57792-fa68-4efb-be46-e8d194d86ed3	jonas@stenberg.io
 \.
 
 
--- Completed on 2023-08-05 02:04:32 CEST
+-- Completed on 2023-08-06 02:06:18 CEST
 
 --
 -- PostgreSQL database dump complete
