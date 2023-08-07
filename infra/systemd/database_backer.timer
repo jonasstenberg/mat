@@ -1,0 +1,11 @@
+[Unit]
+Description=Daily PG Backup
+After=database-daily-backup.timer
+
+[Timer]
+OnCalendar=*-*-* 02:00
+RandomizedDelaySec=10m
+Persistent=true
+
+[Install]
+WantedBy=timers.target

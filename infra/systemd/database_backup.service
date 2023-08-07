@@ -1,0 +1,13 @@
+[Unit]
+Description=Daily PG Backup
+Documentation=man:pg_dump(8)
+ConditionACPower=true
+After=postgresql@.service network.target network-online.target systemd-networkd.service
+
+[Service]
+Type=oneshot
+User=postgres
+Group=postgres
+ExecStart=/usr/bin/pg_dump --dbname=mat --data-only --jobs=1 --verbose --create --file=/var/lib/postgres/backups/main.sql
+KillMode=process
+TimeoutStopSec=90

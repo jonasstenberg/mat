@@ -1,0 +1,15 @@
+[Unit]
+Description=mat
+After=network-online.target
+
+[Service]
+User=root
+Group=root
+EnvironmentFile=/etc/mat-env
+WorkingDirectory=/usr/local/bin/mat.stenberg.io
+ExecStart=/root/.nvm/versions/node/v19.3.0/bin/npm start
+ExecReload=/usr/bin/kill -USR1 $MAINPID
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
