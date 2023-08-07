@@ -5,8 +5,9 @@ export interface Errors {
   servings?: string;
   prep_time?: string;
   cook_time?: string;
-  description?: string;
+  categories?: string;
   ingredients?: string;
+  description?: string;
 }
 
 export const useErrors = () => {

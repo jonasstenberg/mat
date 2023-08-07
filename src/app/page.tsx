@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import styles from './page.module.css';
 import { getRecipes } from '@/lib/recipes';
 import { RecipeProps } from '@/types/recipe';
+import clock from '../../public/clock.svg';
 
 const Search = dynamic(() => import('@/components/Search'), {
   loading: () => <p />,
@@ -17,8 +18,19 @@ type Props = {
   };
 };
 
+const formatTime = (minutes: number): string => {
+  if (minutes < 60) {
+    const thresholds = [15, 30, 45, 60];
+    const threshold = thresholds.find((t) => minutes < t) || 60;
+    return `Under ${threshold} min`;
+  }
+
+  const hours = Math.floor(minutes / 60);
+  return `Över ${hours} ${hours === 1 ? 'timme' : 'timmar'}`;
+};
+
 function Recipe({ recipe }: { recipe: RecipeProps }) {
-  const { id, name, ingredients, image } = recipe || {};
+  const { id, name, image } = recipe || {};
   return (
     <div className={styles.recipe} key={id}>
       {image ? (
@@ -39,11 +51,14 @@ function Recipe({ recipe }: { recipe: RecipeProps }) {
         <h2 className={styles['recipe-title']}>
           <Link href={`/recipe/${id}`}>{name}</Link>
         </h2>
-        <div className={styles['recipe-metadata']}>
-          {ingredients.length} ingredienser
-          {recipe.prep_time ? ` | ${recipe.prep_time} m. prep` : ''}
-          {recipe.cook_time ? ` | ${recipe.cook_time} m. tillagning` : ''}
-        </div>
+        {recipe.prep_time || recipe.cook_time ? (
+          <div className={styles['recipe-metadata']}>
+            <Image src={clock} alt="clock" className={styles.clock} />
+            {formatTime(recipe.prep_time + recipe.cook_time)}
+          </div>
+        ) : (
+          ''
+        )}
       </div>
     </div>
   );

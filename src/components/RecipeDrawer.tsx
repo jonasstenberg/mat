@@ -1,6 +1,16 @@
 'use client';
 
-import { Button, Drawer, Stack, TagsInput, TextInput, Textarea } from '@mantine/core';
+import {
+  Button,
+  Drawer,
+  NumberInput,
+  Select,
+  Stack,
+  TagsInput,
+  Text,
+  TextInput,
+  Textarea,
+} from '@mantine/core';
 import { IconDeviceFloppy } from '@tabler/icons-react';
 import React, { useEffect, useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
@@ -15,7 +25,7 @@ import { validateRecipe } from '@/utils/validateRecipe';
 import { useRecipeDrawer } from '@/hooks/useRecipeDrawer';
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-const defaultServings = parseInt(process.env.NEXT_PUBLIC_DEFAULT_SERVINGS || '', 10);
+const defaultServings = process.env.NEXT_PUBLIC_DEFAULT_SERVINGS || '4';
 
 interface RecipeDrawerProps {
   categories: CategoryProps[];
@@ -100,6 +110,7 @@ const updateRecipe = async (
       recipeToUpdate: filename
         ? {
             ...recipeToUpdate,
+            ...recipeToUpdate,
             image: filename,
           }
         : recipeToUpdate,
@@ -118,9 +129,11 @@ export default function RecipeDrawer(props: RecipeDrawerProps) {
   const { errors, setErrors, resetError } = useErrors();
 
   const [recipeName, setRecipeName] = useState<string>(recipeToUpdate?.name || '');
-  const [servings, setServings] = useState<number>(recipeToUpdate?.servings || defaultServings);
-  const [prep_time, setPrepTime] = useState<number>(recipeToUpdate?.prep_time || 0);
-  const [cook_time, setCookTime] = useState<number>(recipeToUpdate?.cook_time || 0);
+  const [servings, setServings] = useState<string | null>(
+    recipeToUpdate?.servings.toString() || defaultServings
+  );
+  const [prep_time, setPrepTime] = useState<string | number>(recipeToUpdate?.prep_time || 0);
+  const [cook_time, setCookTime] = useState<string | number>(recipeToUpdate?.cook_time || 0);
   const [categories, setCategories] = useState<string[]>(
     recipeToUpdate?.categories?.map((category) => category.name) || []
   );
@@ -146,7 +159,7 @@ export default function RecipeDrawer(props: RecipeDrawerProps) {
   }, [recipeToUpdate?.name]);
 
   useEffect(() => {
-    setServings(recipeToUpdate?.servings || defaultServings);
+    setServings(recipeToUpdate?.servings.toString() || defaultServings);
   }, [recipeToUpdate?.servings]);
 
   useEffect(() => {
@@ -198,38 +211,27 @@ export default function RecipeDrawer(props: RecipeDrawerProps) {
           }}
           error={errors.recipeName}
         />
-        <TextInput
+        <Select
           label="Antal portioner"
           placeholder={defaultServings.toString()}
           withAsterisk
           value={servings}
-          onChange={(e) => {
-            resetError('servings');
-            setServings(Number.parseInt(e.currentTarget.value, 10));
-          }}
-          error={errors.servings}
+          data={Array.from({ length: 12 }, (_, index) => ((index + 1) * 2).toString())}
+          onChange={setServings}
         />
-        <TextInput
-          label="Tid för prep"
+        <NumberInput
+          label="Tid för prep (i minuter)"
           placeholder="0"
           withAsterisk
           value={prep_time}
-          onChange={(e) => {
-            resetError('prep_time');
-            setPrepTime(Number.parseInt(e.currentTarget.value, 10));
-          }}
-          error={errors.prep_time}
+          onChange={setPrepTime}
         />
-        <TextInput
-          label="Tid för tillagning"
+        <NumberInput
+          label="Tid för tillagning (i minuter)"
           placeholder={defaultServings.toString()}
           withAsterisk
           value={cook_time}
-          onChange={(e) => {
-            resetError('cook_time');
-            setCookTime(Number.parseInt(e.currentTarget.value, 10));
-          }}
-          error={errors.cook_time}
+          onChange={setCookTime}
         />
         <TagsInput
           label="Kategori"
@@ -238,6 +240,9 @@ export default function RecipeDrawer(props: RecipeDrawerProps) {
           value={categories}
           onChange={setCategories}
         />
+        <Text c="red" size="xs">
+          {errors.categories}
+        </Text>
         <ImageUploader image={image} setImage={setImage} clearImage={clearImage} />
         <IngredientsFieldset
           ingredients={ingredients}
@@ -274,16 +279,18 @@ export default function RecipeDrawer(props: RecipeDrawerProps) {
               recipeName,
               description,
               ingredients: mappedIngredients,
+              categories,
             });
 
             setErrors(validate.errors);
+            setIsLoading(false);
 
             if (validate.valid) {
               const recipe = {
                 name: recipeName,
-                servings,
-                prep_time,
-                cook_time,
+                servings: Number(servings),
+                prep_time: Number(prep_time),
+                cook_time: Number(cook_time),
                 categories,
                 description,
                 image,
@@ -293,7 +300,6 @@ export default function RecipeDrawer(props: RecipeDrawerProps) {
                 ? await updateRecipe(recipeToUpdate.id, recipe, async () => {
                     await fetch(`/api/revalidate?path=/recipe/${recipeToUpdate.id}`);
                     handlers.close();
-                    setIsLoading(false);
                     startTransition(() => {
                       window.location.reload();
                     });

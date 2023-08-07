@@ -190,6 +190,13 @@
   font-weight: 600;
 }
 
+.clock {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.25rem;
+  fill: var(--mantine-color-gray-7);
+}
+
 .recipe-data {
   grid-column: span 6;
   padding: 2rem;
