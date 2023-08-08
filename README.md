@@ -16,4 +16,6 @@ Follow the instructions in [CONTRIBUTING](./CONTRIBUTING.md) and code away.
 
 ## TODO
 
-- [ ] Add instructions on how to setup the infrastrucure
+- [x] Add instructions on how to setup the infrastrucure
+- [ ] Add sign-up functionality
+- [ ] Add possability to add images or urls to your collection of recipes
