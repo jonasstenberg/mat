@@ -25,6 +25,7 @@
     "@mantine/core": "7.0.0-alpha.21",
     "@mantine/form": "7.0.0-alpha.21",
     "@mantine/hooks": "7.0.0-alpha.21",
+    "@mantine/dropzone": "7.0.0-alpha.21",
     "@tabler/icons-react": "^2.30.0",
     "@types/jsonwebtoken": "^9.0.2",
     "@types/node": "20.4.5",

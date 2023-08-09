@@ -13,7 +13,7 @@ import { getCategories } from '@/lib/categories';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import Providers from '@/components/Providers';
 import { theme } from '@/theme';
-import RecipeDrawer from '@/components/RecipeDrawer';
+import RecipeModal from '@/components/RecipeModal';
 
 const HeaderMenu = dynamic(() => import('@/components/HeaderMenu'), {
   loading: () => <p />,
@@ -56,7 +56,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <body>
           <MantineProvider theme={theme} defaultColorScheme="light">
             <LoginDrawer />
-            {session?.user?.name && <RecipeDrawer categories={categories} />}
+            {session?.user?.name && <RecipeModal categories={categories} />}
             <header className={styles.header}>
               <Title className={styles['header-heading']}>
                 <Link href="/">stenberg&apos;s receptsida</Link>

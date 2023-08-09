@@ -5,7 +5,7 @@ import { signOut } from 'next-auth/react';
 import { Session } from 'next-auth';
 
 import { Menu, Button, rem } from '@mantine/core';
-import { useRecipeDrawer } from '@/hooks/useRecipeDrawer';
+import { useRecipeModal } from '@/hooks/useRecipeModal';
 import { useLoginDrawer } from '@/hooks/useLoginDrawer';
 
 interface HeaderMenuProps {
@@ -13,7 +13,7 @@ interface HeaderMenuProps {
 }
 
 export default function HeaderMenu(props: HeaderMenuProps) {
-  const { handlers } = useRecipeDrawer();
+  const { handlers } = useRecipeModal();
   const { handlers: loginHandlers } = useLoginDrawer();
   return (
     <>

@@ -31,7 +31,6 @@ export async function POST(req: NextRequest) {
         new_categories: recipe.categories,
         new_ingredients: recipe.ingredients,
         new_image: recipe.image,
-        new_thumbnail: recipe.thumbnail,
       }),
     });
 
@@ -75,8 +74,7 @@ export async function PUT(req: NextRequest) {
         new_cook_time: recipe.cook_time,
         new_description: recipe.description,
         new_image: recipe.image,
-        new_thumbnail: recipe.thumbnail,
-        new_categories: recipe.categories?.map((category: string) => ({ name: category })),
+        new_categories: recipe.categories,
         new_ingredients: recipe.ingredients,
       }),
     });

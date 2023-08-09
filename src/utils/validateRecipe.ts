@@ -1,43 +1,31 @@
-import { Errors } from '@/hooks/useRecipeErrors';
-import { IngredientProps } from '@/types/recipe';
-
-interface RecipeValidationProps {
-  recipeName: string;
-  description: string;
-  ingredients: IngredientProps[];
-  categories: string[];
-}
+import { Errors } from '@/contexts/ErrorContext';
+import { RecipeProps } from '@/types/recipe';
 
 interface RecipeValidationResult {
   valid: boolean;
   errors: Errors;
 }
 
-export const validateRecipe = ({
-  recipeName,
-  description,
-  ingredients,
-  categories,
-}: RecipeValidationProps): RecipeValidationResult => {
+export const validateRecipe = (recipe: RecipeProps): RecipeValidationResult => {
   let valid = true;
   let errors = {};
 
-  if (!recipeName.trim()) {
+  if (!recipe.name?.trim()) {
     errors = { ...errors, recipeName: 'Receptnamn krävs.' };
     valid = false;
   }
 
-  if (!description.trim()) {
+  if (!recipe.description?.trim()) {
     errors = { ...errors, description: 'Beskrivning krävs.' };
     valid = false;
   }
 
-  if (ingredients.length < 1 || !ingredients[0].name.trim()) {
+  if (!recipe.ingredients || recipe.ingredients.length < 1 || !recipe.ingredients[0].name?.trim()) {
     errors = { ...errors, ingredients: 'Minst en ingrediens krävs.' };
     valid = false;
   }
 
-  if (categories.length < 1) {
+  if (!recipe.categories || recipe.categories.length < 1) {
     errors = { ...errors, categories: 'Minst en kategori krävs.' };
     valid = false;
   }

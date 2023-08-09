@@ -8,7 +8,7 @@ DROP TABLE IF EXISTS categories CASCADE;
 DROP TABLE IF EXISTS recipe_categories CASCADE;
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-create extension if not exists "pgcrypto";
+CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 
 DROP ROLE IF EXISTS "anon";
 DROP ROLE IF EXISTS "jonas@stenberg.io";

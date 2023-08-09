@@ -1,25 +1,11 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 
-export interface Errors {
-  recipeName?: string;
-  servings?: string;
-  prep_time?: string;
-  cook_time?: string;
-  categories?: string;
-  ingredients?: string;
-  description?: string;
-}
+import { ErrorContext } from '@/contexts/ErrorContext';
 
 export const useErrors = () => {
-  const [errors, setErrors] = useState<Errors>({});
-
-  const resetError = (field: keyof Errors) => {
-    setErrors((prevErrors) => {
-      const newErrors = { ...prevErrors };
-      delete newErrors[field];
-      return newErrors;
-    });
-  };
-
-  return { errors, setErrors, resetError };
+  const context = useContext(ErrorContext);
+  if (!context) {
+    throw new Error('hook must be used within its provider');
+  }
+  return context;
 };

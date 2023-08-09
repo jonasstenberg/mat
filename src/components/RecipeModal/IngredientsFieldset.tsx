@@ -2,14 +2,15 @@ import React from 'react';
 import { Button, CloseButton, Text, Group, Stack, Fieldset } from '@mantine/core';
 
 import Ingredient from './Ingredient';
+import { IngredientProps } from '@/types/recipe';
 
 interface IngredientsFieldsetProps {
-  ingredients: any[];
+  ingredients: IngredientProps[];
   handleAddComponent: () => void;
-  handleRemoveComponent: (id: number) => void;
-  handleChangeValue: (id: number, name: string, value: string) => void;
+  handleRemoveComponent: (id: string | number) => void;
+  handleChangeValue: (id: string | number, name: string, value: string) => void;
   addError: boolean;
-  errors: { ingredients?: string };
+  error: string | undefined;
 }
 
 const IngredientsFieldset: React.FC<IngredientsFieldsetProps> = ({
@@ -18,24 +19,24 @@ const IngredientsFieldset: React.FC<IngredientsFieldsetProps> = ({
   handleRemoveComponent,
   handleChangeValue,
   addError,
-  errors,
+  error,
 }) => (
   <Fieldset legend="Ingredienser">
     <Stack gap="sm">
-      {ingredients.map((ingredient) => (
+      {ingredients?.map((ingredient) => (
         <Group grow preventGrowOverflow={false} wrap="nowrap" key={ingredient.id}>
           <React.Fragment key={ingredient.id}>
             <Ingredient
-              values={ingredient.values}
+              ingredient={ingredient}
               onChange={(name, value) => handleChangeValue(ingredient.id, name, value)}
             />
           </React.Fragment>
           <CloseButton onClick={() => handleRemoveComponent(ingredient.id)} />
         </Group>
       ))}
-      {errors.ingredients && (
+      {error && (
         <Text c="red" size="xs">
-          {errors.ingredients}
+          {error}
         </Text>
       )}
       <Button

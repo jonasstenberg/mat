@@ -5,7 +5,7 @@ import { Button, Modal } from '@mantine/core';
 import { useRouter } from 'next/navigation';
 
 import { RecipeProps } from '@/types/recipe';
-import { useRecipeDrawer } from '@/hooks/useRecipeDrawer';
+import { useRecipeModal } from '@/hooks/useRecipeModal';
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -14,7 +14,7 @@ interface RecipeActionsProps {
 }
 
 export default function RecipeActions({ recipe }: RecipeActionsProps) {
-  const { setRecipeToUpdate, handlers } = useRecipeDrawer();
+  const { setRecipeToUpdate, handlers } = useRecipeModal();
   const [confirmOpened, { open: confirmOpen, close: confirmClose }] = useDisclosure(false);
   const router = useRouter();
 

@@ -236,5 +236,3 @@ END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 
 GRANT EXECUTE ON FUNCTION login(TEXT,TEXT) TO anon;
-
-INSERT INTO auth.users (name, email, pass, role) VALUES ('Jonas Stenberg', 'jonas@stenberg.io', 'microsoft', 'jonas@stenberg.io');;
