@@ -4,13 +4,15 @@ import { notFound } from 'next/navigation';
 import React from 'react';
 import dynamic from 'next/dynamic';
 import { getServerSession } from 'next-auth';
-import { Divider, Text, Title } from '@mantine/core';
+import { Center, Divider, Text, Title } from '@mantine/core';
 
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { getAllRecipeIds, getRecipe } from '@/lib/recipes';
 import { RecipeProps } from '@/types/recipe';
 import styles from '@/app/page.module.css';
 import Ingredients from './Ingredients';
+import ServingsSlider from '@/components/ServingsSlider';
+import { config } from '@/utils/config';
 
 const RecipeActions = dynamic(() => import('@/components/RecipeActions'), {
   loading: () => <p />,
@@ -63,9 +65,11 @@ export async function generateStaticParams() {
   return ids;
 }
 
-export default async function Page({ params }: Props) {
+export default async function Page({ params, searchParams }: Props) {
   const recipe = await getRecipe(params.id);
   const session = await getServerSession(authOptions);
+
+  const servings = Number(searchParams.servings || recipe.servings || config.defaultServings);
 
   return (
     <main>
@@ -75,13 +79,16 @@ export default async function Page({ params }: Props) {
           <Title order={2} mt="md" mb="xs" className={styles['recipe-heading']}>
             {recipe.name}
           </Title>
-          <Divider mt="md" mb="xs" />
-          <Text size="sm">
-            {recipe.servings} portioner
-            {recipe.prep_time ? ` | ${recipe.prep_time} min preptid` : ''}
-            {recipe.cook_time ? ` | ${recipe.cook_time} min tillagningstid` : ''}
-          </Text>
-          <Divider mt="xs" mb="lg" />
+          <Divider mt="md" mb="sm" />
+          <Center mb="xs">
+            <Text size="sm">
+              {servings} portioner
+              {recipe.prep_time ? ` | ${recipe.prep_time} min preptid` : ''}
+              {recipe.cook_time ? ` | ${recipe.cook_time} min tillagningstid` : ''}
+            </Text>
+          </Center>
+          <ServingsSlider servings={servings} />
+          <Divider mt="sm" mb="lg" />
           <div className={styles['recipe-description']}>
             {recipe.description.split('\n').map((str) => {
               if (str.startsWith('#')) {
@@ -93,7 +100,7 @@ export default async function Page({ params }: Props) {
             })}
           </div>
           <div className={styles.ingredients}>
-            <Ingredients recipe={recipe} />
+            <Ingredients recipe={recipe} servings={servings} />
           </div>
         </div>
         {recipe.image ? (
