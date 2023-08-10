@@ -22,7 +22,7 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H $DOMAIN >> ~/.ssh/known_hosts
           scp -o StrictHostKeyChecking=no root@$DOMAIN:/var/lib/postgres/backups/main.sql data/data.sql
-          rsync --delete -azrv root@$DOMAIN:/var/mat.stenberg.io/uploads/ data/files
+          rsync --delete -azrv root@$DOMAIN:/usr/local/bin/matv2.stenberg.io/public/uploads/ data/files
           git config user.name github-actions
           git config user.email github-actions@github.com
           git status
