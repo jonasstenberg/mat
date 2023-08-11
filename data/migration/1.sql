@@ -14,23 +14,6 @@ CREATE TABLE ingredients (
 GRANT SELECT ON "ingredients" TO "anon";
 GRANT ALL ON "ingredients" TO "jonas@stenberg.io";
 
-INSERT INTO ingredients (recipe_id, name, measurement, quantity)
-SELECT
-  r.id,
-  i::text AS name,
-  '' AS measurement,
-  '' AS quantity
-FROM recipes r,
-LATERAL jsonb_array_elements_text(r.ingredients) AS i;
-
-ALTER TABLE recipes DROP COLUMN ingredients CASCADE;
-
-ALTER TABLE recipes
-ADD COLUMN servings INT DEFAULT 4;
-
-UPDATE recipes
-SET servings = 4;
-
 CREATE OR REPLACE VIEW recipes_and_categories
 AS
 SELECT
@@ -156,7 +139,6 @@ END;
 $$;
 
 GRANT EXECUTE ON FUNCTION update_recipe TO "jonas@stenberg.io";
-
 CREATE SCHEMA IF NOT EXISTS auth;
 
 DROP TABLE IF EXISTS auth.users CASCADE;
@@ -236,3 +218,4 @@ END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 
 GRANT EXECUTE ON FUNCTION login(TEXT,TEXT) TO anon;
+

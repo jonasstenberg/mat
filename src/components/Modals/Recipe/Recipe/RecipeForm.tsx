@@ -1,4 +1,13 @@
-import { Button, NumberInput, Select, Stack, Textarea } from '@mantine/core';
+import {
+  Button,
+  Fieldset,
+  Group,
+  NumberInput,
+  Select,
+  Stack,
+  TextInput,
+  Textarea,
+} from '@mantine/core';
 import React, { useEffect, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -6,10 +15,10 @@ import { IconDeviceFloppy } from '@tabler/icons-react';
 import { useIngredientsHandler } from '@/hooks/useIngredientsHandler';
 import { useErrors } from '@/hooks/useRecipeErrors';
 import { RecipeProps } from '@/types/recipe';
-import ImageUploader from '../ImageUploader';
-import IngredientsFieldset from '../IngredientsFieldset';
 import { useRecipeModal } from '@/hooks/useRecipeModal';
 import { validateRecipe } from '@/utils/validateRecipe';
+import ImageUploader from './ImageUploader';
+import IngredientsFieldset from './IngredientsFieldset';
 
 const defaultServings = process.env.NEXT_PUBLIC_DEFAULT_SERVINGS || '4';
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
@@ -137,43 +146,68 @@ export default function RecipeForm({ isLoading, setIsLoading }: Props) {
 
   return (
     <Stack gap="sm">
-      <Select
-        label="Antal portioner"
-        placeholder={defaultServings.toString()}
-        withAsterisk
-        value={recipeFormData?.servings.toString()}
-        data={Array.from({ length: 12 }, (_, index) => ((index + 1) * 2).toString())}
-        onChange={(value) =>
-          setRecipeFormData({
-            ...recipeFormData,
-            servings: Number(value),
-          })
-        }
-      />
-      <NumberInput
-        label="Tid för prep (i minuter)"
-        placeholder="0"
-        withAsterisk
-        value={recipeFormData?.prep_time}
-        onChange={(value) =>
-          setRecipeFormData({
-            ...recipeFormData,
-            prep_time: Number(value),
-          })
-        }
-      />
-      <NumberInput
-        label="Tid för tillagning (i minuter)"
-        placeholder=""
-        withAsterisk
-        value={recipeFormData?.cook_time}
-        onChange={(value) =>
-          setRecipeFormData({
-            ...recipeFormData,
-            cook_time: Number(value),
-          })
-        }
-      />
+      <Fieldset legend="Antal enheter">
+        <Group grow preventGrowOverflow={false} wrap="nowrap">
+          <Select
+            label="Antal portioner"
+            placeholder={defaultServings.toString()}
+            w="15%"
+            miw="7rem"
+            withAsterisk
+            value={recipeFormData?.servings.toString()}
+            data={Array.from({ length: 12 }, (_, index) => ((index + 1) * 2).toString())}
+            onChange={(value) =>
+              setRecipeFormData({
+                ...recipeFormData,
+                servings: Number(value),
+              })
+            }
+          />
+          <TextInput
+            label="Enhet"
+            placeholder="Portioner"
+            w="85%"
+            withAsterisk
+            value={recipeFormData.servings_name}
+            onChange={(e) => {
+              setRecipeFormData({
+                ...recipeFormData,
+                servings_name: e.currentTarget.value,
+              });
+            }}
+          />
+        </Group>
+      </Fieldset>
+      <Fieldset legend="Tid (i minuter)">
+        <Group grow preventGrowOverflow={false} wrap="nowrap">
+          <NumberInput
+            label="Prep"
+            placeholder="0"
+            w="50%"
+            withAsterisk
+            value={recipeFormData?.prep_time}
+            onChange={(value) =>
+              setRecipeFormData({
+                ...recipeFormData,
+                prep_time: Number(value),
+              })
+            }
+          />
+          <NumberInput
+            label="Tillagning"
+            placeholder=""
+            w="50%"
+            withAsterisk
+            value={recipeFormData?.cook_time}
+            onChange={(value) =>
+              setRecipeFormData({
+                ...recipeFormData,
+                cook_time: Number(value),
+              })
+            }
+          />
+        </Group>
+      </Fieldset>
       <ImageUploader />
       <IngredientsFieldset
         ingredients={recipeFormData?.ingredients}
@@ -211,6 +245,7 @@ export default function RecipeForm({ isLoading, setIsLoading }: Props) {
           const recipe: RecipeProps = {
             name: recipeFormData.name,
             servings: recipeFormData.servings,
+            servings_name: recipeFormData.servings_name,
             prep_time: recipeFormData.prep_time,
             cook_time: recipeFormData.cook_time,
             categories: recipeFormData.categories,

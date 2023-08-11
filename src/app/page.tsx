@@ -51,14 +51,16 @@ function Recipe({ recipe }: { recipe: RecipeProps }) {
         <h2 className={styles['recipe-title']}>
           <Link href={`/recipe/${id}`}>{name}</Link>
         </h2>
-        {recipe.prep_time || recipe.cook_time ? (
-          <div className={styles['recipe-metadata']}>
-            <Image src={clock} alt="clock" className={styles.clock} />
-            {formatTime(recipe.prep_time + recipe.cook_time)}
-          </div>
-        ) : (
-          ''
-        )}
+        <div className={styles['recipe-metadata']}>
+          {recipe.prep_time || recipe.cook_time ? (
+            <>
+              <Image src={clock} alt="clock" className={styles.clock} />
+              {formatTime(recipe.prep_time + recipe.cook_time)}
+            </>
+          ) : (
+            <p>&nbsp;</p>
+          )}
+        </div>
       </div>
     </div>
   );

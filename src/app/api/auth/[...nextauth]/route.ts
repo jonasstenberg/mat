@@ -1,6 +1,7 @@
 import { NextAuthOptions } from 'next-auth';
 import NextAuth from 'next-auth/next';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import GoogleProvider from 'next-auth/providers/google';
 import jwt from 'jsonwebtoken';
 
 import { config } from '@/utils/config';
@@ -10,6 +11,10 @@ export const authOptions: NextAuthOptions = {
     strategy: 'jwt',
   },
   providers: [
+    GoogleProvider({
+      clientId: config.googleClientId,
+      clientSecret: config.googleSecret,
+    }),
     CredentialsProvider({
       credentials: {
         email: { label: 'Email', type: 'email', placeholder: 'me@example.com' },
@@ -29,7 +34,7 @@ export const authOptions: NextAuthOptions = {
             },
             body: JSON.stringify({
               login_email: email,
-              login_pass: password,
+              login_password: password,
             }),
           });
 
@@ -60,7 +65,6 @@ export const authOptions: NextAuthOptions = {
       const tokenContent = {
         name: token?.name,
         email: token?.email,
-        role: token?.email,
         sub: token?.sub,
       };
 
@@ -75,6 +79,25 @@ export const authOptions: NextAuthOptions = {
       // @ts-ignore-next-line
       const verify = jwt.verify(token, secret);
       return verify;
+    },
+  },
+  events: {
+    async signIn({ profile, account }) {
+      if (account?.provider === 'credentials') {
+        return;
+      }
+
+      await fetch(`${config.baseUrl}/api/user`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: profile?.name,
+          email: profile?.email,
+          provider: account?.provider,
+        }),
+      });
     },
   },
 };

@@ -4,7 +4,8 @@ import { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 import { ReactNode } from 'react';
 import { RecipeModalProvider } from '@/contexts/RecipeModalContext';
-import { LoginDrawerProvider } from '@/contexts/LoginDrawerContext';
+import { AuthModalProvider } from '@/contexts/AuthModalContext';
+import { SettingsModalProvider } from '@/contexts/SettingsModalContext';
 import { ErrorProvider } from '@/contexts/ErrorContext';
 
 interface Props {
@@ -15,11 +16,13 @@ interface Props {
 export default function Providers({ children, session }: Props) {
   return (
     <SessionProvider session={session}>
-      <LoginDrawerProvider>
-        <RecipeModalProvider>
-          <ErrorProvider>{children}</ErrorProvider>
-        </RecipeModalProvider>
-      </LoginDrawerProvider>
+      <SettingsModalProvider>
+        <AuthModalProvider>
+          <RecipeModalProvider>
+            <ErrorProvider>{children}</ErrorProvider>
+          </RecipeModalProvider>
+        </AuthModalProvider>
+      </SettingsModalProvider>
     </SessionProvider>
   );
 }

@@ -47,8 +47,13 @@ SET row_security = off;
 -- Data for Name: users; Type: TABLE DATA; Schema: auth; Owner: postgres
 --
 
-COPY auth.users (id, name, email, pass, role) FROM stdin;
-e708ff15-722c-4177-ac55-405fff35b30f	Jonas Stenberg	jonas@stenberg.io	$2a$06$UFa2NQyoGEFrOuHzv6KVp.j8G.qnnujXLi5/9fTol98CsNRWCc2Nq	jonas@stenberg.io
+COPY auth.users (id, name, email, owner) FROM stdin;
+e708ff15-722c-4177-ac55-405fff35b30f	Jonas Stenberg	jonas@stenberg.io	jonas@stenberg.io
+\.
+
+
+COPY auth.user_passwords (email, password) FROM stdin;
+jonas@stenberg.io	$2a$06$UFa2NQyoGEFrOuHzv6KVp.j8G.qnnujXLi5/9fTol98CsNRWCc2Nq
 \.
 
 

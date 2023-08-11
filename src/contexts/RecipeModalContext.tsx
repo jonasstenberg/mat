@@ -5,11 +5,13 @@ import { useDisclosure } from '@mantine/hooks';
 import { RecipeProps } from '@/types/recipe';
 
 const defaultServings = process.env.NEXT_PUBLIC_DEFAULT_SERVINGS || '4';
+const defaultServingsName = process.env.NEXT_PUBLIC_DEFAULT_SERVINGS_NAME || 'portioner';
 
 const defaultRecipeFormData = {
   name: '',
   categories: [],
   servings: Number(defaultServings),
+  servings_name: defaultServingsName,
   prep_time: 0,
   cook_time: 0,
   ingredients: [{ id: Date.now(), measurement: '', quantity: '', name: '' }],

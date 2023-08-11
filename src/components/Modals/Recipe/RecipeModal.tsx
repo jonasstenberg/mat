@@ -8,9 +8,9 @@ import { useMediaQuery } from '@mantine/hooks';
 import { CategoryProps } from '@/types/recipe';
 import { useErrors } from '@/hooks/useRecipeErrors';
 import { useRecipeModal } from '@/hooks/useRecipeModal';
-import RecipeForm from './RecipeModal/Forms/RecipeForm';
-import ImageForm from './RecipeModal/Forms/ImageForm';
-import LinkForm from './RecipeModal/Forms/LinkForm';
+import RecipeForm from './Recipe/RecipeForm';
+import LinkForm from './Link/LinkForm';
+import ImageForm from './Image/ImageForm';
 
 interface RecipeModalProps {
   categories: CategoryProps[];
@@ -50,6 +50,7 @@ export default function RecipeModal(props: RecipeModalProps) {
             label="Namn på receptet"
             placeholder="Linsgryta"
             withAsterisk
+            data-autofocus
             value={recipeFormData?.name}
             onChange={(e) => {
               resetError('recipeName');

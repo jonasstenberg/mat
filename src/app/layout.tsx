@@ -13,14 +13,23 @@ import { getCategories } from '@/lib/categories';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import Providers from '@/components/Providers';
 import { theme } from '@/theme';
-import RecipeModal from '@/components/RecipeModal';
 
 const HeaderMenu = dynamic(() => import('@/components/HeaderMenu'), {
   loading: () => <p />,
   ssr: false,
 });
 
-const LoginDrawer = dynamic(() => import('@/components/LoginDrawer'), {
+const RecipeModal = dynamic(() => import('@/components/Modals/Recipe/RecipeModal'), {
+  loading: () => <p />,
+  ssr: false,
+});
+
+const AuthModal = dynamic(() => import('@/components/Modals/Auth/AuthModal'), {
+  loading: () => <p />,
+  ssr: false,
+});
+
+const SettingsModal = dynamic(() => import('@/components/Modals/Settings/SettingsModal'), {
   loading: () => <p />,
   ssr: false,
 });
@@ -55,7 +64,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <Providers session={session}>
         <body>
           <MantineProvider theme={theme} defaultColorScheme="light">
-            <LoginDrawer />
+            <AuthModal />
+            {session?.user?.name && <SettingsModal session={session} />}
             {session?.user?.name && <RecipeModal categories={categories} />}
             <header className={styles.header}>
               <Title className={styles['header-heading']}>

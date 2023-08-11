@@ -250,7 +250,6 @@
 
 .ingredients {
   column-count: 2;
-  margin-top: 2rem;
 }
 
 @media only screen and (width <= 832px) {

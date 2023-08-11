@@ -5,11 +5,13 @@ export interface RecipeProps {
   date_added?: string;
   date_updated?: string;
   servings: number;
+  servings_name: string;
   prep_time: number;
   cook_time: number;
   ingredients: IngredientProps[];
   description: string;
   image: string | File | null;
+  owner?: string;
 }
 
 export interface CategoryProps {
@@ -17,6 +19,7 @@ export interface CategoryProps {
   name: string;
   date_added?: string;
   date_updated?: string;
+  owner?: string;
 }
 
 export interface IngredientProps {
@@ -24,4 +27,5 @@ export interface IngredientProps {
   quantity: string;
   measurement: string;
   name: string;
+  owner?: string;
 }

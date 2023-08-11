@@ -60,7 +60,7 @@ export const useIngredientsHandler = ({ resetError }: UseIngredientsHandlerProps
         ingredient.id === id
           ? {
               ...ingredient,
-              [name]: value,
+              [name]: value.replace(',', '.'),
             }
           : ingredient
       ),

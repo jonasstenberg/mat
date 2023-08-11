@@ -22,16 +22,7 @@ export async function POST(req: NextRequest) {
         'Content-Type': 'application/json',
         Prefer: 'return=representation',
       },
-      body: JSON.stringify({
-        new_name: recipe.name,
-        new_servings: recipe.servings,
-        new_prep_time: recipe.prep_time,
-        new_cook_time: recipe.cook_time,
-        new_description: recipe.description,
-        new_categories: recipe.categories,
-        new_ingredients: recipe.ingredients,
-        new_image: recipe.image,
-      }),
+      body: JSON.stringify(recipe),
     });
 
     const id = await res.json();
@@ -68,14 +59,7 @@ export async function PUT(req: NextRequest) {
       },
       body: JSON.stringify({
         r_recipe_id: recipeId,
-        new_name: recipe.name,
-        new_servings: recipe.servings,
-        new_prep_time: recipe.prep_time,
-        new_cook_time: recipe.cook_time,
-        new_description: recipe.description,
-        new_image: recipe.image,
-        new_categories: recipe.categories,
-        new_ingredients: recipe.ingredients,
+        ...recipe,
       }),
     });
 

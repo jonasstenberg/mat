@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import React from 'react';
 import dynamic from 'next/dynamic';
 import { getServerSession } from 'next-auth';
-import { Center, Divider, Text, Title } from '@mantine/core';
+import { Center, Divider, Stack, Text, Title } from '@mantine/core';
 
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { getAllRecipeIds, getRecipe } from '@/lib/recipes';
@@ -75,33 +75,35 @@ export default async function Page({ params, searchParams }: Props) {
     <main>
       <div className={styles['recipe-individual']}>
         <div className={styles['recipe-data']}>
-          {session?.user?.name && <RecipeActions recipe={recipe} />}
+          {session?.user?.email === recipe.owner && <RecipeActions recipe={recipe} />}
           <Title order={2} mt="md" mb="xs" className={styles['recipe-heading']}>
             {recipe.name}
           </Title>
           <Divider mt="md" mb="sm" />
           <Center mb="xs">
             <Text size="sm">
-              {servings} portioner
+              {servings} {recipe.servings_name}
               {recipe.prep_time ? ` | ${recipe.prep_time} min preptid` : ''}
               {recipe.cook_time ? ` | ${recipe.cook_time} min tillagningstid` : ''}
             </Text>
           </Center>
           <ServingsSlider servings={servings} />
-          <Divider mt="sm" mb="lg" />
-          <div className={styles['recipe-description']}>
-            {recipe.description.split('\n').map((str) => {
-              if (str.startsWith('#')) {
-                const hashes = str?.match(/#/g)?.length;
-                const CustomTag = `h${hashes}` as keyof JSX.IntrinsicElements;
-                return <CustomTag key={str}>{str.replace(/#/g, '')}</CustomTag>;
-              }
-              return `${str}\n`;
-            })}
-          </div>
-          <div className={styles.ingredients}>
-            <Ingredients recipe={recipe} servings={servings} />
-          </div>
+          <Divider mt="sm" mb="xl" />
+          <Stack mt={0}>
+            <div className={styles.ingredients}>
+              <Ingredients recipe={recipe} servings={servings} />
+            </div>
+            <div className={styles['recipe-description']}>
+              {recipe.description.split('\n').map((str) => {
+                if (str.startsWith('#')) {
+                  const hashes = str?.match(/#/g)?.length;
+                  const CustomTag = `h${hashes}` as keyof JSX.IntrinsicElements;
+                  return <CustomTag key={str}>{str.replace(/#/g, '')}</CustomTag>;
+                }
+                return `${str}\n`;
+              })}
+            </div>
+          </Stack>
         </div>
         {recipe.image ? (
           <Image
