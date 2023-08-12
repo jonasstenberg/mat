@@ -5,11 +5,10 @@ CREATE TABLE categories (
   date_added TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
   date_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
   name TEXT UNIQUE NOT NULL,
-  owner TEXT DEFAULT current_user
+  owner TEXT DEFAULT current_setting('request.jwt.claims', true)::json->>'email'
 );
 
-GRANT SELECT ON "categories" TO "anon";
-GRANT ALL ON "categories" TO "registered";
+GRANT ALL ON "categories" TO "anon";
 
 CREATE TRIGGER set_timestamptz
     BEFORE UPDATE ON categories
@@ -17,6 +16,7 @@ CREATE TRIGGER set_timestamptz
     EXECUTE PROCEDURE set_timestamptz ();
 
 ALTER TABLE categories ENABLE ROW LEVEL SECURITY;
+ALTER TABLE categories FORCE ROW LEVEL SECURITY;
 
 CREATE POLICY categories_policy_select
   ON categories
@@ -26,14 +26,14 @@ CREATE POLICY categories_policy_select
 CREATE POLICY categories_policy_insert
   ON categories
   FOR INSERT
-  WITH CHECK (owner = current_user);
+  WITH CHECK (owner = current_setting('request.jwt.claims', true)::json->>'email');
 
 CREATE POLICY categories_policy_update
   ON categories
   FOR UPDATE
-  USING (owner = current_user);
+  USING (owner = current_setting('request.jwt.claims', true)::json->>'email');
 
 CREATE POLICY categories_policy_delete
   ON categories
   FOR DELETE
-  USING (owner = current_user);
+  USING (owner = current_setting('request.jwt.claims', true)::json->>'email');

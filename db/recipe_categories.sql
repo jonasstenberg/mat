@@ -5,13 +5,13 @@ CREATE TABLE recipe_categories (
   recipe UUID REFERENCES recipes(id) ON DELETE CASCADE NOT NULL,
   category UUID REFERENCES categories(id) ON DELETE CASCADE NOT NULL,
   PRIMARY KEY (recipe, category),
-  owner TEXT DEFAULT current_user
+  owner TEXT DEFAULT current_setting('request.jwt.claims', true)::json->>'email'
 );
 
-GRANT SELECT ON "recipe_categories" TO "anon";
-GRANT ALL ON "recipe_categories" TO "registered";
+GRANT ALL ON "recipe_categories" TO "anon";
 
 ALTER TABLE recipe_categories ENABLE ROW LEVEL SECURITY;
+ALTER TABLE recipe_categories FORCE ROW LEVEL SECURITY;
 
 CREATE POLICY recipe_categories_policy_select
   ON recipe_categories
@@ -21,14 +21,14 @@ CREATE POLICY recipe_categories_policy_select
 CREATE POLICY recipe_categories_policy_insert
   ON recipe_categories
   FOR INSERT
-  WITH CHECK (owner = current_user);
+  WITH CHECK (owner = current_setting('request.jwt.claims', true)::json->>'email');
 
 CREATE POLICY recipe_categories_policy_update
   ON recipe_categories
   FOR UPDATE
-  USING (owner = current_user);
+  USING (owner = current_setting('request.jwt.claims', true)::json->>'email');
 
 CREATE POLICY recipe_categories_policy_delete
   ON recipe_categories
   FOR DELETE
-  USING (owner = current_user);
+  USING (owner = current_setting('request.jwt.claims', true)::json->>'email');

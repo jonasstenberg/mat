@@ -7,11 +7,11 @@ CREATE TABLE auth.users (
   name TEXT NOT NULL,
   email TEXT UNIQUE NOT NULL,
   provider TEXT,
-  owner TEXT DEFAULT current_user
+  owner TEXT DEFAULT current_setting('request.jwt.claims', true)::json->>'email'
 );
 
-GRANT USAGE ON SCHEMA auth TO "registered";
-GRANT SELECT, UPDATE, INSERT, DELETE ON auth.users TO "registered";
+GRANT USAGE ON SCHEMA auth TO "anon";
+GRANT SELECT, UPDATE, INSERT, DELETE ON auth.users TO "anon";
 
 ALTER TABLE auth.users ENABLE ROW LEVEL SECURITY;
 ALTER TABLE auth.users FORCE ROW LEVEL SECURITY;
@@ -19,35 +19,22 @@ ALTER TABLE auth.users FORCE ROW LEVEL SECURITY;
 CREATE POLICY users_policy_select
   ON auth.users
   FOR SELECT
-  USING (owner = current_user);
+  USING (owner = current_setting('request.jwt.claims', true)::json->>'email');
 
 CREATE POLICY users_policy_insert
   ON auth.users
   FOR INSERT
-  WITH CHECK (owner = current_user);
+  WITH CHECK (owner = current_setting('request.jwt.claims', true)::json->>'email');
 
 CREATE POLICY users_policy_update
   ON auth.users
   FOR UPDATE
-  USING (owner = current_user);
+  USING (owner = current_setting('request.jwt.claims', true)::json->>'email');
 
 CREATE POLICY users_policy_delete
   ON auth.users
   FOR DELETE
-  USING (owner = current_user);
-
-CREATE OR REPLACE FUNCTION remove_user_role()
-RETURNS TRIGGER AS $$
-BEGIN
-    EXECUTE format('DROP ROLE IF EXISTS %I', OLD.owner);
-    RETURN OLD;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER trigger_remove_user_role
-BEFORE DELETE ON auth.users
-FOR EACH ROW
-EXECUTE FUNCTION remove_user_role();
+  USING (owner = current_setting('request.jwt.claims', true)::json->>'email');
 
 DROP TABLE IF EXISTS auth.user_passwords CASCADE;
 
@@ -151,7 +138,6 @@ BEGIN
         EXECUTE format('CREATE ROLE %I INHERIT', email);
       EXCEPTION
         WHEN others THEN
-          -- Do nothing or log the error if needed
       END;
 
       EXECUTE format('GRANT "registered" TO %I', email);

@@ -43,7 +43,7 @@ BEGIN
 END;
 $$;
 
-GRANT EXECUTE ON FUNCTION insert_recipe TO "registered";
+GRANT EXECUTE ON FUNCTION insert_recipe TO "anon";
 
 CREATE OR REPLACE FUNCTION update_recipe(
   r_recipe_id UUID,
@@ -100,4 +100,4 @@ BEGIN
 END;
 $$;
 
-GRANT EXECUTE ON FUNCTION update_recipe TO "registered";
+GRANT EXECUTE ON FUNCTION update_recipe TO "anon";

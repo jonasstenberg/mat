@@ -8,11 +8,10 @@ CREATE TABLE ingredients (
   name TEXT NOT NULL,
   measurement TEXT NOT NULL,
   quantity TEXT NOT NULL,
-  owner TEXT DEFAULT current_user
+  owner TEXT DEFAULT current_setting('request.jwt.claims', true)::json->>'email'
 );
 
-GRANT SELECT ON "ingredients" TO "anon";
-GRANT ALL ON "ingredients" TO "registered";
+GRANT ALL ON "ingredients" TO "anon";
 
 CREATE TRIGGER set_timestamptz
     BEFORE UPDATE ON ingredients
@@ -20,6 +19,7 @@ CREATE TRIGGER set_timestamptz
     EXECUTE PROCEDURE set_timestamptz ();
 
 ALTER TABLE ingredients ENABLE ROW LEVEL SECURITY;
+ALTER TABLE ingredients FORCE ROW LEVEL SECURITY;
 
 CREATE POLICY ingredients_policy_select
   ON ingredients
@@ -29,14 +29,14 @@ CREATE POLICY ingredients_policy_select
 CREATE POLICY ingredients_policy_insert
   ON ingredients
   FOR INSERT
-  WITH CHECK (owner = current_user);
+  WITH CHECK (owner = current_setting('request.jwt.claims', true)::json->>'email');
 
 CREATE POLICY ingredients_policy_update
   ON ingredients
   FOR UPDATE
-  USING (owner = current_user);
+  USING (owner = current_setting('request.jwt.claims', true)::json->>'email');
 
 CREATE POLICY ingredients_policy_delete
   ON ingredients
   FOR DELETE
-  USING (owner = current_user);
+  USING (owner = current_setting('request.jwt.claims', true)::json->>'email');

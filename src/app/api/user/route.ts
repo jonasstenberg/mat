@@ -96,6 +96,7 @@ export async function DELETE(req: NextRequest) {
         Prefer: 'return=representation',
       },
     });
+
     const json = await res.json();
     if (!json.length || !json[0] || !json[0].id) {
       return NextResponse.json({ error: 'Something went wrong.' }, { status: 500 });

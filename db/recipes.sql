@@ -12,12 +12,11 @@ CREATE TABLE recipes (
   description TEXT NOT NULL,
   image TEXT,
   thumbnail TEXT,
-  owner TEXT REFERENCES auth.users (email) ON DELETE CASCADE DEFAULT current_user NOT NULL,
+  owner TEXT REFERENCES auth.users (email) ON DELETE CASCADE DEFAULT current_setting('request.jwt.claims', true)::json->>'email' NOT NULL,
   tsv tsvector
 );
 
-GRANT SELECT ON "recipes" TO "anon";
-GRANT ALL ON "recipes" TO "registered";
+GRANT ALL ON "recipes" TO "anon";
 
 CREATE TRIGGER set_timestamptz
     BEFORE UPDATE ON recipes
@@ -25,6 +24,7 @@ CREATE TRIGGER set_timestamptz
     EXECUTE PROCEDURE set_timestamptz ();
 
 ALTER TABLE recipes ENABLE ROW LEVEL SECURITY;
+ALTER TABLE recipes FORCE ROW LEVEL SECURITY;
 
 CREATE POLICY recipes_policy_select
   ON recipes
@@ -34,14 +34,14 @@ CREATE POLICY recipes_policy_select
 CREATE POLICY recipes_policy_insert
   ON recipes
   FOR INSERT
-  WITH CHECK (owner = current_user);
+  WITH CHECK (owner = current_setting('request.jwt.claims', true)::json->>'email');
 
 CREATE POLICY recipes_policy_update
   ON recipes
   FOR UPDATE
-  USING (owner = current_user);
+  USING (owner = current_setting('request.jwt.claims', true)::json->>'email');
 
 CREATE POLICY recipes_policy_delete
   ON recipes
   FOR DELETE
-  USING (owner = current_user);
+  USING (owner = current_setting('request.jwt.claims', true)::json->>'email');
