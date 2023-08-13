@@ -15,6 +15,7 @@
 }
 
 .recipe-heading {
+  min-height: 20rem;
   grid-column: span 5;
   display: flex;
   align-items: center;
