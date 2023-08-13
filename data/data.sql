@@ -5,7 +5,7 @@
 -- Dumped from database version 14.8 (Debian 14.8-1.pgdg100+1)
 -- Dumped by pg_dump version 14.8 (Debian 14.8-1.pgdg100+1)
 
--- Started on 2023-08-12 02:06:59 CEST
+-- Started on 2023-08-13 02:08:20 CEST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -19,7 +19,7 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- TOC entry 3414 (class 1262 OID 17460)
+-- TOC entry 3413 (class 1262 OID 17460)
 -- Name: mat; Type: DATABASE; Schema: -; Owner: postgres
 --
 
@@ -42,7 +42,7 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- TOC entry 3415 (class 0 OID 0)
+-- TOC entry 3414 (class 0 OID 0)
 -- Name: mat; Type: DATABASE PROPERTIES; Schema: -; Owner: postgres
 --
 
@@ -63,7 +63,7 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- TOC entry 3403 (class 0 OID 17516)
+-- TOC entry 3402 (class 0 OID 17784)
 -- Dependencies: 212
 -- Data for Name: users; Type: TABLE DATA; Schema: auth; Owner: postgres
 --
@@ -71,11 +71,12 @@ SET row_security = off;
 COPY auth.users (id, name, email, provider, owner) FROM stdin;
 e708ff15-722c-4177-ac55-405fff35b30f	Jonas Stenberg	jonas@stenberg.io	\N	jonas@stenberg.io
 93eb6174-e2e2-478c-9433-072b0befbbea	Jonas Stenberg	jonas.d.stenberg@gmail.com	google	jonas.d.stenberg@gmail.com
+592fd113-c3e6-48c2-8c17-4a0c32323676	Svante Richter	svante.richter@gmail.com	google	svante.richter@gmail.com
 \.
 
 
 --
--- TOC entry 3404 (class 0 OID 17533)
+-- TOC entry 3403 (class 0 OID 17799)
 -- Dependencies: 213
 -- Data for Name: user_passwords; Type: TABLE DATA; Schema: auth; Owner: postgres
 --
@@ -86,7 +87,7 @@ jonas@stenberg.io	$2a$06$UFa2NQyoGEFrOuHzv6KVp.j8G.qnnujXLi5/9fTol98CsNRWCc2Nq
 
 
 --
--- TOC entry 3407 (class 0 OID 17599)
+-- TOC entry 3406 (class 0 OID 17859)
 -- Dependencies: 216
 -- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -104,7 +105,7 @@ fcbddad5-f66b-4142-949f-af475423a834	2023-08-04 12:31:16.591547	2023-08-04 12:31
 
 
 --
--- TOC entry 3405 (class 0 OID 17555)
+-- TOC entry 3404 (class 0 OID 17815)
 -- Dependencies: 214
 -- Data for Name: recipes; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -153,7 +154,6 @@ f26e4739-19bc-48f4-91ed-e87268a69423	2022-12-29 12:37:33.928328	2023-08-11 14:48
 fb5328c4-5e22-41d7-a1e1-35448e96b4af	2020-12-26 15:40:43.094303	2023-08-11 14:48:54.654293	Morotssoppa med kokos	4	portioner	\N	\N	Hetta upp olivolja i en stor gryta och fräs lök, vitlök, morötter, spiskummin, ingefära och chiliflakes tills de får lite färg.\nHäll i nästan all kokosmjölk i grytan ihop med grönsaksfond och vatten. Låt sjuda utan lock cirka 15–20 minuter eller tills morötterna är mjuka.\nMixa soppan slät och tillsätt limejuice, salt och svartpeppar. Späd ev med vatten.\nTill servering: Ringla över resten av kokosmjölken och toppa gärna med pumpafrön vid servering.	fb5328c4-5e22-41d7-a1e1-35448e96b4af.webp	\N	jonas@stenberg.io	'15':42 '20':43 'all':28 'chiliflak':19 'cirk':41 'ev':60 'fräs':12 'färg':24 'får':22 'gryt':10 'grytan':31 'grönsaksfond':34 'gärn':72 'hett':4 'häll':25 'ihop':32 'ingefär':17 'koko':3 'kokosmjölk':29,69 'limejuic':55 'lit':23 'lock':40 'låt':37 'lök':13 'minut':44 'mix':50 'mjuk':49 'morotssopp':1 'moröt':15,47 'nästan':27 'olivolj':6 'pumpafrön':74 'rest':67 'ringl':65 'salt':56 'servering':64,76 'sjud':38 'slät':52 'soppan':51 'spiskummin':16 'späd':59 'stor':9 'svartpepp':58 'till':20,46 'tillsät':54 'topp':71 'vatt':36,62 'vitlök':14
 1cb4d94c-8104-47ee-8849-c11bbdc60c1b	2020-11-17 18:06:35.71147	2023-08-11 14:48:54.654293	Ört- och vitlöksgravad strömming	4	portioner	\N	\N	Blanda vatten och ättikssprit i en skål. Tillsätt saltet och rör tills det har löst sig. Lägg ner filéerna i lagen. Ställ in i kyl och låt dem ligga där tills köttet blivit vitt och fast, ca 6 timmar. Häll bort lagen. Drag skinnet av strömmingen. Blanda alla ingredienser till örtsåsen. Varva strömming och sås i en burk eller krus. Ställ in den i kylen för att mogna, ca 1 dygn före servering. Hållbar ca 1 vecka i kyl.	1cb4d94c-8104-47ee-8849-c11bbdc60c1b.webp	\N	jonas@stenberg.io	'1':74,80 '6':42 'bland':5,51 'bort':45 'burk':62 'ca':41,73,79 'drag':47 'dygn':75 'fast':40 'filé':23 'för':76 'häll':44 'hållb':78 'in':27,66 'ingrediens':53 'krus':64 'kyl':29,69,83 'köttet':36 'lag':25,46 'ligg':33 'lägg':21 'låt':31 'löst':19 'mogn':72 'ner':22 'rör':15 'saltet':13 'servering':77 'skinnet':48 'skål':11 'strömming':4,50,57 'ställ':26,65 'sås':59 'till':16,35 'tillsät':12 'timm':43 'varv':56 'vatt':6 'veck':81 'vitlöksgrav':3 'vitt':38 'ättikssprit':8 'ört':1 'örtsås':55
 e7e6ba02-26e6-4e54-af66-5afb58f6bd4b	2020-11-17 09:47:13.881733	2023-08-11 14:48:54.654293	Pasta med räkor, chili och tomat	4	portioner	\N	\N	Ansa och skölj purjolöken noga. Skiva den tunt. Finhacka chilin och halvera tomaterna.\n\nKoka pastan enligt anvisning på förpackningen.\n\nFräs purjolök, vitlök och chili i oljan ca 5 minuter tills löken mjuknar. Tillsätt tomatpure och fräs med i en minut. Tillsätt tomaterna och fräs ytterligare 2 minuter. Häll på grädde och låt koka ihop. Smaka av med citronskal, salt och peppar. Vänd ner räkorna.\n\nBlanda pastan med såsen och hälften av osten.\nServera med resten av parmesanen vid sidan av.\n	e7e6ba02-26e6-4e54-af66-5afb58f6bd4b.webp	\N	jonas@stenberg.io	'2':52 '5':34 'ans':7 'anvisning':23 'bland':71 'ca':33 'chili':4,30 'chilin':16 'citronskal':64 'enl':22 'finhack':15 'fräs':26,42,50 'förpackning':25 'grädd':56 'halver':18 'hälft':76 'häll':54 'ihop':60 'kok':20,59 'låt':58 'lök':37 'minut':35,46,53 'mjukn':38 'ner':69 'nog':11 'oljan':32 'ost':78 'parmesan':83 'past':1 'pastan':21,72 'pepp':67 'purjolök':10,27 'rest':81 'räk':3,70 'salt':65 'server':79 'sidan':85 'skiv':12 'skölj':9 'smak':61 'sås':74 'till':36 'tillsät':39,47 'tom':6 'tomat':19,48 'tomatpur':40 'tunt':14 'vitlök':28 'vänd':68 'ytter':51
-4aa69da1-cda1-46cb-b386-6fd0e5251b6e	2020-11-21 15:16:22.100787	2023-08-11 14:48:54.654293	Lax med pepparrotscreme och ugnsrostad potatis	4	portioner	\N	\N	Sätt ugnen på 200 grader.\n\n### Ugnsrostad potatis\nSkala och skär potatisen i mindre klyftor. Blanda med olivolja, salt och peppar och lägg ut på en plåt med bakplåtspapper. Sätt in i ugnen i ca 25 minuter eller tills potatisen är gyllenbrun.\n\n### Pepparrotscreme\nBlanda alla ingredienser i en skål och bred ut ovanpå laxfiléerna eller laxsidan. Sätt in i ugnen ca. 15-20 minuter eller till laxen har en innertemperatur på 55-57 grader.\n\nServera med sallad.	4aa69da1-cda1-46cb-b386-6fd0e5251b6e.webp	\N	jonas@stenberg.io	'-20':68 '-57':78 '15':67 '200':10 '25':41 '55':77 'bakplåtspapp':34 'bland':21,49 'bred':56 'ca':40,66 'grad':11,79 'gyllenbrun':47 'in':36,63 'ingrediens':51 'innertemperatur':75 'klyft':20 'lax':1,72 'laxfilé':59 'laxsidan':61 'lägg':28 'mindr':19 'minut':42,69 'olivolj':23 'ovanpå':58 'pepp':26 'pepparrotscrem':3,48 'plåt':32 'potatis':6,13,17,45 'sall':82 'salt':24 'server':80 'skal':14 'skär':16 'skål':54 'sätt':7,35,62 'till':44 'ugn':8,38,65 'ugnsrost':5,12
 7f4502e4-b154-4bfe-b0ae-a4f762c7a910	2020-11-16 20:56:04.321388	2023-08-11 14:48:54.654293	Tonfiskpasta med chili, citron och kapris	4	portioner	\N	\N	Hacka lök och vitlök. Fräs i olivoljan. Låt chiliflaksen och kaprisen fräsa med mot slutet.\nTillsätt tonfisken och några droppar citronsaft.\n\nKoka spaghettin och spara 1 dl pastavatten.\n\nNär pastan nästan är klar, ha i rivet citronskal från en halv citron och persiljan. Börja med en halv dl pastavatten och känn efter hur konsistensen blir, tillsätt mer om det behövs.\n\nVänd ner pastan och servera med parmesanen vid sidan om.	7f4502e4-b154-4bfe-b0ae-a4f762c7a910.webp	\N	jonas@stenberg.io	'1':32 'behöv':66 'börj':50 'chili':3 'chiliflaks':15 'citron':4,47 'citronsaft':27 'citronskal':43 'dl':33,54 'dropp':26 'fräs':11,18 'hack':7 'halv':46,53 'kapris':6,17 'klar':39 'kok':28 'konsistens':60 'känn':57 'låt':14 'lök':8 'mer':63 'ner':68 'nästan':37 'olivoljan':13 'parmesan':73 'pastan':36,69 'pastavat':34,55 'persiljan':49 'rivet':42 'server':71 'sidan':75 'slutet':21 'spaghettin':29 'spar':31 'tillsät':22,62 'tonfisk':23 'tonfiskpast':1 'vitlök':10 'vänd':67
 1ff2ca0d-e96e-4256-b9e6-2aa2dd53ea50	2022-12-29 17:24:19.424081	2023-08-11 14:48:54.654293	Kalljästa morotsfrallor med äpple	4	portioner	\N	\N	1. Vispa hop jästen med vattnet i en bunke. Tillsätt rägmjöl, vetemjöl och salt. Rör hop till en lös deg. Tillsätt morot och äpple och blanda hop. Lät jäsa övertäckt i rumstemperatur över natten, eller ca 10 timmar.\n\n2. Sätt ugnen pà 250°C. Ställ in en plåt så att den blir het.\nKlicka ut degen till frallor på ett bakplåtspapper med mjölade\nhänder. Ta ut den varma plåten och skjut över bakplåtspappret\nmed frallorna på plåten. Grädda i mitten av ugnen 12-15 minuter eller tills frallorna fått fin färg. Låt svalna på galler.	1ff2ca0d-e96e-4256-b9e6-2aa2dd53ea50.webp	\N	jonas@stenberg.io	'-15':88 '1':5 '10':41 '12':87 '2':43 '250':47 'bakplåtspapp':65 'bakplåtspappret':77 'bland':30 'bunk':13 'c':48 'ca':40 'deg':24,60 'fin':94 'frall':62,79,92 'färg':95 'fått':93 'gall':99 'grädd':82 'het':57 'hop':7,20,31 'händ':68 'in':50 'jäs':33 'jäst':8 'kalljäst':1 'klick':58 'lät':32 'låt':96 'lös':23 'minut':89 'mitt':84 'mjöl':67 'morot':26 'morotsfrall':2 'natt':38 'plåt':52,73,81 'pà':46 'rumstemperatur':36 'rägmjöl':15 'rör':19 'salt':18 'skjut':75 'ställ':49 'svaln':97 'sätt':44 'ta':69 'till':91 'tillsät':14,25 'timm':42 'ugn':45,86 'varm':72 'vattnet':10 'vetemjöl':16 'visp':6 'äppl':4,28 'övertäck':34
 ae627ce3-5e81-48b1-a04e-4a3216d9f6b9	2020-11-24 20:51:42.560464	2023-08-11 14:48:54.654293	Bönchili med koriander och nachos	4	portioner	15	60	Finhacka gullöken, vitlöken och chilin. Skär morötterna och bleksellerin i små kuber.\n\nStek alla grönsaker i rikligt med olivolja. Ha i tomatpurén när löken är genomskinlig och låt fräsa med någon minut.\nBlanda ner timjan, oregano, paprikapulver och spiskummit. Ha i burktomaterna och en burk vatten.\n\nLåt koka upp.\n\nBlanda ner bönorna och kakaon och låt koka ca. 10 minuter.\n\nSalta och peppra.\n\nSkär bort båda stammen och bladen på koriandern. Finhacka stammen och lägg ner i grytan innan servering.\nGrovhacka bladen och servera vid sidan om.	ae627ce3-5e81-48b1-a04e-4a3216d9f6b9.webp	\N	jonas@stenberg.io	'10':64 'blad':74,87 'bland':38,55 'bleksellerin':14 'bort':70 'burk':50 'burktomat':47 'båd':71 'bön':57 'bönchili':1 'ca':63 'chilin':10 'finhack':6,77 'fräs':34 'genomskin':31 'grovhack':86 'grytan':83 'grönsak':20 'gullök':7 'innan':84 'kakaon':59 'kok':53,62 'koriand':3,76 'kub':17 'lägg':80 'låt':33,52,61 'lök':29 'minut':37,65 'moröt':12 'nacho':5 'ner':39,56,81 'olivolj':24 'oregano':41 'paprikapulv':42 'peppr':68 'rik':22 'salt':66 'server':89 'servering':85 'sidan':91 'skär':11,69 'små':16 'spiskummit':44 'stamm':72,78 'stek':18 'timjan':40 'tomatpurén':27 'vatt':51 'vitlök':8
@@ -165,11 +165,12 @@ dd534f07-426c-4dcc-87e0-8174d44d03f7	2020-11-21 15:32:01.748489	2023-08-11 14:48
 9bbf4e07-645f-44a4-88e2-ca7d23f31746	2022-12-29 17:35:36.149884	2023-08-11 14:48:54.654293	Stekta kroppkakor med svamp och hasselnötter	4	portioner	\N	\N	Skala och koka potatisen i lättsaltat vatten. Pressa genom en potatispress och låt svalna. Vispa ihop ägget.\nBlanda potatis, ägg, mjöl och 1 tsk salt till en jämn deg.\n\nFyllning: Skala och finhacka löken. Fräs löken i 2 msk smör på låg värme tills den mjuknar ca 10 minuter. Höj värmen och tillsätt svamp, kryddpeppar, ½ tsk salt och stek vtterligare några minuter. Rör ner nötterna.	9bbf4e07-645f-44a4-88e2-ca7d23f31746.webp	\N	jonas@stenberg.io	'1':29 '10':54 '2':44 'bland':24 'ca':53 'deg':35 'finhack':39 'fräs':41 'fyllning':36 'genom':15 'hasselnöt':6 'höj':56 'ihop':22 'jämn':34 'kok':9 'kroppkak':2 'kryddpepp':61 'lättsalt':12 'låg':48 'låt':19 'lök':40,42 'minut':55,68 'mjukn':52 'mjöl':27 'msk':45 'ner':70 'nött':71 'potatis':10,25 'potatispress':17 'press':14 'rör':69 'salt':31,63 'skal':7,37 'smör':46 'stek':65 'stekt':1 'svaln':20 'svamp':4,60 'till':50 'tillsät':59 'tsk':30,62 'vatt':13 'visp':21 'vtter':66 'värm':49,57 'ägg':26 'ägget':23
 04ecefde-1b56-44df-9aef-401c9e48c34a	2023-08-04 11:15:45.48476	2023-08-11 14:59:40.223801	Amerikanska blåbärsmuffins	12	muffins	15	15	Vispa smör och socker vitt och pösigt. Rör i äggen , ett i taget. Tillsätt vaniljsocker och mjölk. Blanda mjöl och bakpulver och rör i smeten. Fyll formarna med\nsmeten.\n\nTryck i blåbären med en sked.\nGrädda mitt i ugnen på 200° i ca 15 min.	04ecefde-1b56-44df-9aef-401c9e48c34a.webp	\N	jonas@stenberg.io	'15':46 '200':43 'amerikansk':1 'bakpulv':23 'bland':20 'blåbär':34 'blåbärsmuffin':2 'ca':45 'form':29 'fyll':28 'grädd':38 'mjöl':21 'mjölk':19 'pös':9 'rör':10,25 'sked':37 'smet':27,31 'smör':4 'sock':6 'taget':15 'tillsät':16 'tryck':32 'ugn':41 'vaniljsock':17 'visp':3 'vitt':7 'ägg':12
 8ecc7ec6-54e8-466b-bd41-36d4a05539e7	2022-12-29 12:57:11.352181	2023-08-11 19:04:07.103485	Mammas äppelkaka i svampskogen	8	bitar	\N	\N	Blanda alla ingredienser och lägg i en pajform.\nLägg på äppelklyftorna. Lägg på smörklickar och kanel.\n\nGrädda i 30-40 minuter på 175 grader.	8ecc7ec6-54e8-466b-bd41-36d4a05539e7.webp	\N	jonas@stenberg.io	'-40':24 '175':27 '30':23 'bland':5 'grad':28 'grädd':21 'ingrediens':7 'kanel':20 'lägg':9,13,16 'mamm':1 'minut':25 'pajform':12 'smörklick':18 'svampskog':4 'äppelkak':2 'äppelklyft':15
+4aa69da1-cda1-46cb-b386-6fd0e5251b6e	2020-11-21 15:16:22.100787	2023-08-12 14:24:33.506243	Lax med pepparrotscreme och ugnsrostad potatis	4	portioner	\N	\N	Sätt ugnen på 200 grader.\n\n### Ugnsrostad potatis\nSkala och skär potatisen i mindre klyftor. Blanda med olivolja, salt och peppar och lägg ut på en plåt med bakplåtspapper. Sätt in i ugnen i ca 25 minuter eller tills potatisen är gyllenbrun.\n\n### Pepparrotscreme\nBlanda alla ingredienser i en skål och bred ut ovanpå laxfiléerna eller laxsidan. Sätt in i ugnen ca. 15-20 minuter eller till laxen har en innertemperatur på 55-57 grader.\n\nServera med sallad.	\N	\N	jonas@stenberg.io	'-20':68 '-57':78 '15':67 '200':10 '25':41 '55':77 'bakplåtspapp':34 'bland':21,49 'bred':56 'ca':40,66 'grad':11,79 'gyllenbrun':47 'in':36,63 'ingrediens':51 'innertemperatur':75 'klyft':20 'lax':1,72 'laxfilé':59 'laxsidan':61 'lägg':28 'mindr':19 'minut':42,69 'olivolj':23 'ovanpå':58 'pepp':26 'pepparrotscrem':3,48 'plåt':32 'potatis':6,13,17,45 'sall':82 'salt':24 'server':80 'skal':14 'skär':16 'skål':54 'sätt':7,35,62 'till':44 'ugn':8,38,65 'ugnsrost':5,12
 \.
 
 
 --
--- TOC entry 3406 (class 0 OID 17578)
+-- TOC entry 3405 (class 0 OID 17838)
 -- Dependencies: 215
 -- Data for Name: ingredients; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -830,11 +831,23 @@ a6c271f2-4522-4bee-9ced-3483f32432fd	2023-08-11 19:04:28.724055	2023-08-11 19:04
 7b392905-e09f-416c-bbbb-bcb3f7068aca	2023-08-11 19:04:28.724055	2023-08-11 19:04:28.724055	0789d29d-8a27-496d-a4d1-c662200a6281	socker	dl	1	jonas@stenberg.io
 245e7a1c-7ee6-41ba-ba13-9697f3601e7a	2023-08-11 19:04:28.724055	2023-08-11 19:04:28.724055	0789d29d-8a27-496d-a4d1-c662200a6281	drygt 0,5 tsk bakpulver			jonas@stenberg.io
 88e14b4b-0dd7-480c-8883-237f1ef39206	2023-08-11 19:04:28.724055	2023-08-11 19:04:28.724055	0789d29d-8a27-496d-a4d1-c662200a6281	ägg		1	jonas@stenberg.io
+5200a11f-956b-44ef-919a-d87340d35e87	2023-08-12 14:24:33.506243	2023-08-12 14:24:33.506243	4aa69da1-cda1-46cb-b386-6fd0e5251b6e	# Lax			jonas@stenberg.io
+46c0abdd-5afd-4fd7-8e11-55b3efc3ee9d	2023-08-12 14:24:33.506243	2023-08-12 14:24:33.506243	4aa69da1-cda1-46cb-b386-6fd0e5251b6e	# Pepparrotscreme			jonas@stenberg.io
+c4530d6f-ecf8-4b8b-9465-04de43133a86	2023-08-12 14:24:33.506243	2023-08-12 14:24:33.506243	4aa69da1-cda1-46cb-b386-6fd0e5251b6e	# Potatis			jonas@stenberg.io
+e907f2c8-a80a-4ed8-9988-405bac9bdaa9	2023-08-12 14:24:33.506243	2023-08-12 14:24:33.506243	4aa69da1-cda1-46cb-b386-6fd0e5251b6e	laxfileér eller 500g laxsida		4	jonas@stenberg.io
+3439fb9e-0eb2-4808-a0c6-d002756cb89c	2023-08-12 14:24:33.506243	2023-08-12 14:24:33.506243	4aa69da1-cda1-46cb-b386-6fd0e5251b6e	philadelphiaost eller liknande	pkt	1	jonas@stenberg.io
+1e7dc9e4-994a-4023-ab41-2d3599ba5b1d	2023-08-12 14:24:33.506243	2023-08-12 14:24:33.506243	4aa69da1-cda1-46cb-b386-6fd0e5251b6e	finriven pepparrot	msk	2.5	jonas@stenberg.io
+3c5a3640-4237-4893-910a-f815a4241e32	2023-08-12 14:24:33.506243	2023-08-12 14:24:33.506243	4aa69da1-cda1-46cb-b386-6fd0e5251b6e	salt	tsk	1	jonas@stenberg.io
+191277ad-c598-4758-9848-8e6408ad6877	2023-08-12 14:24:33.506243	2023-08-12 14:24:33.506243	4aa69da1-cda1-46cb-b386-6fd0e5251b6e	svartpeppar	krm	1	jonas@stenberg.io
+2578b140-da83-44b0-ae0b-2ce5e537fcda	2023-08-12 14:24:33.506243	2023-08-12 14:24:33.506243	4aa69da1-cda1-46cb-b386-6fd0e5251b6e	fast potatis	g	500	jonas@stenberg.io
+540ebb59-7790-494b-b403-f90b486a0eea	2023-08-12 14:24:33.506243	2023-08-12 14:24:33.506243	4aa69da1-cda1-46cb-b386-6fd0e5251b6e	olivolja	dl	0.5	jonas@stenberg.io
+833fc8fd-f232-44e7-9365-a07048dec87f	2023-08-12 14:24:33.506243	2023-08-12 14:24:33.506243	4aa69da1-cda1-46cb-b386-6fd0e5251b6e	salt	tsk	1	jonas@stenberg.io
+5c5ed76e-6493-4c26-b2d0-0e87fc7f2186	2023-08-12 14:24:33.506243	2023-08-12 14:24:33.506243	4aa69da1-cda1-46cb-b386-6fd0e5251b6e	svartpeppar	krm	1	jonas@stenberg.io
 \.
 
 
 --
--- TOC entry 3408 (class 0 OID 17617)
+-- TOC entry 3407 (class 0 OID 17877)
 -- Dependencies: 217
 -- Data for Name: recipe_categories; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -845,7 +858,6 @@ COPY public.recipe_categories (date_added, recipe, category, owner) FROM stdin;
 2020-11-25 19:51:42.533503	49d79c70-f086-4339-b5c5-df189a86074f	008625e8-ada4-4412-b20f-feb6f2f5c6ed	jonas@stenberg.io
 2020-11-24 20:37:15.095521	1642372e-2a7a-445d-be6f-2474be5b8586	008625e8-ada4-4412-b20f-feb6f2f5c6ed	jonas@stenberg.io
 2020-11-24 20:37:27.377815	33c62ccb-4f03-4528-8d4e-e29b0b71bf16	2f8c4fd1-7a96-4df8-b38b-7949deec6ce5	jonas@stenberg.io
-2020-11-24 20:37:42.723623	4aa69da1-cda1-46cb-b386-6fd0e5251b6e	008625e8-ada4-4412-b20f-feb6f2f5c6ed	jonas@stenberg.io
 2020-11-24 20:39:50.751708	40b0ea90-96bb-4c1d-ba4b-29eea6419ea1	008625e8-ada4-4412-b20f-feb6f2f5c6ed	jonas@stenberg.io
 2020-11-24 20:39:50.776957	40b0ea90-96bb-4c1d-ba4b-29eea6419ea1	5a9ca809-e24a-40f0-bf36-dfb3c56e9e10	jonas@stenberg.io
 2020-11-24 20:44:48.236592	1cb4d94c-8104-47ee-8849-c11bbdc60c1b	2f8c4fd1-7a96-4df8-b38b-7949deec6ce5	jonas@stenberg.io
@@ -908,10 +920,11 @@ COPY public.recipe_categories (date_added, recipe, category, owner) FROM stdin;
 2023-08-11 19:03:45.426149	a7f351df-a980-49b4-b5b5-38d6f191a3b6	fcbddad5-f66b-4142-949f-af475423a834	jonas@stenberg.io
 2023-08-11 19:04:07.103485	8ecc7ec6-54e8-466b-bd41-36d4a05539e7	74b57792-fa68-4efb-be46-e8d194d86ed3	jonas@stenberg.io
 2023-08-11 19:04:28.724055	0789d29d-8a27-496d-a4d1-c662200a6281	74b57792-fa68-4efb-be46-e8d194d86ed3	jonas@stenberg.io
+2023-08-12 14:24:33.506243	4aa69da1-cda1-46cb-b386-6fd0e5251b6e	008625e8-ada4-4412-b20f-feb6f2f5c6ed	jonas@stenberg.io
 \.
 
 
--- Completed on 2023-08-12 02:06:59 CEST
+-- Completed on 2023-08-13 02:08:20 CEST
 
 --
 -- PostgreSQL database dump complete
