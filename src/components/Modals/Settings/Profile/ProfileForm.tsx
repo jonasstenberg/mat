@@ -21,6 +21,7 @@ export default function ProfileForm() {
       .then((res) => res.json())
       .then((json) => {
         setUser(json[0]);
+        setName(json[0].name);
       });
   }, []);
 
@@ -36,7 +37,7 @@ export default function ProfileForm() {
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (name.length) {
+    if (!name.length) {
       setError('Du måste ange ett namn');
       return;
     }

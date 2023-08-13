@@ -1,0 +1,12 @@
+.user {
+  border-radius: var(--mantine-radius-sm);
+  transition: background-color 100ms ease;
+}
+
+.user:hover {
+  background-color: var(--mantine-color-gray-1);
+}
+
+.user[data-active='true'] {
+  background-color: var(--mantine-color-gray-1);
+}
