@@ -34,7 +34,7 @@
 .recipe-image,
 .recipe-image-no-image {
   grid-column: span 7;
-  background-color: var(--mantine-color-orange-1);
+  background-color: #f6f6f4;
   width: 100%;
   max-width: 100%;
   height: 100%;
