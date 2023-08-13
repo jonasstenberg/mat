@@ -19,3 +19,9 @@ Follow the instructions in [CONTRIBUTING](./CONTRIBUTING.md) and code away.
 - [x] Add instructions on how to setup the infrastrucure
 - [ ] Add sign-up functionality
 - [ ] Add possability to add images or urls to your collection of recipes
+- [ ] Add steps in recipes
+- [ ] Use schema.org (https://schema.org/Recipe)
+- [x] You shouldn't be able to reset password on SSO
+- [ ] Add onError on images
+- [x] Checkboxes on ingredients with checkboxes doesn't work
+- [ ] Shopping list

@@ -3,16 +3,15 @@
 import { TextInput } from '@mantine/core';
 import { useDebouncedValue, useMediaQuery } from '@mantine/hooks';
 
-import { useEffect, useState, useTransition } from 'react';
+import { useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 
 import styles from '../app/page.module.css';
 
-export default function Search() {
-  const [search, setSearch] = useState('');
+export default function Search({ searchQuery }: { searchQuery: string }) {
+  const [search, setSearch] = useState<string>(searchQuery || '');
   const router = useRouter();
   const pathname = usePathname();
-  const [, startTransition] = useTransition();
 
   const [debouncedValue] = useDebouncedValue(search, 500);
 
@@ -28,9 +27,7 @@ export default function Search() {
       params.delete('search');
     }
 
-    startTransition(() => {
-      router.replace(`${pathname}?${params.toString()}`);
-    });
+    router.push(`${pathname}?${params.toString()}`);
   }, [debouncedValue, pathname, router.replace]);
 
   return (
@@ -40,7 +37,11 @@ export default function Search() {
       pt=""
       px="lg"
       maw="40rem"
-      className={styles['search-input']}
+      value={search}
+      classNames={{
+        root: styles['search-input'],
+        input: styles['search-input-field'],
+      }}
       placeholder="Sök ingrediens eller recept"
       onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
     />

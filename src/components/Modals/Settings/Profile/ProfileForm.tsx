@@ -4,6 +4,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { signOut } from 'next-auth/react';
+import { useAuthModal } from '@/hooks/useAuthModal';
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -12,18 +13,14 @@ export default function ProfileForm() {
   const [error, setError] = useState<string>('');
   const [confirmOpened, { open: confirmOpen, close: confirmClose }] = useDisclosure(false);
   const router = useRouter();
-
-  const [id, setId] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
   const [name, setName] = useState<string>('');
+  const { user, setUser } = useAuthModal();
 
   useEffect(() => {
     fetch(`${baseUrl}/api/profile`)
       .then((res) => res.json())
       .then((json) => {
-        setId(json[0].id || '');
-        setEmail(json[0].email || '');
-        setName(json[0].name || '');
+        setUser(json[0]);
       });
   }, []);
 
@@ -39,7 +36,7 @@ export default function ProfileForm() {
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!name.length) {
+    if (name.length) {
       setError('Du måste ange ett namn');
       return;
     }
@@ -53,8 +50,8 @@ export default function ProfileForm() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          id,
-          email,
+          id: user?.id,
+          email: user?.email,
           name,
         }),
       });
@@ -62,8 +59,6 @@ export default function ProfileForm() {
       setLoading(false);
 
       if (res.ok) {
-        setName('');
-        setError('');
         window.location.reload();
       } else {
         throw new Error(`Response not ok ${res.status} ${res.statusText}`);

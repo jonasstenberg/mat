@@ -73,6 +73,20 @@
   font-size: 1rem;
 }
 
+.search-input-field {
+  background-color: #f6f6f4;
+}
+
+.recipes {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 0 1.25rem 2rem;
+  width: 100%;
+  max-width: var(--extra-large);
+  min-height: 24rem;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -106,22 +120,6 @@
   display: none;
 }
 
-.recipe-individual {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(10px, 1fr));
-  grid-gap: 0.5rem;
-  row-gap: 0.5rem;
-  column-gap: 0.5rem;
-  margin: 2rem auto;
-  border-radius: var(--mantine-radius-sm);
-  box-shadow: var(--mantine-shadow-md);
-  background-color: var(--mantine-color-white);
-  padding: 0;
-  width: 100%;
-  max-width: var(--extra-large);
-  min-height: 24rem;
-}
-
 @media only screen and (width <= 832px) {
   .recipe-individual {
     margin: 0 auto;
@@ -134,11 +132,16 @@
   flex-flow: column nowrap;
   justify-content: space-between;
   border-radius: var(--mantine-radius-sm);
-  box-shadow: var(--mantine-shadow-md);
   background-color: var(--mantine-color-white);
   padding: 0;
   height: 24rem;
   min-height: 12rem;
+  transition: 'transform 150ms ease, box-shadow 150ms ease';
+}
+
+.recipe:hover {
+  transform: scale(1.01);
+  box-shadow: var(--mantine-shadow-md);
 }
 
 .image-container,
@@ -182,7 +185,7 @@
   align-items: center;
   justify-content: center;
   margin: 0.25rem;
-  background-color: var(--mantine-color-orange-0);
+  background-color: #f6f6f4;
   padding: 0.5rem 0;
   text-align: center;
   color: var(--mantine-color-gray-7);
@@ -197,128 +200,16 @@
   fill: var(--mantine-color-gray-7);
 }
 
-.recipe-data {
-  grid-column: span 6;
-  padding: 2rem;
-}
-
-.recipe-image,
-.recipe-image-no-image {
-  grid-column: span 6;
-  border-radius: 0 var(--mantine-radius-sm) var(--mantine-radius-sm) 0;
-  background-color: var(--mantine-color-orange-1);
-  width: 100%;
-  max-width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-@media only screen and (width <= 832px) {
-  .recipe-data {
-    grid-column: span 12;
-    order: 2;
-  }
-
-  .recipe-image,
-  .recipe-image-no-image {
-    grid-column: span 12;
-    order: 1;
-  }
-}
-
-.recipe-heading {
-  margin-bottom: 2rem;
-  font-size: 2.5rem;
-  font-weight: 400;
-}
-
-.recipe-description {
-  display: inline;
-  white-space: pre-line;
-  word-wrap: break-word;
-}
-
-.recipe-description h1,
-.recipe-description h2,
-.recipe-description h3,
-.recipe-description h4,
-.recipe-description h5,
-.recipe-description h6 {
-  margin: 0;
-  padding: 0;
-}
-
-.ingredients {
-  column-count: 2;
-}
-
-@media only screen and (width <= 832px) {
-  .ingredients {
-    column-count: 1;
-  }
-}
-
-.ingredient-topic {
-  border-bottom: 1px solid var(--mantine-color-black);
-  width: 100%;
-}
-
-.ingredient-label {
-  display: flex;
-  position: relative;
-  align-items: center;
-  cursor: pointer;
-  padding-left: 3rem;
-  min-height: 2.25rem;
-  color: var(--mantine-color-black);
-}
-
-.ingredient-span {
+.recipe-actions {
   position: absolute;
   top: 0;
-  left: 0;
-  border: 1px solid #ccc;
-  border-radius: 50%;
-  background-color: #fff;
-  width: 2rem;
-  height: 2rem;
+  left: 2rem;
 }
 
-.ingredient-span::after {
-  position: absolute;
-  top: 0.625rem;
-  left: 0.5rem;
-  transform: rotate(-45deg);
-  opacity: 0;
-  border: 2px solid #fff;
-  border-top: none;
-  border-right: none;
-  width: 0.75rem;
-  height: 0.375rem;
-  content: '';
-}
-
-.ingredient-input[type='checkbox'] {
-  visibility: hidden;
-}
-
-.ingredient-input[type='checkbox']:checked + .ingredient-span {
-  border-color: var(--mantine-color-black);
-  background-color: var(--mantine-color-black);
-}
-
-.ingredient {
-  display: table;
-  margin-bottom: 0.5rem;
-  padding: 0.25rem 0;
-  page-break-inside: avoid;
-  break-inside: avoid-column;
-}
-
-.ingredient input[type='checkbox']:checked + .ingredient-span::after {
-  opacity: 1;
-}
-
-.ingredient .toggle {
-  margin-right: 0.5rem;
+@media only screen and (width <= 800px) {
+  .recipe-actions {
+    position: relative;
+    grid-column: span 12;
+    left: 0;
+  }
 }

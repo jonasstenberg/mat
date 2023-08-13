@@ -73,9 +73,9 @@ export default async function Home({ searchParams }: Props) {
   return (
     <>
       <div className={styles['search-wrapper']}>
-        <Search />
+        <Search searchQuery={search} />
       </div>
-      <main>
+      <main className={styles.recipes}>
         <div className={styles.grid}>
           {recipes?.map((recipe) => (
             <Recipe key={recipe.id} recipe={recipe} />

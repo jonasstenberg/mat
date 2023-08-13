@@ -19,9 +19,9 @@ import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useAuthModal } from '@/hooks/useAuthModal';
 import { GoogleButton } from '@/components/SocialButtons';
+import { capitalizeFirstLetter } from '@/utils/strings';
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-const capitalizeFirstLetter = (string: string) => string.charAt(0).toUpperCase() + string.slice(1);
 
 export default function AuthModal() {
   const searchParams = useSearchParams();
@@ -72,7 +72,6 @@ export default function AuthModal() {
       setLoading(false);
 
       if (res?.error) {
-        console.log(res);
         setError('Ogiltig e-post eller lösenord');
       } else {
         form.reset();

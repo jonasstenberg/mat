@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react';
 
+import styles from './styles.module.css';
 import { IngredientProps, RecipeProps } from '@/types/recipe';
-import styles from '@/app/page.module.css';
 
 interface Props {
   recipe: RecipeProps;
@@ -131,19 +131,19 @@ export default function Ingredients({ servings, recipe }: Props) {
 
   return (
     <>
+      <h4>Ingredienser</h4>
       {ingredients.map((ingredient, i) => {
         const normalizedIngredient = normalizeIngredient(ingredient, recipe.servings, servings);
         return (
           <div key={i} className={styles.ingredient}>
             {!normalizedIngredient.name.startsWith('#') ? (
               <label htmlFor={normalizedIngredient.name} className={styles['ingredient-label']}>
-                {`${convertDecimalToFraction(normalizedIngredient.quantity)} ${
-                  normalizedIngredient.measurement
-                } ${convertDecimalInStringToFraction(normalizedIngredient.name)}`}
+                {`${convertDecimalToFraction(normalizedIngredient.quantity)} ${normalizedIngredient.measurement
+                  } ${convertDecimalInStringToFraction(normalizedIngredient.name)}`}
                 <input
                   className={styles['ingredient-input']}
                   type="checkbox"
-                  value={normalizedIngredient.name}
+                  value={ingredient.name}
                   name="checked"
                   checked={ingredient.isChecked}
                   onChange={onChangeCheckBox}

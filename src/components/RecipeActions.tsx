@@ -4,6 +4,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { Button, Modal } from '@mantine/core';
 import { useRouter } from 'next/navigation';
 
+import styles from '@/app/page.module.css';
 import { RecipeProps } from '@/types/recipe';
 import { useRecipeModal } from '@/hooks/useRecipeModal';
 
@@ -36,17 +37,19 @@ export default function RecipeActions({ recipe }: RecipeActionsProps) {
           Ta bort
         </Button>
       </Modal>
-      <Button
-        onClick={() => {
-          setRecipeToUpdate(recipe);
-          handlers.open();
-        }}
-      >
-        Redigera
-      </Button>
-      <Button ml="xs" color="red" onClick={() => confirmOpen()}>
-        Ta bort
-      </Button>
+      <div className={styles['recipe-actions']}>
+        <Button
+          onClick={() => {
+            setRecipeToUpdate(recipe);
+            handlers.open();
+          }}
+        >
+          Redigera
+        </Button>
+        <Button ml="xs" color="red" onClick={() => confirmOpen()}>
+          Ta bort
+        </Button>
+      </div>
     </>
   );
 }

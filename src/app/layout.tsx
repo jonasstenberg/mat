@@ -2,12 +2,12 @@ import '@mantine/core/styles.css';
 import Link from 'next/link';
 import { getServerSession } from 'next-auth';
 import clsx from 'clsx';
-import { MantineProvider, Title } from '@mantine/core';
+import { MantineProvider } from '@mantine/core';
 import dynamic from 'next/dynamic';
 
 import '@/styles/globals.css';
 import styles from '@/app/page.module.css';
-import { azeretMono, openSans, lora } from '@/styles/fonts';
+import { azeretMono, openSans, lora, finlandica } from '@/styles/fonts';
 
 import { getCategories } from '@/lib/categories';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
@@ -59,7 +59,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const session = await getServerSession(authOptions);
 
   return (
-    <html lang="sv" className={clsx(openSans.variable, azeretMono.variable, lora.variable)}>
+    <html
+      lang="sv"
+      className={clsx(openSans.variable, azeretMono.variable, lora.variable, finlandica.variable)}
+    >
       <head />
       <Providers session={session}>
         <body>
@@ -68,9 +71,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             {session?.user?.name && <SettingsModal session={session} />}
             {session?.user?.name && <RecipeModal categories={categories} />}
             <header className={styles.header}>
-              <Title className={styles['header-heading']}>
+              <h1 className={styles['header-heading']}>
                 <Link href="/">stenberg&apos;s receptsida</Link>
-              </Title>
+              </h1>
               <HeaderMenu session={session} />
             </header>
             {children}

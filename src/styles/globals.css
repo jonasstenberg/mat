@@ -14,9 +14,9 @@
 
 body {
   margin: 0;
-  background-color: var(--mantine-color-orange-0);
   color: var(--mantine-color-gray-8);
   font-size: var(--mantine-font-size-sm);
+  background-color: var(--mantine-color-white);
 }
 
 h1,
@@ -63,16 +63,6 @@ li {
   margin: 0;
   padding: 0;
   list-style-type: none;
-}
-
-main {
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-  padding: 0 1.25rem 2rem;
-  width: 100%;
-  max-width: var(--extra-large);
-  min-height: 24rem;
 }
 
 @media only screen and (width <= 832px) {

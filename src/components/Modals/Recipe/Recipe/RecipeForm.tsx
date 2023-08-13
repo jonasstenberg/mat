@@ -101,10 +101,10 @@ const updateRecipe = async (
       recipeId,
       recipeToUpdate: filename
         ? {
-            ...recipeToUpdate,
-            ...recipeToUpdate,
-            image: filename,
-          }
+          ...recipeToUpdate,
+          ...recipeToUpdate,
+          image: filename,
+        }
         : recipeToUpdate,
     }),
   });
@@ -261,17 +261,17 @@ export default function RecipeForm({ isLoading, setIsLoading }: Props) {
           if (validate.valid) {
             recipeToUpdate
               ? await updateRecipe(recipeToUpdate.id, recipe, async () => {
-                  await fetch(`/api/revalidate?path=/recipe/${recipeToUpdate.id}`);
-                  handlers.close();
-                  startTransition(() => {
-                    window.location.reload();
-                  });
-                })
-              : await saveRecipe(recipe, (id: string) => {
-                  setIsLoading(false);
-                  handlers.close();
-                  router.replace(`/recipe/${id}`);
+                await fetch(`/api/revalidate?path=/recipe/${recipeToUpdate.id}`);
+                handlers.close();
+                startTransition(() => {
+                  window.location.reload();
                 });
+              })
+              : await saveRecipe(recipe, (id: string) => {
+                setIsLoading(false);
+                handlers.close();
+                router.replace(`/recipe/${id}`);
+              });
           }
         }}
         loading={isLoading}

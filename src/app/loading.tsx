@@ -18,9 +18,9 @@ export default async function Loading() {
   return (
     <>
       <div className={styles['search-wrapper']}>
-        <Search />
+        <Search searchQuery="" />
       </div>
-      <main>
+      <main className={styles.recipes}>
         <div className={styles.grid}>
           {[...Array(12)]
             .map((_, i) => ({ id: `${i}` }))

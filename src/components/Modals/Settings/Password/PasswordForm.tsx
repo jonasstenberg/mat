@@ -1,4 +1,5 @@
 import { Button, PasswordInput, Stack, Text } from '@mantine/core';
+import { hasLength, matchesField, useForm } from '@mantine/form';
 import { IconDeviceFloppy } from '@tabler/icons-react';
 import { Session } from 'next-auth';
 import { useState } from 'react';
@@ -27,38 +28,28 @@ const isValidPassword = (password: string): boolean => {
   return true;
 };
 
-const requirements = `Lösenordskrav:
-- Minst 8 tecken i längd.
-- Innehåller minst en stor bokstav.
-- Innehåller minst en liten bokstav.
-- Innehåller minst en siffra.`;
+const requirements =
+  'Lösenordet måste innehålla minst 8 tecken, minst en stor bokstav, minst en liten bokstav och minst en siffra.';
 
 export default function PasswordForm({ session }: PasswordFormProps) {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
 
-  const [oldPassword, setOldPassword] = useState<string>('');
-  const [newPassword1, setNewPassword1] = useState<string>('');
-  const [newPassword2, setNewPassword2] = useState<string>('');
+  const form = useForm({
+    initialValues: {
+      oldPassword: '',
+      newPassword1: '',
+      newPassword2: '',
+    },
 
-  const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+    validate: {
+      oldPassword: hasLength({ min: 8 }, requirements),
+      newPassword1: (val) => (!isValidPassword(val) ? requirements : null),
+      newPassword2: matchesField('newPassword1', 'Lösenorden stämmer inte överens'),
+    },
+  });
 
-    if (!oldPassword.length || !newPassword1.length || !newPassword2.length) {
-      setError('Du kan inte lämna något fält tomt');
-      return;
-    }
-
-    if (newPassword1 !== newPassword2) {
-      setError('Lösenorden stämmer inte överens');
-      return;
-    }
-
-    if (!isValidPassword(newPassword1)) {
-      setError(requirements);
-      return;
-    }
-
+  const onSubmit = async () => {
     try {
       setLoading(true);
 
@@ -69,17 +60,14 @@ export default function PasswordForm({ session }: PasswordFormProps) {
         },
         body: JSON.stringify({
           email: session?.user?.email,
-          old_password: oldPassword,
-          new_password: newPassword1,
+          old_password: form.values.oldPassword,
+          new_password: form.values.newPassword1,
         }),
       });
 
       setLoading(false);
 
       if (res.ok) {
-        setOldPassword('');
-        setNewPassword1('');
-        setNewPassword2('');
         setError('');
         window.location.reload();
       } else {
@@ -103,7 +91,7 @@ export default function PasswordForm({ session }: PasswordFormProps) {
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={form.onSubmit(() => onSubmit())}>
       <Stack gap="sm">
         {error && (
           <Text c="red" size="xs" style={{ whiteSpace: 'pre-line' }}>
@@ -114,20 +102,20 @@ export default function PasswordForm({ session }: PasswordFormProps) {
           label="Gammalt lösenord"
           autoComplete="current-password"
           data-autofocus
-          value={oldPassword}
-          onChange={(e) => setOldPassword(e.currentTarget.value)}
+          withAsterisk
+          {...form.getInputProps('oldPassword')}
         />
         <PasswordInput
           label="Nytt lösenord"
           autoComplete="new-password"
-          value={newPassword1}
-          onChange={(e) => setNewPassword1(e.currentTarget.value)}
+          withAsterisk
+          {...form.getInputProps('newPassword1')}
         />
         <PasswordInput
           label="Upprepa nytt lösenord"
           autoComplete="new-password"
-          value={newPassword2}
-          onChange={(e) => setNewPassword2(e.currentTarget.value)}
+          withAsterisk
+          {...form.getInputProps('newPassword2')}
         />
         <Button leftSection={<IconDeviceFloppy size={20} />} type="submit" loading={loading}>
           Spara

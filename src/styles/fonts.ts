@@ -1,4 +1,4 @@
-import { Open_Sans, Azeret_Mono, Lora } from 'next/font/google';
+import { Open_Sans, Azeret_Mono, Lora, Finlandica } from '@next/font/google';
 
 export const openSans = Open_Sans({
   weight: ['400', '600'],
@@ -19,4 +19,11 @@ export const lora = Lora({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-lora',
+});
+
+export const finlandica = Finlandica({
+  weight: ['400', '600'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-finlandica',
 });

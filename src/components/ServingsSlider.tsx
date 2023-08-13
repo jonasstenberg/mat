@@ -25,14 +25,18 @@ export default function ServingsSlider({ servings }: { servings: number }) {
     })
   );
   return (
-    <Slider
-      min={2}
-      max={24}
-      defaultValue={servings}
-      step={2}
-      marks={servingsStepper}
-      styles={{ markLabel: { display: 'none' } }}
-      onChangeEnd={updateServings}
-    />
+    <>
+      <Slider
+        min={2}
+        max={24}
+        defaultValue={servings}
+        step={2}
+        marks={servingsStepper}
+        mt="0.25rem"
+        styles={{ markLabel: { display: 'none' } }}
+        labelAlwaysOn
+        onChangeEnd={updateServings}
+      />
+    </>
   );
 }
