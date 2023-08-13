@@ -21,7 +21,8 @@
   border-bottom: 1px solid var(--mantine-color-gray-3);
 }
 
-.recipe-heading h1 {
+.recipe-heading h2 {
+  width: 100%;
   text-align: center;
   font-family: var(--font-lora);
   font-size: 2.5rem;
@@ -157,7 +158,7 @@
     grid-column: span 12;
     order: -1;
   }
-  .recipe-heading h1 {
+  .recipe-heading h2 {
     font-size: 1.5rem;
     text-align: left;
   }

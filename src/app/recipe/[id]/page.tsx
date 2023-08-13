@@ -75,7 +75,7 @@ export default async function Page({ params, searchParams }: Props) {
     <main className={styles.recipe}>
       {session?.user?.email === recipe.owner && <RecipeActions recipe={recipe} />}
       <div className={styles['recipe-heading']}>
-        <h1>{recipe.name}</h1>
+        <h2>{recipe.name}</h2>
       </div>
       {recipe.image ? (
         <Image
