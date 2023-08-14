@@ -1,4 +1,4 @@
-import { Open_Sans, Azeret_Mono, Lora, Finlandica } from '@next/font/google';
+import { Open_Sans, Azeret_Mono, Lora, Finlandica } from 'next/font/google';
 
 export const openSans = Open_Sans({
   weight: ['400', '600'],
