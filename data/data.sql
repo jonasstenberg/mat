@@ -5,7 +5,7 @@
 -- Dumped from database version 14.8 (Debian 14.8-1.pgdg100+1)
 -- Dumped by pg_dump version 14.8 (Debian 14.8-1.pgdg100+1)
 
--- Started on 2023-08-19 02:02:20 CEST
+-- Started on 2023-08-20 02:09:12 CEST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -165,7 +165,7 @@ dd534f07-426c-4dcc-87e0-8174d44d03f7	2020-11-21 15:32:01.748489	2023-08-11 14:48
 8ecc7ec6-54e8-466b-bd41-36d4a05539e7	2022-12-29 12:57:11.352181	2023-08-11 19:04:07.103485	Mammas äppelkaka i svampskogen	8	bitar	\N	\N	Blanda alla ingredienser och lägg i en pajform.\nLägg på äppelklyftorna. Lägg på smörklickar och kanel.\n\nGrädda i 30-40 minuter på 175 grader.	8ecc7ec6-54e8-466b-bd41-36d4a05539e7.webp	\N	jonas@stenberg.io	'-40':24 '175':27 '30':23 'bland':5 'grad':28 'grädd':21 'ingrediens':7 'kanel':20 'lägg':9,13,16 'mamm':1 'minut':25 'pajform':12 'smörklick':18 'svampskog':4 'äppelkak':2 'äppelklyft':15
 4aa69da1-cda1-46cb-b386-6fd0e5251b6e	2020-11-21 15:16:22.100787	2023-08-12 14:24:33.506243	Lax med pepparrotscreme och ugnsrostad potatis	4	portioner	\N	\N	Sätt ugnen på 200 grader.\n\n### Ugnsrostad potatis\nSkala och skär potatisen i mindre klyftor. Blanda med olivolja, salt och peppar och lägg ut på en plåt med bakplåtspapper. Sätt in i ugnen i ca 25 minuter eller tills potatisen är gyllenbrun.\n\n### Pepparrotscreme\nBlanda alla ingredienser i en skål och bred ut ovanpå laxfiléerna eller laxsidan. Sätt in i ugnen ca. 15-20 minuter eller till laxen har en innertemperatur på 55-57 grader.\n\nServera med sallad.	\N	\N	jonas@stenberg.io	'-20':68 '-57':78 '15':67 '200':10 '25':41 '55':77 'bakplåtspapp':34 'bland':21,49 'bred':56 'ca':40,66 'grad':11,79 'gyllenbrun':47 'in':36,63 'ingrediens':51 'innertemperatur':75 'klyft':20 'lax':1,72 'laxfilé':59 'laxsidan':61 'lägg':28 'mindr':19 'minut':42,69 'olivolj':23 'ovanpå':58 'pepp':26 'pepparrotscrem':3,48 'plåt':32 'potatis':6,13,17,45 'sall':82 'salt':24 'server':80 'skal':14 'skär':16 'skål':54 'sätt':7,35,62 'till':44 'ugn':8,38,65 'ugnsrost':5,12
 e6800c24-b01f-4d28-baf1-3dfa25fcfa4b	2022-09-22 19:54:14.424542	2023-08-13 20:01:47.49987	Lemon posset med hallon	4	portioner	10	240	Koka upp grädde och socker, låt koka 1 minut. Ta från värmen och rör ner citronjuice.\n\nHäll upp i 6 formar eller glas (för 6 port) och ställ i kylen minst 4 timmar eller tills de stelnat.\n\nTill servering: Toppa med hallon vid servering.	e6800c24-b01f-4d28-baf1-3dfa25fcfa4b.webp	\N	jonas@stenberg.io	'1':12 '4':36 '6':24,29 'citronjuic':20 'form':25 'glas':27 'grädd':7 'hallon':4,46 'häll':21 'kok':5,11 'kyl':34 'lemon':1 'låt':10 'minst':35 'minut':13 'ner':19 'port':30 'posset':2 'rör':18 'servering':43,48 'sock':9 'steln':41 'ställ':32 'ta':14 'till':39 'timm':37 'topp':44 'värm':16
-04ecefde-1b56-44df-9aef-401c9e48c34a	2023-08-04 11:15:45.48476	2023-08-14 09:21:12.57946	Amerikanska blåbärsmuffins	12	muffins	15	15	Vispa smör och socker vitt och pösigt. Rör i äggen , ett i taget. Tillsätt vaniljsocker och mjölk. Blanda mjöl och bakpulver och rör i smeten. Fyll formarna med\nsmeten.\n\nTryck i blåbären med en sked.\nGrädda mitt i ugnen på 200° i ca 15 min.	04ecefde-1b56-44df-9aef-401c9e48c34a.webp	\N	jonas@stenberg.io	'15':46 '200':43 'amerikansk':1 'bakpulv':23 'bland':20 'blåbär':34 'blåbärsmuffin':2 'ca':45 'form':29 'fyll':28 'grädd':38 'mjöl':21 'mjölk':19 'pös':9 'rör':10,25 'sked':37 'smet':27,31 'smör':4 'sock':6 'taget':15 'tillsät':16 'tryck':32 'ugn':41 'vaniljsock':17 'visp':3 'vitt':7 'ägg':12
+04ecefde-1b56-44df-9aef-401c9e48c34a	2023-08-04 11:15:45.48476	2023-08-19 10:30:03.269537	Amerikanska blåbärsmuffins	12	muffins	15	15	Vispa smör och socker vitt och pösigt. Rör i äggen , ett i taget. Tillsätt vaniljsocker och mjölk. Blanda mjöl och bakpulver och rör i smeten. Fyll formarna med\nsmeten.\n\nTryck i blåbären med en sked.\nGrädda mitt i ugnen på 200° i ca 15 min.	04ecefde-1b56-44df-9aef-401c9e48c34a.webp	\N	jonas@stenberg.io	'15':46 '200':43 'amerikansk':1 'bakpulv':23 'bland':20 'blåbär':34 'blåbärsmuffin':2 'ca':45 'form':29 'fyll':28 'grädd':38 'mjöl':21 'mjölk':19 'pös':9 'rör':10,25 'sked':37 'smet':27,31 'smör':4 'sock':6 'taget':15 'tillsät':16 'tryck':32 'ugn':41 'vaniljsock':17 'visp':3 'vitt':7 'ägg':12
 d6f52463-0949-4b7d-801e-7aa4c2e6fe8e	2022-12-29 17:26:36.816902	2023-08-13 20:14:30.366565	Lövbiffsgryta	4	portioner	\N	\N	Strimla köttet tunt och hetta upp en stekpanna. Klicka i smör och lägg i hälften av köttet. Stek på hög värme under omrörning. Salta och peppra. Flytta över köttet på en tallrik när det fått stekyta. Stek resten av köttet.\n\nStek lök och vitlök tills löken är mjuk. Häll tillbaka allt kött.\n\nHäll i grädde, senap och soja. Lät småputtra några minuter.\nLägg bönorna i saltat kokande vatten och låt koka ca 2 min.\nServera grytan med ris eller potatis samt bönorna.	d6f52463-0949-4b7d-801e-7aa4c2e6fe8e.webp	\N	jonas@stenberg.io	'2':74 'bön':65,83 'ca':73 'flytt':28 'fått':36 'grytan':77 'grädd':56 'hett':6 'hälft':16 'häll':50,54 'hög':21 'klick':10 'kok':68,72 'kött':53 'köttet':3,18,30,41 'lägg':14,64 'lät':60 'låt':71 'lök':43,47 'lövbiffsgryt':1 'minut':63 'mjuk':49 'omrörning':24 'peppr':27 'potatis':81 'rest':39 'ris':79 'salt':25,67 'samt':82 'senap':57 'server':76 'småputtr':61 'smör':12 'soj':59 'stek':19,38,42 'stekpan':9 'stekyt':37 'striml':2 'tallrik':33 'till':46 'tillbak':51 'tunt':4 'vatt':69 'vitlök':45 'värm':22
 8f4f0cd3-b2b8-4e78-8110-15459b651d18	2020-11-17 17:43:49.165456	2023-08-18 07:52:50.043752	Blåbärsgröt	2	portioner	5	5	Koka först blåbär, vatten och socker. Sedan ner med grahamsgrynen och saltet och koka i cirka 5 minuter.\n\nServera gärna med rostade kokosflakes, hackade hasselnötter och en klick honung.	8f4f0cd3-b2b8-4e78-8110-15459b651d18.webp	\N	jonas@stenberg.io	'5':18 'blåbär':4 'blåbärsgröt':1 'cirk':17 'först':3 'grahamsgryn':11 'gärn':21 'hack':25 'hasselnöt':26 'honung':30 'klick':29 'kok':2,15 'kokosflak':24 'minut':19 'ner':9 'rost':23 'saltet':13 'server':20 'sock':7 'vatt':5
 \.
@@ -837,19 +837,19 @@ e907f2c8-a80a-4ed8-9988-405bac9bdaa9	2023-08-12 14:24:33.506243	2023-08-12 14:24
 7a6ade8f-7a24-41d6-abe6-b2a01b16ea6c	2023-08-13 20:01:47.49987	2023-08-13 20:01:47.49987	e6800c24-b01f-4d28-baf1-3dfa25fcfa4b	strösocker	dl	1.5	jonas@stenberg.io
 a4b41dfc-fa39-4b05-a8ee-a4fb770b0cad	2023-08-13 20:01:47.49987	2023-08-13 20:01:47.49987	e6800c24-b01f-4d28-baf1-3dfa25fcfa4b	färskpressad citronjuice	dl	0.75	jonas@stenberg.io
 fc851211-2589-4999-b3d9-c2ffdff12190	2023-08-13 20:14:30.366565	2023-08-13 20:14:30.366565	d6f52463-0949-4b7d-801e-7aa4c2e6fe8e	a			jonas@stenberg.io
-64466328-f516-4978-ae12-f2960f976d5d	2023-08-14 09:21:12.57946	2023-08-14 09:21:12.57946	04ecefde-1b56-44df-9aef-401c9e48c34a	rumstempererat smör	g	150	jonas@stenberg.io
-a73f790a-2515-49b9-a50c-ff883899321e	2023-08-14 09:21:12.57946	2023-08-14 09:21:12.57946	04ecefde-1b56-44df-9aef-401c9e48c34a	socker	dl	2	jonas@stenberg.io
-7ea4468a-b150-4a17-a143-b15c0e030001	2023-08-14 09:21:12.57946	2023-08-14 09:21:12.57946	04ecefde-1b56-44df-9aef-401c9e48c34a	ägg		2	jonas@stenberg.io
-5b82627b-55cd-4a70-b792-a57aa2f43463	2023-08-14 09:21:12.57946	2023-08-14 09:21:12.57946	04ecefde-1b56-44df-9aef-401c9e48c34a	vaniljsocker	tsk	1	jonas@stenberg.io
-df870dbc-72a3-4bf1-96cf-05bf84dd0652	2023-08-14 09:21:12.57946	2023-08-14 09:21:12.57946	04ecefde-1b56-44df-9aef-401c9e48c34a	mjölk	dl	0.5	jonas@stenberg.io
-9704448e-9fff-452a-8363-4b2929d829fd	2023-08-14 09:21:12.57946	2023-08-14 09:21:12.57946	04ecefde-1b56-44df-9aef-401c9e48c34a	vetemjöl	dl	3	jonas@stenberg.io
-657ac7db-2116-46f6-9fa9-edd26b940588	2023-08-14 09:21:12.57946	2023-08-14 09:21:12.57946	04ecefde-1b56-44df-9aef-401c9e48c34a	bakpulver	tsk	1	jonas@stenberg.io
-c4ee1938-4890-4c11-8e87-ba9027b5a286	2023-08-14 09:21:12.57946	2023-08-14 09:21:12.57946	04ecefde-1b56-44df-9aef-401c9e48c34a	blåbär	dl	2	jonas@stenberg.io
 37a2e522-4cdf-4998-a565-e49d723a71b9	2023-08-18 07:52:50.043752	2023-08-18 07:52:50.043752	8f4f0cd3-b2b8-4e78-8110-15459b651d18	blåbär	dl	1.5	jonas@stenberg.io
 3e09ce65-70b8-42f0-bb11-50dd355aca05	2023-08-18 07:52:50.043752	2023-08-18 07:52:50.043752	8f4f0cd3-b2b8-4e78-8110-15459b651d18	socker	msk	1	jonas@stenberg.io
 293eb809-b7dc-47d4-a1dd-d9374bfa5ce9	2023-08-18 07:52:50.043752	2023-08-18 07:52:50.043752	8f4f0cd3-b2b8-4e78-8110-15459b651d18	vatten	dl	2	jonas@stenberg.io
 a843ceb4-b9e6-4e50-8ac1-a7a7f72b6d7c	2023-08-18 07:52:50.043752	2023-08-18 07:52:50.043752	8f4f0cd3-b2b8-4e78-8110-15459b651d18	grahamsgryn	dl	1	jonas@stenberg.io
 6a91b65e-5c97-4c4f-a26a-ea3bed008405	2023-08-18 07:52:50.043752	2023-08-18 07:52:50.043752	8f4f0cd3-b2b8-4e78-8110-15459b651d18	salt	kryddmått	1	jonas@stenberg.io
+f0929f9c-625c-4d17-9fe5-ed1eaad61539	2023-08-19 10:30:03.269537	2023-08-19 10:30:03.269537	04ecefde-1b56-44df-9aef-401c9e48c34a	rumstempererat smör	g	150	jonas@stenberg.io
+4902c7d8-4aff-4c62-a4e1-7038bcfd3b26	2023-08-19 10:30:03.269537	2023-08-19 10:30:03.269537	04ecefde-1b56-44df-9aef-401c9e48c34a	socker	dl	2	jonas@stenberg.io
+84de5a36-09c5-454a-9e9d-e6edfa1266d1	2023-08-19 10:30:03.269537	2023-08-19 10:30:03.269537	04ecefde-1b56-44df-9aef-401c9e48c34a	ägg		2	jonas@stenberg.io
+bd13a0e5-2059-4212-bdc2-f196ffd2729c	2023-08-19 10:30:03.269537	2023-08-19 10:30:03.269537	04ecefde-1b56-44df-9aef-401c9e48c34a	vaniljsocker	tsk	1	jonas@stenberg.io
+4e4990fe-94b6-427e-8387-ef57d46e1bfe	2023-08-19 10:30:03.269537	2023-08-19 10:30:03.269537	04ecefde-1b56-44df-9aef-401c9e48c34a	mjölk	dl	0.5	jonas@stenberg.io
+4a5da49f-5b7c-4d13-b108-bb268d7d4665	2023-08-19 10:30:03.269537	2023-08-19 10:30:03.269537	04ecefde-1b56-44df-9aef-401c9e48c34a	vetemjöl	dl	3	jonas@stenberg.io
+6aeec85c-d90e-4784-90fe-97a800bb71a4	2023-08-19 10:30:03.269537	2023-08-19 10:30:03.269537	04ecefde-1b56-44df-9aef-401c9e48c34a	bakpulver	tsk	1	jonas@stenberg.io
+c8963eb1-2743-46e6-9d5a-72a3e146655d	2023-08-19 10:30:03.269537	2023-08-19 10:30:03.269537	04ecefde-1b56-44df-9aef-401c9e48c34a	blåbär	dl	2	jonas@stenberg.io
 \.
 
 
@@ -926,12 +926,12 @@ COPY public.recipe_categories (date_added, recipe, category, owner) FROM stdin;
 2023-08-13 20:01:47.49987	e6800c24-b01f-4d28-baf1-3dfa25fcfa4b	ffa8c20f-3293-418e-a89f-200018197bab	jonas@stenberg.io
 2023-08-13 20:01:47.49987	e6800c24-b01f-4d28-baf1-3dfa25fcfa4b	5a9ca809-e24a-40f0-bf36-dfb3c56e9e10	jonas@stenberg.io
 2023-08-13 20:14:30.366565	d6f52463-0949-4b7d-801e-7aa4c2e6fe8e	008625e8-ada4-4412-b20f-feb6f2f5c6ed	jonas@stenberg.io
-2023-08-14 09:21:12.57946	04ecefde-1b56-44df-9aef-401c9e48c34a	74b57792-fa68-4efb-be46-e8d194d86ed3	jonas@stenberg.io
 2023-08-18 07:52:50.043752	8f4f0cd3-b2b8-4e78-8110-15459b651d18	1e92d3e7-8a5e-4d0d-a52e-737a519666c5	jonas@stenberg.io
+2023-08-19 10:30:03.269537	04ecefde-1b56-44df-9aef-401c9e48c34a	74b57792-fa68-4efb-be46-e8d194d86ed3	jonas@stenberg.io
 \.
 
 
--- Completed on 2023-08-19 02:02:20 CEST
+-- Completed on 2023-08-20 02:09:12 CEST
 
 --
 -- PostgreSQL database dump complete
