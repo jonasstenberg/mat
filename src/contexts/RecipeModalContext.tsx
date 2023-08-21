@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useDisclosure } from '@mantine/hooks';
-import { RecipeProps } from '@/types/recipe';
+import { RecipeSchema } from '@/types/recipe';
 
 const defaultServings = process.env.NEXT_PUBLIC_DEFAULT_SERVINGS || '4';
 const defaultServingsName = process.env.NEXT_PUBLIC_DEFAULT_SERVINGS_NAME || 'portioner';
@@ -26,10 +26,10 @@ interface RecipeModalContextType {
     close: () => void;
     toggle: () => void;
   };
-  recipeFormData: RecipeProps;
-  setRecipeFormData: React.Dispatch<React.SetStateAction<RecipeProps>>;
-  recipeToUpdate: RecipeProps | undefined | null;
-  setRecipeToUpdate: React.Dispatch<React.SetStateAction<RecipeProps | undefined | null>>;
+  recipeFormData: RecipeSchema;
+  setRecipeFormData: React.Dispatch<React.SetStateAction<RecipeSchema>>;
+  recipeToUpdate: RecipeSchema | undefined | null;
+  setRecipeToUpdate: React.Dispatch<React.SetStateAction<RecipeSchema | undefined | null>>;
 }
 
 export const RecipeModalContext = React.createContext<RecipeModalContextType | undefined>(
@@ -41,8 +41,8 @@ interface RecipeModalProviderProps {
 }
 
 export const RecipeModalProvider = ({ children }: RecipeModalProviderProps) => {
-  const [recipeToUpdate, setRecipeToUpdate] = useState<RecipeProps | undefined | null>(null);
-  const [recipeFormData, setRecipeFormData] = useState<RecipeProps>(defaultRecipeFormData);
+  const [recipeToUpdate, setRecipeToUpdate] = useState<RecipeSchema | undefined | null>(null);
+  const [recipeFormData, setRecipeFormData] = useState<RecipeSchema>(defaultRecipeFormData);
   const [opened, handlers] = useDisclosure(false, {
     onClose: () => {
       setRecipeToUpdate(null);

@@ -26,7 +26,7 @@ SET row_security = off;
 CREATE DATABASE mat WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'en_US.UTF-8';
 
 
-ALTER DATABASE mat OWNER TO postgres;
+ALTER DATABASE mat OWNER TO jonasstenberg;
 
 \connect mat
 
@@ -68,7 +68,7 @@ SET row_security = off;
 -- Data for Name: users; Type: TABLE DATA; Schema: auth; Owner: postgres
 --
 
-COPY auth.users (id, name, email, provider, owner) FROM stdin;
+COPY public.users (id, name, email, provider, owner) FROM stdin;
 e708ff15-722c-4177-ac55-405fff35b30f	Jonas Stenberg	jonas@stenberg.io	\N	jonas@stenberg.io
 93eb6174-e2e2-478c-9433-072b0befbbea	Jonas Stenberg	jonas.d.stenberg@gmail.com	google	jonas.d.stenberg@gmail.com
 592fd113-c3e6-48c2-8c17-4a0c32323676	Svante Richter	svante.richter@gmail.com	google	svante.richter@gmail.com
@@ -82,8 +82,8 @@ e708ff15-722c-4177-ac55-405fff35b30f	Jonas Stenberg	jonas@stenberg.io	\N	jonas@s
 -- Data for Name: user_passwords; Type: TABLE DATA; Schema: auth; Owner: postgres
 --
 
-COPY auth.user_passwords (email, password) FROM stdin;
-jonas@stenberg.io	$2a$06$UFa2NQyoGEFrOuHzv6KVp.j8G.qnnujXLi5/9fTol98CsNRWCc2Nq
+COPY public.user_passwords (email, password, owner) FROM stdin;
+jonas@stenberg.io	$2a$06$UFa2NQyoGEFrOuHzv6KVp.j8G.qnnujXLi5/9fTol98CsNRWCc2Nq	jonas@stenberg.io
 \.
 
 

@@ -5,13 +5,12 @@ import { Button, Modal } from '@mantine/core';
 import { useRouter } from 'next/navigation';
 
 import styles from '@/app/page.module.css';
-import { RecipeProps } from '@/types/recipe';
+import { RecipeSchema } from '@/types/recipe';
 import { useRecipeModal } from '@/hooks/useRecipeModal';
-
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+import { deleteRecipe } from '@/actions/recipe';
 
 interface RecipeActionsProps {
-  recipe?: RecipeProps | null;
+  recipe: RecipeSchema | null;
 }
 
 export default function RecipeActions({ recipe }: RecipeActionsProps) {
@@ -20,9 +19,7 @@ export default function RecipeActions({ recipe }: RecipeActionsProps) {
   const router = useRouter();
 
   const handleDeleteRecipe = async () => {
-    await fetch(`${baseUrl}/api/recipe?id=${recipe?.id}`, {
-      method: 'DELETE',
-    });
+    deleteRecipe(recipe?.id as string);
     confirmClose();
     router.push('/');
   };

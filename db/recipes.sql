@@ -12,7 +12,7 @@ CREATE TABLE recipes (
   description TEXT NOT NULL,
   image TEXT,
   thumbnail TEXT,
-  owner TEXT REFERENCES auth.users (email) ON DELETE CASCADE DEFAULT current_setting('request.jwt.claims', true)::json->>'email' NOT NULL,
+  owner TEXT REFERENCES users (email) ON DELETE CASCADE DEFAULT current_setting('request.jwt.claims', true)::json->>'email' NOT NULL,
   tsv tsvector
 );
 
@@ -34,14 +34,14 @@ CREATE POLICY recipes_policy_select
 CREATE POLICY recipes_policy_insert
   ON recipes
   FOR INSERT
-  WITH CHECK (owner = current_setting('request.jwt.claims', true)::json->>'email');
+  WITH CHECK (owner = current_setting('request.jwt.claims')::json->>'email');
 
 CREATE POLICY recipes_policy_update
   ON recipes
   FOR UPDATE
-  USING (owner = current_setting('request.jwt.claims', true)::json->>'email');
+  USING (owner = current_setting('request.jwt.claims')::json->>'email');
 
 CREATE POLICY recipes_policy_delete
   ON recipes
   FOR DELETE
-  USING (owner = current_setting('request.jwt.claims', true)::json->>'email');
+  USING (owner = current_setting('request.jwt.claims')::json->>'email');

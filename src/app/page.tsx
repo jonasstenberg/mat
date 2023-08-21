@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 
 import styles from './page.module.css';
 import { getRecipes } from '@/lib/recipes';
-import { RecipeProps } from '@/types/recipe';
+import { RecipeSchema } from '@/types/recipe';
 import clock from '../../public/clock.svg';
 
 const Search = dynamic(() => import('@/components/Search'), {
@@ -29,7 +29,7 @@ const formatTime = (minutes: number): string => {
   return `Över ${hours} ${hours === 1 ? 'timme' : 'timmar'}`;
 };
 
-function Recipe({ recipe }: { recipe: RecipeProps }) {
+function Recipe({ recipe }: { recipe: RecipeSchema }) {
   const { id, name, image } = recipe || {};
   return (
     <div className={styles.recipe} key={id}>
@@ -49,7 +49,9 @@ function Recipe({ recipe }: { recipe: RecipeProps }) {
       )}
       <div className={styles['recipe-info']}>
         <h2 className={styles['recipe-title']}>
-          <Link href={`/recipe/${id}`}>{name}</Link>
+          <Link prefetch={false} href={`/recipe/${id}`}>
+            {name}
+          </Link>
         </h2>
         <div className={styles['recipe-metadata']}>
           {recipe.prep_time || recipe.cook_time ? (

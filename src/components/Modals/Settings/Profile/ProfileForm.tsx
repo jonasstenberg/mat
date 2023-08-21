@@ -1,34 +1,44 @@
+'use client';
+
 import { Button, Divider, Modal, Stack, Text, TextInput } from '@mantine/core';
 import { IconDeviceFloppy } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { signOut } from 'next-auth/react';
+import { Session } from 'next-auth';
 import { useAuthModal } from '@/hooks/useAuthModal';
+import { deleteUser, getUser, updateUser } from '@/actions/user';
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-
-export default function ProfileForm() {
+export default function ProfileForm({ session }: { session: Session | null }) {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
+  const [success, setSuccess] = useState<boolean>(false);
   const [confirmOpened, { open: confirmOpen, close: confirmClose }] = useDisclosure(false);
   const router = useRouter();
   const [name, setName] = useState<string>('');
   const { user, setUser } = useAuthModal();
 
   useEffect(() => {
-    fetch(`${baseUrl}/api/profile`)
-      .then((res) => res.json())
-      .then((json) => {
-        setUser(json[0]);
-        setName(json[0].name);
-      });
+    const fetchData = async () => {
+      if (!session?.user.email) {
+        return;
+      }
+      const u = await getUser(session?.user.email);
+      if (u) {
+        setUser(u);
+        setName(u.name);
+      }
+    };
+
+    fetchData();
   }, []);
 
   const handleDeleteAccount = async () => {
-    await fetch(`${baseUrl}/api/user`, {
-      method: 'DELETE',
-    });
+    if (!user) {
+      return;
+    }
+    await deleteUser(user);
     await signOut();
     confirmClose();
     router.push('/');
@@ -45,25 +55,19 @@ export default function ProfileForm() {
     try {
       setLoading(true);
 
-      const res = await fetch(`${baseUrl}/api/profile`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          id: user?.id,
-          email: user?.email,
-          name,
-        }),
-      });
+      if (!user) {
+        return;
+      }
+      const message = await updateUser(user, name);
 
       setLoading(false);
 
-      if (res.ok) {
-        window.location.reload();
-      } else {
-        throw new Error(`Response not ok ${res.status} ${res.statusText}`);
+      if (message.length) {
+        throw new Error(message);
       }
+
+      setError('');
+      setSuccess(true);
     } catch (err: any) {
       setLoading(false);
       setError(err);
@@ -82,6 +86,11 @@ export default function ProfileForm() {
       </Modal>
       <form onSubmit={onSubmit}>
         <Stack gap="sm">
+          {success && (
+            <Text c="green" size="xs" style={{ whiteSpace: 'pre-line' }}>
+              Uppdaterat!
+            </Text>
+          )}
           {error && (
             <Text c="red" size="xs" style={{ whiteSpace: 'pre-line' }}>
               {error}

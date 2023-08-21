@@ -1,12 +1,12 @@
 import { Errors } from '@/contexts/ErrorContext';
-import { RecipeProps } from '@/types/recipe';
+import { RecipeSchema } from '@/types/recipe';
 
 interface RecipeValidationResult {
   valid: boolean;
   errors: Errors;
 }
 
-export const validateRecipe = (recipe: RecipeProps): RecipeValidationResult => {
+export const validateRecipe = (recipe: RecipeSchema): RecipeValidationResult => {
   let valid = true;
   let errors = {};
 

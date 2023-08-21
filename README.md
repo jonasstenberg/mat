@@ -17,7 +17,7 @@ Follow the instructions in [CONTRIBUTING](./CONTRIBUTING.md) and code away.
 ## TODO
 
 - [x] Add instructions on how to setup the infrastrucure
-- [ ] Add sign-up functionality
+- [x] Add sign-up functionality
 - [ ] Add possability to add images or urls to your collection of recipes
 - [ ] Add steps in recipes
 - [ ] Use schema.org (https://schema.org/Recipe)

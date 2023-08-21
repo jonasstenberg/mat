@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useDisclosure } from '@mantine/hooks';
-import { UserProps } from '@/types/user';
+import { UserSchema } from '@/types/user';
 
 interface AuthModalContextType {
   opened: boolean;
@@ -11,8 +11,8 @@ interface AuthModalContextType {
     close: () => void;
     toggle: () => void;
   };
-  user: UserProps | null;
-  setUser: React.Dispatch<React.SetStateAction<UserProps | null>>;
+  user: UserSchema | null;
+  setUser: React.Dispatch<React.SetStateAction<UserSchema | null>>;
 }
 
 export const AuthModalContext = React.createContext<AuthModalContextType | undefined>(undefined);

@@ -20,4 +20,7 @@ module.exports = {
         ]
       : undefined,
   swcMinify: true,
+  experimental: {
+    serverActions: true,
+  },
 };

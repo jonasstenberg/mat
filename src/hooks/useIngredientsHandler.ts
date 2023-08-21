@@ -8,27 +8,31 @@ export interface UseIngredientsHandlerProps {
 }
 
 export const useIngredientsHandler = ({ resetError }: UseIngredientsHandlerProps) => {
-  const { recipeFormData, setRecipeFormData } = useRecipeModal();
+  const { setRecipeFormData } = useRecipeModal();
   const [addError, setAddError] = useState(false);
 
   const handleAddComponent = () => {
-    const lastIngredient = recipeFormData.ingredients[recipeFormData.ingredients.length - 1];
-    const isAddDisabled = lastIngredient?.name === '';
+    setRecipeFormData((prevRecipeFormData) => {
+      const lastIngredient =
+        prevRecipeFormData.ingredients[prevRecipeFormData.ingredients.length - 1];
+      const isAddDisabled = lastIngredient?.name === '';
 
-    if (isAddDisabled && recipeFormData.ingredients.length > 1) {
-      setAddError(true);
-      return;
-    }
-    setAddError(true);
-    const newIngredient = {
-      id: Date.now(),
-      measurement: '',
-      quantity: '',
-      name: '',
-    };
-    setRecipeFormData({
-      ...recipeFormData,
-      ingredients: [...recipeFormData.ingredients, newIngredient],
+      if (isAddDisabled && prevRecipeFormData.ingredients.length > 1) {
+        setAddError(true);
+        return prevRecipeFormData;
+      }
+
+      const newIngredient = {
+        id: Date.now(),
+        measurement: '',
+        quantity: '',
+        name: '',
+      };
+
+      return {
+        ...prevRecipeFormData,
+        ingredients: [...prevRecipeFormData.ingredients, newIngredient],
+      };
     });
   };
 
@@ -54,9 +58,10 @@ export const useIngredientsHandler = ({ resetError }: UseIngredientsHandlerProps
   const handleChangeValue = (id: string | number, name: string, value: string) => {
     resetError('ingredients');
     setAddError(false); // TODO: only set to false if all inputs has something in the name field
-    setRecipeFormData({
-      ...recipeFormData,
-      ingredients: recipeFormData.ingredients.map((ingredient) =>
+
+    setRecipeFormData((prevRecipeFormData) => ({
+      ...prevRecipeFormData,
+      ingredients: prevRecipeFormData.ingredients.map((ingredient) =>
         ingredient.id === id
           ? {
               ...ingredient,
@@ -64,7 +69,7 @@ export const useIngredientsHandler = ({ resetError }: UseIngredientsHandlerProps
             }
           : ingredient
       ),
-    });
+    }));
   };
 
   return {

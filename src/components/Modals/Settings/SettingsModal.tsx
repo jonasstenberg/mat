@@ -24,7 +24,7 @@ export default function SettingsModal({ session }: SettingsModalProps) {
         </Tabs.List>
         <Stack gap="sm" mt="lg">
           <Tabs.Panel value="profile">
-            <ProfileForm />
+            <ProfileForm session={session} />
           </Tabs.Panel>
           {!user?.provider && (
             <Tabs.Panel value="password">

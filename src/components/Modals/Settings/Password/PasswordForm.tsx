@@ -1,88 +1,58 @@
 import { Button, PasswordInput, Stack, Text } from '@mantine/core';
-import { hasLength, matchesField, useForm } from '@mantine/form';
+import { useForm, zodResolver } from '@mantine/form';
 import { IconDeviceFloppy } from '@tabler/icons-react';
-import { Session } from 'next-auth';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Session } from 'next-auth';
+import { PasswordChangeSchema, passwordChangeSchema } from '@/types/user';
+import { resetPassword } from '@/actions/user';
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-
-interface PasswordFormProps {
-  session: Session | null;
-}
-
-const isValidPassword = (password: string): boolean => {
-  const minLength = 8;
-
-  if (password.length < minLength) {
-    return false;
-  }
-
-  if (!(password.match(/[A-Z]/) && password.match(/[a-z]/))) {
-    return false;
-  }
-
-  if (!password.match(/\d/)) {
-    return false;
-  }
-
-  return true;
-};
-
-const requirements =
-  'Lösenordet måste innehålla minst 8 tecken, minst en stor bokstav, minst en liten bokstav och minst en siffra.';
-
-export default function PasswordForm({ session }: PasswordFormProps) {
+export default function PasswordForm({ session }: { session: Session | null }) {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
+  const [success, setSuccess] = useState<boolean>(false);
+  const router = useRouter();
 
-  const form = useForm({
+  const form = useForm<PasswordChangeSchema>({
     initialValues: {
+      email: session?.user.email as string,
       oldPassword: '',
-      newPassword1: '',
-      newPassword2: '',
+      password: '',
+      confirmPassword: '',
     },
 
-    validate: {
-      oldPassword: hasLength({ min: 8 }, requirements),
-      newPassword1: (val) => (!isValidPassword(val) ? requirements : null),
-      newPassword2: matchesField('newPassword1', 'Lösenorden stämmer inte överens'),
-    },
+    validate: zodResolver(passwordChangeSchema),
   });
 
   const onSubmit = async () => {
     try {
       setLoading(true);
 
-      const res = await fetch(`${baseUrl}/api/user`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: session?.user?.email,
-          old_password: form.values.oldPassword,
-          new_password: form.values.newPassword1,
-        }),
-      });
+      const msg = await resetPassword(form.values);
 
       setLoading(false);
 
-      if (res.ok) {
+      if (!msg.error.length) {
         setError('');
-        window.location.reload();
-      } else {
-        const msg = await res.json();
-        switch (msg.error) {
-          case 'incorrect-old-password':
-            setError('Ditt gamla lösenord stämmer inte');
-            break;
-          case 'not-meet-requirements':
-            setError(requirements);
-            break;
-          default:
-            setError('Något gick fel. Försök igen senare.');
-            break;
-        }
+        setSuccess(true);
+        form.reset();
+        router.refresh();
+        return;
+      }
+
+      switch (msg.error) {
+        case 'incorrect-old-password':
+          form.setFieldError('oldPassword', 'Ditt gamla lösenord stämmer inte');
+          break;
+        case 'not-meet-requirements':
+          form.setFieldError(
+            'password',
+            'Lösenordet måste innehålla minst 8 tecken, minst en stor bokstav, minst en liten bokstav och minst en siffra.'
+          );
+          break;
+        default:
+          form.setFieldError('password', 'Något gick fel. Försök igen senare.');
+          break;
       }
     } catch (err: any) {
       setLoading(false);
@@ -93,6 +63,11 @@ export default function PasswordForm({ session }: PasswordFormProps) {
   return (
     <form onSubmit={form.onSubmit(() => onSubmit())}>
       <Stack gap="sm">
+        {success && (
+          <Text c="green" size="xs" style={{ whiteSpace: 'pre-line' }}>
+            Lösenordet bytt!
+          </Text>
+        )}
         {error && (
           <Text c="red" size="xs" style={{ whiteSpace: 'pre-line' }}>
             {error}
@@ -109,13 +84,13 @@ export default function PasswordForm({ session }: PasswordFormProps) {
           label="Nytt lösenord"
           autoComplete="new-password"
           withAsterisk
-          {...form.getInputProps('newPassword1')}
+          {...form.getInputProps('password')}
         />
         <PasswordInput
           label="Upprepa nytt lösenord"
           autoComplete="new-password"
           withAsterisk
-          {...form.getInputProps('newPassword2')}
+          {...form.getInputProps('confirmPassword')}
         />
         <Button leftSection={<IconDeviceFloppy size={20} />} type="submit" loading={loading}>
           Spara

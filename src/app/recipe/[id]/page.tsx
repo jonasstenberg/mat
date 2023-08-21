@@ -6,8 +6,7 @@ import dynamic from 'next/dynamic';
 import { getServerSession } from 'next-auth';
 
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
-import { getAllRecipeIds, getRecipe } from '@/lib/recipes';
-import { RecipeProps } from '@/types/recipe';
+import { getRecipe } from '@/lib/recipes';
 import styles from './styles.module.css';
 import Ingredients from './Ingredients';
 import ServingsSlider from '@/components/ServingsSlider';
@@ -52,16 +51,6 @@ export async function generateMetadata(
         undefined,
     },
   };
-}
-
-export async function generateStaticParams() {
-  const recipes = await getAllRecipeIds();
-
-  const ids = recipes.map((recipe: RecipeProps) => ({
-    id: recipe.id,
-  }));
-
-  return ids;
 }
 
 export default async function Page({ params, searchParams }: Props) {
@@ -111,11 +100,11 @@ export default async function Page({ params, searchParams }: Props) {
       </aside>
       <div className={styles['recipe-description']}>
         <h4>Gör så här</h4>
-        {recipe.description.split('\n').map((str) => {
+        {recipe.description.split('\n').map((str, index) => {
           if (str.startsWith('#')) {
             const hashes = str?.match(/#/g)?.length;
             const CustomTag = `h${hashes}` as keyof JSX.IntrinsicElements;
-            return <CustomTag key={str}>{str.replace(/#/g, '')}</CustomTag>;
+            return <CustomTag key={index}>{str.replace(/#/g, '')}</CustomTag>;
           }
           return `${str}\n`;
         })}

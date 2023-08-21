@@ -26,6 +26,7 @@ export default function HeaderMenu({ session }: HeaderMenuProps) {
   const [userMenuOpened, setUserMenuOpened] = useState<boolean>(false);
   const { handlers: loginHandlers } = useAuthModal();
   const { handlers: settingsHandlers } = useSettingsModal();
+
   return (
     <>
       <div style={{ marginRight: rem(16) }}>
@@ -52,7 +53,7 @@ export default function HeaderMenu({ session }: HeaderMenuProps) {
                 <Text fw={500} size="sm" style={{ lineHeight: 1 }} mr={3}>
                   {session?.user.name?.split(' ')[0] || ''}
                 </Text>
-                <IconChevronDown size={rem(12)} stroke={1.5} />
+                <IconChevronDown size="0.75rem" stroke={1.5} />
               </Group>
             </UnstyledButton>
           </Menu.Target>

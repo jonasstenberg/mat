@@ -1,24 +1,22 @@
-DROP VIEW recipes_and_categories;
-
 CREATE OR REPLACE VIEW recipes_and_categories
 AS
 SELECT
   recipes.*,
-  COALESCE(rc.rc, '[]') AS categories,
+  COALESCE(rc.categories, '[]') AS categories,
   ing.ingredients,
   to_tsvector('pg_catalog.swedish',
               concat_ws(' ',
                         recipes.name,
                         recipes.description,
                         ing.names,
-                        jsonb_path_query_array(rc.rc::jsonb, '$.name'::jsonpath)
+                        jsonb_path_query_array(rc.categories::jsonb, '$'::jsonpath)
                        )
              ) as full_tsv
 FROM recipes
 LEFT JOIN LATERAL (
-  SELECT jsonb_agg(rc) AS rc FROM (
-    SELECT categories.* FROM categories, recipe_categories WHERE recipe_categories.category = categories.id AND recipe_categories.recipe = recipes.id
-  ) AS rc
+  SELECT jsonb_agg(name) AS categories FROM (
+    SELECT categories.name FROM categories, recipe_categories WHERE recipe_categories.category = categories.id AND recipe_categories.recipe = recipes.id
+  ) AS rc_categories
 ) AS rc ON TRUE
 LEFT JOIN LATERAL (
   SELECT

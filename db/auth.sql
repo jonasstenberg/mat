@@ -1,8 +1,6 @@
-CREATE SCHEMA IF NOT EXISTS auth;
+DROP TABLE IF EXISTS users CASCADE;
 
-DROP TABLE IF EXISTS auth.users CASCADE;
-
-CREATE TABLE auth.users (
+CREATE TABLE users (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   name TEXT NOT NULL,
   email TEXT UNIQUE NOT NULL,
@@ -10,59 +8,41 @@ CREATE TABLE auth.users (
   owner TEXT DEFAULT current_setting('request.jwt.claims', true)::json->>'email'
 );
 
-GRANT USAGE ON SCHEMA auth TO "anon";
-GRANT SELECT, UPDATE, INSERT, DELETE ON auth.users TO "anon";
+GRANT SELECT, UPDATE, INSERT, DELETE ON users TO "anon";
 
-ALTER TABLE auth.users ENABLE ROW LEVEL SECURITY;
-ALTER TABLE auth.users FORCE ROW LEVEL SECURITY;
+ALTER TABLE users ENABLE ROW LEVEL SECURITY;
+ALTER TABLE users FORCE ROW LEVEL SECURITY;
 
 CREATE POLICY users_policy_select
-  ON auth.users
+  ON users
   FOR SELECT
   USING (owner = current_setting('request.jwt.claims', true)::json->>'email');
 
 CREATE POLICY users_policy_insert
-  ON auth.users
+  ON users
   FOR INSERT
   WITH CHECK (owner = current_setting('request.jwt.claims', true)::json->>'email');
 
 CREATE POLICY users_policy_update
-  ON auth.users
+  ON users
   FOR UPDATE
   USING (owner = current_setting('request.jwt.claims', true)::json->>'email');
 
 CREATE POLICY users_policy_delete
-  ON auth.users
+  ON users
   FOR DELETE
   USING (owner = current_setting('request.jwt.claims', true)::json->>'email');
 
-DROP TABLE IF EXISTS auth.user_passwords CASCADE;
+DROP TABLE IF EXISTS user_passwords CASCADE;
 
-CREATE TABLE IF NOT EXISTS auth.user_passwords (
-  email text PRIMARY KEY REFERENCES auth.users (email) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED NOT NULL,
-  password text NOT NULL
+CREATE TABLE IF NOT EXISTS user_passwords (
+  email text PRIMARY KEY REFERENCES users (email) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED NOT NULL,
+  password text NOT NULL,
+  owner TEXT DEFAULT current_setting('request.jwt.claims', true)::json->>'email'
 );
 
 CREATE OR REPLACE FUNCTION
-auth.check_role_exists() RETURNS TRIGGER AS $$
-BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_roles AS r WHERE r.rolname = NEW.email) THEN
-    RAISE foreign_key_violation USING message =
-      'unknown database role: ' || NEW.email;
-    RETURN NULL;
-  END IF;
-  RETURN NEW;
-END
-$$ LANGUAGE plpgsql;
-
-DROP TRIGGER IF EXISTS ensure_user_role_exists ON auth.users;
-CREATE CONSTRAINT TRIGGER ensure_user_role_exists
-  AFTER INSERT OR UPDATE ON auth.users
-  FOR EACH ROW
-  EXECUTE PROCEDURE auth.check_role_exists();
-
-CREATE OR REPLACE FUNCTION
-auth.encrypt_password() RETURNS TRIGGER AS $$
+encrypt_password() RETURNS TRIGGER AS $$
 BEGIN
   IF tg_op = 'INSERT' OR NEW.password <> OLD.password THEN
     NEW.password = crypt(NEW.password, gen_salt('bf'));
@@ -71,38 +51,24 @@ BEGIN
 END
 $$ LANGUAGE plpgsql;
 
-DROP TRIGGER IF EXISTS encrypt_password ON auth.user_passwords;
+DROP TRIGGER IF EXISTS encrypt_password ON user_passwords;
 
 CREATE TRIGGER encrypt_password
-  BEFORE INSERT OR UPDATE ON auth.user_passwords
+  BEFORE INSERT OR UPDATE ON user_passwords
   FOR EACH ROW
-  EXECUTE PROCEDURE auth.encrypt_password();
+  EXECUTE PROCEDURE encrypt_password();
 
 CREATE OR REPLACE FUNCTION
-auth.user_role(email TEXT, password TEXT) RETURNS NAME
-  LANGUAGE plpgsql
-  AS $$
-BEGIN
-  RETURN (
-  SELECT email FROM auth.users
-   WHERE users.email = user_role.email
-     AND users.password = crypt(user_role.password, users.password)
-  );
-END;
-$$;
-
--- login should be on your exposed schema
-CREATE OR REPLACE FUNCTION
-login(login_email TEXT, login_password TEXT) RETURNS auth.users AS $$
+login(login_email TEXT, login_password TEXT) RETURNS users AS $$
 DECLARE
   _role NAME;
-  result auth.users;
+  result users;
 BEGIN
   SELECT
-      auth.user_passwords.email
+      user_passwords.email
   FROM
-      auth.users
-      INNER JOIN auth.user_passwords ON users.email = user_passwords.email
+      users
+      INNER JOIN user_passwords ON users.email = user_passwords.email
   WHERE
       users.email = login_email
       AND user_passwords.password = crypt(login_password, user_passwords.password)
@@ -112,7 +78,7 @@ BEGIN
     RAISE EXCEPTION 'invalid user or password';
   END IF;
 
-  SELECT * INTO result FROM auth.users WHERE email = login_email;
+  SELECT * INTO result FROM users WHERE email = login_email;
 
   RETURN result;
 END;
@@ -130,23 +96,17 @@ DECLARE
 BEGIN
     SELECT u.id
     INTO _user_id
-    FROM auth.users u
+    FROM users u
     WHERE u.email = signup.email;
 
-    IF _user_id IS NULL THEN
-      BEGIN
-        EXECUTE format('CREATE ROLE %I INHERIT', email);
-      EXCEPTION
-        WHEN others THEN
-      END;
-
-      EXECUTE format('GRANT "registered" TO %I', email);
-
-      INSERT INTO auth.users (name, email, provider, owner) VALUES (name, email, provider, email)
+    IF _user_id IS NOT NULL THEN
+      RAISE EXCEPTION 'already-exists';
+    ELSE
+      INSERT INTO users (name, email, provider, owner) VALUES (name, email, provider, email)
       RETURNING id INTO _user_id;
 
       IF provider IS NULL THEN
-        INSERT INTO auth.user_passwords (email, password) VALUES (email, password);
+        INSERT INTO user_passwords (email, password) VALUES (email, password);
       END IF;
     END IF;
 
@@ -177,10 +137,7 @@ CREATE OR REPLACE FUNCTION reset_password(email text, old_password text, new_pas
 DECLARE
     stored_password text;
 BEGIN
-    SELECT password INTO stored_password FROM auth.user_passwords WHERE auth.user_passwords.email = reset_password.email;
-
-    RAISE NOTICE 'Stored password: %', stored_password;
-    RAISE NOTICE 'Compared hash: %', crypt(old_password, stored_password);
+    SELECT password INTO stored_password FROM user_passwords WHERE user_passwords.email = reset_password.email;
 
     IF stored_password IS NULL THEN
         RAISE EXCEPTION 'no-email-found';
@@ -198,11 +155,11 @@ BEGIN
     END IF;
 
     UPDATE
-        auth.user_passwords
+        user_passwords
     SET
         password = reset_password.new_password
     WHERE
-        auth.user_passwords.email = reset_password.email;
+        user_passwords.email = reset_password.email;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 

@@ -13,17 +13,18 @@ import {
 } from '@mantine/core';
 import { IconLogin } from '@tabler/icons-react';
 import { useToggle } from '@mantine/hooks';
-import { useSearchParams } from 'next/navigation';
-import { isEmail, useForm } from '@mantine/form';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useForm, zodResolver } from '@mantine/form';
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useAuthModal } from '@/hooks/useAuthModal';
 import { GoogleButton } from '@/components/SocialButtons';
 import { capitalizeFirstLetter } from '@/utils/strings';
-
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+import { SignInSchema, SignUpSchema, signInSchema, signUpSchema } from '@/types/user';
+import { signUp } from '@/actions/user';
 
 export default function AuthModal() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const { opened, handlers } = useAuthModal();
   const [type, toggle] = useToggle(['login', 'register']);
@@ -32,35 +33,28 @@ export default function AuthModal() {
 
   const callbackUrl = searchParams.get('callbackUrl') || '/';
 
-  const form = useForm({
+  const form = useForm<SignUpSchema | SignInSchema>({
     initialValues: {
       email: '',
       name: '',
       password: '',
     },
 
-    validate: {
-      email: isEmail('Ogiltig e-post'),
-      password: (val) => (val.length <= 8 ? 'Lösenordet måste innehålla minst 8 tecken' : null),
-    },
+    validate: zodResolver(type === 'login' ? signInSchema : signUpSchema),
   });
 
-  const onSubmit = async (values: typeof form.values) => {
+  const onSubmit = async (values: SignUpSchema | SignInSchema) => {
     try {
       setLoading(true);
 
       if (type === 'register') {
-        await fetch(`${baseUrl}/api/user`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name: values.name,
-            email: values.email,
-            password: values.password,
-          }),
-        });
+        const err = await signUp(values as SignUpSchema);
+
+        if (err.length) {
+          setLoading(false);
+          setError(err);
+          return;
+        }
       }
       const res = await signIn('credentials', {
         redirect: false,
@@ -75,7 +69,8 @@ export default function AuthModal() {
         setError('Ogiltig e-post eller lösenord');
       } else {
         form.reset();
-        window.location.reload();
+        handlers.close();
+        router.refresh();
       }
     } catch (err: any) {
       setLoading(false);
