@@ -2,118 +2,90 @@
 
 import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
-import { SignUpSchema, PasswordChangeSchema, UserSchema } from '@/types/user';
+import { SignUpSchema, PasswordChangeSchema, UserSchema, UserNameSchema } from '@/types/user';
 import { config } from '@/utils/config';
-import { extractError } from '@/utils/extractError';
+import { handleServerErrors } from '@/utils/handleServerErrors';
 
-export const signUp = async (user: SignUpSchema): Promise<string> => {
-  const res = await fetch(
-    `${config.apiEndpoint}/rpc/${
-      !user.provider || user.provider === 'credentials' ? 'signup' : 'signup_provider'
-    }`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(user),
-    }
-  );
-
-  if (!res.ok) {
-    const msg = await res.json();
-    switch (msg.error) {
-      case 'already-exists':
-        return `E-post adressen ${user.email} är redan registrerad`;
-      default:
-        return 'Något gick fel, försök igen senare';
-    }
-  }
-
-  revalidatePath('/');
-
-  return '';
+export type UserResponse = {
+  success?: { user?: UserSchema };
+  errors?: { [key: string]: string };
 };
 
-export const resetPassword = async (user: PasswordChangeSchema): Promise<{ error: string }> => {
-  const token = cookies().get('next-auth.session-token')?.value;
+const ERROR_DETAILS: Record<string, { path: string; message: string }> = {
+  'already-exists': {
+    path: 'email',
+    message: 'E-post adressen är redan registrerad',
+  },
+  'incorrect-old-password': {
+    path: 'oldPassword',
+    message: 'Ditt gamla lösenord stämmer inte',
+  },
+  'not-meet-requirements': {
+    path: 'password',
+    message:
+      'Lösenordet måste innehålla minst 8 tecken, minst en stor bokstav, minst en liten bokstav och minst en siffra.',
+  },
+};
 
+const UNKNOWN_ERROR = {
+  path: 'global',
+  message: 'Något gick fel, försök igen senare',
+};
+
+const handleErrorResponse = async (response: Response) => {
+  let msg;
   try {
-    if (!token) {
-      throw new Error('Unauthorized');
-    }
-
-    const res = await fetch(`${config.apiEndpoint}/rpc/reset_password`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-        Prefer: 'return=representation',
-      },
-      body: JSON.stringify({
-        email: user.email,
-        old_password: user.oldPassword,
-        new_password: user.password,
-      }),
-    });
-
-    if (!res.ok) {
-      const msg = await res.json();
-      return {
-        error: msg.message,
-      };
-    }
-
-    return { error: '' };
-  } catch (error: unknown) {
-    const message = extractError(error);
+    msg = await response.json();
+  } catch (error) {
+    console.error('Error parsing JSON:', error);
     return {
-      error: message,
+      errors: {
+        global: UNKNOWN_ERROR.message,
+      },
     };
   }
-};
 
-export const deleteUser = async (user: UserSchema) => {
-  const token = cookies().get('next-auth.session-token')?.value;
-
-  try {
-    if (!token) {
-      throw new Error('Unauthorized');
-    }
-
-    const res = await fetch(`${config.apiEndpoint}/users?email=eq.${user.email}`, {
-      method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-        Prefer: 'return=representation',
+  if (typeof msg !== 'object' || msg === null) {
+    return {
+      errors: {
+        global: UNKNOWN_ERROR.message,
       },
-    });
-
-    const json = await res.json();
-    if (!json.length || !json[0] || !json[0].id) {
-      throw new Error('Something went wrong');
-    }
-  } catch (error) {
-    const message = extractError(error);
-    console.error(message);
+    };
   }
+
+  const errorCode = msg.error || msg.message || '';
+
+  if (ERROR_DETAILS[errorCode]) {
+    const { path, message } = ERROR_DETAILS[errorCode];
+    return {
+      errors: {
+        [path]: message,
+      },
+    };
+  }
+
+  return {
+    errors: {
+      global: UNKNOWN_ERROR.message,
+    },
+  };
 };
 
-export const getUser = async (email: string): Promise<UserSchema | null> => {
-  const token = cookies().get('next-auth.session-token')?.value;
+const getAuthorizedHeaders = () => {
+  const getAuthToken = cookies().get('next-auth.session-token')?.value;
 
+  return {
+    Authorization: `Bearer ${getAuthToken}`,
+    'Content-Type': 'application/json',
+    Prefer: 'return=representation',
+  };
+};
+
+export const getUser = async (email: string): Promise<UserResponse> => {
   try {
-    if (!token) {
-      throw new Error('Unauthorized');
-    }
-
     const res = await fetch(`${config.apiEndpoint}/users?email=eq.${email}`, {
       method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
+      headers: getAuthorizedHeaders(),
     });
 
     const user = await res.json();
@@ -122,33 +94,82 @@ export const getUser = async (email: string): Promise<UserSchema | null> => {
       throw new Error(user.message);
     }
 
-    return user[0];
+    return { success: { user: user[0] } };
   } catch (error) {
-    const message = extractError(error);
-    console.error(message);
-    return null;
+    console.error({
+      message: 'Network error or unhandled case',
+      error,
+    });
+    return { errors: { global: UNKNOWN_ERROR.message } };
   }
 };
 
-export const updateUser = async (user: UserSchema, name: string) => {
-  const token = cookies().get('next-auth.session-token')?.value;
-
+export const signUp = async (user: SignUpSchema): Promise<UserResponse> => {
   try {
-    if (!token) {
-      throw new Error('Unauthorized');
+    const endpoint =
+      !user.provider || user.provider === 'credentials' ? 'signup' : 'signup_provider';
+    const res = await fetch(`${config.apiEndpoint}/rpc/${endpoint}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
+    });
+
+    if (!res.ok) {
+      return await handleErrorResponse(res);
     }
 
+    revalidatePath('/');
+
+    return { success: {} };
+  } catch (error: unknown) {
+    console.error({
+      message: 'Network error or unhandled case',
+      error,
+    });
+    return { errors: { global: UNKNOWN_ERROR.message } };
+  }
+};
+
+export const resetPassword = async (user: PasswordChangeSchema): Promise<UserResponse> => {
+  try {
+    const res = await fetch(`${config.apiEndpoint}/rpc/reset_password`, {
+      method: 'POST',
+      headers: getAuthorizedHeaders(),
+      body: JSON.stringify({
+        email: user.email,
+        old_password: user.oldPassword,
+        new_password: user.password,
+      }),
+    });
+
+    if (!res.ok) {
+      return await handleErrorResponse(res);
+    }
+
+    return { success: {} };
+  } catch (error: unknown) {
+    console.error({
+      message: 'Network error or unhandled case',
+      error,
+    });
+    return { errors: { global: UNKNOWN_ERROR.message } };
+  }
+};
+
+export const updateUser = async (
+  user: UserSchema,
+  userName: UserNameSchema
+): Promise<UserResponse> => {
+  try {
     const res = await fetch(`${config.apiEndpoint}/users?id=eq.${user.id}`, {
       method: 'PUT',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-        Prefer: 'return=representation',
-      },
+      headers: getAuthorizedHeaders(),
       body: JSON.stringify({
         id: user.id,
-        email: user.email,
-        name,
+        email: userName.email,
+        name: userName.name,
       }),
     });
 
@@ -157,9 +178,41 @@ export const updateUser = async (user: UserSchema, name: string) => {
       throw new Error(msg.message);
     }
 
-    return '';
+    const response = await getUser(user?.email);
+    const isSuccess = await handleServerErrors(response);
+
+    if (!isSuccess) {
+      return await handleErrorResponse(res);
+    }
+
+    return { success: { user: response.success?.user } };
   } catch (error) {
-    const message = extractError(error);
-    return message;
+    console.error({
+      message: 'Network error or unhandled case',
+      error,
+    });
+    return { errors: { global: UNKNOWN_ERROR.message } };
+  }
+};
+
+export const deleteUser = async (user: UserSchema): Promise<UserResponse> => {
+  try {
+    const res = await fetch(`${config.apiEndpoint}/users?email=eq.${user.email}`, {
+      method: 'DELETE',
+      headers: getAuthorizedHeaders(),
+    });
+
+    const json = await res.json();
+    if (!res.ok || !json.length || !json[0] || !json[0].id) {
+      return await handleErrorResponse(res);
+    }
+
+    return { success: {} };
+  } catch (error) {
+    console.error({
+      message: 'Network error or unhandled case',
+      error,
+    });
+    return { errors: { global: UNKNOWN_ERROR.message } };
   }
 };

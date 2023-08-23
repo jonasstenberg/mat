@@ -1,204 +1,181 @@
 'use server';
 
-import { join } from 'path';
-import { fileTypeFromBuffer } from 'file-type';
-import { stat, mkdir, writeFile, unlink } from 'fs/promises';
 import { cookies } from 'next/headers';
 import { revalidatePath } from 'next/cache';
-import sharp from 'sharp';
 
 import { config } from '@/utils/config';
-import { IngredientSchema, RecipeSchema, recipeSchema } from '@/types/recipe';
+import { IngredientSchema, InstructionSchema, RecipeSchema, recipeSchema } from '@/types/recipe';
 import { extractError } from '@/utils/extractError';
+import { validateSchema } from '@/utils/validateSchema';
+import { deleteImage, uploadNewImage, resizeExistingImage } from './image';
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+export type RecipeResponse = {
+  success?: { id?: string };
+  errors?: { [key: string]: string };
+};
 
-const parseFormData = (formData: FormData): RecipeSchema => {
+const getAuthToken = cookies().get('next-auth.session-token')?.value;
+
+const getAuthorizedHeaders = () => ({
+  Authorization: `Bearer ${getAuthToken}`,
+  'Content-Type': 'application/json',
+  Prefer: 'return=representation',
+});
+
+const parseRecipeFormData = (formData: FormData): RecipeSchema => {
   const categories = JSON.parse(formData.get('categories') as string) as string[];
   const ingredients = JSON.parse(formData.get('ingredients') as string) as IngredientSchema[];
+  const instructions = JSON.parse(formData.get('instructions') as string) as InstructionSchema[];
 
   return {
     name: formData.get('name') as string,
-    servings: parseInt(formData.get('servings') as string, 10),
-    servings_name: formData.get('servings_name') as string,
+    recipe_yield: parseInt(formData.get('recipe_yield') as string, 10),
+    recipe_yield_name: formData.get('recipe_yield_name') as string,
     prep_time: parseInt(formData.get('prep_time') as string, 10),
     cook_time: parseInt(formData.get('cook_time') as string, 10),
     categories,
     description: formData.get('description') as string,
     ingredients,
+    instructions,
     image: formData.get('image') as string | Blob | null,
   };
 };
 
-const uploadImage = async (id: string, image: Blob): Promise<string> => {
-  const formData = new FormData();
-  formData.append('file', image);
-
-  const uploadDir = join(process.cwd(), 'public', 'uploads');
+const handleFetchError = async (response: globalThis.Response) => {
+  let jsonData = null;
 
   try {
-    await stat(uploadDir);
-  } catch (e: any) {
-    if (e.code === 'ENOENT') {
-      await mkdir(uploadDir, { recursive: true });
-    } else {
-      throw new Error("Couldn't create folder");
-    }
-  }
-  const filename = `${id}.webp`;
-  const outputPath = join(uploadDir, filename);
-
-  const file = formData.get('file') as Blob | null;
-
-  if (!file) {
-    try {
-      unlink(outputPath);
-    } catch (e: unknown) {
-      throw new Error("Couldn't remove old image");
-    }
-    return '';
+    jsonData = await response.json();
+  } catch {
+    /* empty */
   }
 
-  if (file.size > 5 * 1024 * 1024) {
-    throw new Error('File is too large');
+  if (!response.ok) {
+    const errorDetail = jsonData ? `, ${JSON.stringify(jsonData)}` : '';
+    throw new Error(`Response not ok ${response.status}${errorDetail}`);
   }
 
-  const fileBuffer = await file.arrayBuffer();
-
-  const type = await fileTypeFromBuffer(fileBuffer);
-
-  if (!type || !type.mime.startsWith('image/')) {
-    throw new Error('Invalid file content');
-  }
-
-  const buffer = await sharp(fileBuffer).resize(600).withMetadata().toBuffer();
-
-  await writeFile(outputPath, buffer);
-
-  return filename;
+  return jsonData;
 };
 
-export async function saveRecipe(formData: FormData): Promise<string> {
-  const token = cookies().get('next-auth.session-token')?.value;
+export async function updateRecipe(id: string, formData: FormData): Promise<RecipeResponse> {
+  const recipe = parseRecipeFormData(formData);
 
-  if (!token) {
-    throw new Error('Unauthorized');
+  const { success, errors, data } = validateSchema<RecipeSchema>(recipeSchema, recipe);
+
+  if (!success || !data) {
+    return {
+      errors,
+    };
   }
-
-  const recipe = parseFormData(formData);
-
-  const result = recipeSchema.safeParse(recipe);
-  if (!result.success) {
-    console.error("Can't parse input");
-    return '';
-  }
-
-  const res = await fetch(`${config.apiEndpoint}/rpc/insert_recipe`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-      Prefer: 'return=representation',
-    },
-    body: JSON.stringify(recipe),
-  });
-
-  const id = await res.json();
-
-  const file = formData.get('image') as Blob;
-  if (file && file.size > 0) {
-    const filename = await uploadImage(id, file);
-
-    await fetch(`${baseUrl}/api/recipe`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        recipeId: id,
-        recipeToUpdate: {
-          ...recipe,
-          image: filename,
-        },
-      }),
-    });
-  }
-
-  return id;
-}
-
-export async function updateRecipe(id: string, formData: FormData) {
-  const token = cookies().get('next-auth.session-token')?.value;
 
   try {
-    if (!token) {
-      throw new Error('Unauthorized');
-    }
-
-    const recipe = parseFormData(formData);
-
-    const result = recipeSchema.safeParse(recipe);
-    if (!result.success) {
-      throw new Error('Kan inte läsa datan');
-    }
-
-    const file = recipe.image;
-    let filename = typeof file === 'string' ? recipe.image : null;
-
-    const isTypeFile = file && file instanceof Blob && file.size > 0;
-
-    if (isTypeFile) {
-      filename = await uploadImage(id, file);
+    const file = data.image;
+    let image;
+    if (file) {
+      if (typeof file === 'string') {
+        image = await resizeExistingImage(file);
+      } else {
+        const oldFile = file && typeof file === 'string' ? file : undefined;
+        image = await uploadNewImage(file as Blob, oldFile);
+      }
     }
 
     const res = await fetch(`${config.apiEndpoint}/rpc/update_recipe`, {
       method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-        Prefer: 'return=representation',
-      },
+      headers: getAuthorizedHeaders(),
       body: JSON.stringify({
         r_recipe_id: id,
-        ...recipe,
-        ...(isTypeFile && { image: filename }),
+        ...data,
+        ...(image && { image }),
       }),
     });
 
-    if (!res.ok) {
-      const json = await res.json();
-      console.error(`Response not ok ${res.status}, ${JSON.stringify(json)}`);
-      throw new Error(`Response not ok ${res.status}, ${JSON.stringify(json)}`);
-    }
+    await handleFetchError(res);
 
     revalidatePath('/');
     revalidatePath(`/recipe/${id}`);
+
+    return {
+      success: {},
+    };
   } catch (error: unknown) {
     const message = extractError(error);
     console.error(message);
+    return {
+      errors: {
+        global: 'Något gick fel, försök igen senare.',
+      },
+    };
+  }
+}
+
+export async function saveRecipe(formData: FormData): Promise<RecipeResponse> {
+  const recipe = parseRecipeFormData(formData);
+
+  const { success, errors, data } = validateSchema<RecipeSchema>(recipeSchema, recipe);
+
+  if (!success) {
+    return {
+      errors,
+    };
+  }
+
+  try {
+    let image;
+    const file = formData.get('image') as Blob;
+
+    if (file && file.size > 0) {
+      image = await uploadNewImage(file);
+    }
+
+    const res = await fetch(`${config.apiEndpoint}/rpc/insert_recipe`, {
+      method: 'POST',
+      headers: getAuthorizedHeaders(),
+      body: JSON.stringify({
+        ...data,
+        ...(image && { image }),
+      }),
+    });
+
+    const id = await handleFetchError(res);
+
+    return {
+      success: {
+        id,
+      },
+    };
+  } catch (error: unknown) {
+    const message = extractError(error);
+    console.error(message);
+    return {
+      errors: {
+        global: 'Något gick fel, försök igen senare.',
+      },
+    };
   }
 }
 
 export async function deleteRecipe(id: string) {
-  const token = cookies().get('next-auth.session-token')?.value;
-
   try {
-    if (!token) {
-      throw new Error('Unauthorized');
+    const resRecipeDetails = await fetch(`${config.apiEndpoint}/recipes?id=eq.${id}`, {
+      headers: {
+        ...getAuthorizedHeaders(),
+        Accept: 'application/vnd.pgrst.object + json',
+      },
+    });
+    const recipeDetails = await handleFetchError(resRecipeDetails);
+
+    if (recipeDetails && recipeDetails.image) {
+      await deleteImage(recipeDetails.image);
     }
 
     const res = await fetch(`${config.apiEndpoint}/recipes?id=eq.${id}`, {
       method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
+      headers: getAuthorizedHeaders(),
     });
 
-    if (!res.ok) {
-      const json = await res.json();
-      throw new Error(`Response not ok ${res.status}, ${JSON.stringify(json)}`);
-    }
+    await handleFetchError(res);
   } catch (error) {
     const message = extractError(error);
     console.error(message);

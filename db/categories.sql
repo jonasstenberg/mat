@@ -2,8 +2,8 @@ DROP TABLE IF EXISTS categories CASCADE;
 
 CREATE TABLE categories (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  date_added TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-  date_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  date_published TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  date_modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
   name TEXT UNIQUE NOT NULL,
   owner TEXT DEFAULT current_setting('request.jwt.claims', true)::json->>'email'
 );

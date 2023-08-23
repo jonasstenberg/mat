@@ -10,16 +10,16 @@ import {
   normalizeIngredient,
 } from '@/utils/ingredientParser';
 
-interface Props {
+type IngredientsProps = {
   recipe: RecipeSchema;
-  servings: number;
-}
+  recipeYield: number;
+};
 
-interface IngredientsCheckedProps extends IngredientSchema {
+type IngredientsCheckedProps = IngredientSchema & {
   isChecked: boolean;
-}
+};
 
-export default function Ingredients({ servings, recipe }: Props) {
+export default function Ingredients({ recipeYield, recipe }: IngredientsProps) {
   const [ingredients, setIngredients] = useState<IngredientsCheckedProps[]>(
     recipe.ingredients.map((ingredient: IngredientSchema) => ({
       ...ingredient,
@@ -55,7 +55,11 @@ export default function Ingredients({ servings, recipe }: Props) {
     <>
       <h4>Ingredienser</h4>
       {ingredients.map((ingredient, i) => {
-        const normalizedIngredient = normalizeIngredient(ingredient, recipe.servings, servings);
+        const normalizedIngredient = normalizeIngredient(
+          ingredient,
+          recipe.recipe_yield,
+          recipeYield
+        );
         return (
           <div key={i} className={styles.ingredient}>
             {!normalizedIngredient.name.startsWith('#') ? (

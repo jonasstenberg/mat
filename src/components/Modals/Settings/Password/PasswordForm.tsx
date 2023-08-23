@@ -1,16 +1,18 @@
-import { Button, PasswordInput, Stack, Text } from '@mantine/core';
+'use client';
+
+import { Button, PasswordInput, Stack } from '@mantine/core';
 import { useForm, zodResolver } from '@mantine/form';
 import { IconDeviceFloppy } from '@tabler/icons-react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Session } from 'next-auth';
+import { notifications } from '@mantine/notifications';
 import { PasswordChangeSchema, passwordChangeSchema } from '@/types/user';
 import { resetPassword } from '@/actions/user';
+import { handleServerErrors } from '@/utils/handleServerErrors';
 
 export default function PasswordForm({ session }: { session: Session | null }) {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>('');
-  const [success, setSuccess] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
 
   const form = useForm<PasswordChangeSchema>({
@@ -26,53 +28,29 @@ export default function PasswordForm({ session }: { session: Session | null }) {
 
   const onSubmit = async () => {
     try {
-      setLoading(true);
+      setIsLoading(true);
 
-      const msg = await resetPassword(form.values);
+      const response = await resetPassword(form.values);
+      const isSuccess = await handleServerErrors(response, form);
 
-      setLoading(false);
-
-      if (!msg.error.length) {
-        setError('');
-        setSuccess(true);
+      if (isSuccess) {
+        notifications.show({
+          title: 'Sparat!',
+          message: 'Lösenordet uppdaterat 👌',
+        });
         form.reset();
         router.refresh();
-        return;
       }
 
-      switch (msg.error) {
-        case 'incorrect-old-password':
-          form.setFieldError('oldPassword', 'Ditt gamla lösenord stämmer inte');
-          break;
-        case 'not-meet-requirements':
-          form.setFieldError(
-            'password',
-            'Lösenordet måste innehålla minst 8 tecken, minst en stor bokstav, minst en liten bokstav och minst en siffra.'
-          );
-          break;
-        default:
-          form.setFieldError('password', 'Något gick fel. Försök igen senare.');
-          break;
-      }
+      setIsLoading(false);
     } catch (err: any) {
-      setLoading(false);
-      setError(err);
+      setIsLoading(false);
     }
   };
 
   return (
     <form onSubmit={form.onSubmit(() => onSubmit())}>
       <Stack gap="sm">
-        {success && (
-          <Text c="green" size="xs" style={{ whiteSpace: 'pre-line' }}>
-            Lösenordet bytt!
-          </Text>
-        )}
-        {error && (
-          <Text c="red" size="xs" style={{ whiteSpace: 'pre-line' }}>
-            {error}
-          </Text>
-        )}
         <PasswordInput
           label="Gammalt lösenord"
           autoComplete="current-password"
@@ -92,7 +70,7 @@ export default function PasswordForm({ session }: { session: Session | null }) {
           withAsterisk
           {...form.getInputProps('confirmPassword')}
         />
-        <Button leftSection={<IconDeviceFloppy size={20} />} type="submit" loading={loading}>
+        <Button leftSection={<IconDeviceFloppy size={20} />} type="submit" loading={isLoading}>
           Spara
         </Button>
       </Stack>

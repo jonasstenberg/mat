@@ -2,27 +2,27 @@
 
 import React, { useState } from 'react';
 
-export interface Errors {
+export type Errors = {
   recipeName?: string;
-  servings?: string;
+  recipe_yield?: string;
   prep_time?: string;
   cook_time?: string;
   categories?: string;
   ingredients?: string;
   description?: string;
-}
+};
 
-interface ErrorContextType {
+type ErrorContextType = {
   errors: Errors | undefined | null;
   setErrors: (errors: Errors) => void;
   resetError: (field: keyof Errors) => void;
-}
+};
 
 export const ErrorContext = React.createContext<ErrorContextType | undefined>(undefined);
 
-interface ErrorProviderProps {
+type ErrorProviderProps = {
   children: React.ReactNode;
-}
+};
 
 export const ErrorProvider = ({ children }: ErrorProviderProps) => {
   const [errors, setErrors] = useState<Errors | undefined | null>(null);

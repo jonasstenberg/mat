@@ -3,22 +3,22 @@
 import React from 'react';
 import { useDisclosure } from '@mantine/hooks';
 
-interface SettingsModalContextType {
+type SettingsModalContextType = {
   opened: boolean;
   handlers: {
     open: () => void;
     close: () => void;
     toggle: () => void;
   };
-}
+};
 
 export const SettingsModalContext = React.createContext<SettingsModalContextType | undefined>(
   undefined
 );
 
-interface SettingsModalProviderProps {
+type SettingsModalProviderProps = {
   children: React.ReactNode;
-}
+};
 
 export const SettingsModalProvider = ({ children }: SettingsModalProviderProps) => {
   const [opened, handlers] = useDisclosure(false);

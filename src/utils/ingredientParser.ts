@@ -53,11 +53,11 @@ const fractionToDecimal = (fraction: string) => {
 
 export const normalizeIngredient = (
   ingredient: { quantity: string; measurement: string; name: string },
-  recipeServings: number,
-  newServings: number
+  recipeYield: number,
+  newYield: number
 ) => {
   // Normalize ingredient.quantity
-  let normalizedQuantity = (Number(ingredient.quantity) / recipeServings) * newServings;
+  let normalizedQuantity = (Number(ingredient.quantity) / recipeYield) * newYield;
 
   if (ingredient.measurement === 'g') {
     normalizedQuantity = Math.round(normalizedQuantity); // Round to the nearest whole number if measurement is "g"
@@ -76,7 +76,7 @@ export const normalizeIngredient = (
     const quantityMatch = contentInsideParens.match(/([\d/\\.]+)/);
     if (quantityMatch) {
       const originalQuantity = fractionToDecimal(quantityMatch[1]);
-      const normalizedQuantityInName = (originalQuantity / recipeServings) * newServings;
+      const normalizedQuantityInName = (originalQuantity / recipeYield) * newYield;
       const fractionString = convertDecimalToFraction(normalizedQuantityInName.toString());
       const updatedContent = contentInsideParens.replace(quantityMatch[1], fractionString);
       name = name.replace(matches[0], `(${updatedContent})`);

@@ -34,6 +34,13 @@ export const passwordChangeSchema = z
 
 export type PasswordChangeSchema = z.infer<typeof passwordChangeSchema>;
 
+export const userNameSchema = z.object({
+  email: z.string().email(),
+  name: z.string().min(2, { message: 'Namnet måste vara minst 2 bokstäver långt' }),
+});
+
+export type UserNameSchema = z.infer<typeof userNameSchema>;
+
 export const userSchema = z.object({
   id: z.string().uuid().optional(),
   email: z.string().email(),

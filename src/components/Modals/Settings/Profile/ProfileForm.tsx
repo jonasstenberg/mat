@@ -4,35 +4,30 @@ import { Button, Divider, Modal, Stack, Text, TextInput } from '@mantine/core';
 import { IconDeviceFloppy } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { signOut } from 'next-auth/react';
 import { Session } from 'next-auth';
+import { notifications } from '@mantine/notifications';
+import { useForm, zodResolver } from '@mantine/form';
 import { useAuthModal } from '@/hooks/useAuthModal';
-import { deleteUser, getUser, updateUser } from '@/actions/user';
+import { deleteUser, updateUser } from '@/actions/user';
+import { handleServerErrors } from '@/utils/handleServerErrors';
+import { UserNameSchema, userNameSchema } from '@/types/user';
 
 export default function ProfileForm({ session }: { session: Session | null }) {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>('');
-  const [success, setSuccess] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [confirmOpened, { open: confirmOpen, close: confirmClose }] = useDisclosure(false);
   const router = useRouter();
-  const [name, setName] = useState<string>('');
   const { user, setUser } = useAuthModal();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (!session?.user.email) {
-        return;
-      }
-      const u = await getUser(session?.user.email);
-      if (u) {
-        setUser(u);
-        setName(u.name);
-      }
-    };
+  const form = useForm<UserNameSchema>({
+    initialValues: user ?? {
+      email: session?.user.email as string,
+      name: '',
+    },
 
-    fetchData();
-  }, []);
+    validate: zodResolver(userNameSchema),
+  });
 
   const handleDeleteAccount = async () => {
     if (!user) {
@@ -44,33 +39,26 @@ export default function ProfileForm({ session }: { session: Session | null }) {
     router.push('/');
   };
 
-  const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!name.length) {
-      setError('Du måste ange ett namn');
-      return;
-    }
-
+  const onSubmit = async () => {
     try {
-      setLoading(true);
+      setIsLoading(true);
 
       if (!user) {
         return;
       }
-      const message = await updateUser(user, name);
+      const response = await updateUser(user, form.values);
+      const isSuccess = await handleServerErrors(response);
 
-      setLoading(false);
-
-      if (message.length) {
-        throw new Error(message);
+      if (isSuccess && response.success?.user) {
+        setUser(response.success?.user);
+        notifications.show({
+          title: 'Sparat!',
+          message: 'Namnet uppdaterat 🙃',
+        });
       }
-
-      setError('');
-      setSuccess(true);
-    } catch (err: any) {
-      setLoading(false);
-      setError(err);
+      setIsLoading(false);
+    } catch (err: unknown) {
+      setIsLoading(false);
     }
   };
 
@@ -84,29 +72,18 @@ export default function ProfileForm({ session }: { session: Session | null }) {
           Ta bort mitt konto
         </Button>
       </Modal>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={form.onSubmit(() => onSubmit())}>
         <Stack gap="sm">
-          {success && (
-            <Text c="green" size="xs" style={{ whiteSpace: 'pre-line' }}>
-              Uppdaterat!
-            </Text>
+          {user ? (
+            <TextInput label="Namn" withAsterisk {...form.getInputProps('name')} />
+          ) : (
+            'Laddar...'
           )}
-          {error && (
-            <Text c="red" size="xs" style={{ whiteSpace: 'pre-line' }}>
-              {error}
-            </Text>
-          )}
-          <TextInput
-            label="Namn"
-            withAsterisk
-            value={name}
-            onChange={(e) => setName(e.currentTarget.value)}
-          />
-          <Button leftSection={<IconDeviceFloppy size={20} />} type="submit" loading={loading}>
+          <Button leftSection={<IconDeviceFloppy size={20} />} type="submit" loading={isLoading}>
             Spara
           </Button>
           <Divider />
-          <Text>Om du tar bort ditt konto kommer alla dina recept att tas bort också.</Text>
+          <Text>Om du tar bort ditt konto kommer också alla dina recept att tas bort.</Text>
           <Button color="red" onClick={() => confirmOpen()}>
             Ta bort mitt konto
           </Button>

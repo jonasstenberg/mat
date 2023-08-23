@@ -7,9 +7,9 @@ import PasswordForm from './Password/PasswordForm';
 import ProfileForm from './Profile/ProfileForm';
 import { useAuthModal } from '@/hooks/useAuthModal';
 
-interface SettingsModalProps {
+type SettingsModalProps = {
   session: Session | null;
-}
+};
 
 export default function SettingsModal({ session }: SettingsModalProps) {
   const { opened, handlers } = useSettingsModal();

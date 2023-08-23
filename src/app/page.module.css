@@ -208,8 +208,8 @@
 
 @media only screen and (width <= 800px) {
   .recipe-actions {
+    order: -1;
     position: relative;
-    grid-column: span 12;
     left: 0;
   }
 }

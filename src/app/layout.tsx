@@ -1,9 +1,11 @@
 import '@mantine/core/styles.css';
+import '@mantine/notifications/styles.css';
 import Link from 'next/link';
 import { getServerSession } from 'next-auth';
 import clsx from 'clsx';
 import { MantineProvider } from '@mantine/core';
 import dynamic from 'next/dynamic';
+import { Notifications } from '@mantine/notifications';
 
 import '@/styles/globals.css';
 import styles from '@/app/page.module.css';
@@ -67,6 +69,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <Providers session={session}>
         <body>
           <MantineProvider theme={theme} defaultColorScheme="light">
+            <Notifications position="top-right" />
             <AuthModal />
             {session?.user?.name && <SettingsModal session={session} />}
             {session?.user?.name && <RecipeModal categories={categories} />}

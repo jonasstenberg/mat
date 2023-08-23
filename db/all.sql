@@ -2,6 +2,7 @@
 \ir auth.sql
 \ir recipes.sql
 \ir ingredients.sql
+\ir instructions.sql
 \ir categories.sql
 \ir recipe_categories.sql
 \ir views.sql

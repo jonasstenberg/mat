@@ -2,17 +2,14 @@
 
 import { Modal, Tabs } from '@mantine/core';
 import React from 'react';
-import '@mantine/dropzone/styles.css';
 
 import { useMediaQuery } from '@mantine/hooks';
 import { useRecipeModal } from '@/hooks/useRecipeModal';
 import RecipeForm from './Recipe/RecipeForm';
-import LinkForm from './Link/LinkForm';
-import ImageForm from './Image/ImageForm';
 
-interface RecipeModalProps {
+type RecipeModalProps = {
   categories: string[];
-}
+};
 
 export default function RecipeModal({ categories }: RecipeModalProps) {
   const { opened, handlers, recipeToUpdate } = useRecipeModal();
@@ -44,10 +41,10 @@ export default function RecipeModal({ categories }: RecipeModalProps) {
           <RecipeForm categories={categories} />
         </Tabs.Panel>
         <Tabs.Panel value="link">
-          <LinkForm />
+          <p> </p>
         </Tabs.Panel>
         <Tabs.Panel value="image">
-          <ImageForm />
+          <p> </p>
         </Tabs.Panel>
       </Tabs>
     </Modal>

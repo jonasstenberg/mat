@@ -12,10 +12,15 @@
   padding: 0;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 body {
   margin: 0;
   color: var(--mantine-color-gray-8);
-  font-size: var(--mantine-font-size-sm);
+  font-size: var(--mantine-font-size-lg);
   background-color: var(--mantine-color-white);
 }
 
@@ -27,6 +32,7 @@ h5,
 h6 {
   margin: 1rem 0 0.5rem;
   padding: 0;
+  font-family: var(--mantine-font-family-headings);
 }
 
 h1 {
@@ -77,4 +83,9 @@ li {
   input {
     font-size: 16px;
   }
+}
+
+.reactEasyCrop_Container {
+  position: relative !important;
+  height: 20rem !important;
 }

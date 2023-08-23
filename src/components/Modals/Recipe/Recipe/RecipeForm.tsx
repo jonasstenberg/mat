@@ -1,7 +1,8 @@
+'use client';
+
 import {
   Box,
   Button,
-  CloseButton,
   Fieldset,
   FileButton,
   Group,
@@ -14,87 +15,126 @@ import {
   Textarea,
 } from '@mantine/core';
 import { IconDeviceFloppy } from '@tabler/icons-react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm, zodResolver } from '@mantine/form';
 import { useRouter } from 'next/navigation';
+import { notifications } from '@mantine/notifications';
 import { useRecipeModal } from '@/hooks/useRecipeModal';
 import { saveRecipe, updateRecipe } from '@/actions/recipe';
 import { IngredientSchema, RecipeSchema, recipeSchema } from '@/types/recipe';
+import { createFormData } from '@/utils/createFormData';
+import { InstructionSection } from './InstructionSection';
+import { IngredientSection } from './IngredientSection';
+import { handleServerErrors } from '@/utils/handleServerErrors';
 
-const defaultServings = process.env.NEXT_PUBLIC_DEFAULT_SERVINGS || '4';
-const defaultServingsName = process.env.NEXT_PUBLIC_DEFAULT_SERVINGS_NAME || 'portioner';
+const defaultRecipeYield = process.env.NEXT_PUBLIC_DEFAULT_RECIPE_YIELD || '4';
+const defaultRecipeYieldName = process.env.NEXT_PUBLIC_DEFAULT_RECIPE_YIELD_NAME || 'portioner';
 
 type RecipeFormProps = {
   categories: string[];
 };
 
-export default function RecipeForm({ categories }: RecipeFormProps) {
-  const { handlers, recipeToUpdate } = useRecipeModal();
-  const router = useRouter();
+const yieldOptions = Array.from({ length: 13 }, (_, index) =>
+  (index === 0 ? 1 : index * 2).toString()
+);
 
-  const initialIngredient: IngredientSchema = {
-    id: Date.now(),
-    measurement: '',
-    quantity: '',
-    name: '',
-  };
+const initialIngredient: IngredientSchema = {
+  id: Date.now(),
+  measurement: '',
+  quantity: '',
+  name: '',
+};
+
+const initialInstruction = {
+  id: Date.now(),
+  step: '',
+};
+
+export default function RecipeForm({ categories }: RecipeFormProps) {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { handlers, recipeToUpdate } = useRecipeModal();
+  const [objectURL, setObjectURL] = useState<string | null>(null);
+  const router = useRouter();
 
   const form = useForm<RecipeSchema>({
     validate: zodResolver(recipeSchema),
     initialValues: recipeToUpdate ?? {
       name: '',
       categories: [],
-      servings: Number(defaultServings),
-      servings_name: defaultServingsName,
+      recipe_yield: Number(defaultRecipeYield),
+      recipe_yield_name: defaultRecipeYieldName,
       prep_time: 0,
       cook_time: 0,
       ingredients: [initialIngredient],
       description: '',
+      instructions: [initialInstruction],
       image: '',
     },
     transformValues: (values: RecipeSchema) => ({
       ...values,
+      recipe_yield: Number(values.recipe_yield),
       prep_time: Number(values.prep_time) || 0,
       cook_time: Number(values.cook_time) || 0,
     }),
   });
 
+  const onSubmit = async (recipe: RecipeSchema) => {
+    const formData = createFormData<RecipeSchema>(recipe);
+
+    setIsLoading(true);
+    if (recipeToUpdate) {
+      const response = await updateRecipe(recipeToUpdate.id as string, formData);
+      const isSuccess = await handleServerErrors(response, form);
+
+      if (isSuccess) {
+        handlers.close();
+        router.refresh();
+        notifications.show({
+          title: 'Sparat!',
+          message: 'Receptet är uppdaterat 😇',
+        });
+      }
+    } else {
+      const response = await saveRecipe(formData);
+      const isSuccess = await handleServerErrors(response, form);
+
+      if (isSuccess) {
+        handlers.close();
+        router.push(`/recipe/${response.success?.id}`);
+        notifications.show({
+          title: 'Sparat!',
+          message: 'Nytt recept! 😇',
+        });
+      }
+    }
+
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    if (form.values.image instanceof Blob) {
+      const newObjectURL = URL.createObjectURL(form.values.image);
+      setObjectURL(newObjectURL);
+    } else if (typeof form.values.image === 'string' && form.values.image.length) {
+      const imageURL = `/api/image?filename=${form.values.image}`;
+      setObjectURL(imageURL);
+    } else {
+      setObjectURL(null);
+    }
+
+    return () => {
+      if (objectURL && form.values.image instanceof Blob) {
+        URL.revokeObjectURL(objectURL);
+      }
+    };
+  }, [form.values.image]);
+
   return (
     <Box
       component="form"
       onSubmit={form.onSubmit(async () => {
-        const formData = new FormData();
-
         const recipe: RecipeSchema = form.getTransformedValues();
-
-        Object.keys(recipe).forEach((key) => {
-          const value = recipe[key as keyof RecipeSchema];
-          if (value !== null && value !== undefined) {
-            switch (typeof value) {
-              case 'string':
-              case 'number':
-                formData.append(key, value.toString());
-                break;
-              case 'object':
-                if (value instanceof File) {
-                  formData.append(key, value);
-                } else if (Array.isArray(value)) {
-                  formData.append(key, JSON.stringify(value));
-                }
-                break;
-            }
-          }
-        });
-
-        if (recipeToUpdate) {
-          await updateRecipe(recipeToUpdate.id as string, formData);
-          handlers.close();
-          router.refresh();
-        } else {
-          const id = await saveRecipe(formData);
-          handlers.close();
-          router.push(`/recipe/${id}`);
-        }
+        await onSubmit(recipe);
       })}
     >
       <Stack gap="sm" mt="lg">
@@ -115,19 +155,20 @@ export default function RecipeForm({ categories }: RecipeFormProps) {
           <Group grow preventGrowOverflow={false} wrap="nowrap">
             <Select
               label="Antal portioner"
-              placeholder={defaultServings.toString()}
+              placeholder={defaultRecipeYield.toString()}
               w="15%"
               miw="7rem"
               withAsterisk
-              data={Array.from({ length: 12 }, (_, index) => ((index + 1) * 2).toString())}
-              {...form.getInputProps('servings')}
+              data={yieldOptions}
+              value={form.values.recipe_yield.toString()}
+              onChange={(value) => form.setFieldValue('recipe_yield', Number(value))}
             />
             <TextInput
               label="Enhet"
               placeholder="Portioner"
               w="85%"
               withAsterisk
-              {...form.getInputProps('servings_name')}
+              {...form.getInputProps('recipe_yield_name')}
             />
           </Group>
         </Fieldset>
@@ -137,14 +178,12 @@ export default function RecipeForm({ categories }: RecipeFormProps) {
               label="Prep"
               placeholder="0"
               w="50%"
-              withAsterisk
               {...form.getInputProps('prep_time')}
             />
             <NumberInput
               label="Tillagning"
               placeholder=""
               w="50%"
-              withAsterisk
               {...form.getInputProps('cook_time')}
             />
           </Group>
@@ -152,73 +191,28 @@ export default function RecipeForm({ categories }: RecipeFormProps) {
         <Fieldset legend="Bilduppladdning">
           <Stack>
             <Group grow>
-              <FileButton name="image" accept="image/*" {...form.getInputProps('image')}>
+              <FileButton
+                name="image"
+                accept="image/*"
+                onChange={(e: any) => form.setValues({ ...form.values, image: e })}
+              >
                 {(props) => <Button {...props}>Ladda upp bild</Button>}
               </FileButton>
               <Button
                 disabled={!form.values.image}
                 color="red"
-                onClick={() =>
-                  form.setValues({
-                    image: null,
-                  })
-                }
+                onClick={() => form.setValues({ ...form.values, image: null })}
               >
                 Ta bort
               </Button>
             </Group>
-            {form.values.image && (
-              <Image
-                h={200}
-                w="auto"
-                fit="cover"
-                src={
-                  typeof form.values.image === 'string'
-                    ? `/api/image?filename=${form.values.image}`
-                    : URL.createObjectURL(form.values.image)
-                }
-                alt="Förhandsgranskning"
-              />
+            {objectURL && (
+              <Image h={200} w="auto" fit="contain" src={objectURL} alt="Förhandsgranskning" />
             )}
           </Stack>
         </Fieldset>
-        <Fieldset legend="Ingredienser">
-          <Stack gap="sm">
-            {form.values.ingredients?.map((ingredient, index) => (
-              <Group grow preventGrowOverflow={false} wrap="nowrap" key={ingredient.id}>
-                <React.Fragment key={ingredient.id}>
-                  <TextInput
-                    placeholder="2"
-                    w="15%"
-                    miw="3rem"
-                    autoCapitalize="none"
-                    {...form.getInputProps(`ingredients.${index}.quantity`)}
-                  />
-                  <TextInput
-                    placeholder="dl"
-                    w="15%"
-                    miw="3rem"
-                    autoCapitalize="none"
-                    {...form.getInputProps(`ingredients.${index}.measurement`)}
-                  />
-                  <TextInput
-                    placeholder="vatten"
-                    w="70%"
-                    miw="5rem"
-                    autoCapitalize="none"
-                    {...form.getInputProps(`ingredients.${index}.name`)}
-                  />
-                </React.Fragment>
-                <CloseButton onClick={() => form.removeListItem('ingredients', index)} />
-              </Group>
-            ))}
-            <Button onClick={() => form.insertListItem('ingredients', initialIngredient)}>
-              Lägg till ingrediens
-            </Button>
-          </Stack>
-        </Fieldset>
+        <IngredientSection ingredients={form.values.ingredients} form={form} />
         <Textarea
-          name="description"
           placeholder="Beskrivning"
           styles={{
             input: {
@@ -229,7 +223,8 @@ export default function RecipeForm({ categories }: RecipeFormProps) {
           withAsterisk
           {...form.getInputProps('description')}
         />
-        <Button leftSection={<IconDeviceFloppy size={20} />} type="submit">
+        <InstructionSection instructions={form.values.instructions} form={form} />
+        <Button loading={isLoading} leftSection={<IconDeviceFloppy size={20} />} type="submit">
           Spara
         </Button>
       </Stack>

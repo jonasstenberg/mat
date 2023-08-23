@@ -1,12 +1,13 @@
 CREATE OR REPLACE FUNCTION insert_recipe(
   name TEXT,
-  servings INTEGER,
-  servings_name TEXT,
+  recipe_yield INTEGER,
+  recipe_yield_name TEXT,
   prep_time INTEGER,
   cook_time INTEGER,
   description TEXT,
   categories TEXT[],
   ingredients JSONB[],
+  instructions JSONB[],
   image TEXT DEFAULT NULL,
   thumbnail TEXT DEFAULT NULL
 )
@@ -16,10 +17,11 @@ DECLARE
   category TEXT;
   category_id UUID;
   ingredient JSONB;
+  instruction JSONB;
 BEGIN
   -- Insert into the recipes table
-  INSERT INTO recipes(name, servings, servings_name, prep_time, cook_time, description, image, thumbnail)
-  VALUES(name, servings, servings_name, prep_time, cook_time, description, image, thumbnail)
+  INSERT INTO recipes(name, recipe_yield, recipe_yield_name, prep_time, cook_time, description, image, thumbnail)
+  VALUES(name, recipe_yield, recipe_yield_name, prep_time, cook_time, description, image, thumbnail)
   RETURNING id INTO new_recipe_id;
 
   -- Handle categories
@@ -39,6 +41,12 @@ BEGIN
     VALUES(new_recipe_id, ingredient->>'name', ingredient->>'measurement', ingredient->>'quantity');
   END LOOP;
 
+  FOREACH instruction IN ARRAY instructions
+  LOOP
+    INSERT INTO public.instructions(recipe_id, step)
+    VALUES(new_recipe_id, instruction->>'step');
+  END LOOP;
+
   RETURN new_recipe_id; -- Return the new recipe's ID
 END;
 $$;
@@ -48,13 +56,14 @@ GRANT EXECUTE ON FUNCTION insert_recipe TO "anon";
 CREATE OR REPLACE FUNCTION update_recipe(
   r_recipe_id UUID,
   name TEXT,
-  servings INTEGER,
-  servings_name TEXT,
+  recipe_yield INTEGER,
+  recipe_yield_name TEXT,
   prep_time INTEGER,
   cook_time INTEGER,
   description TEXT,
   categories TEXT[],
   ingredients JSONB[],
+  instructions JSONB[],
   image TEXT DEFAULT NULL,
   thumbnail TEXT DEFAULT NULL
 )
@@ -63,12 +72,13 @@ DECLARE
   category TEXT;
   category_id UUID;
   ingredient JSONB;
+  instruction JSONB;
 BEGIN
   -- Update the recipes table
   UPDATE recipes SET
     name = update_recipe.name,
-    servings = update_recipe.servings,
-    servings_name = update_recipe.servings_name,
+    recipe_yield = update_recipe.recipe_yield,
+    recipe_yield_name = update_recipe.recipe_yield_name,
     prep_time = update_recipe.prep_time,
     cook_time = update_recipe.cook_time,
     description = update_recipe.description,
@@ -95,6 +105,13 @@ BEGIN
     VALUES(r_recipe_id, ingredient->>'name', ingredient->>'measurement', ingredient->>'quantity');
   END LOOP;
 
+  DELETE FROM instructions WHERE recipe_id = r_recipe_id;
+
+  FOREACH instruction IN ARRAY update_recipe.instructions
+  LOOP
+    INSERT INTO instructions(recipe_id, step)
+    VALUES(r_recipe_id, instruction->>'step');
+  END LOOP;
 END;
 $$;
 

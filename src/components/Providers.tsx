@@ -8,12 +8,12 @@ import { AuthModalProvider } from '@/contexts/AuthModalContext';
 import { SettingsModalProvider } from '@/contexts/SettingsModalContext';
 import { ErrorProvider } from '@/contexts/ErrorContext';
 
-interface Props {
+type ProviderProps = {
   children: ReactNode;
   session: Session | null;
-}
+};
 
-export default function Providers({ children, session }: Props) {
+export default function Providers({ children, session }: ProviderProps) {
   return (
     <SessionProvider session={session}>
       <SettingsModalProvider>

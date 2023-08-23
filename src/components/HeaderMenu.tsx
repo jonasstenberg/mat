@@ -11,21 +11,41 @@ import { signOut } from 'next-auth/react';
 import { Session } from 'next-auth';
 import { Menu, rem, Text, UnstyledButton, Group, Avatar } from '@mantine/core';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from '@/app/header.module.css';
 import { useRecipeModal } from '@/hooks/useRecipeModal';
 import { useAuthModal } from '@/hooks/useAuthModal';
 import { useSettingsModal } from '@/hooks/useSettingsModal';
+import { getUser } from '@/actions/user';
+import { handleServerErrors } from '@/utils/handleServerErrors';
+import { UserSchema } from '@/types/user';
 
-interface HeaderMenuProps {
+type HeaderMenuProps = {
   session: Session | null;
-}
+};
 
 export default function HeaderMenu({ session }: HeaderMenuProps) {
   const { handlers } = useRecipeModal();
   const [userMenuOpened, setUserMenuOpened] = useState<boolean>(false);
   const { handlers: loginHandlers } = useAuthModal();
   const { handlers: settingsHandlers } = useSettingsModal();
+  const { setUser } = useAuthModal();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!session?.user.email) {
+        return;
+      }
+      const response = await getUser(session?.user.email);
+      const isSuccess = await handleServerErrors(response);
+
+      if (isSuccess) {
+        setUser(response.success?.user as UserSchema);
+      }
+    };
+
+    fetchData();
+  }, [session]);
 
   return (
     <>
@@ -50,7 +70,7 @@ export default function HeaderMenu({ session }: HeaderMenuProps) {
                   radius="xl"
                   size={20}
                 />
-                <Text fw={500} size="sm" style={{ lineHeight: 1 }} mr={3}>
+                <Text fw={500} size="lg" style={{ lineHeight: 1 }} mr={3}>
                   {session?.user.name?.split(' ')[0] || ''}
                 </Text>
                 <IconChevronDown size="0.75rem" stroke={1.5} />
@@ -61,6 +81,7 @@ export default function HeaderMenu({ session }: HeaderMenuProps) {
             <Menu.Dropdown>
               <Menu.Item
                 leftSection={<IconSquarePlus style={{ width: rem(14), height: rem(14) }} />}
+                style={{ fontSize: '1rem' }}
                 onClick={() => {
                   handlers.open();
                 }}
@@ -70,9 +91,10 @@ export default function HeaderMenu({ session }: HeaderMenuProps) {
 
               <Menu.Divider />
 
-              <Menu.Label>Inställningar</Menu.Label>
+              <Menu.Label style={{ fontSize: '1rem' }}>Inställningar</Menu.Label>
               <Menu.Item
                 leftSection={<IconSettings style={{ width: rem(14), height: rem(14) }} />}
+                style={{ fontSize: '1rem' }}
                 onClick={() => {
                   settingsHandlers.open();
                 }}
@@ -81,6 +103,7 @@ export default function HeaderMenu({ session }: HeaderMenuProps) {
               </Menu.Item>
               <Menu.Item
                 leftSection={<IconLogout style={{ width: rem(14), height: rem(14) }} />}
+                style={{ fontSize: '1rem' }}
                 onClick={() => {
                   signOut();
                 }}
@@ -92,6 +115,7 @@ export default function HeaderMenu({ session }: HeaderMenuProps) {
             <Menu.Dropdown>
               <Menu.Item
                 leftSection={<IconLogin style={{ width: rem(14), height: rem(14) }} />}
+                style={{ fontSize: '1rem' }}
                 onClick={() => {
                   loginHandlers.open();
                 }}

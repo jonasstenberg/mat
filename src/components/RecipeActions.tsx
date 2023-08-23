@@ -3,15 +3,16 @@
 import { useDisclosure } from '@mantine/hooks';
 import { Button, Modal } from '@mantine/core';
 import { useRouter } from 'next/navigation';
+import { notifications } from '@mantine/notifications';
 
 import styles from '@/app/page.module.css';
 import { RecipeSchema } from '@/types/recipe';
 import { useRecipeModal } from '@/hooks/useRecipeModal';
 import { deleteRecipe } from '@/actions/recipe';
 
-interface RecipeActionsProps {
+type RecipeActionsProps = {
   recipe: RecipeSchema | null;
-}
+};
 
 export default function RecipeActions({ recipe }: RecipeActionsProps) {
   const { setRecipeToUpdate, handlers } = useRecipeModal();
@@ -19,7 +20,11 @@ export default function RecipeActions({ recipe }: RecipeActionsProps) {
   const router = useRouter();
 
   const handleDeleteRecipe = async () => {
-    deleteRecipe(recipe?.id as string);
+    await deleteRecipe(recipe?.id as string);
+    notifications.show({
+      title: '💀',
+      message: 'Receptet borttaget!',
+    });
     confirmClose();
     router.push('/');
   };

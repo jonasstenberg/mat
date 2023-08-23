@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import { UserSchema } from '@/types/user';
 
-interface AuthModalContextType {
+type AuthModalContextType = {
   opened: boolean;
   handlers: {
     open: () => void;
@@ -13,13 +13,13 @@ interface AuthModalContextType {
   };
   user: UserSchema | null;
   setUser: React.Dispatch<React.SetStateAction<UserSchema | null>>;
-}
+};
 
 export const AuthModalContext = React.createContext<AuthModalContextType | undefined>(undefined);
 
-interface AuthModalProviderProps {
+type AuthModalProviderProps = {
   children: React.ReactNode;
-}
+};
 
 export const AuthModalProvider = ({ children }: AuthModalProviderProps) => {
   const [user, setUser] = useState<AuthModalContextType['user']>(null);

@@ -25,3 +25,5 @@ Follow the instructions in [CONTRIBUTING](./CONTRIBUTING.md) and code away.
 - [ ] Add onError on images
 - [x] Checkboxes on ingredients with checkboxes doesn't work
 - [ ] Shopping list
+- [ ] Fix global error
+- [ ] Implement Mantine Modal Manager https://v7.mantine.dev/others/modals

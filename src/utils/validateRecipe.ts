@@ -1,10 +1,10 @@
 import { Errors } from '@/contexts/ErrorContext';
 import { RecipeSchema } from '@/types/recipe';
 
-interface RecipeValidationResult {
+type RecipeValidationResult = {
   valid: boolean;
   errors: Errors;
-}
+};
 
 export const validateRecipe = (recipe: RecipeSchema): RecipeValidationResult => {
   let valid = true;

@@ -3,7 +3,7 @@ import { config } from '@/utils/config';
 
 export async function getRecipes(search: string): Promise<RecipeSchema[]> {
   const baseUrl = `${config.apiEndpoint}/recipes_and_categories`;
-  const baseQuery = '?order=name&select=*,categories(*)';
+  const baseQuery = '?order=name';
   const searchQuery = search?.length ? `&full_tsv=fts(swedish).${search}:*` : '';
 
   const url = `${baseUrl}${baseQuery}${searchQuery}`;

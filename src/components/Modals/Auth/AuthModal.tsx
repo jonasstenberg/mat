@@ -22,6 +22,7 @@ import { GoogleButton } from '@/components/SocialButtons';
 import { capitalizeFirstLetter } from '@/utils/strings';
 import { SignInSchema, SignUpSchema, signInSchema, signUpSchema } from '@/types/user';
 import { signUp } from '@/actions/user';
+import { handleServerErrors } from '@/utils/handleServerErrors';
 
 export default function AuthModal() {
   const router = useRouter();
@@ -48,15 +49,15 @@ export default function AuthModal() {
       setLoading(true);
 
       if (type === 'register') {
-        const err = await signUp(values as SignUpSchema);
+        const signUpResponse = await signUp(values as SignUpSchema);
+        const isSuccess = await handleServerErrors(signUpResponse, form);
 
-        if (err.length) {
+        if (!isSuccess) {
           setLoading(false);
-          setError(err);
           return;
         }
       }
-      const res = await signIn('credentials', {
+      const signInResponse = await signIn('credentials', {
         redirect: false,
         email: values.email,
         password: values.password,
@@ -65,7 +66,7 @@ export default function AuthModal() {
 
       setLoading(false);
 
-      if (res?.error) {
+      if (signInResponse?.error) {
         setError('Ogiltig e-post eller lösenord');
       } else {
         form.reset();

@@ -27,7 +27,7 @@ export default function Search({ searchQuery }: { searchQuery: string }) {
       params.delete('search');
     }
 
-    router.replace(`${pathname}?${params.toString()}`);
+    router.push(`${pathname}?${params.toString()}`);
   }, [debouncedValue, pathname, router.replace]);
 
   return (

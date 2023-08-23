@@ -14,8 +14,7 @@ CREATE OR REPLACE FUNCTION set_timestamptz ()
     RETURNS TRIGGER
     AS $$
 BEGIN
-    NEW.date_updated = now()::timestamptz;
+    NEW.date_modified = now()::timestamptz;
     RETURN NEW;
 END;
-$$
-LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql;
