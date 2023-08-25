@@ -1,3 +1,5 @@
+import { UNKNOWN_ERROR } from './errors';
+
 export const extractError = (error: unknown): string => {
   let message: string;
 
@@ -8,7 +10,7 @@ export const extractError = (error: unknown): string => {
   } else if (typeof error === 'string') {
     message = error;
   } else {
-    message = 'Något gick fel, försök igen';
+    message = UNKNOWN_ERROR.message;
   }
 
   return message;

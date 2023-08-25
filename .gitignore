@@ -36,3 +36,5 @@ next-env.d.ts
 
 # Postgrest
 postgrest.cfg
+
+certificates

@@ -1,5 +1,6 @@
 CREATE OR REPLACE FUNCTION insert_recipe(
   name TEXT,
+  author TEXT,
   recipe_yield INTEGER,
   recipe_yield_name TEXT,
   prep_time INTEGER,
@@ -20,8 +21,8 @@ DECLARE
   instruction JSONB;
 BEGIN
   -- Insert into the recipes table
-  INSERT INTO recipes(name, recipe_yield, recipe_yield_name, prep_time, cook_time, description, image, thumbnail)
-  VALUES(name, recipe_yield, recipe_yield_name, prep_time, cook_time, description, image, thumbnail)
+  INSERT INTO recipes(name, author, recipe_yield, recipe_yield_name, prep_time, cook_time, description, image, thumbnail)
+  VALUES(name, author, recipe_yield, recipe_yield_name, prep_time, cook_time, description, image, thumbnail)
   RETURNING id INTO new_recipe_id;
 
   -- Handle categories
@@ -56,6 +57,7 @@ GRANT EXECUTE ON FUNCTION insert_recipe TO "anon";
 CREATE OR REPLACE FUNCTION update_recipe(
   r_recipe_id UUID,
   name TEXT,
+  author TEXT,
   recipe_yield INTEGER,
   recipe_yield_name TEXT,
   prep_time INTEGER,
@@ -77,6 +79,7 @@ BEGIN
   -- Update the recipes table
   UPDATE recipes SET
     name = update_recipe.name,
+    author = update_recipe.author,
     recipe_yield = update_recipe.recipe_yield,
     recipe_yield_name = update_recipe.recipe_yield_name,
     prep_time = update_recipe.prep_time,

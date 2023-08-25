@@ -26,6 +26,9 @@ import { createFormData } from '@/utils/createFormData';
 import { InstructionSection } from './InstructionSection';
 import { IngredientSection } from './IngredientSection';
 import { handleServerErrors } from '@/utils/handleServerErrors';
+import { UNKNOWN_ERROR } from '@/utils/errors';
+import { useAuthModal } from '@/hooks/useAuthModal';
+import { yieldStepper } from '@/components/RecipeYieldSlider';
 
 const defaultRecipeYield = process.env.NEXT_PUBLIC_DEFAULT_RECIPE_YIELD || '4';
 const defaultRecipeYieldName = process.env.NEXT_PUBLIC_DEFAULT_RECIPE_YIELD_NAME || 'portioner';
@@ -33,10 +36,6 @@ const defaultRecipeYieldName = process.env.NEXT_PUBLIC_DEFAULT_RECIPE_YIELD_NAME
 type RecipeFormProps = {
   categories: string[];
 };
-
-const yieldOptions = Array.from({ length: 13 }, (_, index) =>
-  (index === 0 ? 1 : index * 2).toString()
-);
 
 const initialIngredient: IngredientSchema = {
   id: Date.now(),
@@ -52,14 +51,28 @@ const initialInstruction = {
 
 export default function RecipeForm({ categories }: RecipeFormProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { handlers, recipeToUpdate } = useRecipeModal();
+  const { handlers, recipeToUpdate, setRecipeToUpdate } = useRecipeModal();
   const [objectURL, setObjectURL] = useState<string | null>(null);
   const router = useRouter();
+  const { user } = useAuthModal();
+
+  const validateRecipeSchema = (recipe: RecipeSchema) => {
+    try {
+      const parsedData = recipeSchema.parse(recipe);
+      return parsedData;
+    } catch (error) {
+      notifications.show(UNKNOWN_ERROR);
+      console.error('Validation failed', error);
+      setRecipeToUpdate(null);
+      return null;
+    }
+  };
 
   const form = useForm<RecipeSchema>({
     validate: zodResolver(recipeSchema),
-    initialValues: recipeToUpdate ?? {
+    initialValues: (recipeToUpdate && validateRecipeSchema(recipeToUpdate)) ?? {
       name: '',
+      author: user?.name,
       categories: [],
       recipe_yield: Number(defaultRecipeYield),
       recipe_yield_name: defaultRecipeYieldName,
@@ -81,7 +94,6 @@ export default function RecipeForm({ categories }: RecipeFormProps) {
   const onSubmit = async (recipe: RecipeSchema) => {
     const formData = createFormData<RecipeSchema>(recipe);
 
-    setIsLoading(true);
     if (recipeToUpdate) {
       const response = await updateRecipe(recipeToUpdate.id as string, formData);
       const isSuccess = await handleServerErrors(response, form);
@@ -145,6 +157,12 @@ export default function RecipeForm({ categories }: RecipeFormProps) {
           data-autofocus
           {...form.getInputProps('name')}
         />
+        <TextInput
+          label="Receptmakare (person eller org)"
+          placeholder="Hanna"
+          data-autofocus
+          {...form.getInputProps('author')}
+        />
         <TagsInput
           label="Kategori"
           placeholder="Välj kategori"
@@ -159,7 +177,7 @@ export default function RecipeForm({ categories }: RecipeFormProps) {
               w="15%"
               miw="7rem"
               withAsterisk
-              data={yieldOptions}
+              data={yieldStepper.map((y) => y.label)}
               value={form.values.recipe_yield.toString()}
               onChange={(value) => form.setFieldValue('recipe_yield', Number(value))}
             />
@@ -224,7 +242,13 @@ export default function RecipeForm({ categories }: RecipeFormProps) {
           {...form.getInputProps('description')}
         />
         <InstructionSection instructions={form.values.instructions} form={form} />
-        <Button loading={isLoading} leftSection={<IconDeviceFloppy size={20} />} type="submit">
+        <Button
+          onClick={() => setIsLoading(true)}
+          disabled={isLoading}
+          loading={isLoading}
+          leftSection={<IconDeviceFloppy size={20} />}
+          type="submit"
+        >
           Spara
         </Button>
       </Stack>

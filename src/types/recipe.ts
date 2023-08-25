@@ -32,6 +32,7 @@ export type InstructionSchema = z.infer<typeof instructionSchema>;
 export const recipeSchema = z.object({
   id: z.string().uuid().optional(),
   name: z.string().min(2, { message: 'Namnet måste vara minst 2 bokstäver långt' }),
+  author: z.string().optional(),
   categories: z
     .array(z.string().min(2, { message: 'Namnet måste vara minst 2 bokstäver långt' }))
     .min(1, { message: 'Du behöver välja minst 1 kategori' }),
@@ -48,11 +49,6 @@ export const recipeSchema = z.object({
   description: z.string().optional(),
   image: z.union([z.string(), z.instanceof(Blob), z.null()]),
   owner: z.string().email({ message: 'Ogiltig e-postadress' }).optional(),
-  user_info: z
-    .object({
-      name: z.string().optional(),
-    })
-    .optional(),
 });
 
 export type RecipeSchema = z.infer<typeof recipeSchema>;

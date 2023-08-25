@@ -11,7 +11,7 @@ import { signOut } from 'next-auth/react';
 import { Session } from 'next-auth';
 import { Menu, rem, Text, UnstyledButton, Group, Avatar } from '@mantine/core';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from '@/app/header.module.css';
 import { useRecipeModal } from '@/hooks/useRecipeModal';
 import { useAuthModal } from '@/hooks/useAuthModal';
@@ -29,13 +29,17 @@ export default function HeaderMenu({ session }: HeaderMenuProps) {
   const [userMenuOpened, setUserMenuOpened] = useState<boolean>(false);
   const { handlers: loginHandlers } = useAuthModal();
   const { handlers: settingsHandlers } = useSettingsModal();
-  const { setUser } = useAuthModal();
+  const { user, setUser } = useAuthModal();
+  const emailRef = useRef<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!session?.user.email) {
+      if (!session?.user.email || emailRef.current) {
         return;
       }
+
+      emailRef.current = session?.user.email;
+
       const response = await getUser(session?.user.email);
       const isSuccess = await handleServerErrors(response);
 
@@ -45,7 +49,7 @@ export default function HeaderMenu({ session }: HeaderMenuProps) {
     };
 
     fetchData();
-  }, [session]);
+  }, [session?.user.email]);
 
   return (
     <>
@@ -64,20 +68,15 @@ export default function HeaderMenu({ session }: HeaderMenuProps) {
               data-active={userMenuOpened}
             >
               <Group gap={7}>
-                <Avatar
-                  src={session?.user.image}
-                  alt={session?.user.name || ''}
-                  radius="xl"
-                  size={20}
-                />
+                <Avatar src={session?.user.image} alt={user?.name || ''} radius="xl" size={20} />
                 <Text fw={500} size="lg" style={{ lineHeight: 1 }} mr={3}>
-                  {session?.user.name?.split(' ')[0] || ''}
+                  {user?.name?.split(' ')[0] || ''}
                 </Text>
                 <IconChevronDown size="0.75rem" stroke={1.5} />
               </Group>
             </UnstyledButton>
           </Menu.Target>
-          {session?.user?.name ? (
+          {user?.name ? (
             <Menu.Dropdown>
               <Menu.Item
                 leftSection={<IconSquarePlus style={{ width: rem(14), height: rem(14) }} />}

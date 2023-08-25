@@ -98,7 +98,7 @@ const generateRecipeJSONLD = (recipe: RecipeSchema) => {
     description: recipe.description || undefined,
     author: {
       '@type': 'Person',
-      name: recipe.user_info?.name || undefined,
+      name: recipe.author || undefined,
     },
   };
 };
@@ -128,6 +128,13 @@ export default async function Page({ params, searchParams }: Props) {
       </Script>
       <div className={styles['recipe-heading']}>
         <h2>{recipe.name}</h2>
+        {recipe.author ? (
+          <p>
+            Av: <span>{recipe.author}</span>
+          </p>
+        ) : (
+          ''
+        )}
       </div>
       {recipe.image ? (
         <Image

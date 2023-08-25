@@ -8,13 +8,18 @@ import { IngredientSchema, InstructionSchema, RecipeSchema, recipeSchema } from 
 import { extractError } from '@/utils/extractError';
 import { validateSchema } from '@/utils/validateSchema';
 import { deleteImage, uploadNewImage, resizeExistingImage } from './image';
+import { UNKNOWN_ERROR } from '@/utils/errors';
+
+const isProduction = config.baseUrl.startsWith('https');
 
 export type RecipeResponse = {
   success?: { id?: string };
   errors?: { [key: string]: string };
 };
 
-const getAuthToken = cookies().get('next-auth.session-token')?.value;
+const getAuthToken = cookies().get(
+  isProduction ? '__Secure-next-auth.session-token' : 'next-auth.session-token'
+)?.value;
 
 const getAuthorizedHeaders = () => ({
   Authorization: `Bearer ${getAuthToken}`,
@@ -29,6 +34,7 @@ const parseRecipeFormData = (formData: FormData): RecipeSchema => {
 
   return {
     name: formData.get('name') as string,
+    author: formData.get('author') as string,
     recipe_yield: parseInt(formData.get('recipe_yield') as string, 10),
     recipe_yield_name: formData.get('recipe_yield_name') as string,
     prep_time: parseInt(formData.get('prep_time') as string, 10),
@@ -104,7 +110,7 @@ export async function updateRecipe(id: string, formData: FormData): Promise<Reci
     console.error(message);
     return {
       errors: {
-        global: 'Något gick fel, försök igen senare.',
+        global: UNKNOWN_ERROR.message,
       },
     };
   }
@@ -150,7 +156,7 @@ export async function saveRecipe(formData: FormData): Promise<RecipeResponse> {
     console.error(message);
     return {
       errors: {
-        global: 'Något gick fel, försök igen senare.',
+        global: UNKNOWN_ERROR.message,
       },
     };
   }

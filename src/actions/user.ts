@@ -5,6 +5,9 @@ import { cookies } from 'next/headers';
 import { SignUpSchema, PasswordChangeSchema, UserSchema, UserNameSchema } from '@/types/user';
 import { config } from '@/utils/config';
 import { handleServerErrors } from '@/utils/handleServerErrors';
+import { UNKNOWN_ERROR } from '@/utils/errors';
+
+const isProduction = config.baseUrl.startsWith('https');
 
 export type UserResponse = {
   success?: { user?: UserSchema };
@@ -25,11 +28,6 @@ const ERROR_DETAILS: Record<string, { path: string; message: string }> = {
     message:
       'Lösenordet måste innehålla minst 8 tecken, minst en stor bokstav, minst en liten bokstav och minst en siffra.',
   },
-};
-
-const UNKNOWN_ERROR = {
-  path: 'global',
-  message: 'Något gick fel, försök igen senare',
 };
 
 const handleErrorResponse = async (response: Response) => {
@@ -72,7 +70,9 @@ const handleErrorResponse = async (response: Response) => {
 };
 
 const getAuthorizedHeaders = () => {
-  const getAuthToken = cookies().get('next-auth.session-token')?.value;
+  const getAuthToken = cookies().get(
+    isProduction ? '__Secure-next-auth.session-token' : 'next-auth.session-token'
+  )?.value;
 
   return {
     Authorization: `Bearer ${getAuthToken}`,

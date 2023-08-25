@@ -5,6 +5,7 @@ dotenv.config();
 
 const Config = z
   .object({
+    isProduction: z.boolean(),
     secret: z.string().min(30),
     authUrl: z.string().url(),
     baseUrl: z.string().url(),
@@ -18,6 +19,7 @@ const Config = z
 export type Config = z.infer<typeof Config>;
 
 export const config = Config.parse({
+  isProduction: process.env.NODE_ENV === 'production',
   secret: process.env.NEXTAUTH_SECRET,
   authUrl: process.env.NEXTAUTH_URL,
   baseUrl: process.env.NEXT_PUBLIC_BASE_URL,

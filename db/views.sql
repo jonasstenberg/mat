@@ -13,10 +13,8 @@ SELECT
                         jsonb_path_query_array(rc.categories::jsonb, '$'::jsonpath),
                         ins.steps
                        )
-             ) as full_tsv,
-  json_build_object('name', users.name) AS user_info
+             ) as full_tsv
 FROM recipes
-LEFT JOIN users ON recipes.owner = users.email
 LEFT JOIN LATERAL (
   SELECT jsonb_agg(name) AS categories FROM (
     SELECT categories.name FROM categories, recipe_categories WHERE recipe_categories.category = categories.id AND recipe_categories.recipe = recipes.id

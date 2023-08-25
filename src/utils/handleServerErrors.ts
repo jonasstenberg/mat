@@ -1,4 +1,5 @@
 import { notifications } from '@mantine/notifications';
+import { UNKNOWN_ERROR } from './errors';
 
 type Errors = {
   [key: string]: string | Errors;
@@ -21,10 +22,7 @@ export const handleServerErrors = async <T extends Errors>(
       }
 
       if (key === 'global') {
-        notifications.show({
-          title: '😱',
-          message: errorMessage,
-        });
+        notifications.show(UNKNOWN_ERROR);
       }
     });
     return false;

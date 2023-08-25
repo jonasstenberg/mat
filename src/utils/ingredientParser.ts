@@ -76,7 +76,12 @@ export const normalizeIngredient = (
     const quantityMatch = contentInsideParens.match(/([\d/\\.]+)/);
     if (quantityMatch) {
       const originalQuantity = fractionToDecimal(quantityMatch[1]);
-      const normalizedQuantityInName = (originalQuantity / recipeYield) * newYield;
+      let normalizedQuantityInName = (originalQuantity / recipeYield) * newYield;
+
+      if (/\d\s?g/.test(contentInsideParens)) {
+        normalizedQuantityInName = Math.round(normalizedQuantityInName);
+      }
+
       const fractionString = convertDecimalToFraction(normalizedQuantityInName.toString());
       const updatedContent = contentInsideParens.replace(quantityMatch[1], fractionString);
       name = name.replace(matches[0], `(${updatedContent})`);
