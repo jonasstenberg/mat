@@ -4,7 +4,7 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import Recipes from '@/components/Recipes';
 import { getCategories } from '@/lib/categories';
 
-export type HomeProps = {
+export type AllProsp = {
   searchParams?: {
     search?: string;
     sort?: string;
@@ -12,13 +12,13 @@ export type HomeProps = {
   };
 };
 
-export default async function Home({ searchParams }: HomeProps) {
+export default async function All({ searchParams }: AllProsp) {
   const search = searchParams?.search ?? '';
   const filteredCategoryParam = searchParams?.category ?? '';
 
   const session = await getServerSession(authOptions);
   const recipes = await getRecipes({
-    owner: session?.user.email,
+    owner: undefined,
     search,
     filteredCategoryParam,
   });

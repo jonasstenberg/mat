@@ -17,7 +17,7 @@ function RecipeData({ recipe }: { recipe: { id: string } }) {
 export default async function Loading() {
   return (
     <>
-      <div className={styles['search-wrapper']}>
+      <div className={styles['top-container']}>
         <Search searchQuery="" />
       </div>
       <main className={styles.recipes}>

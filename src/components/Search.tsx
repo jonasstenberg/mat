@@ -15,8 +15,7 @@ export default function Search({ searchQuery }: { searchQuery: string }) {
 
   const [debouncedValue] = useDebouncedValue(search, 500);
 
-  const mid = useMediaQuery('(min-width: 48rem)');
-  const small = useMediaQuery('(min-width: 36rem)');
+  const mid = useMediaQuery('(min-width: 832px)');
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -28,19 +27,18 @@ export default function Search({ searchQuery }: { searchQuery: string }) {
     }
 
     router.push(`${pathname}?${params.toString()}`);
-  }, [debouncedValue, pathname, router.replace]);
+  }, [debouncedValue, pathname, router.push]);
 
   return (
     <TextInput
       radius="xl"
-      size={mid ? 'lg' : small ? 'md' : 'sm'}
-      pt=""
-      px="lg"
-      maw="40rem"
+      size={mid ? 'lg' : 'md'}
+      maw="50rem"
       value={search}
       classNames={{
         root: styles['search-input'],
         input: styles['search-input-field'],
+        wrapper: styles['search-input-wrapper'],
       }}
       placeholder="Sök ingrediens eller recept"
       onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}

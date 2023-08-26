@@ -13,7 +13,7 @@ type RecipeModalProps = {
 
 export default function RecipeModal({ categories }: RecipeModalProps) {
   const { opened, handlers, recipeToUpdate } = useRecipeModal();
-  const isMobile = useMediaQuery('(max-width: 50em)');
+  const isMobile = useMediaQuery('(max-width: 800px)');
 
   return (
     <Modal

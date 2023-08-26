@@ -2,10 +2,10 @@
 
 import { useContext } from 'react';
 
-import { ErrorContext } from '@/contexts/ErrorContext';
+import { FilterContext } from '@/contexts/FilterContext';
 
-export const useErrors = () => {
-  const context = useContext(ErrorContext);
+export const useFilter = () => {
+  const context = useContext(FilterContext);
   if (!context) {
     throw new Error('hook must be used within its provider');
   }

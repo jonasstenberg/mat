@@ -12,7 +12,7 @@ import {
   TextInput,
 } from '@mantine/core';
 import { IconLogin } from '@tabler/icons-react';
-import { useToggle } from '@mantine/hooks';
+import { useMediaQuery, useToggle } from '@mantine/hooks';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useForm, zodResolver } from '@mantine/form';
 import { useState } from 'react';
@@ -21,7 +21,7 @@ import { useAuthModal } from '@/hooks/useAuthModal';
 import { GoogleButton } from '@/components/SocialButtons';
 import { capitalizeFirstLetter } from '@/utils/strings';
 import { SignInSchema, SignUpSchema, signInSchema, signUpSchema } from '@/types/user';
-import { signUp } from '@/actions/user';
+import { getUser, signUp } from '@/actions/user';
 import { handleServerErrors } from '@/utils/handleServerErrors';
 
 export default function AuthModal() {
@@ -31,6 +31,9 @@ export default function AuthModal() {
   const [type, toggle] = useToggle(['login', 'register']);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
+  const { setUser } = useAuthModal();
+
+  const isMobile = useMediaQuery('(max-width: 800px)');
 
   const callbackUrl = searchParams.get('callbackUrl') || '/';
 
@@ -69,9 +72,13 @@ export default function AuthModal() {
       if (signInResponse?.error) {
         setError('Ogiltig e-post eller lösenord');
       } else {
-        form.reset();
-        handlers.close();
-        router.refresh();
+        const user = await getUser(values.email);
+        if (user.success?.user) {
+          setUser(user.success?.user);
+          form.reset();
+          handlers.close();
+          router.refresh();
+        }
       }
     } catch (err: any) {
       setLoading(false);
@@ -85,6 +92,7 @@ export default function AuthModal() {
       onClose={handlers.close}
       radius="md"
       title="Välkommen till Receptbanken, logga in med"
+      fullScreen={isMobile}
     >
       <Group grow mb="md" mt="md">
         <GoogleButton
@@ -129,7 +137,7 @@ export default function AuthModal() {
             {...form.getInputProps('password')}
           />
           <Group mt="md" justify="space-between">
-            <Anchor component="button" type="button" c="dimmed" onClick={() => toggle()} size="xs">
+            <Anchor component="button" type="button" c="dimmed" onClick={() => toggle()} size="md">
               {type === 'register'
                 ? 'Har du redan ett konto? Logga in'
                 : 'Har du inget konto? Registrera'}

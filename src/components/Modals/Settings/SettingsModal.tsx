@@ -2,6 +2,7 @@
 
 import { Modal, Stack, Tabs } from '@mantine/core';
 import { Session } from 'next-auth';
+import { useMediaQuery } from '@mantine/hooks';
 import { useSettingsModal } from '@/hooks/useSettingsModal';
 import PasswordForm from './Password/PasswordForm';
 import ProfileForm from './Profile/ProfileForm';
@@ -14,9 +15,10 @@ type SettingsModalProps = {
 export default function SettingsModal({ session }: SettingsModalProps) {
   const { opened, handlers } = useSettingsModal();
   const { user } = useAuthModal();
+  const isMobile = useMediaQuery('(max-width: 800px)');
 
   return (
-    <Modal opened={opened} onClose={handlers.close} title="Inställningar">
+    <Modal opened={opened} onClose={handlers.close} title="Inställningar" fullScreen={isMobile}>
       <Tabs defaultValue="profile">
         <Tabs.List>
           <Tabs.Tab value="profile">Profil</Tabs.Tab>

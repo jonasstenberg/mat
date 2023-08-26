@@ -1,3 +1,42 @@
+.nav {
+  height: 100%;
+  padding-left: 1.25rem;
+  font-size: 1.125rem;
+}
+
+.nav ul {
+  display: flex;
+  height: 100%;
+}
+
+.nav ul li {
+  height: 100%;
+}
+
+.nav ul li a {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0.5rem 1rem;
+  transition: color 0.1s ease-in-out;
+}
+
+.nav ul li a:hover:not(.nav-current) {
+  background-color: var(--mantine-color-gray-1);
+  color: var(--mantine-color-gray-6);
+}
+
+.nav-current {
+  color: var(--mantine-color-gray-6);
+  font-weight: 600;
+}
+
+.user-menu {
+  font-size: 0.875rem;
+  margin-right: 1rem;
+  text-align: right;
+}
+
 .user {
   border-radius: var(--mantine-radius-sm);
   transition: background-color 100ms ease;
@@ -8,5 +47,22 @@
 }
 
 .user[data-active='true'] {
+  background-color: var(--mantine-color-gray-1);
+}
+
+.burger {
+  justify-self: end;
+  margin-right: 1rem;
+}
+
+.drawer a {
+  display: block;
+  line-height: 1;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  text-decoration: none;
+}
+
+.drawer a:hover {
   background-color: var(--mantine-color-gray-1);
 }

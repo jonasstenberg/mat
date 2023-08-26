@@ -1,19 +1,13 @@
 'use client';
 
-import {
-  IconSquarePlus,
-  IconLogout,
-  IconLogin,
-  IconSettings,
-  IconChevronDown,
-} from '@tabler/icons-react';
+import { IconLogout, IconLogin, IconSettings, IconChevronDown } from '@tabler/icons-react';
 import { signOut } from 'next-auth/react';
 import { Session } from 'next-auth';
 import { Menu, rem, Text, UnstyledButton, Group, Avatar } from '@mantine/core';
+import { useRouter } from 'next/navigation';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from '@/app/header.module.css';
-import { useRecipeModal } from '@/hooks/useRecipeModal';
 import { useAuthModal } from '@/hooks/useAuthModal';
 import { useSettingsModal } from '@/hooks/useSettingsModal';
 import { getUser } from '@/actions/user';
@@ -25,20 +19,17 @@ type HeaderMenuProps = {
 };
 
 export default function HeaderMenu({ session }: HeaderMenuProps) {
-  const { handlers } = useRecipeModal();
   const [userMenuOpened, setUserMenuOpened] = useState<boolean>(false);
+  const router = useRouter();
   const { handlers: loginHandlers } = useAuthModal();
   const { handlers: settingsHandlers } = useSettingsModal();
   const { user, setUser } = useAuthModal();
-  const emailRef = useRef<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!session?.user.email || emailRef.current) {
+      if (!session?.user.email) {
         return;
       }
-
-      emailRef.current = session?.user.email;
 
       const response = await getUser(session?.user.email);
       const isSuccess = await handleServerErrors(response);
@@ -53,7 +44,7 @@ export default function HeaderMenu({ session }: HeaderMenuProps) {
 
   return (
     <>
-      <div style={{ marginRight: rem(16) }}>
+      <div className={styles['user-menu']}>
         <Menu
           shadow="md"
           width={200}
@@ -76,21 +67,8 @@ export default function HeaderMenu({ session }: HeaderMenuProps) {
               </Group>
             </UnstyledButton>
           </Menu.Target>
-          {user?.name ? (
-            <Menu.Dropdown>
-              <Menu.Item
-                leftSection={<IconSquarePlus style={{ width: rem(14), height: rem(14) }} />}
-                style={{ fontSize: '1rem' }}
-                onClick={() => {
-                  handlers.open();
-                }}
-              >
-                Lägg till recept
-              </Menu.Item>
-
-              <Menu.Divider />
-
-              <Menu.Label style={{ fontSize: '1rem' }}>Inställningar</Menu.Label>
+          {session?.user.email ? (
+            <Menu.Dropdown key="loggedin">
               <Menu.Item
                 leftSection={<IconSettings style={{ width: rem(14), height: rem(14) }} />}
                 style={{ fontSize: '1rem' }}
@@ -105,13 +83,14 @@ export default function HeaderMenu({ session }: HeaderMenuProps) {
                 style={{ fontSize: '1rem' }}
                 onClick={() => {
                   signOut();
+                  router.push('/');
                 }}
               >
                 Logga ut
               </Menu.Item>
             </Menu.Dropdown>
           ) : (
-            <Menu.Dropdown>
+            <Menu.Dropdown key="login">
               <Menu.Item
                 leftSection={<IconLogin style={{ width: rem(14), height: rem(14) }} />}
                 style={{ fontSize: '1rem' }}

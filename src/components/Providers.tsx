@@ -6,7 +6,7 @@ import { ReactNode } from 'react';
 import { RecipeModalProvider } from '@/contexts/RecipeModalContext';
 import { AuthModalProvider } from '@/contexts/AuthModalContext';
 import { SettingsModalProvider } from '@/contexts/SettingsModalContext';
-import { ErrorProvider } from '@/contexts/ErrorContext';
+import { FilterProvider } from '@/contexts/FilterContext';
 
 type ProviderProps = {
   children: ReactNode;
@@ -19,7 +19,7 @@ export default function Providers({ children, session }: ProviderProps) {
       <SettingsModalProvider>
         <AuthModalProvider>
           <RecipeModalProvider>
-            <ErrorProvider>{children}</ErrorProvider>
+            <FilterProvider>{children}</FilterProvider>
           </RecipeModalProvider>
         </AuthModalProvider>
       </SettingsModalProvider>

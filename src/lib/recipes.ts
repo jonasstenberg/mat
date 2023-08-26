@@ -1,14 +1,28 @@
 import { RecipeSchema } from '@/types/recipe';
 import { config } from '@/utils/config';
 
-export async function getRecipes(search: string): Promise<RecipeSchema[]> {
+export async function getRecipes({
+  owner,
+  search,
+  filteredCategoryParam,
+}: {
+  owner: string | null | undefined;
+  search: string;
+  filteredCategoryParam: string;
+}): Promise<RecipeSchema[]> {
   const baseUrl = `${config.apiEndpoint}/recipes_and_categories`;
   const baseQuery = '?order=name';
-  const searchQuery = search?.length ? `&full_tsv=fts(swedish).${search}:*` : '';
+  const ownerQuery = owner ? `&owner=eq.${owner}` : '';
+  const searchQuery = search?.length
+    ? `&full_tsv=fts(swedish).${encodeURIComponent(search)}:*`
+    : '';
+  const categoryQuery = filteredCategoryParam?.length
+    ? `&categories=cs.{${encodeURIComponent(filteredCategoryParam)}}`
+    : '';
 
-  const url = `${baseUrl}${baseQuery}${searchQuery}`;
+  const url = `${baseUrl}${baseQuery}${ownerQuery}${searchQuery}${categoryQuery}`;
 
-  const recipeResult = await fetch(url);
+  const recipeResult = await fetch(url, { cache: 'no-store' });
   const recipeData = await recipeResult.json();
 
   return recipeData;
