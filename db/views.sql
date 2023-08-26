@@ -2,7 +2,7 @@ CREATE OR REPLACE VIEW recipes_and_categories
 AS
 SELECT
   recipes.*,
-  COALESCE(rc.categories, '[]') AS categories,
+  COALESCE(ARRAY(SELECT jsonb_array_elements_text(rc.categories)), ARRAY[]::text[]) AS categories,
   ing.ingredients,
   ins.instructions,
   to_tsvector('pg_catalog.swedish',
