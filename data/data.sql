@@ -5,7 +5,7 @@
 -- Dumped from database version 14.8 (Debian 14.8-1.pgdg100+1)
 -- Dumped by pg_dump version 14.8 (Debian 14.8-1.pgdg100+1)
 
--- Started on 2023-08-25 02:03:10 CEST
+-- Started on 2023-08-26 02:06:20 CEST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -77,7 +77,6 @@ ffa8c20f-3293-418e-a89f-200018197bab	2020-11-24 20:37:34.635708	2020-11-24 20:37
 74b57792-fa68-4efb-be46-e8d194d86ed3	2022-12-29 15:17:14.471522	2022-12-29 15:17:14.471522	Bakelse	jonas@stenberg.io
 fcbddad5-f66b-4142-949f-af475423a834	2023-08-04 12:31:16.591547	2023-08-04 12:31:16.591547	Tillbehör	jonas@stenberg.io
 73f14622-6755-4c5a-a610-ad8bf0f28071	2023-08-04 16:56:05.373362	2023-08-04 16:56:05.373362	Matbröd	jonas@stenberg.io
-8e001f6e-a09a-48ce-9121-35052b342431	2023-08-13 20:13:25.614442	2023-08-13 20:13:25.614442	{"name": "Frukost"}	jonas@stenberg.io
 \.
 
 
@@ -1397,7 +1396,7 @@ jonas@stenberg.io	$2a$06$UFa2NQyoGEFrOuHzv6KVp.j8G.qnnujXLi5/9fTol98CsNRWCc2Nq	j
 \.
 
 
--- Completed on 2023-08-25 02:03:10 CEST
+-- Completed on 2023-08-26 02:06:20 CEST
 
 --
 -- PostgreSQL database dump complete
