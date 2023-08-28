@@ -63,7 +63,7 @@ export default function HeaderMenu({ session }: HeaderMenuProps) {
                 <Text fw={500} size="lg" style={{ lineHeight: 1 }} mr={3}>
                   {user?.name?.split(' ')[0] || ''}
                 </Text>
-                <IconChevronDown size="0.75rem" stroke={1.5} />
+                <IconChevronDown style={{ width: '0.75rem', height: '0.75rem' }} stroke={1.5} />
               </Group>
             </UnstyledButton>
           </Menu.Target>

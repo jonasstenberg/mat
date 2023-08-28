@@ -9,7 +9,7 @@ import { Notifications } from '@mantine/notifications';
 
 import '@/styles/globals.css';
 import styles from '@/app/page.module.css';
-import { azeretMono, openSans, lora, finlandica } from '@/styles/fonts';
+import { lora } from '@/styles/fonts';
 
 import { getCategories } from '@/lib/categories';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
@@ -57,10 +57,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const session = await getServerSession(authOptions);
 
   return (
-    <html
-      lang="sv"
-      className={clsx(openSans.variable, azeretMono.variable, lora.variable, finlandica.variable)}
-    >
+    <html lang="sv" className={clsx(lora.variable)}>
       <head />
       <Providers session={session}>
         <body>
