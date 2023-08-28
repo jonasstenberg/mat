@@ -1,18 +1,18 @@
 'use client';
 
-import { IconLogout, IconLogin, IconSettings, IconChevronDown } from '@tabler/icons-react';
-import { signOut } from 'next-auth/react';
+import { Avatar, Group, Menu, Text, UnstyledButton, rem } from '@mantine/core';
+import { IconChevronDown, IconLogin, IconLogout, IconSettings } from '@tabler/icons-react';
 import { Session } from 'next-auth';
-import { Menu, rem, Text, UnstyledButton, Group, Avatar } from '@mantine/core';
+import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-
 import { useEffect, useState } from 'react';
+
+import { getUser } from '@/actions/user';
 import styles from '@/app/header.module.css';
 import { useAuthModal } from '@/hooks/useAuthModal';
 import { useSettingsModal } from '@/hooks/useSettingsModal';
-import { getUser } from '@/actions/user';
-import { handleServerErrors } from '@/utils/handleServerErrors';
 import { UserSchema } from '@/types/user';
+import { handleServerErrors } from '@/utils/handleServerErrors';
 
 type HeaderMenuProps = {
   session: Session | null;
@@ -40,7 +40,7 @@ export default function HeaderMenu({ session }: HeaderMenuProps) {
     };
 
     fetchData();
-  }, [session?.user.email]);
+  }, []);
 
   return (
     <>
