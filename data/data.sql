@@ -5,7 +5,7 @@
 -- Dumped from database version 14.8 (Debian 14.8-1.pgdg100+1)
 -- Dumped by pg_dump version 14.8 (Debian 14.8-1.pgdg100+1)
 
--- Started on 2023-08-28 02:04:59 CEST
+-- Started on 2023-08-29 02:04:53 CEST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -152,10 +152,10 @@ a644a7d4-a57f-45ae-97d4-1ae39a0638a5	2022-12-29 12:40:19.597625	2023-08-24 20:17
 043263df-ef4d-4694-b989-8b01821706a2	2022-05-29 13:23:13.093179	2023-08-24 20:17:14.087893	Mammas dillkött	Ingmarie Stenberg	4	portioner	0	0	\N		043263df-ef4d-4694-b989-8b01821706a2.webp	\N	jonas@stenberg.io	'annan':68 'buljong':72 'citron':78 'dill':79 'dillköt':2 'eventuellt':91 'fortsät':29 'gryt':13 'grädd':81 'gör':64 'halv':51 'häll':22 'kastrull':69 'klyft':38 'kok':3 'kokt':103 'krydd':42 'köttet':5,59,98 'lägg':96 'låt':61 'lök':39 'mamm':1 'mer':27 'morotsbit':100 'moröt':40 'ner':93,97 'pannan':87 'potatis':104 'press':77 'salt':16 'saltet':24 'sen':43 'server':101 'sidan':55 'sil':70 'sjud':46 'ska':44 'skum':28 'skumm':14,30,34 'ställ':53 'svaln':62 'sås':65,83 'ta':57 'tag':19 'timm':52 'toppred':74 'täck':10 'vatt':7 'visp':92 'äggul':95
 8ecc7ec6-54e8-466b-bd41-36d4a05539e7	2022-12-29 12:57:11.352181	2023-08-24 20:17:14.087893	Mammas äppelkaka i svampskogen	Ingmarie Stenberg	8	bitar	0	0	\N		8ecc7ec6-54e8-466b-bd41-36d4a05539e7.webp	\N	jonas@stenberg.io	'-40':24 '175':27 '30':23 'bland':5 'grad':28 'grädd':21 'ingrediens':7 'kanel':20 'lägg':9,13,16 'mamm':1 'minut':25 'pajform':12 'smörklick':18 'svampskog':4 'äppelkak':2 'äppelklyft':15
 68bc2e69-483e-497d-b422-bb311f53de8b	2021-01-12 08:48:02.680444	2023-08-24 20:18:44.817448	Torsk med äggsås	Ingmarie Stenberg	4	portioner	0	0	\N		68bc2e69-483e-497d-b422-bb311f53de8b.webp	\N	jonas@stenberg.io	'1':37,44,59,89,125 '2':55 'bland':112 'bädd':133 'ca':20,36 'del':81,84 'dijonsenap':91 'dl':45 'dygn':22 'fräs':23,54,122 'genom':6 'gnid':8 'grädd':68 'gräddmjölk':66 'gullök':80 'halv':79 'hälft':67,69 'häll':39 'in':9 'kastrull':64,109 'klar':101 'kokt':141 'kyl':18 'lit':41,85 'lock':52 'låg':26 'låt':15,48 'lök':94 'mindr':42 'minut':38 'mjölk':70 'msk':56,60,126 'muskot':87 'nedåt':34 'nästan':99 'peppr':76 'persiljan':105 'potatis':142 'rimm':4 'riv':86 'runt':11,73 'rör':120 'salt':10,74,128 'server':129 'sidan':144 'skinnsidan':33 'smör':29,57,127 'spadet':114 'spen':136 'spenat':123 'spis':111 'stekt':135 'stå':16 'sås':96,118 'ta':92,107 'tillsät':65,77,102 'torsk':1,5,24,49,98,116,130,140 'traktörpan':32 'tsk':90 'två':83 'ur':95 'vatt':46 'vetemjöl':61 'visp':72 'värm':27 'ägg':103 'äggsås':3,138 'ångkok':50
-69ff89cd-3722-4d25-b9f4-c6818ee7b531	2023-08-24 08:45:22.562168	2023-08-26 13:24:48.416088	Festsill	Jonas Stenberg	4	portioner	0	0	\N		eb580cc6-92e6-4fcd-8f25-aa2512f5517c.webp	\N	jonas@stenberg.io	\N
+69ff89cd-3722-4d25-b9f4-c6818ee7b531	2023-08-24 08:45:22.562168	2023-08-28 19:55:49.153178	Festsill	Jonas Stenberg	4	portioner	0	0	\N		eb580cc6-92e6-4fcd-8f25-aa2512f5517c.webp	\N	jonas@stenberg.io	\N
 a7f351df-a980-49b4-b5b5-38d6f191a3b6	2023-08-04 12:31:16.591547	2023-08-26 13:30:47.474433	Inlagda gurkor	Ingmarie Stenberg	2	mellanstora glasburkar	0	0	\N		a7f351df-a980-49b4-b5b5-38d6f191a3b6.webp	\N	jonas@stenberg.io	'1':3 '10':46 '2':18 '3':29 '4':60 'behöv':66 'bland':30 'bort':88 'burk':28,64 'ca':45 'cm':15 'cm-stor':14 'dag':91 'del':12 'dillkron':21 'gurk':2,5 'gurkan':84 'gurkskiv':20,69 'gärn':76 'häll':61 'ibland':49 'ihop':31 'inlag':1 'innan':53 'kub':17 'lag':32,62 'lit':50 'lägg':75 'längr':51 'löst':40,58 'minut':47 'ner':83 'nog':6 'pepparrot':10,22 'potatis':79 'press':82 'rengjord':27 'rör':34 'saft':72 'salt':38,54 'senapsfrön':24 'själv':74 'skal':9,78 'skiv':8 'sock':36,56 'stor':16 'tar':44 'tas':86 'tid':52 'tvätt':4 'täck':68 'varv':19 'väl':26,42 'överst':80
 44687753-8723-45cf-b025-c07fe64d1a05	2020-12-30 20:12:09.175593	2023-08-26 13:29:57.153231	Vit chokladmousse med lakrits	Jonas Stenberg	4	portioner	0	0	\N	Recept från boken ”Lakrits: godis, bakverk, desserter, mat & dryck” av Elisabeth Johansson. Fotograf: Helén Pe. Bonnier Fakta.	44687753-8723-45cf-b025-c07fe64d1a05.webp	\N	jonas@stenberg.io	'1':5 '100':102 '12':75 '15':168 '2':23 '20':169 '3':57 '4':77 '5':98 '6':121 '7':149 '8':190 'bakplåtspapp':162 'bakverk':11 'bok':8 'bonni':21 'brun':183 'bunk':33,56,65,80 'börj':181 'choklad':27,61 'chokladcookies':192 'chokladmouss':2 'citronsaft':107 'dessert':12 'dryck':14 'elisabeth':16 'elvisp':84,114 'engångsspritspås':152 'eventuellt':207 'fakt':22 'florsockret':136 'fotograf':18 'fram':79 'fyll':150 'färg':189 'fördel':93,195 'försvin':186 'garner':203 'godis':10 'grad':103 'grovt':193 'grädd':36,163 'gräddblandning':88 'hack':24 'hallon':205 'hallonpurén':148 'hast':112,127 'helén':19 'hälft':118 'häll':52 'håll':171 'in':141 'johansson':17 'kall':87 'kok':34 'koll':172 'kross':191 'kyl':72 'lakrit':4,9 'lakritsgranul':38,209 'lit':208 'luft':91 'lägg':29,199 'låt':46,69 'löst':44 'maräng':109,138,157,174,201 'mat':13 'minst':74 'minut':50,133,170 'mouss':92,94,198 'ner':54,117,135,147 'par':132 'pe':20 'plastfoli':67 'plåt':160 'portionsgl':97 'pulvret':42 'recept':6 'rest':123 'ros':188 'rör':58 'samt':206 'sikt':134 'skumm':110 'slickepot':145 'slutet':176 'smul':196 'smält':63 'små':96,156 'sockret':125 'sprits':154 'strösockret':120 'stå':70 'svaln':47 'sänk':111 'sätt':99 'ta':78 'till':41,60 'tillsät':122 'timm':76 'täck':64 'ugn':100,166 'visp':40,82,104,116,129 'vit':1,26 'vänd':140,146 'äggvit':105 'öka':126
-24194bad-e62c-49a3-8e4b-3b8a35e8c724	2023-08-05 10:08:37.352644	2023-08-26 15:39:16.047265	Mommakakor	Ingmarie Stenberg	4	längder	0	0	\N		24194bad-e62c-49a3-8e4b-3b8a35e8c724.webp	\N	jonas@stenberg.io	'15':34 '200':31 '4':17 'bakplåtspapp':22 'bland':11 'ca':33 'deg':14 'dom':20,26 'fingr':28 'grad':32 'grädd':29 'gyllenbrun':40 'ingrediens':9 'jämn':13 'kak':38 'lägg':19 'läng':18 'minut':35 'mommakak':1 'poröst':6 'rull':15 'rör':2 'skär':41 'smör':5 'sock':3 'storlek':45 'till':37 'tillsät':7 'tryck':24 'önsk':47 'övr':8
+24194bad-e62c-49a3-8e4b-3b8a35e8c724	2023-08-05 10:08:37.352644	2023-08-28 06:00:48.048344	Mommakakor	Ingmarie Stenberg	4	längder	0	0	\N		24194bad-e62c-49a3-8e4b-3b8a35e8c724.webp	\N	jonas@stenberg.io	'15':34 '200':31 '4':17 'bakplåtspapp':22 'bland':11 'ca':33 'deg':14 'dom':20,26 'fingr':28 'grad':32 'grädd':29 'gyllenbrun':40 'ingrediens':9 'jämn':13 'kak':38 'lägg':19 'läng':18 'minut':35 'mommakak':1 'poröst':6 'rull':15 'rör':2 'skär':41 'smör':5 'sock':3 'storlek':45 'till':37 'tillsät':7 'tryck':24 'önsk':47 'övr':8
 \.
 
 
@@ -795,16 +795,6 @@ f693aaf4-5e16-4367-bcbd-aebbafd6da34	2023-08-24 20:18:44.817448	2023-08-24 20:18
 9b8990f7-018a-4dd0-b3d1-a4a910533f03	2023-08-24 20:18:44.817448	2023-08-24 20:18:44.817448	68bc2e69-483e-497d-b422-bb311f53de8b	hackad persilja	dl	0.5	jonas@stenberg.io
 03aa5e7e-64e7-4752-81aa-8c20445906e6	2023-08-24 20:18:44.817448	2023-08-24 20:18:44.817448	68bc2e69-483e-497d-b422-bb311f53de8b	Salt och peppar			jonas@stenberg.io
 67a93198-c1f9-4124-97a6-4a525b910922	2023-08-24 20:18:44.817448	2023-08-24 20:18:44.817448	68bc2e69-483e-497d-b422-bb311f53de8b	En halv påse bladspenat			jonas@stenberg.io
-0d523171-095f-4613-b468-71f70d2b5e71	2023-08-26 13:24:48.416088	2023-08-26 13:24:48.416088	69ff89cd-3722-4d25-b9f4-c6818ee7b531	askar matjesill		2	jonas@stenberg.io
-f82ed4d1-de58-4ed1-9f46-2fca6a300540	2023-08-26 13:24:48.416088	2023-08-26 13:24:48.416088	69ff89cd-3722-4d25-b9f4-c6818ee7b531	tub (150g) majonäs		1	jonas@stenberg.io
-37cf09f0-141c-435b-a613-a371f20a61bd	2023-08-26 13:24:48.416088	2023-08-26 13:24:48.416088	69ff89cd-3722-4d25-b9f4-c6818ee7b531	vispgrädde	dl	0.75	jonas@stenberg.io
-0ba19126-0d21-4fd9-93fd-d42bebc05e74	2023-08-26 13:24:48.416088	2023-08-26 13:24:48.416088	69ff89cd-3722-4d25-b9f4-c6818ee7b531	gräddfil	dl	1	jonas@stenberg.io
-8604131b-ed60-4164-afa8-63280a380ab2	2023-08-26 13:24:48.416088	2023-08-26 13:24:48.416088	69ff89cd-3722-4d25-b9f4-c6818ee7b531	tomatpure			jonas@stenberg.io
-e228d4de-80bd-4982-bad9-6792383bbc0f	2023-08-26 13:24:48.416088	2023-08-26 13:24:48.416088	69ff89cd-3722-4d25-b9f4-c6818ee7b531	hårdkokta ägg		4	jonas@stenberg.io
-0d7a4331-632d-4f4c-9668-7b2329859640	2023-08-26 13:24:48.416088	2023-08-26 13:24:48.416088	69ff89cd-3722-4d25-b9f4-c6818ee7b531	klippt dill	dl	1.5	jonas@stenberg.io
-c08bc2ed-6180-43a3-bd36-45bc180aa312	2023-08-26 13:24:48.416088	2023-08-26 13:24:48.416088	69ff89cd-3722-4d25-b9f4-c6818ee7b531	hårdkokt ägg		1	jonas@stenberg.io
-238b6f4b-c344-4e9b-9d44-6c7bc2510b8b	2023-08-26 13:24:48.416088	2023-08-26 13:24:48.416088	69ff89cd-3722-4d25-b9f4-c6818ee7b531	# Till garnering			jonas@stenberg.io
-8d8e788b-051c-4b4e-a3e5-9572e5353b82	2023-08-26 13:24:48.416088	2023-08-26 13:24:48.416088	69ff89cd-3722-4d25-b9f4-c6818ee7b531	dillkvistar			jonas@stenberg.io
 cb7b5648-3192-4143-afbf-4d95c0df2fbd	2023-08-26 13:29:57.153231	2023-08-26 13:29:57.153231	44687753-8723-45cf-b025-c07fe64d1a05	#Minihallonmaränger			jonas@stenberg.io
 47b88035-8360-4d86-ad7e-1a200aab6562	2023-08-26 13:29:57.153231	2023-08-26 13:29:57.153231	44687753-8723-45cf-b025-c07fe64d1a05	gram äggvita(or)		30	jonas@stenberg.io
 24e63449-b741-43ca-8395-06a70e697584	2023-08-26 13:29:57.153231	2023-08-26 13:29:57.153231	44687753-8723-45cf-b025-c07fe64d1a05	citronsaft, 3 - 4 droppar, pressad	st	4	jonas@stenberg.io
@@ -827,13 +817,23 @@ d177be1b-735d-4b43-a3d7-66bf79b31d20	2023-08-26 13:29:57.153231	2023-08-26 13:29
 39fe5eac-334e-4c74-b2fe-e99af768e342	2023-08-26 13:30:47.474433	2023-08-26 13:30:47.474433	a7f351df-a980-49b4-b5b5-38d6f191a3b6	socker	dl	4.5	jonas@stenberg.io
 51d4fd21-c9b1-45be-ab0d-7ca511154475	2023-08-26 13:30:47.474433	2023-08-26 13:30:47.474433	a7f351df-a980-49b4-b5b5-38d6f191a3b6	salt	dl	1	jonas@stenberg.io
 73bb88cf-9076-4b05-ae29-2fc2d52197e2	2023-08-26 13:30:47.474433	2023-08-26 13:30:47.474433	a7f351df-a980-49b4-b5b5-38d6f191a3b6	pepparrot		1	jonas@stenberg.io
-1b5c34c5-785b-4a65-b63b-2abb2baddc35	2023-08-26 15:39:16.047265	2023-08-26 15:39:16.047265	24194bad-e62c-49a3-8e4b-3b8a35e8c724	smör	g	200	jonas@stenberg.io
-a48ebe3c-fdda-4308-81c7-03efeebe9ecc	2023-08-26 15:39:16.047265	2023-08-26 15:39:16.047265	24194bad-e62c-49a3-8e4b-3b8a35e8c724	socker	dl	2.25	jonas@stenberg.io
-dac7ba16-d6b8-418f-a823-0aa0d0bfdc36	2023-08-26 15:39:16.047265	2023-08-26 15:39:16.047265	24194bad-e62c-49a3-8e4b-3b8a35e8c724	sirap	msk	1	jonas@stenberg.io
-695ea34d-b3b1-47e1-b0f8-b4af7011940c	2023-08-26 15:39:16.047265	2023-08-26 15:39:16.047265	24194bad-e62c-49a3-8e4b-3b8a35e8c724	vaniljsocker	tsk	1	jonas@stenberg.io
-aecfaacc-25cb-4ace-b3b3-d94b6a790393	2023-08-26 15:39:16.047265	2023-08-26 15:39:16.047265	24194bad-e62c-49a3-8e4b-3b8a35e8c724	bakpulver	tsk	2	jonas@stenberg.io
-9fbbe266-3c2c-42e3-8e7d-e5748d7b81f1	2023-08-26 15:39:16.047265	2023-08-26 15:39:16.047265	24194bad-e62c-49a3-8e4b-3b8a35e8c724	vetemjöl	dl	5	jonas@stenberg.io
-65abb071-ef9d-4cf0-b0f0-84ec8f177818	2023-08-26 15:39:16.047265	2023-08-26 15:39:16.047265	24194bad-e62c-49a3-8e4b-3b8a35e8c724	solroskärnor	dl	1	jonas@stenberg.io
+7ea96257-21e8-4e9c-8886-e17dabbce822	2023-08-28 06:00:48.048344	2023-08-28 06:00:48.048344	24194bad-e62c-49a3-8e4b-3b8a35e8c724	smör	g	200	jonas@stenberg.io
+18af71eb-2712-4764-9cd1-455687c23a44	2023-08-28 06:00:48.048344	2023-08-28 06:00:48.048344	24194bad-e62c-49a3-8e4b-3b8a35e8c724	socker	dl	2.25	jonas@stenberg.io
+4e863f38-ee27-45ba-80d1-4327609c21d1	2023-08-28 06:00:48.048344	2023-08-28 06:00:48.048344	24194bad-e62c-49a3-8e4b-3b8a35e8c724	sirap	msk	1	jonas@stenberg.io
+5747e81f-74ba-40f6-9bf3-4bb7dc566782	2023-08-28 06:00:48.048344	2023-08-28 06:00:48.048344	24194bad-e62c-49a3-8e4b-3b8a35e8c724	vaniljsocker	tsk	1	jonas@stenberg.io
+9f6abaca-5b51-4bf8-be22-166e7311fad2	2023-08-28 06:00:48.048344	2023-08-28 06:00:48.048344	24194bad-e62c-49a3-8e4b-3b8a35e8c724	bakpulver	tsk	2	jonas@stenberg.io
+2ca8dbf1-03fa-4570-9951-ed5be1dba94f	2023-08-28 06:00:48.048344	2023-08-28 06:00:48.048344	24194bad-e62c-49a3-8e4b-3b8a35e8c724	vetemjöl	dl	5	jonas@stenberg.io
+a8b699ee-d8fd-4b8d-a271-25643dc47038	2023-08-28 06:00:48.048344	2023-08-28 06:00:48.048344	24194bad-e62c-49a3-8e4b-3b8a35e8c724	solroskärnor	dl	1	jonas@stenberg.io
+3f4da059-0199-4cf5-948a-547a7f54d6f8	2023-08-28 19:55:49.153178	2023-08-28 19:55:49.153178	69ff89cd-3722-4d25-b9f4-c6818ee7b531	askar matjesill		2	jonas@stenberg.io
+4371e12f-0129-4be3-b613-db907fef3095	2023-08-28 19:55:49.153178	2023-08-28 19:55:49.153178	69ff89cd-3722-4d25-b9f4-c6818ee7b531	tub (150g) majonäs		1	jonas@stenberg.io
+f743f764-9903-4607-84e4-614d6a9b334e	2023-08-28 19:55:49.153178	2023-08-28 19:55:49.153178	69ff89cd-3722-4d25-b9f4-c6818ee7b531	vispgrädde	dl	0.75	jonas@stenberg.io
+36706b63-1bd3-48a5-b227-81539b021017	2023-08-28 19:55:49.153178	2023-08-28 19:55:49.153178	69ff89cd-3722-4d25-b9f4-c6818ee7b531	gräddfil	dl	1	jonas@stenberg.io
+173243fb-cf01-42a2-a758-3cdbf90c8179	2023-08-28 19:55:49.153178	2023-08-28 19:55:49.153178	69ff89cd-3722-4d25-b9f4-c6818ee7b531	tomatpure			jonas@stenberg.io
+224b679e-e95a-44d3-ad4f-c6fb532be46a	2023-08-28 19:55:49.153178	2023-08-28 19:55:49.153178	69ff89cd-3722-4d25-b9f4-c6818ee7b531	hårdkokta ägg		4	jonas@stenberg.io
+fe0b68d8-5f2f-4a54-b77f-77fe2a471048	2023-08-28 19:55:49.153178	2023-08-28 19:55:49.153178	69ff89cd-3722-4d25-b9f4-c6818ee7b531	klippt dill	dl	1.5	jonas@stenberg.io
+15e256cb-ad6e-4940-b71f-ccd47a0c391f	2023-08-28 19:55:49.153178	2023-08-28 19:55:49.153178	69ff89cd-3722-4d25-b9f4-c6818ee7b531	hårdkokt ägg		1	jonas@stenberg.io
+10f542b4-3ce5-47f1-acc1-a9eebce38995	2023-08-28 19:55:49.153178	2023-08-28 19:55:49.153178	69ff89cd-3722-4d25-b9f4-c6818ee7b531	# Till garnering			jonas@stenberg.io
+bb269d1b-7b9f-4b07-a2c6-8848b33ffcd5	2023-08-28 19:55:49.153178	2023-08-28 19:55:49.153178	69ff89cd-3722-4d25-b9f4-c6818ee7b531	dillkvistar			jonas@stenberg.io
 \.
 
 
@@ -1254,8 +1254,6 @@ b53ce63d-55ea-4d38-b34a-4e8acfcb4b9e	2023-08-24 20:18:44.817448	2023-08-24 20:18
 50e6f5c7-030c-4db2-9acf-4fda5f9d8a31	2023-08-24 20:18:44.817448	2023-08-24 20:18:44.817448	68bc2e69-483e-497d-b422-bb311f53de8b	Salta.	jonas@stenberg.io
 83a50a80-3140-4a55-a865-a8d82722d631	2023-08-24 20:18:44.817448	2023-08-24 20:18:44.817448	68bc2e69-483e-497d-b422-bb311f53de8b	Servera torsken på en bädd av stekt spenat med äggsåsen på torsken.	jonas@stenberg.io
 800db1ff-65ee-46c6-b31a-3377631c7cd1	2023-08-24 20:18:44.817448	2023-08-24 20:18:44.817448	68bc2e69-483e-497d-b422-bb311f53de8b	Kokt potatis vid sidan om.	jonas@stenberg.io
-621aa10a-e56c-4d6c-8465-bd9e6e749e21	2023-08-26 13:24:48.416088	2023-08-26 13:24:48.416088	69ff89cd-3722-4d25-b9f4-c6818ee7b531	Dela sillen i bitar och blanda alla ingredienser.	jonas@stenberg.io
-e3d5cfc8-6f82-42f3-8ece-dbdfea81895d	2023-08-26 13:24:48.416088	2023-08-26 13:24:48.416088	69ff89cd-3722-4d25-b9f4-c6818ee7b531	Häll över i en glasburk och låt stå i kylen över natten.	jonas@stenberg.io
 d4c42efc-066b-4c47-b120-cf42e4558387	2023-08-26 13:29:57.153231	2023-08-26 13:29:57.153231	44687753-8723-45cf-b025-c07fe64d1a05	Hacka den vita chokladen och lägg den i en bunke.	jonas@stenberg.io
 4b861af4-5791-491e-97b3-7ab263d14317	2023-08-26 13:29:57.153231	2023-08-26 13:29:57.153231	44687753-8723-45cf-b025-c07fe64d1a05	Koka upp grädde och lakritsgranulat och vispa tills pulvret har lösts upp.	jonas@stenberg.io
 f3daa82f-2cc4-4e75-a96c-03f9e7909f06	2023-08-26 13:29:57.153231	2023-08-26 13:29:57.153231	44687753-8723-45cf-b025-c07fe64d1a05	Låt svalna i några minuter och häll sedan ner i bunken.	jonas@stenberg.io
@@ -1283,11 +1281,13 @@ eac1d404-76e5-4450-9adb-12e70d0e2888	2023-08-26 13:30:47.474433	2023-08-26 13:30
 f2978681-711d-4cf5-ad16-0924829c93c8	2023-08-26 13:30:47.474433	2023-08-26 13:30:47.474433	a7f351df-a980-49b4-b5b5-38d6f191a3b6	Den behöver inte täcka gurkskivorna för de saftar sig själva.	jonas@stenberg.io
 d8ecc913-ecce-4ec8-af8a-d4a5faad9960	2023-08-26 13:30:47.474433	2023-08-26 13:30:47.474433	a7f351df-a980-49b4-b5b5-38d6f191a3b6	Lägg gärna en skalad potatis överst som pressar ner gurkan.	jonas@stenberg.io
 0390552a-9e7d-48c5-a2de-6a4ac1093087	2023-08-26 13:30:47.474433	2023-08-26 13:30:47.474433	a7f351df-a980-49b4-b5b5-38d6f191a3b6	Den tas sedan bort efter några dagar.	jonas@stenberg.io
-7bd3610d-2c52-45f5-ae9e-a1134227aeff	2023-08-26 15:39:16.047265	2023-08-26 15:39:16.047265	24194bad-e62c-49a3-8e4b-3b8a35e8c724	Rör socker och smör poröst.	jonas@stenberg.io
-9d075cc2-36f5-4ac3-af6b-ea50c53eca1c	2023-08-26 15:39:16.047265	2023-08-26 15:39:16.047265	24194bad-e62c-49a3-8e4b-3b8a35e8c724	Tillsätt övriga ingredienser och blanda till jämn deg.	jonas@stenberg.io
-08d9b26b-01ab-4589-96fc-e064a07c3ba1	2023-08-26 15:39:16.047265	2023-08-26 15:39:16.047265	24194bad-e62c-49a3-8e4b-3b8a35e8c724	Rulla ut 4 längder, lägg dom på bakplåtspapper och tryck ut dom med fingrarna.	jonas@stenberg.io
-71ec44e5-0d81-4ad9-a418-a8b774739ca9	2023-08-26 15:39:16.047265	2023-08-26 15:39:16.047265	24194bad-e62c-49a3-8e4b-3b8a35e8c724	Grädda i 200 grader, ca 15 minuter eller tills kakorna blivit gyllenbruna.	jonas@stenberg.io
-31a14416-7276-4298-a323-139c1e6c9822	2023-08-26 15:39:16.047265	2023-08-26 15:39:16.047265	24194bad-e62c-49a3-8e4b-3b8a35e8c724	Skär dem i den storlek som önskas.	jonas@stenberg.io
+8dfedbd8-ae48-45e2-a0db-cab3ec170ffc	2023-08-28 06:00:48.048344	2023-08-28 06:00:48.048344	24194bad-e62c-49a3-8e4b-3b8a35e8c724	Rör socker och smör poröst.	jonas@stenberg.io
+6b2338f3-c6d0-4950-96fd-5df2bfddf297	2023-08-28 06:00:48.048344	2023-08-28 06:00:48.048344	24194bad-e62c-49a3-8e4b-3b8a35e8c724	Tillsätt övriga ingredienser och blanda till jämn deg.	jonas@stenberg.io
+879fabf5-1ea8-47da-9295-35b4128a163e	2023-08-28 06:00:48.048344	2023-08-28 06:00:48.048344	24194bad-e62c-49a3-8e4b-3b8a35e8c724	Rulla ut 4 längder, lägg dom på bakplåtspapper och tryck ut dom med fingrarna.	jonas@stenberg.io
+232408d7-2aed-4f29-a48a-f67c6d5beeb0	2023-08-28 06:00:48.048344	2023-08-28 06:00:48.048344	24194bad-e62c-49a3-8e4b-3b8a35e8c724	Grädda i 200 grader, ca 15 minuter eller tills kakorna blivit gyllenbruna.	jonas@stenberg.io
+5d9d021d-8258-4c33-93d1-3968d1f9b55b	2023-08-28 06:00:48.048344	2023-08-28 06:00:48.048344	24194bad-e62c-49a3-8e4b-3b8a35e8c724	Skär dem i den storlek som önskas.	jonas@stenberg.io
+ca172935-500f-448d-93af-ce0a41fb6ef7	2023-08-28 19:55:49.153178	2023-08-28 19:55:49.153178	69ff89cd-3722-4d25-b9f4-c6818ee7b531	Dela sillen i bitar och blanda alla ingredienser.	jonas@stenberg.io
+82b2df45-18d1-4600-b68e-67ec09c79e77	2023-08-28 19:55:49.153178	2023-08-28 19:55:49.153178	69ff89cd-3722-4d25-b9f4-c6818ee7b531	Häll över i en glasburk och låt stå i kylen över natten.	jonas@stenberg.io
 \.
 
 
@@ -1361,12 +1361,12 @@ COPY public.recipe_categories (date_published, recipe, category, owner) FROM std
 2023-08-24 20:18:21.816892	57be7a15-9cc3-437c-a189-21b0c11b203b	008625e8-ada4-4412-b20f-feb6f2f5c6ed	jonas@stenberg.io
 2023-08-24 20:18:30.179113	6675697a-c45c-495c-af13-2180ae68113a	008625e8-ada4-4412-b20f-feb6f2f5c6ed	jonas@stenberg.io
 2023-08-24 20:18:44.817448	68bc2e69-483e-497d-b422-bb311f53de8b	008625e8-ada4-4412-b20f-feb6f2f5c6ed	jonas@stenberg.io
-2023-08-26 13:24:48.416088	69ff89cd-3722-4d25-b9f4-c6818ee7b531	5a9ca809-e24a-40f0-bf36-dfb3c56e9e10	jonas@stenberg.io
-2023-08-26 13:24:48.416088	69ff89cd-3722-4d25-b9f4-c6818ee7b531	008625e8-ada4-4412-b20f-feb6f2f5c6ed	jonas@stenberg.io
 2023-08-26 13:29:57.153231	44687753-8723-45cf-b025-c07fe64d1a05	5a9ca809-e24a-40f0-bf36-dfb3c56e9e10	jonas@stenberg.io
 2023-08-26 13:29:57.153231	44687753-8723-45cf-b025-c07fe64d1a05	ffa8c20f-3293-418e-a89f-200018197bab	jonas@stenberg.io
 2023-08-26 13:30:47.474433	a7f351df-a980-49b4-b5b5-38d6f191a3b6	fcbddad5-f66b-4142-949f-af475423a834	jonas@stenberg.io
-2023-08-26 15:39:16.047265	24194bad-e62c-49a3-8e4b-3b8a35e8c724	74b57792-fa68-4efb-be46-e8d194d86ed3	jonas@stenberg.io
+2023-08-28 06:00:48.048344	24194bad-e62c-49a3-8e4b-3b8a35e8c724	74b57792-fa68-4efb-be46-e8d194d86ed3	jonas@stenberg.io
+2023-08-28 19:55:49.153178	69ff89cd-3722-4d25-b9f4-c6818ee7b531	5a9ca809-e24a-40f0-bf36-dfb3c56e9e10	jonas@stenberg.io
+2023-08-28 19:55:49.153178	69ff89cd-3722-4d25-b9f4-c6818ee7b531	008625e8-ada4-4412-b20f-feb6f2f5c6ed	jonas@stenberg.io
 \.
 
 
@@ -1381,7 +1381,7 @@ jonas@stenberg.io	$2a$06$UFa2NQyoGEFrOuHzv6KVp.j8G.qnnujXLi5/9fTol98CsNRWCc2Nq	j
 \.
 
 
--- Completed on 2023-08-28 02:04:59 CEST
+-- Completed on 2023-08-29 02:04:53 CEST
 
 --
 -- PostgreSQL database dump complete
