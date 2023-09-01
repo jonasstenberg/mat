@@ -5,7 +5,7 @@
 -- Dumped from database version 14.8 (Debian 14.8-1.pgdg100+1)
 -- Dumped by pg_dump version 14.8 (Debian 14.8-1.pgdg100+1)
 
--- Started on 2023-08-31 02:03:57 CEST
+-- Started on 2023-09-01 02:01:37 CEST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -156,6 +156,7 @@ a644a7d4-a57f-45ae-97d4-1ae39a0638a5	2022-12-29 12:40:19.597625	2023-08-24 20:17
 a7f351df-a980-49b4-b5b5-38d6f191a3b6	2023-08-04 12:31:16.591547	2023-08-26 13:30:47.474433	Inlagda gurkor	Ingmarie Stenberg	2	mellanstora glasburkar	0	0	\N		a7f351df-a980-49b4-b5b5-38d6f191a3b6.webp	\N	jonas@stenberg.io	'1':3 '10':46 '2':18 '3':29 '4':60 'behöv':66 'bland':30 'bort':88 'burk':28,64 'ca':45 'cm':15 'cm-stor':14 'dag':91 'del':12 'dillkron':21 'gurk':2,5 'gurkan':84 'gurkskiv':20,69 'gärn':76 'häll':61 'ibland':49 'ihop':31 'inlag':1 'innan':53 'kub':17 'lag':32,62 'lit':50 'lägg':75 'längr':51 'löst':40,58 'minut':47 'ner':83 'nog':6 'pepparrot':10,22 'potatis':79 'press':82 'rengjord':27 'rör':34 'saft':72 'salt':38,54 'senapsfrön':24 'själv':74 'skal':9,78 'skiv':8 'sock':36,56 'stor':16 'tar':44 'tas':86 'tid':52 'tvätt':4 'täck':68 'varv':19 'väl':26,42 'överst':80
 44687753-8723-45cf-b025-c07fe64d1a05	2020-12-30 20:12:09.175593	2023-08-26 13:29:57.153231	Vit chokladmousse med lakrits	Jonas Stenberg	4	portioner	0	0	\N	Recept från boken ”Lakrits: godis, bakverk, desserter, mat & dryck” av Elisabeth Johansson. Fotograf: Helén Pe. Bonnier Fakta.	44687753-8723-45cf-b025-c07fe64d1a05.webp	\N	jonas@stenberg.io	'1':5 '100':102 '12':75 '15':168 '2':23 '20':169 '3':57 '4':77 '5':98 '6':121 '7':149 '8':190 'bakplåtspapp':162 'bakverk':11 'bok':8 'bonni':21 'brun':183 'bunk':33,56,65,80 'börj':181 'choklad':27,61 'chokladcookies':192 'chokladmouss':2 'citronsaft':107 'dessert':12 'dryck':14 'elisabeth':16 'elvisp':84,114 'engångsspritspås':152 'eventuellt':207 'fakt':22 'florsockret':136 'fotograf':18 'fram':79 'fyll':150 'färg':189 'fördel':93,195 'försvin':186 'garner':203 'godis':10 'grad':103 'grovt':193 'grädd':36,163 'gräddblandning':88 'hack':24 'hallon':205 'hallonpurén':148 'hast':112,127 'helén':19 'hälft':118 'häll':52 'håll':171 'in':141 'johansson':17 'kall':87 'kok':34 'koll':172 'kross':191 'kyl':72 'lakrit':4,9 'lakritsgranul':38,209 'lit':208 'luft':91 'lägg':29,199 'låt':46,69 'löst':44 'maräng':109,138,157,174,201 'mat':13 'minst':74 'minut':50,133,170 'mouss':92,94,198 'ner':54,117,135,147 'par':132 'pe':20 'plastfoli':67 'plåt':160 'portionsgl':97 'pulvret':42 'recept':6 'rest':123 'ros':188 'rör':58 'samt':206 'sikt':134 'skumm':110 'slickepot':145 'slutet':176 'smul':196 'smält':63 'små':96,156 'sockret':125 'sprits':154 'strösockret':120 'stå':70 'svaln':47 'sänk':111 'sätt':99 'ta':78 'till':41,60 'tillsät':122 'timm':76 'täck':64 'ugn':100,166 'visp':40,82,104,116,129 'vit':1,26 'vänd':140,146 'äggvit':105 'öka':126
 24194bad-e62c-49a3-8e4b-3b8a35e8c724	2023-08-05 10:08:37.352644	2023-08-28 06:00:48.048344	Mommakakor	Ingmarie Stenberg	4	längder	0	0	\N		24194bad-e62c-49a3-8e4b-3b8a35e8c724.webp	\N	jonas@stenberg.io	'15':34 '200':31 '4':17 'bakplåtspapp':22 'bland':11 'ca':33 'deg':14 'dom':20,26 'fingr':28 'grad':32 'grädd':29 'gyllenbrun':40 'ingrediens':9 'jämn':13 'kak':38 'lägg':19 'läng':18 'minut':35 'mommakak':1 'poröst':6 'rull':15 'rör':2 'skär':41 'smör':5 'sock':3 'storlek':45 'till':37 'tillsät':7 'tryck':24 'önsk':47 'övr':8
+4a3133ca-f9ca-46f6-aa88-071dafca2e0e	2023-08-31 10:52:17.641815	2023-08-31 10:52:17.641815	Ugnsbakade rotfrukter med ostcreme och stekt halloumi	Elin Pennegård	4	portioner	0	0	\N			\N	jonas@stenberg.io	\N
 \.
 
 
@@ -834,6 +835,21 @@ fe0b68d8-5f2f-4a54-b77f-77fe2a471048	2023-08-28 19:55:49.153178	2023-08-28 19:55
 15e256cb-ad6e-4940-b71f-ccd47a0c391f	2023-08-28 19:55:49.153178	2023-08-28 19:55:49.153178	69ff89cd-3722-4d25-b9f4-c6818ee7b531	hårdkokt ägg		1	jonas@stenberg.io
 10f542b4-3ce5-47f1-acc1-a9eebce38995	2023-08-28 19:55:49.153178	2023-08-28 19:55:49.153178	69ff89cd-3722-4d25-b9f4-c6818ee7b531	# Till garnering			jonas@stenberg.io
 bb269d1b-7b9f-4b07-a2c6-8848b33ffcd5	2023-08-28 19:55:49.153178	2023-08-28 19:55:49.153178	69ff89cd-3722-4d25-b9f4-c6818ee7b531	dillkvistar			jonas@stenberg.io
+a4ba7065-8748-4bfb-8bdc-2d0ce9ec3ab8	2023-08-31 10:52:17.641815	2023-08-31 10:52:17.641815	4a3133ca-f9ca-46f6-aa88-071dafca2e0e	# Ugnsbakade rotfrukter			jonas@stenberg.io
+bdae1c35-e2f6-4f5f-aacc-0bfc3ff988a6	2023-08-31 10:52:17.641815	2023-08-31 10:52:17.641815	4a3133ca-f9ca-46f6-aa88-071dafca2e0e	potatisar		8	jonas@stenberg.io
+9b03e4c2-d358-4fbf-ace5-3e7af9f1bd52	2023-08-31 10:52:17.641815	2023-08-31 10:52:17.641815	4a3133ca-f9ca-46f6-aa88-071dafca2e0e	morötter		4	jonas@stenberg.io
+f984dfaf-80d8-42a3-b757-530c7731fa06	2023-08-31 10:52:17.641815	2023-08-31 10:52:17.641815	4a3133ca-f9ca-46f6-aa88-071dafca2e0e	palsternackor		2	jonas@stenberg.io
+cf62f1bc-a587-4f8c-91aa-791123557829	2023-08-31 10:52:17.641815	2023-08-31 10:52:17.641815	4a3133ca-f9ca-46f6-aa88-071dafca2e0e	rödlökar		2	jonas@stenberg.io
+2496021d-a3a9-4509-b161-d7a4f251900f	2023-08-31 10:52:17.641815	2023-08-31 10:52:17.641815	4a3133ca-f9ca-46f6-aa88-071dafca2e0e	# Ostcreme			jonas@stenberg.io
+09474b85-37ff-4404-958a-ba226be80ff7	2023-08-31 10:52:17.641815	2023-08-31 10:52:17.641815	4a3133ca-f9ca-46f6-aa88-071dafca2e0e	Vitost	g	200	jonas@stenberg.io
+37425507-3dc1-420d-9980-dcafd3adde79	2023-08-31 10:52:17.641815	2023-08-31 10:52:17.641815	4a3133ca-f9ca-46f6-aa88-071dafca2e0e	creme fraiche	dl	3	jonas@stenberg.io
+6c3b48ca-0ea2-4d18-9652-60df1bffc304	2023-08-31 10:52:17.641815	2023-08-31 10:52:17.641815	4a3133ca-f9ca-46f6-aa88-071dafca2e0e	pressad citron		0.5	jonas@stenberg.io
+0bab5ee2-17fe-4ba6-9066-eb2f592d543d	2023-08-31 10:52:17.641815	2023-08-31 10:52:17.641815	4a3133ca-f9ca-46f6-aa88-071dafca2e0e	# Grönkålssallad			jonas@stenberg.io
+8c82c17a-6b2a-4614-8034-895f8e130e02	2023-08-31 10:52:17.641815	2023-08-31 10:52:17.641815	4a3133ca-f9ca-46f6-aa88-071dafca2e0e	Grönkål		100g	jonas@stenberg.io
+0b1b2374-d248-4181-b234-721cd994cd13	2023-08-31 10:52:17.641815	2023-08-31 10:52:17.641815	4a3133ca-f9ca-46f6-aa88-071dafca2e0e	Citron		0.5	jonas@stenberg.io
+a8ebd30d-c93a-4a49-98b1-dbb0d8bfdb1f	2023-08-31 10:52:17.641815	2023-08-31 10:52:17.641815	4a3133ca-f9ca-46f6-aa88-071dafca2e0e	Äpple		1	jonas@stenberg.io
+06c5393e-7115-4ff5-8bf2-8b69c63020f1	2023-08-31 10:52:17.641815	2023-08-31 10:52:17.641815	4a3133ca-f9ca-46f6-aa88-071dafca2e0e	# Tillbehör			jonas@stenberg.io
+6aed6517-fb0e-4e3f-b808-99bd78b7316b	2023-08-31 10:52:17.641815	2023-08-31 10:52:17.641815	4a3133ca-f9ca-46f6-aa88-071dafca2e0e	Halloumi			jonas@stenberg.io
 \.
 
 
@@ -1288,6 +1304,7 @@ d8ecc913-ecce-4ec8-af8a-d4a5faad9960	2023-08-26 13:30:47.474433	2023-08-26 13:30
 5d9d021d-8258-4c33-93d1-3968d1f9b55b	2023-08-28 06:00:48.048344	2023-08-28 06:00:48.048344	24194bad-e62c-49a3-8e4b-3b8a35e8c724	Skär dem i den storlek som önskas.	jonas@stenberg.io
 ca172935-500f-448d-93af-ce0a41fb6ef7	2023-08-28 19:55:49.153178	2023-08-28 19:55:49.153178	69ff89cd-3722-4d25-b9f4-c6818ee7b531	Dela sillen i bitar och blanda alla ingredienser.	jonas@stenberg.io
 82b2df45-18d1-4600-b68e-67ec09c79e77	2023-08-28 19:55:49.153178	2023-08-28 19:55:49.153178	69ff89cd-3722-4d25-b9f4-c6818ee7b531	Häll över i en glasburk och låt stå i kylen över natten.	jonas@stenberg.io
+3f464200-4d1b-4c36-8ffc-7849a592aaaa	2023-08-31 10:52:17.641815	2023-08-31 10:52:17.641815	4a3133ca-f9ca-46f6-aa88-071dafca2e0e	aa	jonas@stenberg.io
 \.
 
 
@@ -1367,6 +1384,7 @@ COPY public.recipe_categories (date_published, recipe, category, owner) FROM std
 2023-08-28 06:00:48.048344	24194bad-e62c-49a3-8e4b-3b8a35e8c724	74b57792-fa68-4efb-be46-e8d194d86ed3	jonas@stenberg.io
 2023-08-28 19:55:49.153178	69ff89cd-3722-4d25-b9f4-c6818ee7b531	5a9ca809-e24a-40f0-bf36-dfb3c56e9e10	jonas@stenberg.io
 2023-08-28 19:55:49.153178	69ff89cd-3722-4d25-b9f4-c6818ee7b531	008625e8-ada4-4412-b20f-feb6f2f5c6ed	jonas@stenberg.io
+2023-08-31 10:52:17.641815	4a3133ca-f9ca-46f6-aa88-071dafca2e0e	008625e8-ada4-4412-b20f-feb6f2f5c6ed	jonas@stenberg.io
 \.
 
 
@@ -1381,7 +1399,7 @@ jonas@stenberg.io	$2a$06$UFa2NQyoGEFrOuHzv6KVp.j8G.qnnujXLi5/9fTol98CsNRWCc2Nq	j
 \.
 
 
--- Completed on 2023-08-31 02:03:57 CEST
+-- Completed on 2023-09-01 02:01:37 CEST
 
 --
 -- PostgreSQL database dump complete
