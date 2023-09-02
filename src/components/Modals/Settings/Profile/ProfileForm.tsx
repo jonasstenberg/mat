@@ -9,16 +9,19 @@ import { signOut } from 'next-auth/react';
 import { Session } from 'next-auth';
 import { notifications } from '@mantine/notifications';
 import { useForm, zodResolver } from '@mantine/form';
-import { useAuthModal } from '@/hooks/useAuthModal';
 import { deleteUser, updateUser } from '@/actions/user';
 import { handleServerErrors } from '@/utils/handleServerErrors';
-import { UserNameSchema, userNameSchema } from '@/types/user';
+import { UserNameSchema, UserSchema, userNameSchema } from '@/types/user';
 
-export default function ProfileForm({ session }: { session: Session | null }) {
+type ProfileFormProps = {
+  session: Session | null;
+  user: UserSchema | null | undefined;
+};
+
+export default function ProfileForm({ session, user }: ProfileFormProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [confirmOpened, { open: confirmOpen, close: confirmClose }] = useDisclosure(false);
   const router = useRouter();
-  const { user, setUser } = useAuthModal();
 
   const form = useForm<UserNameSchema>({
     initialValues: user ?? {
@@ -50,12 +53,12 @@ export default function ProfileForm({ session }: { session: Session | null }) {
       const isSuccess = await handleServerErrors(response);
 
       if (isSuccess && response.success?.user) {
-        setUser(response.success?.user);
         notifications.show({
           title: 'Sparat!',
           message: 'Namnet uppdaterat 🙃',
         });
       }
+      router.refresh();
       setIsLoading(false);
     } catch (err: unknown) {
       setIsLoading(false);

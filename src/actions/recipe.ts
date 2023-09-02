@@ -64,15 +64,17 @@ const handleFetchError = async (response: globalThis.Response) => {
   return jsonData;
 };
 
+type GetRecipesProps = {
+  owner: string | null | undefined;
+  search: string;
+  filteredCategoryParam: string;
+};
+
 export async function getRecipes({
   owner,
   search,
   filteredCategoryParam,
-}: {
-  owner: string | null | undefined;
-  search: string;
-  filteredCategoryParam: string;
-}): Promise<RecipeSchema[]> {
+}: GetRecipesProps): Promise<RecipeSchema[]> {
   const baseUrl = `${config.apiEndpoint}/recipes_and_categories`;
   const baseQuery = '?order=name';
   const ownerQuery = owner ? `&owner=eq.${owner}` : '';

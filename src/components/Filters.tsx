@@ -5,13 +5,12 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useFilter } from '@/hooks/useFilter';
 
-export default function Filters({
-  categories,
-  filteredCategoryParam,
-}: {
+type FiltersProps = {
   categories: string[];
   filteredCategoryParam: string;
-}) {
+};
+
+export default function Filters({ categories, filteredCategoryParam }: FiltersProps) {
   const { filteredCategory, setFilteredCategory } = useFilter();
   const router = useRouter();
   const pathname = usePathname();

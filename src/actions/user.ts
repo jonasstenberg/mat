@@ -2,10 +2,12 @@
 
 import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
+import { getServerSession } from 'next-auth';
 import { SignUpSchema, PasswordChangeSchema, UserSchema, UserNameSchema } from '@/types/user';
 import { config } from '@/utils/config';
 import { handleServerErrors } from '@/utils/handleServerErrors';
 import { UNKNOWN_ERROR } from '@/utils/errors';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
 const isProduction = config.baseUrl.startsWith('https');
 
@@ -81,7 +83,15 @@ const getAuthorizedHeaders = () => {
   };
 };
 
-export const getUser = async (email: string): Promise<UserResponse> => {
+export const getUser = async (email: string | null | undefined): Promise<UserResponse> => {
+  const session = await getServerSession(authOptions);
+
+  if (!session?.user.email) {
+    return {
+      success: {},
+    };
+  }
+
   try {
     const res = await fetch(`${config.apiEndpoint}/users?email=eq.${email}`, {
       method: 'GET',

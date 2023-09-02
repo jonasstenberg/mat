@@ -12,6 +12,7 @@ import { signOut } from 'next-auth/react';
 import styles from '../app/header.module.css';
 import { useAuthModal } from '@/hooks/useAuthModal';
 import { useSettingsModal } from '@/hooks/useSettingsModal';
+import { UserSchema } from '@/types/user';
 
 const HeaderMenu = dynamic(() => import('@/components/HeaderMenu'), {
   loading: () => <p />,
@@ -20,9 +21,10 @@ const HeaderMenu = dynamic(() => import('@/components/HeaderMenu'), {
 
 type MenuProps = {
   session: Session | null;
+  user: UserSchema | null | undefined;
 };
 
-export default function Navbar({ session }: MenuProps) {
+export default function Navbar({ session, user }: MenuProps) {
   const pathname = usePathname();
   const router = useRouter();
   const [opened, { toggle, close }] = useDisclosure();
@@ -55,7 +57,7 @@ export default function Navbar({ session }: MenuProps) {
             )}
           </ul>
         </nav>
-        <HeaderMenu session={session} />
+        <HeaderMenu session={session} user={user} />
       </>
     );
   }

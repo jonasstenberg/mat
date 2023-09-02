@@ -9,7 +9,11 @@ export const yieldStepper = Array.from({ length: 24 }, (_, index) => index + 1).
   value,
 }));
 
-export default function RecipeYieldSlider({ recipeYield }: { recipeYield: number }) {
+type RecipeYieldSliderProps = {
+  recipeYield: number;
+};
+
+export default function RecipeYieldSlider({ recipeYield }: RecipeYieldSliderProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();

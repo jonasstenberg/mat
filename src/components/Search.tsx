@@ -8,7 +8,11 @@ import { usePathname, useRouter } from 'next/navigation';
 
 import styles from '../app/page.module.css';
 
-export default function Search({ searchQuery }: { searchQuery: string }) {
+type SearchProps = {
+  searchQuery: string;
+};
+
+export default function Search({ searchQuery }: SearchProps) {
   const [search, setSearch] = useState<string>(searchQuery || '');
   const router = useRouter();
   const pathname = usePathname();

@@ -15,6 +15,7 @@ import RecipeYieldSlider from '@/components/RecipeYieldSlider';
 import { config } from '@/utils/config';
 import { capitalizeFirstLetter } from '@/utils/strings';
 import { RecipeSchema } from '@/types/recipe';
+import Instructions from './Instructions';
 
 export const dynamic = 'force-dynamic';
 export const fetchCache = 'force-no-store';
@@ -179,17 +180,7 @@ export default async function Page({ params, searchParams }: Props) {
       <aside className={styles['recipe-ingredients']}>
         <Ingredients recipe={recipe} recipeYield={recipeYield} />
       </aside>
-      <section className={styles['recipe-instructions']}>
-        <h4>Instruktioner</h4>
-        <ul className={styles['recipe-steps']}>
-          {recipe.instructions?.map((instruction, index) => (
-            <li className={styles['recipe-step']} key={index}>
-              <div className={styles['recipe-step-number']}>Steg {index + 1}</div>
-              <p className={styles['recipe-step-instruction']}>{instruction.step}</p>
-            </li>
-          ))}
-        </ul>
-      </section>
+      <Instructions instructions={recipe.instructions} />
     </main>
   );
 }

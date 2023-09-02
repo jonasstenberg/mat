@@ -16,6 +16,7 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import Providers from '@/components/Providers';
 import { theme } from '@/theme';
 import Navbar from '@/components/Navbar';
+import { getUser } from '@/actions/user';
 
 const RecipeModal = dynamic(() => import('@/components/Modals/Recipe/RecipeModal'), {
   loading: () => <p />,
@@ -52,9 +53,14 @@ export const metadata = {
   viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
 };
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
+type RootLayoutProps = {
+  children: React.ReactNode;
+};
+
+export default async function RootLayout({ children }: RootLayoutProps) {
   const categories = await getCategories();
   const session = await getServerSession(authOptions);
+  const user = await getUser(session?.user.email);
 
   return (
     <html lang="sv" className={clsx(lora.variable)}>
@@ -64,13 +70,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <MantineProvider theme={theme} defaultColorScheme="light">
             <Notifications position="top-right" />
             <AuthModal />
-            {session?.user?.email && <SettingsModal session={session} />}
+            {session?.user?.email && <SettingsModal session={session} user={user.success?.user} />}
             {session?.user?.email && <RecipeModal categories={categories} />}
             <header className={styles.header}>
               <h1 className={styles['header-heading']}>
                 <Link href="/">stenberg&apos;s receptsida</Link>
               </h1>
-              <Navbar session={session} />
+              <Navbar session={session} user={user.success?.user} />
             </header>
             {children}
           </MantineProvider>

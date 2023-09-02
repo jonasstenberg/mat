@@ -27,7 +27,11 @@ const formatTime = (minutes: number): string => {
   return `Över ${hours} ${hours === 1 ? 'timme' : 'timmar'}`;
 };
 
-function Recipe({ recipe }: { recipe: RecipeSchema }) {
+type RecipeProps = {
+  recipe: RecipeSchema;
+};
+
+function Recipe({ recipe }: RecipeProps) {
   const { id, name, image } = recipe || {};
   return (
     <div className={styles.recipe} key={id}>
@@ -37,6 +41,7 @@ function Recipe({ recipe }: { recipe: RecipeSchema }) {
             className={styles.image}
             src={`/api/image?filename=${recipe.image}`}
             loading="lazy"
+            quality="70"
             alt={name}
             sizes="(max-width: 600px) 90vw, (max-width: 1200px) 300px"
             fill

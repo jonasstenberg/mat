@@ -6,15 +6,15 @@ import { useMediaQuery } from '@mantine/hooks';
 import { useSettingsModal } from '@/hooks/useSettingsModal';
 import PasswordForm from './Password/PasswordForm';
 import ProfileForm from './Profile/ProfileForm';
-import { useAuthModal } from '@/hooks/useAuthModal';
+import { UserSchema } from '@/types/user';
 
 type SettingsModalProps = {
   session: Session | null;
+  user: UserSchema | null | undefined;
 };
 
-export default function SettingsModal({ session }: SettingsModalProps) {
+export default function SettingsModal({ user, session }: SettingsModalProps) {
   const { opened, handlers } = useSettingsModal();
-  const { user } = useAuthModal();
   const isMobile = useMediaQuery('(max-width: 800px)');
 
   return (
@@ -26,7 +26,7 @@ export default function SettingsModal({ session }: SettingsModalProps) {
         </Tabs.List>
         <Stack gap="sm" mt="lg">
           <Tabs.Panel value="profile">
-            <ProfileForm session={session} />
+            <ProfileForm session={session} user={user} />
           </Tabs.Panel>
           {!user?.provider && (
             <Tabs.Panel value="password">

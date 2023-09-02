@@ -1,7 +1,13 @@
 import Search from '../components/Search';
 import styles from './page.module.css';
 
-function RecipeData({ recipe }: { recipe: { id: string } }) {
+type RecipeDataProps = {
+  recipe: {
+    id: string;
+  };
+};
+
+function RecipeData({ recipe }: RecipeDataProps) {
   const { id } = recipe || {};
   return (
     <div className={styles.restaurant} key={id}>

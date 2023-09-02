@@ -11,7 +11,11 @@ import { PasswordChangeSchema, passwordChangeSchema } from '@/types/user';
 import { resetPassword } from '@/actions/user';
 import { handleServerErrors } from '@/utils/handleServerErrors';
 
-export default function PasswordForm({ session }: { session: Session | null }) {
+type PasswordFormProps = {
+  session: Session | null;
+};
+
+export default function PasswordForm({ session }: PasswordFormProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
 

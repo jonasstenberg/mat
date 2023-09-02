@@ -1,15 +1,17 @@
 import { RecipeSchema } from '@/types/recipe';
 import { config } from '@/utils/config';
 
+type GetRecipesProps = {
+  owner: string | null | undefined;
+  search: string;
+  filteredCategoryParam: string;
+};
+
 export async function getRecipes({
   owner,
   search,
   filteredCategoryParam,
-}: {
-  owner: string | null | undefined;
-  search: string;
-  filteredCategoryParam: string;
-}): Promise<RecipeSchema[]> {
+}: GetRecipesProps): Promise<RecipeSchema[]> {
   const baseUrl = `${config.apiEndpoint}/recipes_and_categories`;
   const baseQuery = '?order=name';
   const ownerQuery = owner ? `&owner=eq.${owner}` : '';

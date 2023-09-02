@@ -92,6 +92,8 @@ export default function RecipeForm({ categories }: RecipeFormProps) {
   });
 
   const onSubmit = async (recipe: RecipeSchema) => {
+    setIsLoading(true);
+
     const formData = createFormData<RecipeSchema>(recipe);
 
     if (recipeToUpdate) {
@@ -243,7 +245,6 @@ export default function RecipeForm({ categories }: RecipeFormProps) {
         />
         <InstructionSection instructions={form.values.instructions} form={form} />
         <Button
-          onClick={() => setIsLoading(true)}
           disabled={isLoading}
           loading={isLoading}
           leftSection={<IconDeviceFloppy size={20} />}

@@ -5,42 +5,23 @@ import { IconChevronDown, IconLogin, IconLogout, IconSettings } from '@tabler/ic
 import { Session } from 'next-auth';
 import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-import { getUser } from '@/actions/user';
 import styles from '@/app/header.module.css';
 import { useAuthModal } from '@/hooks/useAuthModal';
 import { useSettingsModal } from '@/hooks/useSettingsModal';
 import { UserSchema } from '@/types/user';
-import { handleServerErrors } from '@/utils/handleServerErrors';
 
 type HeaderMenuProps = {
   session: Session | null;
+  user: UserSchema | null | undefined;
 };
 
-export default function HeaderMenu({ session }: HeaderMenuProps) {
+export default function HeaderMenu({ session, user }: HeaderMenuProps) {
   const [userMenuOpened, setUserMenuOpened] = useState<boolean>(false);
   const router = useRouter();
   const { handlers: loginHandlers } = useAuthModal();
   const { handlers: settingsHandlers } = useSettingsModal();
-  const { user, setUser } = useAuthModal();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      if (!session?.user.email) {
-        return;
-      }
-
-      const response = await getUser(session?.user.email);
-      const isSuccess = await handleServerErrors(response);
-
-      if (isSuccess) {
-        setUser(response.success?.user as UserSchema);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   return (
     <>
