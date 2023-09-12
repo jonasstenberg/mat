@@ -5,7 +5,7 @@
 -- Dumped from database version 14.8 (Debian 14.8-1.pgdg100+1)
 -- Dumped by pg_dump version 14.8 (Debian 14.8-1.pgdg100+1)
 
--- Started on 2023-09-11 02:08:20 CEST
+-- Started on 2023-09-12 02:09:02 CEST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -1399,7 +1399,7 @@ jonas@stenberg.io	$2a$06$UFa2NQyoGEFrOuHzv6KVp.j8G.qnnujXLi5/9fTol98CsNRWCc2Nq	j
 \.
 
 
--- Completed on 2023-09-11 02:08:20 CEST
+-- Completed on 2023-09-12 02:09:02 CEST
 
 --
 -- PostgreSQL database dump complete
