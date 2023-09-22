@@ -5,7 +5,7 @@
 -- Dumped from database version 14.8 (Debian 14.8-1.pgdg100+1)
 -- Dumped by pg_dump version 14.8 (Debian 14.8-1.pgdg100+1)
 
--- Started on 2023-09-21 02:01:39 CEST
+-- Started on 2023-09-22 02:07:32 CEST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -91,6 +91,7 @@ COPY public.users (id, name, email, provider, owner) FROM stdin;
 592fd113-c3e6-48c2-8c17-4a0c32323676	Svante Richter	svante.richter@gmail.com	google	svante.richter@gmail.com
 7c619dec-8b65-4197-a251-cd8558f08e18	Andreas Wilnerzon	awgobeat@gmail.com	google	awgobeat@gmail.com
 e708ff15-722c-4177-ac55-405fff35b30f	Jonas Stenberg	jonas@stenberg.io	\N	jonas@stenberg.io
+75dfbacc-9b8d-4b62-ae8f-45cd7f1622e6	Filip Stenberg	Filip.Stenberg.2011@gmail.com	\N	Filip.Stenberg.2011@gmail.com
 \.
 
 
@@ -1396,10 +1397,11 @@ COPY public.recipe_categories (date_published, recipe, category, owner) FROM std
 
 COPY public.user_passwords (email, password, owner) FROM stdin;
 jonas@stenberg.io	$2a$06$UFa2NQyoGEFrOuHzv6KVp.j8G.qnnujXLi5/9fTol98CsNRWCc2Nq	jonas@stenberg.io
+Filip.Stenberg.2011@gmail.com	$2a$06$j5APBpiaqrstn9PoFiLtduywc79Nb8lSZQCJOy3TBqm8ogd6VZTxe	\N
 \.
 
 
--- Completed on 2023-09-21 02:01:39 CEST
+-- Completed on 2023-09-22 02:07:33 CEST
 
 --
 -- PostgreSQL database dump complete
