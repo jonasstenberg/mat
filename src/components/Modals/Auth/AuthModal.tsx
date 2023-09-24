@@ -22,7 +22,7 @@ import { GoogleButton } from '@/components/SocialButtons';
 import { capitalizeFirstLetter } from '@/utils/strings';
 import { SignInSchema, SignUpSchema, signInSchema, signUpSchema } from '@/types/user';
 import { getUser, signUp } from '@/actions/user';
-import { handleServerErrors } from '@/utils/handleServerErrors';
+import { validateServerResponse } from '@/utils/handleServerErrors';
 
 export default function AuthModal() {
   const router = useRouter();
@@ -33,7 +33,7 @@ export default function AuthModal() {
   const [error, setError] = useState<string>('');
   const { setUser } = useAuthModal();
 
-  const isMobile = useMediaQuery('(max-width: 800px)');
+  const isMobile = useMediaQuery('(max-width: 832px)');
 
   const callbackUrl = searchParams.get('callbackUrl') || '/';
 
@@ -52,8 +52,14 @@ export default function AuthModal() {
       setLoading(true);
 
       if (type === 'register') {
-        const signUpResponse = await signUp(values as SignUpSchema);
-        const isSuccess = await handleServerErrors(signUpResponse, form);
+        const signUpValues = values as SignUpSchema;
+        const signUpResponse = await signUp(
+          signUpValues.name,
+          signUpValues.email,
+          null,
+          signUpValues.password
+        );
+        const isSuccess = validateServerResponse(signUpResponse, form);
 
         if (!isSuccess) {
           setLoading(false);
@@ -71,14 +77,15 @@ export default function AuthModal() {
 
       if (signInResponse?.error) {
         setError('Ogiltig e-post eller lösenord');
-      } else {
-        const user = await getUser(values.email);
-        if (user.success?.user) {
-          setUser(user.success?.user);
-          form.reset();
-          handlers.close();
-          router.refresh();
-        }
+        return;
+      }
+
+      const userResponse = await getUser(values.email);
+      if (userResponse.success) {
+        setUser(userResponse.value);
+        form.reset();
+        handlers.close();
+        router.refresh();
       }
     } catch (err: any) {
       setLoading(false);

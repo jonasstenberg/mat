@@ -10,10 +10,17 @@ export const validateSchema = <T>(schema: ZodSchema<T>, data: unknown): Validati
   const result = schema.safeParse(data);
 
   if (!result.success) {
-    let zodErrors: Record<string, string> = {};
+    const zodErrors: Record<string, string> = {};
+
     result.error.issues.forEach((issue) => {
-      zodErrors = { ...zodErrors, [issue.path[0]]: issue.message };
+      if (issue.path.length > 0) {
+        const pathString = issue.path.join('.');
+        zodErrors[pathString] = issue.message || 'Unknown error';
+      } else {
+        zodErrors._general = issue.message || 'General validation error';
+      }
     });
+
     return {
       success: false,
       errors: zodErrors,

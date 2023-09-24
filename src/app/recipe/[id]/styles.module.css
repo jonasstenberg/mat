@@ -49,6 +49,10 @@
   font-weight: 800;
 }
 
+.recipe-heading a:hover {
+  text-decoration: underline;
+}
+
 .recipe-image,
 .recipe-image-no-image {
   grid-area: image;
@@ -121,7 +125,7 @@
   padding-bottom: 1rem;
 }
 
-@media only screen and (width <= 800px) {
+@media only screen and (width <= 832px) {
   .recipe {
     display: flex;
     flex-direction: column;

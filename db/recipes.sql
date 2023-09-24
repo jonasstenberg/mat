@@ -6,6 +6,7 @@ CREATE TABLE recipes (
   date_modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
   name TEXT NOT NULL,
   author TEXT NOT NULL,
+  url TEXT,
   recipe_yield INTEGER DEFAULT 4,
   recipe_yield_name TEXT DEFAULT 'portioner' NOT NULL,
   prep_time INTEGER DEFAULT 0 NOT NULL,

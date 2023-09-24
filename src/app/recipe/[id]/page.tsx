@@ -6,7 +6,6 @@ import dyn from 'next/dynamic';
 import { getServerSession } from 'next-auth';
 import { serialize } from 'tinyduration';
 
-import Script from 'next/script';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { getRecipe } from '@/lib/recipes';
 import styles from './styles.module.css';
@@ -117,36 +116,56 @@ export default async function Page({ params, searchParams }: Props) {
   );
   const cookTime = recipe.prep_time || recipe.cook_time ? recipe.prep_time + recipe.cook_time : 0;
 
+  type RecipeImageProps = Pick<RecipeSchema, 'url' | 'image' | 'name'>;
+
+  const RecipeImage = ({ url, image, name }: RecipeImageProps) => {
+    const imageProps = {
+      priority: true,
+      src: `/api/image?filename=${image}`,
+      className: styles['recipe-image'],
+      height: 400,
+      width: 400,
+      quality: 100,
+      alt: name,
+    };
+
+    return url ? (
+      <a href={url}>
+        <Image {...imageProps} />
+      </a>
+    ) : (
+      <Image {...imageProps} />
+    );
+  };
+
   return (
     <main className={styles.recipe}>
-      <Script
-        id="schema.org"
+      <script
+        key="schema-jsonld"
         type="application/ld+json"
-        strategy="afterInteractive"
-        key={recipe.id}
-      >
-        {JSON.stringify(generateRecipeJSONLD(recipe))}
-      </Script>
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateRecipeJSONLD(recipe), null, '\t'),
+        }}
+      />
       <div className={styles['recipe-heading']}>
-        <h2>{recipe.name}</h2>
+        <h2>{recipe.url ? <a href={recipe.url}>{recipe.name}</a> : recipe.name}</h2>
         {recipe.author ? (
           <p>
-            Av: <span>{recipe.author}</span>
+            Av:{' '}
+            {recipe.url ? (
+              <a href={recipe.url}>
+                <span>{recipe.author}</span>
+              </a>
+            ) : (
+              <span>{recipe.author}</span>
+            )}
           </p>
         ) : (
           ''
         )}
       </div>
       {recipe.image ? (
-        <Image
-          priority
-          src={`/api/image?filename=${recipe.image}`}
-          className={styles['recipe-image']}
-          height={400}
-          width={400}
-          quality={100}
-          alt={recipe.name}
-        />
+        <RecipeImage url={recipe.url} image={recipe.image} name={recipe.name} />
       ) : (
         <div className={styles['recipe-image-no-image']} />
       )}

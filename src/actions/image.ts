@@ -76,3 +76,16 @@ export const uploadNewImage = async (image: Blob, oldImage?: string): Promise<st
 
   return filename;
 };
+
+export const uploadNewImageFromUrl = async (url: string): Promise<string> => {
+  try {
+    const response = await fetch(url);
+    const blob = await response.blob();
+
+    const filename = await uploadNewImage(blob);
+
+    return filename;
+  } catch (error) {
+    throw new Error("Couldn't fetch image");
+  }
+};

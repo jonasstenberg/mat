@@ -3,18 +3,14 @@
 import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 import { getServerSession } from 'next-auth';
-import { SignUpSchema, PasswordChangeSchema, UserSchema, UserNameSchema } from '@/types/user';
+import { PasswordChangeSchema, UserSchema, UserProfileSchema } from '@/types/user';
 import { config } from '@/utils/config';
-import { handleServerErrors } from '@/utils/handleServerErrors';
+import { validateServerResponse } from '@/utils/handleServerErrors';
 import { UNKNOWN_ERROR } from '@/utils/errors';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { Result, ResultVoid } from '@/utils/result';
 
 const isProduction = config.baseUrl.startsWith('https');
-
-export type UserResponse = {
-  success?: { user?: UserSchema };
-  errors?: { [key: string]: string };
-};
 
 const ERROR_DETAILS: Record<string, { path: string; message: string }> = {
   'already-exists': {
@@ -39,17 +35,13 @@ const handleErrorResponse = async (response: Response) => {
   } catch (error) {
     console.error('Error parsing JSON:', error);
     return {
-      errors: {
-        global: UNKNOWN_ERROR.message,
-      },
+      global: UNKNOWN_ERROR.message,
     };
   }
 
   if (typeof msg !== 'object' || msg === null) {
     return {
-      errors: {
-        global: UNKNOWN_ERROR.message,
-      },
+      global: UNKNOWN_ERROR.message,
     };
   }
 
@@ -58,16 +50,12 @@ const handleErrorResponse = async (response: Response) => {
   if (ERROR_DETAILS[errorCode]) {
     const { path, message } = ERROR_DETAILS[errorCode];
     return {
-      errors: {
-        [path]: message,
-      },
+      [path]: message,
     };
   }
 
   return {
-    errors: {
-      global: UNKNOWN_ERROR.message,
-    },
+    global: UNKNOWN_ERROR.message,
   };
 };
 
@@ -83,12 +71,15 @@ const getAuthorizedHeaders = () => {
   };
 };
 
-export const getUser = async (email: string | null | undefined): Promise<UserResponse> => {
+export const getUser = async (email: string | null | undefined): Promise<Result<UserSchema>> => {
   const session = await getServerSession(authOptions);
 
   if (!session?.user.email) {
     return {
-      success: {},
+      success: false,
+      errors: {
+        global: 'User not logged in',
+      },
     };
   }
 
@@ -104,21 +95,34 @@ export const getUser = async (email: string | null | undefined): Promise<UserRes
       throw new Error(user.message);
     }
 
-    return { success: { user: user[0] } };
+    return { success: true, value: user[0] };
   } catch (error) {
     console.error({
       message: 'Network error or unhandled case',
       error,
     });
-    return { errors: { global: UNKNOWN_ERROR.message } };
+    return { success: false, errors: { global: UNKNOWN_ERROR.message } };
   }
 };
 
-export const signUp = async (user: SignUpSchema): Promise<UserResponse> => {
+export const signUp = async (
+  name: string,
+  email: string,
+  provider: string | null,
+  password?: string
+): Promise<ResultVoid> => {
   try {
-    const endpoint =
-      !user.provider || user.provider === 'credentials' ? 'signup' : 'signup_provider';
-    const res = await fetch(`${config.apiEndpoint}/rpc/${endpoint}`, {
+    const isCredentialsProvider = !provider || provider === 'credentials';
+
+    const endpoint = isCredentialsProvider
+      ? `${config.apiEndpoint}/rpc/signup`
+      : `${config.apiEndpoint}/rpc/signup_provider`;
+
+    const user = isCredentialsProvider
+      ? { name, email, provider }
+      : { name, email, provider, password };
+
+    const res = await fetch(endpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -127,22 +131,22 @@ export const signUp = async (user: SignUpSchema): Promise<UserResponse> => {
     });
 
     if (!res.ok) {
-      return await handleErrorResponse(res);
+      return {
+        success: false,
+        errors: await handleErrorResponse(res),
+      };
     }
 
     revalidatePath('/');
 
-    return { success: {} };
+    return { success: true };
   } catch (error: unknown) {
-    console.error({
-      message: 'Network error or unhandled case',
-      error,
-    });
-    return { errors: { global: UNKNOWN_ERROR.message } };
+    console.error('Error signing up:', error);
+    return { success: false, errors: { global: UNKNOWN_ERROR.message } };
   }
 };
 
-export const resetPassword = async (user: PasswordChangeSchema): Promise<UserResponse> => {
+export const resetPassword = async (user: PasswordChangeSchema): Promise<ResultVoid> => {
   try {
     const res = await fetch(`${config.apiEndpoint}/rpc/reset_password`, {
       method: 'POST',
@@ -155,23 +159,26 @@ export const resetPassword = async (user: PasswordChangeSchema): Promise<UserRes
     });
 
     if (!res.ok) {
-      return await handleErrorResponse(res);
+      return {
+        success: false,
+        errors: await handleErrorResponse(res),
+      };
     }
 
-    return { success: {} };
+    return { success: true };
   } catch (error: unknown) {
     console.error({
       message: 'Network error or unhandled case',
       error,
     });
-    return { errors: { global: UNKNOWN_ERROR.message } };
+    return { success: false, errors: { global: UNKNOWN_ERROR.message } };
   }
 };
 
 export const updateUser = async (
   user: UserSchema,
-  userName: UserNameSchema
-): Promise<UserResponse> => {
+  userName: UserProfileSchema
+): Promise<Result<UserSchema>> => {
   try {
     const res = await fetch(`${config.apiEndpoint}/users?id=eq.${user.id}`, {
       method: 'PUT',
@@ -180,6 +187,7 @@ export const updateUser = async (
         id: user.id,
         email: userName.email,
         name: userName.name,
+        measures_system: userName.measures_system,
       }),
     });
 
@@ -189,23 +197,26 @@ export const updateUser = async (
     }
 
     const response = await getUser(user?.email);
-    const isSuccess = await handleServerErrors(response);
+    const isSuccess = validateServerResponse(response);
 
     if (!isSuccess) {
-      return await handleErrorResponse(res);
+      return {
+        success: false,
+        errors: await handleErrorResponse(res),
+      };
     }
 
-    return { success: { user: response.success?.user } };
+    return response;
   } catch (error) {
     console.error({
       message: 'Network error or unhandled case',
       error,
     });
-    return { errors: { global: UNKNOWN_ERROR.message } };
+    return { success: false, errors: { global: UNKNOWN_ERROR.message } };
   }
 };
 
-export const deleteUser = async (user: UserSchema): Promise<UserResponse> => {
+export const deleteUser = async (user: UserSchema): Promise<ResultVoid> => {
   try {
     const res = await fetch(`${config.apiEndpoint}/users?email=eq.${user.email}`, {
       method: 'DELETE',
@@ -214,15 +225,18 @@ export const deleteUser = async (user: UserSchema): Promise<UserResponse> => {
 
     const json = await res.json();
     if (!res.ok || !json.length || !json[0] || !json[0].id) {
-      return await handleErrorResponse(res);
+      return {
+        success: false,
+        errors: await handleErrorResponse(res),
+      };
     }
 
-    return { success: {} };
+    return { success: true };
   } catch (error) {
     console.error({
       message: 'Network error or unhandled case',
       error,
     });
-    return { errors: { global: UNKNOWN_ERROR.message } };
+    return { success: false, errors: { global: UNKNOWN_ERROR.message } };
   }
 };

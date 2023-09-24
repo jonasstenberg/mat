@@ -1,20 +1,16 @@
 import { notifications } from '@mantine/notifications';
 import { UNKNOWN_ERROR } from './errors';
+import { Result, ResultVoid } from './result';
 
-type Errors = {
-  [key: string]: string | Errors;
-};
-
-export const handleServerErrors = async <T extends Errors>(
-  response: { errors?: T },
+export const validateServerResponse = <T>(
+  response: Result<T> | ResultVoid,
   form?: { setFieldError: (key: string, message: string) => void }
-) => {
-  const { errors } = response;
+): boolean => {
+  if (!response.success && response.errors) {
+    const { errors } = response;
 
-  if (errors && Object.keys(errors).length) {
     Object.keys(errors).forEach((key) => {
       const error = errors[key];
-
       const errorMessage = typeof error === 'string' ? error : JSON.stringify(error);
 
       if (form) {

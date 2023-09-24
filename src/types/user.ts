@@ -8,9 +8,21 @@ export const signInSchema = z.object({
 
 export type SignInSchema = z.infer<typeof signInSchema>;
 
-export const signUpSchema = signInSchema.extend({
+export const signUpSchemaProvider = z.object({
+  email: z.string().email(),
   name: z.string().min(2, { message: 'Namnet måste vara minst 2 bokstäver långt' }),
-  provider: z.string().optional(),
+  provider: z.string(),
+});
+
+export type SignUpSchemaProvider = z.infer<typeof signUpSchemaProvider>;
+
+export const signUpSchema = z.object({
+  email: z.string().email(),
+  name: z.string().min(2, { message: 'Namnet måste vara minst 2 bokstäver långt' }),
+  password: z
+    .string()
+    .min(8, { message: 'Lösenordet måste vara minst 8 bokstäver långt ' })
+    .optional(),
 });
 
 export type SignUpSchema = z.infer<typeof signUpSchema>;
@@ -34,17 +46,16 @@ export const passwordChangeSchema = z
 
 export type PasswordChangeSchema = z.infer<typeof passwordChangeSchema>;
 
-export const userNameSchema = z.object({
+export const userProfileSchema = z.object({
   email: z.string().email(),
   name: z.string().min(2, { message: 'Namnet måste vara minst 2 bokstäver långt' }),
+  measures_system: z.enum(['metric', 'imperial']),
 });
 
-export type UserNameSchema = z.infer<typeof userNameSchema>;
+export type UserProfileSchema = z.infer<typeof userProfileSchema>;
 
-export const userSchema = z.object({
+export const userSchema = userProfileSchema.extend({
   id: z.string().uuid().optional(),
-  email: z.string().email(),
-  name: z.string().min(2, { message: 'Namnet måste vara minst 2 bokstäver långt' }),
   provider: z.string().optional(),
 });
 

@@ -5,6 +5,7 @@ import GoogleProvider from 'next-auth/providers/google';
 import jwt from 'jsonwebtoken';
 
 import { config } from '@/utils/config';
+import { signUp } from '@/actions/user';
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -87,17 +88,11 @@ export const authOptions: NextAuthOptions = {
         return;
       }
 
-      await fetch(`${config.baseUrl}/api/user`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: profile?.name,
-          email: profile?.email,
-          provider: account?.provider,
-        }),
-      });
+      if (!profile?.name || !profile.email || !account?.provider) {
+        return;
+      }
+
+      await signUp(profile.name, profile.email, account.provider);
     },
   },
 };

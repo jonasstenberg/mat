@@ -9,7 +9,7 @@
   height: 4rem;
 }
 
-@media only screen and (width <= 768px) {
+@media only screen and (width <= 832px) {
   .header {
     grid-template-columns: minmax(16rem, 1fr) 1fr;
     justify-content: space-between;

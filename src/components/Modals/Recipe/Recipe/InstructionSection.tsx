@@ -31,14 +31,15 @@ export const InstructionSection: React.FC<InstructionSectionProps> = ({ instruct
         <IconGripVertical size={18} />
       </Center>
       <Textarea
+        label={`Steg ${index + 1}`}
         placeholder={`Steg ${index + 1}`}
         w="85%"
         styles={{
           input: {
             resize: 'vertical',
-            height: '6rem',
           },
         }}
+        rows={4}
         withAsterisk
         {...form.getInputProps(`instructions.${index}.step`)}
       />

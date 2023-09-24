@@ -13,6 +13,7 @@ import styles from '../app/header.module.css';
 import { useAuthModal } from '@/hooks/useAuthModal';
 import { useSettingsModal } from '@/hooks/useSettingsModal';
 import { UserSchema } from '@/types/user';
+import { Result } from '@/utils/result';
 
 const HeaderMenu = dynamic(() => import('@/components/HeaderMenu'), {
   loading: () => <p />,
@@ -21,7 +22,7 @@ const HeaderMenu = dynamic(() => import('@/components/HeaderMenu'), {
 
 type MenuProps = {
   session: Session | null;
-  user: UserSchema | null | undefined;
+  user: Result<UserSchema>;
 };
 
 export default function Navbar({ session, user }: MenuProps) {
@@ -31,7 +32,7 @@ export default function Navbar({ session, user }: MenuProps) {
   const { handlers: loginHandlers } = useAuthModal();
   const { handlers: settingsHandlers } = useSettingsModal();
 
-  const small = useMediaQuery('(min-width: 768px)');
+  const small = useMediaQuery('(min-width: 832px)');
 
   if (small) {
     return (

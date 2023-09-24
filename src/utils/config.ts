@@ -11,8 +11,10 @@ const Config = z
     baseUrl: z.string().url(),
     apiEndpoint: z.string().url(),
     defaultRecipeYield: z.number(),
+    defaultRecipeYieldName: z.string(),
     googleClientId: z.string().min(10),
     googleSecret: z.string().min(10),
+    categoryIfNonExist: z.string(),
   })
   .strict();
 
@@ -25,8 +27,10 @@ export const config = Config.parse({
   baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
   apiEndpoint: process.env.NEXT_PUBLIC_API_ENDPOINT,
   defaultRecipeYield: parseInt(process.env.NEXT_PUBLIC_DEFAULT_RECIPE_YIELD || '', 10),
+  defaultRecipeYieldName: process.env.NEXT_PUBLIC_DEFAULT_RECIPE_YIELD_NAME || '',
   googleClientId: process.env.GOOGLE_CLIENT_ID,
   googleSecret: process.env.GOOGLE_SECRET,
+  categoryIfNonExist: process.env.CATEGORY_IF_NON_EXIST,
 });
 
 export const nextPublicEnvironments = {

@@ -1,8 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { IngredientSchema } from '@/types/recipe';
 
-export function useCheckedItems<T extends { id: string | number }>(initialItems: T[]) {
+export function useCheckedItems<T extends { id?: IngredientSchema['id'] }>(initialItems: T[]) {
   const [checkedItems, setCheckedItems] = useState(
     initialItems.map((item) => ({ ...item, isChecked: false }))
   );

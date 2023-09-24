@@ -25,7 +25,7 @@ import { IngredientSchema, RecipeSchema, recipeSchema } from '@/types/recipe';
 import { createFormData } from '@/utils/createFormData';
 import { InstructionSection } from './InstructionSection';
 import { IngredientSection } from './IngredientSection';
-import { handleServerErrors } from '@/utils/handleServerErrors';
+import { validateServerResponse } from '@/utils/handleServerErrors';
 import { UNKNOWN_ERROR } from '@/utils/errors';
 import { useAuthModal } from '@/hooks/useAuthModal';
 import { yieldStepper } from '@/components/RecipeYieldSlider';
@@ -51,7 +51,7 @@ const initialInstruction = {
 
 export default function RecipeForm({ categories }: RecipeFormProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { handlers, recipeToUpdate, setRecipeToUpdate } = useRecipeModal();
+  const { handlers, formRecipe, setFormRecipe } = useRecipeModal();
   const [objectURL, setObjectURL] = useState<string | null>(null);
   const router = useRouter();
   const { user } = useAuthModal();
@@ -63,16 +63,16 @@ export default function RecipeForm({ categories }: RecipeFormProps) {
     } catch (error) {
       notifications.show(UNKNOWN_ERROR);
       console.error('Validation failed', error);
-      setRecipeToUpdate(null);
+      setFormRecipe(null);
       return null;
     }
   };
 
   const form = useForm<RecipeSchema>({
     validate: zodResolver(recipeSchema),
-    initialValues: (recipeToUpdate && validateRecipeSchema(recipeToUpdate)) ?? {
+    initialValues: (formRecipe && validateRecipeSchema(formRecipe)) ?? {
       name: '',
-      author: user?.name,
+      author: user?.name ?? '',
       categories: [],
       recipe_yield: Number(defaultRecipeYield),
       recipe_yield_name: defaultRecipeYieldName,
@@ -96,9 +96,9 @@ export default function RecipeForm({ categories }: RecipeFormProps) {
 
     const formData = createFormData<RecipeSchema>(recipe);
 
-    if (recipeToUpdate) {
-      const response = await updateRecipe(recipeToUpdate.id as string, formData);
-      const isSuccess = await handleServerErrors(response, form);
+    if (formRecipe?.id) {
+      const response = await updateRecipe(formRecipe.id as string, formData);
+      const isSuccess = validateServerResponse(response, form);
 
       if (isSuccess) {
         handlers.close();
@@ -110,11 +110,11 @@ export default function RecipeForm({ categories }: RecipeFormProps) {
       }
     } else {
       const response = await saveRecipe(formData);
-      const isSuccess = await handleServerErrors(response, form);
+      const isSuccess = validateServerResponse(response, form);
 
-      if (isSuccess) {
+      if (isSuccess && response.success) {
         handlers.close();
-        router.push(`/recipe/${response.success?.id}`);
+        router.push(`/recipe/${response.value}`);
         notifications.show({
           title: 'Sparat!',
           message: 'Nytt recept! 😇',
@@ -130,7 +130,9 @@ export default function RecipeForm({ categories }: RecipeFormProps) {
       const newObjectURL = URL.createObjectURL(form.values.image);
       setObjectURL(newObjectURL);
     } else if (typeof form.values.image === 'string' && form.values.image.length) {
-      const imageURL = `/api/image?filename=${form.values.image}`;
+      const imageURL = /^https?:\/\//.test(form.values.image)
+        ? form.values.image
+        : `/api/image?filename=${form.values.image}`;
       setObjectURL(imageURL);
     } else {
       setObjectURL(null);
@@ -227,20 +229,20 @@ export default function RecipeForm({ categories }: RecipeFormProps) {
               </Button>
             </Group>
             {objectURL && (
-              <Image h={200} w="auto" fit="contain" src={objectURL} alt="Förhandsgranskning" />
+              <Image h={400} w="auto" fit="contain" src={objectURL} alt="Förhandsgranskning" />
             )}
           </Stack>
         </Fieldset>
         <IngredientSection ingredients={form.values.ingredients} form={form} />
         <Textarea
+          label="Beskrivning"
           placeholder="Beskrivning"
           styles={{
             input: {
               resize: 'vertical',
-              height: '15rem',
             },
           }}
-          withAsterisk
+          rows={6}
           {...form.getInputProps('description')}
         />
         <InstructionSection instructions={form.values.instructions} form={form} />

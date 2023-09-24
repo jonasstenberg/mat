@@ -27,3 +27,4 @@ Follow the instructions in [CONTRIBUTING](./CONTRIBUTING.md) and code away.
 - [ ] Shopping list
 - [x] Fix global error
 - [ ] Implement Mantine Modal Manager https://v7.mantine.dev/others/modals
+- [ ] Move fraction to decimal to server which would allow users to write 1/3 cup soy instead of 0.33 cup soy

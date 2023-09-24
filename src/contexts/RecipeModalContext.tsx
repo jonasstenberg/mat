@@ -11,8 +11,8 @@ type RecipeModalContextType = {
     close: () => void;
     toggle: () => void;
   };
-  recipeToUpdate: RecipeSchema | undefined | null;
-  setRecipeToUpdate: React.Dispatch<React.SetStateAction<RecipeSchema | undefined | null>>;
+  formRecipe: RecipeSchema | undefined | null;
+  setFormRecipe: React.Dispatch<React.SetStateAction<RecipeSchema | undefined | null>>;
 };
 
 export const RecipeModalContext = React.createContext<RecipeModalContextType | undefined>(
@@ -24,10 +24,10 @@ type RecipeModalProviderProps = {
 };
 
 export const RecipeModalProvider = ({ children }: RecipeModalProviderProps) => {
-  const [recipeToUpdate, setRecipeToUpdate] = useState<RecipeSchema | undefined | null>(null);
+  const [formRecipe, setFormRecipe] = useState<RecipeSchema | undefined | null>(null);
   const [opened, handlers] = useDisclosure(false, {
     onClose: () => {
-      setRecipeToUpdate(null);
+      setFormRecipe(null);
     },
   });
 
@@ -36,8 +36,8 @@ export const RecipeModalProvider = ({ children }: RecipeModalProviderProps) => {
       value={{
         opened,
         handlers,
-        recipeToUpdate,
-        setRecipeToUpdate,
+        formRecipe,
+        setFormRecipe,
       }}
     >
       {children}

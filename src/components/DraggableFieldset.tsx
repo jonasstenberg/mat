@@ -7,7 +7,7 @@ import type { DraggableProvided, DropResult, DroppableProvided } from '@hello-pa
 import { useDraggableInPortal } from '@/hooks/useDraggableInPortal';
 
 type DraggableItem = {
-  id: number | string;
+  id?: number | string;
 };
 
 type DraggableFieldsetProps<T extends DraggableItem> = {

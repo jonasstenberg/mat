@@ -70,13 +70,13 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           <MantineProvider theme={theme} defaultColorScheme="light">
             <Notifications position="top-right" />
             <AuthModal />
-            {session?.user?.email && <SettingsModal session={session} user={user.success?.user} />}
+            {session?.user?.email && <SettingsModal session={session} user={user} />}
             {session?.user?.email && <RecipeModal categories={categories} />}
             <header className={styles.header}>
               <h1 className={styles['header-heading']}>
                 <Link href="/">stenberg&apos;s receptsida</Link>
               </h1>
-              <Navbar session={session} user={user.success?.user} />
+              <Navbar session={session} user={user} />
             </header>
             {children}
           </MantineProvider>

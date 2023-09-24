@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE users (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   name TEXT NOT NULL,
+  measures_system TEXT DEFAULT 'metric',
   email TEXT UNIQUE NOT NULL,
   provider TEXT,
   owner TEXT DEFAULT current_setting('request.jwt.claims', true)::json->>'email'

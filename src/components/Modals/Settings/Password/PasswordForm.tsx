@@ -9,7 +9,7 @@ import { Session } from 'next-auth';
 import { notifications } from '@mantine/notifications';
 import { PasswordChangeSchema, passwordChangeSchema } from '@/types/user';
 import { resetPassword } from '@/actions/user';
-import { handleServerErrors } from '@/utils/handleServerErrors';
+import { validateServerResponse } from '@/utils/handleServerErrors';
 
 type PasswordFormProps = {
   session: Session | null;
@@ -35,7 +35,7 @@ export default function PasswordForm({ session }: PasswordFormProps) {
       setIsLoading(true);
 
       const response = await resetPassword(form.values);
-      const isSuccess = await handleServerErrors(response, form);
+      const isSuccess = validateServerResponse(response, form);
 
       if (isSuccess) {
         notifications.show({

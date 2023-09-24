@@ -15,7 +15,7 @@ type RecipeActionsProps = {
 };
 
 export default function RecipeActions({ recipe }: RecipeActionsProps) {
-  const { setRecipeToUpdate, handlers } = useRecipeModal();
+  const { setFormRecipe, handlers } = useRecipeModal();
   const [confirmOpened, { open: confirmOpen, close: confirmClose }] = useDisclosure(false);
   const router = useRouter();
 
@@ -42,7 +42,7 @@ export default function RecipeActions({ recipe }: RecipeActionsProps) {
       <div className={styles['recipe-actions']}>
         <Button
           onClick={() => {
-            setRecipeToUpdate(recipe);
+            setFormRecipe(recipe);
             handlers.open();
           }}
         >

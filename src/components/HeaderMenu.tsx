@@ -11,10 +11,11 @@ import styles from '@/app/header.module.css';
 import { useAuthModal } from '@/hooks/useAuthModal';
 import { useSettingsModal } from '@/hooks/useSettingsModal';
 import { UserSchema } from '@/types/user';
+import { Result } from '@/utils/result';
 
 type HeaderMenuProps = {
   session: Session | null;
-  user: UserSchema | null | undefined;
+  user: Result<UserSchema>;
 };
 
 export default function HeaderMenu({ session, user }: HeaderMenuProps) {
@@ -22,6 +23,8 @@ export default function HeaderMenu({ session, user }: HeaderMenuProps) {
   const router = useRouter();
   const { handlers: loginHandlers } = useAuthModal();
   const { handlers: settingsHandlers } = useSettingsModal();
+
+  const userName = user.success ? user?.value?.name?.split(' ')[0] || '' : '';
 
   return (
     <>
@@ -40,9 +43,9 @@ export default function HeaderMenu({ session, user }: HeaderMenuProps) {
               data-active={userMenuOpened}
             >
               <Group gap={7}>
-                <Avatar src={session?.user.image} alt={user?.name || ''} radius="xl" size={20} />
+                <Avatar src={session?.user.image} alt={userName} radius="xl" size={20} />
                 <Text fw={500} size="lg" style={{ lineHeight: 1 }} mr={3}>
-                  {user?.name?.split(' ')[0] || ''}
+                  {userName}
                 </Text>
                 <IconChevronDown style={{ width: '0.75rem', height: '0.75rem' }} stroke={1.5} />
               </Group>

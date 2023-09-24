@@ -26,7 +26,8 @@ export default function Ingredients({ recipeYield, recipe }: IngredientsProps) {
         const normalizedIngredient = normalizeIngredient(
           ingredient,
           recipe.recipe_yield,
-          recipeYield
+          recipeYield,
+          ['metric', 'common_volume']
         );
         return (
           <CheckableItem
