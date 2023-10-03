@@ -82,6 +82,7 @@ export default function ProfileForm({ session, user }: ProfileFormProps) {
       </Modal>
       <form onSubmit={form.onSubmit(() => onSubmit())}>
         <Stack gap="sm">
+          <TextInput label="E-post" disabled value={session?.user.email ?? ''} />
           {user ? (
             <TextInput label="Namn" withAsterisk {...form.getInputProps('name')} />
           ) : (

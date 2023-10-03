@@ -52,27 +52,29 @@ export default function HeaderMenu({ session, user }: HeaderMenuProps) {
             </UnstyledButton>
           </Menu.Target>
           {session?.user.email ? (
-            <Menu.Dropdown key="loggedin">
-              <Menu.Item
-                leftSection={<IconSettings style={{ width: rem(14), height: rem(14) }} />}
-                style={{ fontSize: '1rem' }}
-                onClick={() => {
-                  settingsHandlers.open();
-                }}
-              >
-                Konto
-              </Menu.Item>
-              <Menu.Item
-                leftSection={<IconLogout style={{ width: rem(14), height: rem(14) }} />}
-                style={{ fontSize: '1rem' }}
-                onClick={() => {
-                  signOut();
-                  router.push('/');
-                }}
-              >
-                Logga ut
-              </Menu.Item>
-            </Menu.Dropdown>
+            <>
+              <Menu.Dropdown key="loggedin">
+                <Menu.Item
+                  leftSection={<IconSettings style={{ width: rem(14), height: rem(14) }} />}
+                  style={{ fontSize: '1rem' }}
+                  onClick={() => {
+                    settingsHandlers.open();
+                  }}
+                >
+                  Konto
+                </Menu.Item>
+                <Menu.Item
+                  leftSection={<IconLogout style={{ width: rem(14), height: rem(14) }} />}
+                  style={{ fontSize: '1rem' }}
+                  onClick={async () => {
+                    await signOut();
+                    router.push('/');
+                  }}
+                >
+                  Logga ut
+                </Menu.Item>
+              </Menu.Dropdown>
+            </>
           ) : (
             <Menu.Dropdown key="login">
               <Menu.Item

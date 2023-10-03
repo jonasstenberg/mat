@@ -276,6 +276,10 @@ export const normalizeIngredient = (
   newYield: number,
   preferredSystems: UnitSystem[]
 ) => {
+  if (!ingredient.quantity) {
+    return ingredient;
+  }
+
   const isRange = ingredient.quantity.includes('-');
   let normalizedQuantity: number | number[] = 0;
   let newUnit = ingredient.measurement;
@@ -290,7 +294,7 @@ export const normalizeIngredient = (
     normalizedQuantity = (fractionToDecimal(ingredient.quantity) / recipeYield) * newYield;
   }
 
-  // Then proceed to convert to preferred unit if it's a known unit
+  // Convert to preferred unit if it's a known unit
   if (knownUnits.includes(ingredient.measurement)) {
     const converted = convertToPreferredUnit(
       normalizedQuantity as number,
@@ -301,6 +305,7 @@ export const normalizeIngredient = (
     newUnit = converted.unit;
   }
 
+  // No decimals on grams
   if (newUnit === 'g') {
     if (isRange) {
       normalizedQuantity = (normalizedQuantity as number[]).map(Math.round);
