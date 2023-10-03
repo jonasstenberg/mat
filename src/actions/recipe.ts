@@ -13,15 +13,17 @@ import { Result, ResultVoid } from '@/utils/result';
 
 const isProduction = config.baseUrl.startsWith('https');
 
-const getAuthToken = cookies().get(
-  isProduction ? '__Secure-next-auth.session-token' : 'next-auth.session-token'
-)?.value;
+const getAuthorizedHeaders = () => {
+  const getAuthToken = cookies().get(
+    isProduction ? '__Secure-next-auth.session-token' : 'next-auth.session-token'
+  )?.value;
 
-const getAuthorizedHeaders = () => ({
-  Authorization: `Bearer ${getAuthToken}`,
-  'Content-Type': 'application/json',
-  Prefer: 'return=representation',
-});
+  return {
+    Authorization: `Bearer ${getAuthToken}`,
+    'Content-Type': 'application/json',
+    Prefer: 'return=representation',
+  };
+};
 
 const parseRecipeFormData = (formData: FormData): RecipeSchema => {
   const categories = JSON.parse(formData.get('categories') as string) as string[];
