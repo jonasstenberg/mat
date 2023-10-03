@@ -56,7 +56,7 @@ describe('normalizeIngredient', () => {
       measurement: 'g',
       name: 'sugar',
     };
-    expect(normalizeIngredient(ingredient, 2, 4, ['metric', 'common_volume'])).toEqual({
+    expect(normalizeIngredient(ingredient, 2, 4)).toEqual({
       quantity: '2',
       measurement: 'g',
       name: 'sugar',
@@ -68,7 +68,7 @@ describe('normalizeIngredient', () => {
       measurement: 'cup',
       name: 'sugar',
     };
-    expect(normalizeIngredient(ingredient, 1, 2, ['common_volume'])).toEqual({
+    expect(normalizeIngredient(ingredient, 1, 2)).toEqual({
       quantity: '1',
       measurement: 'cup',
       name: 'sugar',
@@ -80,23 +80,10 @@ describe('normalizeIngredient', () => {
       measurement: 'unknown',
       name: 'ingredient',
     };
-    expect(normalizeIngredient(ingredient, 1, 2, ['common_volume'])).toEqual({
+    expect(normalizeIngredient(ingredient, 1, 2)).toEqual({
       quantity: '2',
       measurement: 'unknown',
       name: 'ingredient',
-    });
-  });
-
-  it('should normalize and convert units to preferred system units', () => {
-    const ingredient = {
-      quantity: '1000',
-      measurement: 'g',
-      name: 'sugar',
-    };
-    expect(normalizeIngredient(ingredient, 1, 1, ['imperial'])).toEqual({
-      quantity: '35 1/4',
-      measurement: 'oz',
-      name: 'sugar',
     });
   });
 });
