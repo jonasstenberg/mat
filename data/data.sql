@@ -5,7 +5,7 @@
 -- Dumped from database version 14.9 (Debian 14.9-1.pgdg100+1)
 -- Dumped by pg_dump version 14.9 (Debian 14.9-1.pgdg100+1)
 
--- Started on 2023-10-03 02:02:45 CEST
+-- Started on 2023-10-04 02:03:59 CEST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -78,6 +78,10 @@ ffa8c20f-3293-418e-a89f-200018197bab	2020-11-24 20:37:34.635708	2020-11-24 20:37
 fcbddad5-f66b-4142-949f-af475423a834	2023-08-04 12:31:16.591547	2023-08-04 12:31:16.591547	Tillbehör	jonas@stenberg.io
 73f14622-6755-4c5a-a610-ad8bf0f28071	2023-08-04 16:56:05.373362	2023-08-04 16:56:05.373362	Matbröd	jonas@stenberg.io
 03b77801-d827-4499-bb9e-3397a6553967	2023-09-27 16:34:38.924704	2023-09-27 16:34:38.924704	Huvudrätt	jonas.stenberg@devoteam.com
+54eb7f59-f00c-455e-a991-e10c805bf77f	2023-10-03 18:50:32.527817	2023-10-03 18:50:32.527817	Vickning	jonas.stenberg@devoteam.com
+160300e4-cc17-4d78-8d37-55b3a8953443	2023-10-03 19:04:04.749276	2023-10-03 19:04:04.749276	Förrätt	jonas.stenberg@devoteam.com
+81e48927-9a0b-4b26-b90b-294020818579	2023-10-03 19:04:04.749276	2023-10-03 19:04:04.749276	Brunch	jonas.stenberg@devoteam.com
+5a55a5eb-cb89-4ce3-9535-9fc433aaef08	2023-10-03 19:04:04.749276	2023-10-03 19:04:04.749276	Plockmat	jonas.stenberg@devoteam.com
 \.
 
 
@@ -87,14 +91,14 @@ fcbddad5-f66b-4142-949f-af475423a834	2023-08-04 12:31:16.591547	2023-08-04 12:31
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.users (id, name, email, provider, owner) FROM stdin;
-93eb6174-e2e2-478c-9433-072b0befbbea	Jonas Stenberg	jonas.d.stenberg@gmail.com	google	jonas.d.stenberg@gmail.com
-592fd113-c3e6-48c2-8c17-4a0c32323676	Svante Richter	svante.richter@gmail.com	google	svante.richter@gmail.com
-7c619dec-8b65-4197-a251-cd8558f08e18	Andreas Wilnerzon	awgobeat@gmail.com	google	awgobeat@gmail.com
-e708ff15-722c-4177-ac55-405fff35b30f	Jonas Stenberg	jonas@stenberg.io	\N	jonas@stenberg.io
-75dfbacc-9b8d-4b62-ae8f-45cd7f1622e6	Filip Stenberg	Filip.Stenberg.2011@gmail.com	\N	Filip.Stenberg.2011@gmail.com
-74e5ddee-7779-49da-8a0a-da24ab3598fe	Jonas STENBERG	jonas.stenberg@devoteam.com	google	jonas.stenberg@devoteam.com
-923c4538-8f99-41c8-964d-92cdc95f8516	Filip Stenberg	filip.stenberg.2011@gmail.com	google	filip.stenberg.2011@gmail.com
+COPY public.users (id, name, email, provider, owner, measures_system) FROM stdin;
+93eb6174-e2e2-478c-9433-072b0befbbea	Jonas Stenberg	jonas.d.stenberg@gmail.com	google	jonas.d.stenberg@gmail.com	metric
+592fd113-c3e6-48c2-8c17-4a0c32323676	Svante Richter	svante.richter@gmail.com	google	svante.richter@gmail.com	metric
+7c619dec-8b65-4197-a251-cd8558f08e18	Andreas Wilnerzon	awgobeat@gmail.com	google	awgobeat@gmail.com	metric
+75dfbacc-9b8d-4b62-ae8f-45cd7f1622e6	Filip Stenberg	Filip.Stenberg.2011@gmail.com	\N	Filip.Stenberg.2011@gmail.com	metric
+74e5ddee-7779-49da-8a0a-da24ab3598fe	Jonas STENBERG	jonas.stenberg@devoteam.com	google	jonas.stenberg@devoteam.com	metric
+923c4538-8f99-41c8-964d-92cdc95f8516	Filip Stenberg	filip.stenberg.2011@gmail.com	google	filip.stenberg.2011@gmail.com	metric
+e708ff15-722c-4177-ac55-405fff35b30f	Jonas Stenberg	jonas@stenberg.io	\N	jonas@stenberg.io	metric
 \.
 
 
@@ -161,7 +165,6 @@ a7f351df-a980-49b4-b5b5-38d6f191a3b6	2023-08-04 12:31:16.591547	2023-08-26 13:30
 44687753-8723-45cf-b025-c07fe64d1a05	2020-12-30 20:12:09.175593	2023-08-26 13:29:57.153231	Vit chokladmousse med lakrits	Jonas Stenberg	4	portioner	0	0	\N	Recept från boken ”Lakrits: godis, bakverk, desserter, mat & dryck” av Elisabeth Johansson. Fotograf: Helén Pe. Bonnier Fakta.	44687753-8723-45cf-b025-c07fe64d1a05.webp	\N	jonas@stenberg.io	'1':5 '100':102 '12':75 '15':168 '2':23 '20':169 '3':57 '4':77 '5':98 '6':121 '7':149 '8':190 'bakplåtspapp':162 'bakverk':11 'bok':8 'bonni':21 'brun':183 'bunk':33,56,65,80 'börj':181 'choklad':27,61 'chokladcookies':192 'chokladmouss':2 'citronsaft':107 'dessert':12 'dryck':14 'elisabeth':16 'elvisp':84,114 'engångsspritspås':152 'eventuellt':207 'fakt':22 'florsockret':136 'fotograf':18 'fram':79 'fyll':150 'färg':189 'fördel':93,195 'försvin':186 'garner':203 'godis':10 'grad':103 'grovt':193 'grädd':36,163 'gräddblandning':88 'hack':24 'hallon':205 'hallonpurén':148 'hast':112,127 'helén':19 'hälft':118 'häll':52 'håll':171 'in':141 'johansson':17 'kall':87 'kok':34 'koll':172 'kross':191 'kyl':72 'lakrit':4,9 'lakritsgranul':38,209 'lit':208 'luft':91 'lägg':29,199 'låt':46,69 'löst':44 'maräng':109,138,157,174,201 'mat':13 'minst':74 'minut':50,133,170 'mouss':92,94,198 'ner':54,117,135,147 'par':132 'pe':20 'plastfoli':67 'plåt':160 'portionsgl':97 'pulvret':42 'recept':6 'rest':123 'ros':188 'rör':58 'samt':206 'sikt':134 'skumm':110 'slickepot':145 'slutet':176 'smul':196 'smält':63 'små':96,156 'sockret':125 'sprits':154 'strösockret':120 'stå':70 'svaln':47 'sänk':111 'sätt':99 'ta':78 'till':41,60 'tillsät':122 'timm':76 'täck':64 'ugn':100,166 'visp':40,82,104,116,129 'vit':1,26 'vänd':140,146 'äggvit':105 'öka':126	\N
 24194bad-e62c-49a3-8e4b-3b8a35e8c724	2023-08-05 10:08:37.352644	2023-08-28 06:00:48.048344	Mommakakor	Ingmarie Stenberg	4	längder	0	0	\N		24194bad-e62c-49a3-8e4b-3b8a35e8c724.webp	\N	jonas@stenberg.io	'15':34 '200':31 '4':17 'bakplåtspapp':22 'bland':11 'ca':33 'deg':14 'dom':20,26 'fingr':28 'grad':32 'grädd':29 'gyllenbrun':40 'ingrediens':9 'jämn':13 'kak':38 'lägg':19 'läng':18 'minut':35 'mommakak':1 'poröst':6 'rull':15 'rör':2 'skär':41 'smör':5 'sock':3 'storlek':45 'till':37 'tillsät':7 'tryck':24 'önsk':47 'övr':8	\N
 4a3133ca-f9ca-46f6-aa88-071dafca2e0e	2023-08-31 10:52:17.641815	2023-08-31 10:52:17.641815	Ugnsbakade rotfrukter med ostcreme och stekt halloumi	Elin Pennegård	4	portioner	0	0	\N			\N	jonas@stenberg.io	\N	\N
-c2308734-b8c8-4446-82b0-ecc992b3da52	2023-09-28 07:08:00.975157	2023-09-28 07:08:00.975157	Asiatisk nudelsoppa	ICA Köket	4	portioner	0	30	\N	Perfekt, god och är den asiatiska nudelsoppan att ha som matlåda. Förbered då fram till att nudlarna läggs i. Vid servering häll över varmt vatten, vänta 3 minuter och den goda nudelsoppan är klar att äta.	4f4cca5a-cf99-442c-beec-94426a97b266.webp	\N	jonas.stenberg@devoteam.com	\N	https://www.ica.se/recept/asiatisk-nudelsoppa-729727/
 \.
 
 
@@ -855,17 +858,6 @@ cf62f1bc-a587-4f8c-91aa-791123557829	2023-08-31 10:52:17.641815	2023-08-31 10:52
 a8ebd30d-c93a-4a49-98b1-dbb0d8bfdb1f	2023-08-31 10:52:17.641815	2023-08-31 10:52:17.641815	4a3133ca-f9ca-46f6-aa88-071dafca2e0e	Äpple		1	jonas@stenberg.io
 06c5393e-7115-4ff5-8bf2-8b69c63020f1	2023-08-31 10:52:17.641815	2023-08-31 10:52:17.641815	4a3133ca-f9ca-46f6-aa88-071dafca2e0e	# Tillbehör			jonas@stenberg.io
 6aed6517-fb0e-4e3f-b808-99bd78b7316b	2023-08-31 10:52:17.641815	2023-08-31 10:52:17.641815	4a3133ca-f9ca-46f6-aa88-071dafca2e0e	Halloumi			jonas@stenberg.io
-7f108405-b026-46a0-9155-73ad1faa4e00	2023-09-28 07:08:00.975157	2023-09-28 07:08:00.975157	c2308734-b8c8-4446-82b0-ecc992b3da52	salladskål	g	50	jonas.stenberg@devoteam.com
-2b3a1777-0212-4a7c-8f37-cc191897c935	2023-09-28 07:08:00.975157	2023-09-28 07:08:00.975157	c2308734-b8c8-4446-82b0-ecc992b3da52	morot		1	jonas.stenberg@devoteam.com
-58715ff6-d806-40f3-903e-6fa08e733079	2023-09-28 07:08:00.975157	2023-09-28 07:08:00.975157	c2308734-b8c8-4446-82b0-ecc992b3da52	kycklingbuljongtärning		1	jonas.stenberg@devoteam.com
-11b850f0-b65d-4bf0-8b21-b548c7fd5f10	2023-09-28 07:08:00.975157	2023-09-28 07:08:00.975157	c2308734-b8c8-4446-82b0-ecc992b3da52	röd currypasta	tsk	1	jonas.stenberg@devoteam.com
-6ecd6692-0644-4b05-bdc8-52888f2eb044	2023-09-28 07:08:00.975157	2023-09-28 07:08:00.975157	c2308734-b8c8-4446-82b0-ecc992b3da52	japansk soja	msk	1	jonas.stenberg@devoteam.com
-9dd09b37-725d-404e-9666-a540f0626ed3	2023-09-28 07:08:00.975157	2023-09-28 07:08:00.975157	c2308734-b8c8-4446-82b0-ecc992b3da52	sesamfrö	msk	1	jonas.stenberg@devoteam.com
-3735b25b-a8ab-421b-b50f-a6dc4fbaa440	2023-09-28 07:08:00.975157	2023-09-28 07:08:00.975157	c2308734-b8c8-4446-82b0-ecc992b3da52	sojabönor	dl	1	jonas.stenberg@devoteam.com
-ab4b7eed-14d0-408e-a9b8-be109a5d0cba	2023-09-28 07:08:00.975157	2023-09-28 07:08:00.975157	c2308734-b8c8-4446-82b0-ecc992b3da52	böngroddar	dl	1	jonas.stenberg@devoteam.com
-194577c3-e8d1-431f-9678-87085f629a4e	2023-09-28 07:08:00.975157	2023-09-28 07:08:00.975157	c2308734-b8c8-4446-82b0-ecc992b3da52	glasnudlar (à 100 g)	förp	1	jonas.stenberg@devoteam.com
-14d474af-6562-4a4c-bc88-66a4bf367b4c	2023-09-28 07:08:00.975157	2023-09-28 07:08:00.975157	c2308734-b8c8-4446-82b0-ecc992b3da52	vatten	dl	5	jonas.stenberg@devoteam.com
-bd7e3cbf-33ba-4e32-a6fa-00b6fdcea5bf	2023-09-28 07:08:00.975157	2023-09-28 07:08:00.975157	c2308734-b8c8-4446-82b0-ecc992b3da52	stekt, strimlad kyckling, tärnad tofu eller kokt ägg			jonas.stenberg@devoteam.com
 \.
 
 
@@ -1321,12 +1313,6 @@ d8ecc913-ecce-4ec8-af8a-d4a5faad9960	2023-08-26 13:30:47.474433	2023-08-26 13:30
 ca172935-500f-448d-93af-ce0a41fb6ef7	2023-08-28 19:55:49.153178	2023-08-28 19:55:49.153178	69ff89cd-3722-4d25-b9f4-c6818ee7b531	Dela sillen i bitar och blanda alla ingredienser.	jonas@stenberg.io
 82b2df45-18d1-4600-b68e-67ec09c79e77	2023-08-28 19:55:49.153178	2023-08-28 19:55:49.153178	69ff89cd-3722-4d25-b9f4-c6818ee7b531	Häll över i en glasburk och låt stå i kylen över natten.	jonas@stenberg.io
 3f464200-4d1b-4c36-8ffc-7849a592aaaa	2023-08-31 10:52:17.641815	2023-08-31 10:52:17.641815	4a3133ca-f9ca-46f6-aa88-071dafca2e0e	aa	jonas@stenberg.io
-49408fb6-065a-4ee9-a7c8-d80812b230d8	2023-09-28 07:08:00.975157	2023-09-28 07:08:00.975157	c2308734-b8c8-4446-82b0-ecc992b3da52	Tina sojabönorna.	jonas.stenberg@devoteam.com
-c8b6845a-e43a-44dc-89e3-bd913bf1271e	2023-09-28 07:08:00.975157	2023-09-28 07:08:00.975157	c2308734-b8c8-4446-82b0-ecc992b3da52	Strimla kålen och skala och riv moroten grovt på ett rivjärn.	jonas.stenberg@devoteam.com
-99286efb-18cd-4fea-9c36-0d608c88f3de	2023-09-28 07:08:00.975157	2023-09-28 07:08:00.975157	c2308734-b8c8-4446-82b0-ecc992b3da52	Smula buljongtärningen i en matlåda av glas och tillsätt kål, morötter, currypasta, soja, sesamfrö, sojabönor, böngroddar och överst nudlarna.	jonas.stenberg@devoteam.com
-00d69131-aaf7-4026-8450-d2ade27dae92	2023-09-28 07:08:00.975157	2023-09-28 07:08:00.975157	c2308734-b8c8-4446-82b0-ecc992b3da52	Koka upp vattnet. Häll vattnet över nudlarna och sätt på locket. Låt stå i 3 minuter.	jonas.stenberg@devoteam.com
-31b6a531-f632-432e-bf16-25606cccf6c2	2023-09-28 07:08:00.975157	2023-09-28 07:08:00.975157	c2308734-b8c8-4446-82b0-ecc992b3da52	Öppna locket och rör försiktigt så att allt blandas.	jonas.stenberg@devoteam.com
-30dbeb60-7206-4f3b-8a14-43ad45b97883	2023-09-28 07:08:00.975157	2023-09-28 07:08:00.975157	c2308734-b8c8-4446-82b0-ecc992b3da52	Serveringsförslag: Toppa med valfritt protein och servera.	jonas.stenberg@devoteam.com
 \.
 
 
@@ -1407,8 +1393,6 @@ COPY public.recipe_categories (date_published, recipe, category, owner) FROM std
 2023-08-28 19:55:49.153178	69ff89cd-3722-4d25-b9f4-c6818ee7b531	5a9ca809-e24a-40f0-bf36-dfb3c56e9e10	jonas@stenberg.io
 2023-08-28 19:55:49.153178	69ff89cd-3722-4d25-b9f4-c6818ee7b531	008625e8-ada4-4412-b20f-feb6f2f5c6ed	jonas@stenberg.io
 2023-08-31 10:52:17.641815	4a3133ca-f9ca-46f6-aa88-071dafca2e0e	008625e8-ada4-4412-b20f-feb6f2f5c6ed	jonas@stenberg.io
-2023-09-28 07:08:00.975157	c2308734-b8c8-4446-82b0-ecc992b3da52	03b77801-d827-4499-bb9e-3397a6553967	jonas.stenberg@devoteam.com
-2023-09-28 07:08:00.975157	c2308734-b8c8-4446-82b0-ecc992b3da52	008625e8-ada4-4412-b20f-feb6f2f5c6ed	jonas.stenberg@devoteam.com
 \.
 
 
@@ -1424,7 +1408,7 @@ Filip.Stenberg.2011@gmail.com	$2a$06$j5APBpiaqrstn9PoFiLtduywc79Nb8lSZQCJOy3TBqm
 \.
 
 
--- Completed on 2023-10-03 02:02:45 CEST
+-- Completed on 2023-10-04 02:03:59 CEST
 
 --
 -- PostgreSQL database dump complete
