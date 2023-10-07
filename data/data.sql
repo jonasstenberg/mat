@@ -5,7 +5,7 @@
 -- Dumped from database version 14.9 (Debian 14.9-1.pgdg100+1)
 -- Dumped by pg_dump version 14.9 (Debian 14.9-1.pgdg100+1)
 
--- Started on 2023-10-06 02:03:59 CEST
+-- Started on 2023-10-07 02:03:59 CEST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -82,6 +82,8 @@ fcbddad5-f66b-4142-949f-af475423a834	2023-08-04 12:31:16.591547	2023-08-04 12:31
 160300e4-cc17-4d78-8d37-55b3a8953443	2023-10-03 19:04:04.749276	2023-10-03 19:04:04.749276	Förrätt	jonas.stenberg@devoteam.com
 81e48927-9a0b-4b26-b90b-294020818579	2023-10-03 19:04:04.749276	2023-10-03 19:04:04.749276	Brunch	jonas.stenberg@devoteam.com
 5a55a5eb-cb89-4ce3-9535-9fc433aaef08	2023-10-03 19:04:04.749276	2023-10-03 19:04:04.749276	Plockmat	jonas.stenberg@devoteam.com
+bcae56a6-bc12-4a8f-a8c5-25d4338e266d	2023-10-06 09:06:16.728	2023-10-06 09:06:16.728	Efterrätt	jonas@stenberg.io
+54acfd52-2f49-4b7f-bc95-ad423257019e	2023-10-06 09:06:16.728	2023-10-06 09:06:16.728	Buffé	jonas@stenberg.io
 \.
 
 
@@ -1408,7 +1410,7 @@ Filip.Stenberg.2011@gmail.com	$2a$06$j5APBpiaqrstn9PoFiLtduywc79Nb8lSZQCJOy3TBqm
 \.
 
 
--- Completed on 2023-10-06 02:03:59 CEST
+-- Completed on 2023-10-07 02:03:59 CEST
 
 --
 -- PostgreSQL database dump complete
