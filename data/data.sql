@@ -5,7 +5,7 @@
 -- Dumped from database version 14.9 (Debian 14.9-1.pgdg100+1)
 -- Dumped by pg_dump version 14.9 (Debian 14.9-1.pgdg100+1)
 
--- Started on 2023-10-11 02:03:22 CEST
+-- Started on 2023-10-12 02:00:59 CEST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -167,6 +167,7 @@ a7f351df-a980-49b4-b5b5-38d6f191a3b6	2023-08-04 12:31:16.591547	2023-08-26 13:30
 44687753-8723-45cf-b025-c07fe64d1a05	2020-12-30 20:12:09.175593	2023-08-26 13:29:57.153231	Vit chokladmousse med lakrits	Jonas Stenberg	4	portioner	0	0	\N	Recept från boken ”Lakrits: godis, bakverk, desserter, mat & dryck” av Elisabeth Johansson. Fotograf: Helén Pe. Bonnier Fakta.	44687753-8723-45cf-b025-c07fe64d1a05.webp	\N	jonas@stenberg.io	'1':5 '100':102 '12':75 '15':168 '2':23 '20':169 '3':57 '4':77 '5':98 '6':121 '7':149 '8':190 'bakplåtspapp':162 'bakverk':11 'bok':8 'bonni':21 'brun':183 'bunk':33,56,65,80 'börj':181 'choklad':27,61 'chokladcookies':192 'chokladmouss':2 'citronsaft':107 'dessert':12 'dryck':14 'elisabeth':16 'elvisp':84,114 'engångsspritspås':152 'eventuellt':207 'fakt':22 'florsockret':136 'fotograf':18 'fram':79 'fyll':150 'färg':189 'fördel':93,195 'försvin':186 'garner':203 'godis':10 'grad':103 'grovt':193 'grädd':36,163 'gräddblandning':88 'hack':24 'hallon':205 'hallonpurén':148 'hast':112,127 'helén':19 'hälft':118 'häll':52 'håll':171 'in':141 'johansson':17 'kall':87 'kok':34 'koll':172 'kross':191 'kyl':72 'lakrit':4,9 'lakritsgranul':38,209 'lit':208 'luft':91 'lägg':29,199 'låt':46,69 'löst':44 'maräng':109,138,157,174,201 'mat':13 'minst':74 'minut':50,133,170 'mouss':92,94,198 'ner':54,117,135,147 'par':132 'pe':20 'plastfoli':67 'plåt':160 'portionsgl':97 'pulvret':42 'recept':6 'rest':123 'ros':188 'rör':58 'samt':206 'sikt':134 'skumm':110 'slickepot':145 'slutet':176 'smul':196 'smält':63 'små':96,156 'sockret':125 'sprits':154 'strösockret':120 'stå':70 'svaln':47 'sänk':111 'sätt':99 'ta':78 'till':41,60 'tillsät':122 'timm':76 'täck':64 'ugn':100,166 'visp':40,82,104,116,129 'vit':1,26 'vänd':140,146 'äggvit':105 'öka':126	\N
 24194bad-e62c-49a3-8e4b-3b8a35e8c724	2023-08-05 10:08:37.352644	2023-08-28 06:00:48.048344	Mommakakor	Ingmarie Stenberg	4	längder	0	0	\N		24194bad-e62c-49a3-8e4b-3b8a35e8c724.webp	\N	jonas@stenberg.io	'15':34 '200':31 '4':17 'bakplåtspapp':22 'bland':11 'ca':33 'deg':14 'dom':20,26 'fingr':28 'grad':32 'grädd':29 'gyllenbrun':40 'ingrediens':9 'jämn':13 'kak':38 'lägg':19 'läng':18 'minut':35 'mommakak':1 'poröst':6 'rull':15 'rör':2 'skär':41 'smör':5 'sock':3 'storlek':45 'till':37 'tillsät':7 'tryck':24 'önsk':47 'övr':8	\N
 4a3133ca-f9ca-46f6-aa88-071dafca2e0e	2023-08-31 10:52:17.641815	2023-08-31 10:52:17.641815	Ugnsbakade rotfrukter med ostcreme och stekt halloumi	Elin Pennegård	4	portioner	0	0	\N			\N	jonas@stenberg.io	\N	\N
+b92ce433-e5d3-40bf-b1dd-9820be21f967	2023-10-11 05:05:00.772264	2023-10-11 05:05:00.772264	Fisk med purjolök och tomat	Filip Stenberg	4	portioner	5	20	\N	Enkel och god fiskrätt, som går väldigt fort att göra.	bf3ab9da-7bf3-475a-a9af-32841e2e817e.webp	\N	filip.stenberg.2011@gmail.com	\N	
 \.
 
 
@@ -806,6 +807,13 @@ f693aaf4-5e16-4367-bcbd-aebbafd6da34	2023-08-24 20:18:44.817448	2023-08-24 20:18
 9b8990f7-018a-4dd0-b3d1-a4a910533f03	2023-08-24 20:18:44.817448	2023-08-24 20:18:44.817448	68bc2e69-483e-497d-b422-bb311f53de8b	hackad persilja	dl	0.5	jonas@stenberg.io
 03aa5e7e-64e7-4752-81aa-8c20445906e6	2023-08-24 20:18:44.817448	2023-08-24 20:18:44.817448	68bc2e69-483e-497d-b422-bb311f53de8b	Salt och peppar			jonas@stenberg.io
 67a93198-c1f9-4124-97a6-4a525b910922	2023-08-24 20:18:44.817448	2023-08-24 20:18:44.817448	68bc2e69-483e-497d-b422-bb311f53de8b	En halv påse bladspenat			jonas@stenberg.io
+efb53b90-3b41-4ed8-b058-9d82ea712912	2023-10-11 05:05:00.772264	2023-10-11 05:05:00.772264	b92ce433-e5d3-40bf-b1dd-9820be21f967	torsk	g	600	filip.stenberg.2011@gmail.com
+282dd255-292c-466e-b03b-ae8822f6707c	2023-10-11 05:05:00.772264	2023-10-11 05:05:00.772264	b92ce433-e5d3-40bf-b1dd-9820be21f967	salt	tsk	1	filip.stenberg.2011@gmail.com
+774b18c3-2051-46c5-bed7-4706c7859fa7	2023-10-11 05:05:00.772264	2023-10-11 05:05:00.772264	b92ce433-e5d3-40bf-b1dd-9820be21f967	citronpeppar	tsk	1	filip.stenberg.2011@gmail.com
+31e73a38-9100-440e-928f-99da5e6b57ee	2023-10-11 05:05:00.772264	2023-10-11 05:05:00.772264	b92ce433-e5d3-40bf-b1dd-9820be21f967	purjolök	st	1	filip.stenberg.2011@gmail.com
+79fc6471-ddef-4e0d-9070-19ca293e7f1c	2023-10-11 05:05:00.772264	2023-10-11 05:05:00.772264	b92ce433-e5d3-40bf-b1dd-9820be21f967	tomater	st	6	filip.stenberg.2011@gmail.com
+41537dc1-6b0a-47d2-9721-e7ba11c3e7d7	2023-10-11 05:05:00.772264	2023-10-11 05:05:00.772264	b92ce433-e5d3-40bf-b1dd-9820be21f967	dill	Knippe	1	filip.stenberg.2011@gmail.com
+26469ac3-ad42-4725-a833-fb775053288b	2023-10-11 05:05:00.772264	2023-10-11 05:05:00.772264	b92ce433-e5d3-40bf-b1dd-9820be21f967	potatis	st	8	filip.stenberg.2011@gmail.com
 cb7b5648-3192-4143-afbf-4d95c0df2fbd	2023-08-26 13:29:57.153231	2023-08-26 13:29:57.153231	44687753-8723-45cf-b025-c07fe64d1a05	#Minihallonmaränger			jonas@stenberg.io
 47b88035-8360-4d86-ad7e-1a200aab6562	2023-08-26 13:29:57.153231	2023-08-26 13:29:57.153231	44687753-8723-45cf-b025-c07fe64d1a05	gram äggvita(or)		30	jonas@stenberg.io
 24e63449-b741-43ca-8395-06a70e697584	2023-08-26 13:29:57.153231	2023-08-26 13:29:57.153231	44687753-8723-45cf-b025-c07fe64d1a05	citronsaft, 3 - 4 droppar, pressad	st	4	jonas@stenberg.io
@@ -1197,6 +1205,11 @@ cbd00395-d27d-4cbf-987c-22198afbda99	2023-08-24 20:14:49.819859	2023-08-24 20:14
 1cf91b86-e1b7-42da-82c9-f043792748b7	2023-08-24 20:14:49.819859	2023-08-24 20:14:49.819859	076be509-1a06-41b5-946a-31693a6a8079	Fräs smör tillsammans med mjölet i en annan kastrull, vispa ner buljongen, pressa citron, ha i dragonen och grädden, koka ihop.	jonas@stenberg.io
 af6225b1-fdf9-4887-a3ec-667037833f8d	2023-08-24 20:14:49.819859	2023-08-24 20:14:49.819859	076be509-1a06-41b5-946a-31693a6a8079	Ta av och vispa ner en äggula Häll såsen på fisken, på med lite riven ost och gratinera i ugnen ca 10 minuter.	jonas@stenberg.io
 9aa9013a-397d-4f30-80d0-643a31ac11d0	2023-08-24 20:14:49.819859	2023-08-24 20:14:49.819859	076be509-1a06-41b5-946a-31693a6a8079	Servera med potatismos.	jonas@stenberg.io
+6e54194b-0c8e-4f69-8750-492717475194	2023-10-11 05:05:00.772264	2023-10-11 05:05:00.772264	b92ce433-e5d3-40bf-b1dd-9820be21f967	Sätt ugnen på 225°C.	filip.stenberg.2011@gmail.com
+dab125d2-eb15-4f32-ab0a-337f635caaf2	2023-10-11 05:05:00.772264	2023-10-11 05:05:00.772264	b92ce433-e5d3-40bf-b1dd-9820be21f967	Lägg fisken i en ugnssäker form. Strö över salt och citronpeppar.	filip.stenberg.2011@gmail.com
+0fee6690-a40f-41e5-96ce-35af26530f72	2023-10-11 05:05:00.772264	2023-10-11 05:05:00.772264	b92ce433-e5d3-40bf-b1dd-9820be21f967	Skölj, ansa och strimla purjolöken. Skölj och skär tomaterna i klyftor. Hacka dillen.	filip.stenberg.2011@gmail.com
+a38bca2e-fb29-42b0-8491-87208718b299	2023-10-11 05:05:00.772264	2023-10-11 05:05:00.772264	b92ce433-e5d3-40bf-b1dd-9820be21f967	Fördela purjo, tomater och dill på fisken och droppa över flytande margarin. Tillaga mitt i ugnen i 15-20 min.	filip.stenberg.2011@gmail.com
+0bf463dc-5c07-4a1b-9883-cda10108a4c2	2023-10-11 05:05:00.772264	2023-10-11 05:05:00.772264	b92ce433-e5d3-40bf-b1dd-9820be21f967	Skala och skär potatisen små bitar. Koka potatisen mjuk i lättsaltat vatten ca 10 min. Låt potatisen rinna av och pressa den eventuellt igenom en potatispress innan den serveras till fisken tillsammans med knäckebröd.	filip.stenberg.2011@gmail.com
 a2ed2411-0445-4997-847f-5b3f59e6de93	2023-08-24 20:15:31.669279	2023-08-24 20:15:31.669279	1312646e-45e1-407b-a46e-ed3b60bc1405	Sätt ugnen på 175 grader.	jonas@stenberg.io
 127b0af2-e117-4c16-9f13-e9f81b0a5266	2023-08-24 20:15:31.669279	2023-08-24 20:15:31.669279	1312646e-45e1-407b-a46e-ed3b60bc1405	Ansa rabarbern och skär i små bitar. Lägg i en bunke och tillsätt socker och potatismjöl. Rör om och låt stå.	jonas@stenberg.io
 e139fe03-df52-4116-a3ca-948bbc546a67	2023-08-24 20:15:31.669279	2023-08-24 20:15:31.669279	1312646e-45e1-407b-a46e-ed3b60bc1405	Smält smöret i en kastrull. Ta lite av det smälta smöret och smörj in pajformen. Häll i grädde och sirap i smöret. Rör om och låt koka upp.	jonas@stenberg.io
@@ -1395,6 +1408,7 @@ COPY public.recipe_categories (date_published, recipe, category, owner) FROM std
 2023-08-28 19:55:49.153178	69ff89cd-3722-4d25-b9f4-c6818ee7b531	5a9ca809-e24a-40f0-bf36-dfb3c56e9e10	jonas@stenberg.io
 2023-08-28 19:55:49.153178	69ff89cd-3722-4d25-b9f4-c6818ee7b531	008625e8-ada4-4412-b20f-feb6f2f5c6ed	jonas@stenberg.io
 2023-08-31 10:52:17.641815	4a3133ca-f9ca-46f6-aa88-071dafca2e0e	008625e8-ada4-4412-b20f-feb6f2f5c6ed	jonas@stenberg.io
+2023-10-11 05:05:00.772264	b92ce433-e5d3-40bf-b1dd-9820be21f967	008625e8-ada4-4412-b20f-feb6f2f5c6ed	filip.stenberg.2011@gmail.com
 \.
 
 
@@ -1410,7 +1424,7 @@ Filip.Stenberg.2011@gmail.com	$2a$06$j5APBpiaqrstn9PoFiLtduywc79Nb8lSZQCJOy3TBqm
 \.
 
 
--- Completed on 2023-10-11 02:03:22 CEST
+-- Completed on 2023-10-12 02:00:59 CEST
 
 --
 -- PostgreSQL database dump complete
