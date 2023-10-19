@@ -5,7 +5,7 @@
 -- Dumped from database version 14.9 (Debian 14.9-1.pgdg100+1)
 -- Dumped by pg_dump version 14.9 (Debian 14.9-1.pgdg100+1)
 
--- Started on 2023-10-18 02:00:59 CEST
+-- Started on 2023-10-19 02:09:26 CEST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -101,6 +101,7 @@ COPY public.users (id, name, email, provider, owner, measures_system) FROM stdin
 74e5ddee-7779-49da-8a0a-da24ab3598fe	Jonas STENBERG	jonas.stenberg@devoteam.com	google	jonas.stenberg@devoteam.com	metric
 923c4538-8f99-41c8-964d-92cdc95f8516	Filip Stenberg	filip.stenberg.2011@gmail.com	google	filip.stenberg.2011@gmail.com	metric
 e708ff15-722c-4177-ac55-405fff35b30f	Jonas Stenberg	jonas@stenberg.io	\N	jonas@stenberg.io	metric
+cf541cd6-6a7c-4d82-a289-ef01561eeb36	Ryan MacArthur	ryan.macarthur@gmail.com	google	ryan.macarthur@gmail.com	metric
 \.
 
 
@@ -1424,7 +1425,7 @@ Filip.Stenberg.2011@gmail.com	$2a$06$j5APBpiaqrstn9PoFiLtduywc79Nb8lSZQCJOy3TBqm
 \.
 
 
--- Completed on 2023-10-18 02:00:59 CEST
+-- Completed on 2023-10-19 02:09:26 CEST
 
 --
 -- PostgreSQL database dump complete
