@@ -5,7 +5,7 @@
 -- Dumped from database version 14.9 (Debian 14.9-1.pgdg100+1)
 -- Dumped by pg_dump version 14.9 (Debian 14.9-1.pgdg100+1)
 
--- Started on 2023-11-05 02:01:34 CET
+-- Started on 2023-11-06 02:08:59 CET
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -169,6 +169,7 @@ a7f351df-a980-49b4-b5b5-38d6f191a3b6	2023-08-04 12:31:16.591547	2023-08-26 13:30
 24194bad-e62c-49a3-8e4b-3b8a35e8c724	2023-08-05 10:08:37.352644	2023-08-28 06:00:48.048344	Mommakakor	Ingmarie Stenberg	4	längder	0	0	\N		24194bad-e62c-49a3-8e4b-3b8a35e8c724.webp	\N	jonas@stenberg.io	'15':34 '200':31 '4':17 'bakplåtspapp':22 'bland':11 'ca':33 'deg':14 'dom':20,26 'fingr':28 'grad':32 'grädd':29 'gyllenbrun':40 'ingrediens':9 'jämn':13 'kak':38 'lägg':19 'läng':18 'minut':35 'mommakak':1 'poröst':6 'rull':15 'rör':2 'skär':41 'smör':5 'sock':3 'storlek':45 'till':37 'tillsät':7 'tryck':24 'önsk':47 'övr':8	\N
 4a3133ca-f9ca-46f6-aa88-071dafca2e0e	2023-08-31 10:52:17.641815	2023-08-31 10:52:17.641815	Ugnsbakade rotfrukter med ostcreme och stekt halloumi	Elin Pennegård	4	portioner	0	0	\N			\N	jonas@stenberg.io	\N	\N
 b92ce433-e5d3-40bf-b1dd-9820be21f967	2023-10-11 05:05:00.772264	2023-10-11 05:05:00.772264	Fisk med purjolök och tomat	Filip Stenberg	4	portioner	5	20	\N	Enkel och god fiskrätt, som går väldigt fort att göra.	bf3ab9da-7bf3-475a-a9af-32841e2e817e.webp	\N	filip.stenberg.2011@gmail.com	\N	
+193e220f-a553-468e-9340-ed867270ee47	2023-11-05 20:01:29.438589	2023-11-05 20:03:03.14471	Tekakor med havregryn.	Filip Stenberg	13	Tekakor	5	80	\N	Supergoda Tekakor gjorda på havregryn.\r\nFluffiga och jättemjuka!	5766df30-f98f-4923-be78-3c72db2df229.webp	\N	filip.stenberg.2011@gmail.com	\N	
 \.
 
 
@@ -768,6 +769,13 @@ e8974b19-4a99-43d7-9dfd-bc7f126e5866	2023-08-24 20:18:14.721337	2023-08-24 20:18
 0f823b20-c670-4f33-8b00-1ffacfb18dbf	2023-08-24 20:18:14.721337	2023-08-24 20:18:14.721337	39223e98-f9b2-4217-957c-58a43ab3cbe7	ättiksprit	dl	1	jonas@stenberg.io
 41f2162d-8fb5-4ece-9b82-20b22cd97bb5	2023-08-24 20:18:14.721337	2023-08-24 20:18:14.721337	39223e98-f9b2-4217-957c-58a43ab3cbe7	salt	msk	1.5	jonas@stenberg.io
 4b2d3958-bb0c-4c11-9a64-f7d078fc9c33	2023-08-24 20:18:14.721337	2023-08-24 20:18:14.721337	39223e98-f9b2-4217-957c-58a43ab3cbe7	socker	msk	4	jonas@stenberg.io
+4c531fe4-cdfc-4b78-a2e5-e22c1c201f6c	2023-11-05 20:03:03.14471	2023-11-05 20:03:03.14471	193e220f-a553-468e-9340-ed867270ee47	Vatten	L	0.5	filip.stenberg.2011@gmail.com
+59599849-95d7-4176-9d7a-063c0e4e46d0	2023-11-05 20:03:03.14471	2023-11-05 20:03:03.14471	193e220f-a553-468e-9340-ed867270ee47	Havregryn	DL	2.5	filip.stenberg.2011@gmail.com
+0a9172e7-fd42-4eeb-a3f1-235eb50da718	2023-11-05 20:03:03.14471	2023-11-05 20:03:03.14471	193e220f-a553-468e-9340-ed867270ee47	Olja	DL	0.5	filip.stenberg.2011@gmail.com
+c78622a7-1aa6-46e4-822e-06259b2ddd5a	2023-11-05 20:03:03.14471	2023-11-05 20:03:03.14471	193e220f-a553-468e-9340-ed867270ee47	Jäst	G	50	filip.stenberg.2011@gmail.com
+0f1e592b-1ab7-4b3c-bd5f-e61e61f694d5	2023-11-05 20:03:03.14471	2023-11-05 20:03:03.14471	193e220f-a553-468e-9340-ed867270ee47	Socker	MSK	2	filip.stenberg.2011@gmail.com
+b88027f9-e5d1-4373-8e66-6bcf906c6954	2023-11-05 20:03:03.14471	2023-11-05 20:03:03.14471	193e220f-a553-468e-9340-ed867270ee47	Salt	TSK	1	filip.stenberg.2011@gmail.com
+226655a0-cab4-4ef0-8d35-839afa06ef62	2023-11-05 20:03:03.14471	2023-11-05 20:03:03.14471	193e220f-a553-468e-9340-ed867270ee47	Mjöl(ca)	DL	12	filip.stenberg.2011@gmail.com
 5eebce20-2339-40b9-8b7e-a941d96c7b3c	2023-08-24 20:18:14.721337	2023-08-24 20:18:14.721337	39223e98-f9b2-4217-957c-58a43ab3cbe7	gräddfil	dl	3	jonas@stenberg.io
 42b6bad6-ef79-40be-8e52-f784c9e83744	2023-08-24 20:18:14.721337	2023-08-24 20:18:14.721337	39223e98-f9b2-4217-957c-58a43ab3cbe7	svensk senap	dl	1.5	jonas@stenberg.io
 c48b31d7-60fb-4d07-afd1-3858ef0882a1	2023-08-24 20:18:14.721337	2023-08-24 20:18:14.721337	39223e98-f9b2-4217-957c-58a43ab3cbe7	salt	tsk	0.5	jonas@stenberg.io
@@ -1245,6 +1253,9 @@ ce83747f-ff1d-4ac8-ad9f-932af70dce97	2023-08-24 20:15:45.261953	2023-08-24 20:15
 2ea6698c-8d33-47d9-bdcb-948810d76d8e	2023-08-24 20:15:53.602008	2023-08-24 20:15:53.602008	8ecc7ec6-54e8-466b-bd41-36d4a05539e7	Lägg på äppelklyftorna.	jonas@stenberg.io
 8e066161-5433-40f1-862f-a99f26406442	2023-08-24 20:15:53.602008	2023-08-24 20:15:53.602008	8ecc7ec6-54e8-466b-bd41-36d4a05539e7	Lägg på smörklickar och kanel.	jonas@stenberg.io
 abb4b629-1e40-47e0-8cd4-d5c3bdb5f879	2023-08-24 20:15:53.602008	2023-08-24 20:15:53.602008	8ecc7ec6-54e8-466b-bd41-36d4a05539e7	Grädda i 30-40 minuter på 175 grader.	jonas@stenberg.io
+920402f3-f3c8-4dfa-bc03-0689a60054dc	2023-11-05 20:03:03.14471	2023-11-05 20:03:03.14471	193e220f-a553-468e-9340-ed867270ee47	Koka upp vatten, olja och salt och häll över havregrynen.\nLåt svalna till 37°	filip.stenberg.2011@gmail.com
+1a68e74a-b7f4-4683-9f50-d660b065860c	2023-11-05 20:03:03.14471	2023-11-05 20:03:03.14471	193e220f-a553-468e-9340-ed867270ee47	Tillsätt Jäst, socker och Mjöl.\nKnåda till en bra deg, degen kan vara lite kladdig.\nJäs i 45 min.\n\nDela upp degen i lagom stora bitar.\nCa 10 cm i diameter. \nJäs i 30 min till. 	filip.stenberg.2011@gmail.com
+19a90cec-4f9a-4f95-9b56-f212f34aed53	2023-11-05 20:03:03.14471	2023-11-05 20:03:03.14471	193e220f-a553-468e-9340-ed867270ee47	Grädda mitt i ugnen 6 - 7 min på 225 grader.\n(Tid och temperatur skiftar från ugn till ugn)	filip.stenberg.2011@gmail.com
 81adb27f-9fa8-4b30-908b-82515902f014	2023-08-24 20:17:50.366811	2023-08-24 20:17:50.366811	1cb4d94c-8104-47ee-8849-c11bbdc60c1b	Blanda vatten och ättikssprit i en skål.	jonas@stenberg.io
 33219bfb-3317-4156-8884-7f05279f1526	2023-08-24 20:17:50.366811	2023-08-24 20:17:50.366811	1cb4d94c-8104-47ee-8849-c11bbdc60c1b	Tillsätt saltet och rör tills det har löst sig.	jonas@stenberg.io
 ec17374a-efc9-4e88-82a8-03404c20156d	2023-08-24 20:17:50.366811	2023-08-24 20:17:50.366811	1cb4d94c-8104-47ee-8849-c11bbdc60c1b	Lägg ner filéerna i lagen.	jonas@stenberg.io
@@ -1410,6 +1421,7 @@ COPY public.recipe_categories (date_published, recipe, category, owner) FROM std
 2023-08-28 19:55:49.153178	69ff89cd-3722-4d25-b9f4-c6818ee7b531	008625e8-ada4-4412-b20f-feb6f2f5c6ed	jonas@stenberg.io
 2023-08-31 10:52:17.641815	4a3133ca-f9ca-46f6-aa88-071dafca2e0e	008625e8-ada4-4412-b20f-feb6f2f5c6ed	jonas@stenberg.io
 2023-10-11 05:05:00.772264	b92ce433-e5d3-40bf-b1dd-9820be21f967	008625e8-ada4-4412-b20f-feb6f2f5c6ed	filip.stenberg.2011@gmail.com
+2023-11-05 20:03:03.14471	193e220f-a553-468e-9340-ed867270ee47	1e92d3e7-8a5e-4d0d-a52e-737a519666c5	filip.stenberg.2011@gmail.com
 \.
 
 
@@ -1425,7 +1437,7 @@ Filip.Stenberg.2011@gmail.com	$2a$06$j5APBpiaqrstn9PoFiLtduywc79Nb8lSZQCJOy3TBqm
 \.
 
 
--- Completed on 2023-11-05 02:01:34 CET
+-- Completed on 2023-11-06 02:08:59 CET
 
 --
 -- PostgreSQL database dump complete
