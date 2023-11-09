@@ -15,6 +15,8 @@ const Config = z
     googleClientId: z.string().min(10),
     googleSecret: z.string().min(10),
     categoryIfNonExist: z.string(),
+    cookieSecurePrefix: z.string().optional(),
+    openaiApiKey: z.string(),
   })
   .strict();
 
@@ -31,6 +33,8 @@ export const config = Config.parse({
   googleClientId: process.env.GOOGLE_CLIENT_ID,
   googleSecret: process.env.GOOGLE_SECRET,
   categoryIfNonExist: process.env.CATEGORY_IF_NON_EXIST,
+  cookieSecurePrefix: process.env.COOKIE_SECURE_PREFIX,
+  openaiApiKey: process.env.OPENAI_API_KEY,
 });
 
 export const nextPublicEnvironments = {

@@ -35,6 +35,8 @@ jobs:
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_SECRET: ${{ secrets.GOOGLE_SECRET }}
           CATEGORY_IF_NON_EXIST: ${{ vars.CATEGORY_IF_NON_EXIST }}
+          COOKIE_SECURE_PREFIX: ${{ vars.COOKIE_SECURE_PREFIX }}
+          OPENAI_API_KEY: ${{ vars.OPENAI_API_KEY }}
         run: npm run build
 
       - name: Deploy

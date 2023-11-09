@@ -7,6 +7,7 @@ import { useMediaQuery } from '@mantine/hooks';
 import { useRecipeModal } from '@/hooks/useRecipeModal';
 import RecipeForm from './Recipe/RecipeForm';
 import LinkForm from './Recipe/LinkForm';
+import ImageForm from './Recipe/ImageForm';
 
 type RecipeModalProps = {
   categories: string[];
@@ -34,7 +35,7 @@ export default function RecipeModal({ categories }: RecipeModalProps) {
           <Tabs.Tab value="link" disabled={!!formRecipe?.id}>
             Länk
           </Tabs.Tab>
-          <Tabs.Tab value="image" disabled>
+          <Tabs.Tab value="image" disabled={!!formRecipe?.id}>
             Bild
           </Tabs.Tab>
         </Tabs.List>
@@ -45,7 +46,10 @@ export default function RecipeModal({ categories }: RecipeModalProps) {
           <LinkForm />
           {!!formRecipe && <RecipeForm categories={categories} />}
         </Tabs.Panel>
-        <Tabs.Panel value="image">{null}</Tabs.Panel>
+        <Tabs.Panel value="image">
+          <ImageForm />
+          {!!formRecipe && <RecipeForm categories={categories} />}
+        </Tabs.Panel>
       </Tabs>
     </Modal>
   );

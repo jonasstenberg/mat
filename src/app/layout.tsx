@@ -8,6 +8,7 @@ import dynamic from 'next/dynamic';
 import { Notifications } from '@mantine/notifications';
 
 import '@/styles/globals.css';
+import { Viewport } from 'next';
 import styles from '@/app/page.module.css';
 import { lora } from '@/styles/fonts';
 
@@ -50,7 +51,12 @@ export const metadata = {
     locale: 'sv_SE',
     type: 'website',
   },
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 type RootLayoutProps = {

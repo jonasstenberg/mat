@@ -10,7 +10,15 @@ import { UNKNOWN_ERROR } from '@/utils/errors';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { Result, ResultVoid } from '@/utils/result';
 
-const isProduction = config.baseUrl.startsWith('https');
+const getAuthorizedHeaders = () => {
+  const getAuthToken = cookies().get(`${config.cookieSecurePrefix}next-auth.session-token`)?.value;
+
+  return {
+    Authorization: `Bearer ${getAuthToken}`,
+    'Content-Type': 'application/json',
+    Prefer: 'return=representation',
+  };
+};
 
 const ERROR_DETAILS: Record<string, { path: string; message: string }> = {
   'already-exists': {
@@ -56,18 +64,6 @@ const handleErrorResponse = async (response: Response) => {
 
   return {
     global: UNKNOWN_ERROR.message,
-  };
-};
-
-const getAuthorizedHeaders = () => {
-  const getAuthToken = cookies().get(
-    isProduction ? '__Secure-next-auth.session-token' : 'next-auth.session-token'
-  )?.value;
-
-  return {
-    Authorization: `Bearer ${getAuthToken}`,
-    'Content-Type': 'application/json',
-    Prefer: 'return=representation',
   };
 };
 

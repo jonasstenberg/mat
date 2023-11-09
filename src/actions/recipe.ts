@@ -2,6 +2,7 @@
 
 import { cookies } from 'next/headers';
 import { revalidatePath } from 'next/cache';
+import OpenAI from 'openai';
 
 import { config } from '@/utils/config';
 import { IngredientSchema, InstructionSchema, RecipeSchema, recipeSchema } from '@/types/recipe';
@@ -10,13 +11,14 @@ import { validateSchema } from '@/utils/validateSchema';
 import { deleteImage, uploadNewImage, resizeExistingImage, uploadNewImageFromUrl } from './image';
 import { UNKNOWN_ERROR } from '@/utils/errors';
 import { Result, ResultVoid } from '@/utils/result';
+import { getCategories } from '@/lib/categories';
 
-const isProduction = config.baseUrl.startsWith('https');
+const openai = new OpenAI({
+  organization: 'org-tblg3uwWsfbw943UpETW9AIp',
+});
 
 const getAuthorizedHeaders = () => {
-  const getAuthToken = cookies().get(
-    isProduction ? '__Secure-next-auth.session-token' : 'next-auth.session-token'
-  )?.value;
+  const getAuthToken = cookies().get(`${config.cookieSecurePrefix}next-auth.session-token`)?.value;
 
   return {
     Authorization: `Bearer ${getAuthToken}`,
@@ -195,3 +197,104 @@ export async function deleteRecipe(id: string) {
 
   revalidatePath('/');
 }
+
+export const getRecipeUsingOpenaiVision = async (
+  image: string,
+  mimeType: string
+): Promise<RecipeSchema | null> => {
+  const categories = await getCategories();
+
+  const response = await openai.chat.completions.create({
+    model: 'gpt-4-vision-preview',
+    max_tokens: 1000,
+    messages: [
+      {
+        role: 'user',
+        content: [
+          {
+            type: 'text',
+            text: `
+- Parse the provided image to extract recipe information that complies with our Zod schema definitions.
+- If an ingredient's measurement or unit is absent, leave these fields empty ("").
+- Convert all fraction quantities to decimal format before submission (e.g., "1/2" should be submitted as "0.5").
+- Include all fields as defined in the Zod schema. For any values not present in the image:
+    - Use an empty string "" for string fields.
+    - Use 0 for number fields.
+- The response must be returned in JSON format.
+- Choose one or more appropriate categories from this list: ${JSON.stringify(categories)}
+
+Omit fields that allow null values.
+
+  export const ingredientSchema = z.object({
+    id: z.union([z.string().uuid(), z.number()]).optional(),
+    name: z.string().min(2, { message: 'Namnet måste vara minst 2 bokstäver långt' }),
+    quantity: z.string(),
+    measurement: z.string(),
+    owner: z.string().email().optional(),
+  });
+
+  export type IngredientSchema = z.infer<typeof ingredientSchema>;
+
+  export const instructionSchema = z.object({
+    id: z.union([z.string().uuid(), z.number()]).optional(),
+    step: z.string().min(2, { message: 'Steget måste vara minst 2 bokstäver långt' }),
+    owner: z.string().email().optional(),
+  });
+
+  export type InstructionSchema = z.infer<typeof instructionSchema>;
+
+  export const recipeSchema = z.object({
+    id: z.string().uuid().optional(),
+    name: z.string().min(2, { message: 'Namnet måste vara minst 2 bokstäver långt' }),
+    author: z.string().optional(),
+    url: z.union([z.string(), z.null()]).optional(),
+    categories: z
+      .array(z.string().min(2, { message: 'Namnet måste vara minst 2 bokstäver långt' }))
+      .min(1, { message: 'Du behöver välja minst 1 kategori' }),
+    date_published: z.string().optional(),
+    date_modified: z.string().optional(),
+    recipe_yield: z.number(),
+    recipe_yield_name: z
+      .string()
+      .min(2, { message: 'Namnet på det receptet gör måste vara minst 2 bokstäver långt' }),
+    prep_time: z.number(),
+    cook_time: z.number(),
+    ingredients: z.array(ingredientSchema).min(1, { message: 'Du behöver minst 1 ingrediens' }),
+    instructions: z.array(instructionSchema).min(1, { message: 'Du behöver minst 1 instruktion' }),
+    description: z.string(),
+    image: z.union([z.string(), z.instanceof(Blob), z.null()]).optional(),
+    owner: z.string().email({ message: 'Ogiltig e-postadress' }).optional(),
+  });
+
+  export type RecipeSchema = z.infer<typeof recipeSchema>;
+  `,
+          },
+          {
+            type: 'image_url',
+            image_url: {
+              url: `data:${mimeType};base64,${image}`,
+            },
+          },
+        ],
+      },
+    ],
+  });
+
+  const jsonBlockRegex = /```json\n([\s\S]*?)\n```/;
+  const matches = jsonBlockRegex.exec(response.choices[0].message.content ?? '');
+
+  if (matches && matches[1]) {
+    const jsonContent = matches[1].trim();
+
+    try {
+      const jsonObject = JSON.parse(jsonContent) as RecipeSchema;
+      return jsonObject;
+    } catch (error) {
+      console.error('Failed to parse JSON content:', error);
+      return null;
+    }
+  } else {
+    console.error('No JSON content found');
+    return null;
+  }
+};

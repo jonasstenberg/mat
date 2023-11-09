@@ -9,7 +9,7 @@ export default function Sort() {
   const router = useRouter();
   const pathname = usePathname();
 
-  const handleSort = (s: string) => {
+  const handleSort = (s: string | null) => {
     const params = new URLSearchParams(window.location.search);
     if (s === 'Bokstavsordning') {
       params.set('sort', 'alphabetic');

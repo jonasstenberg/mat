@@ -19,7 +19,7 @@ export default function Filters({ categories, filteredCategoryParam }: FiltersPr
     setFilteredCategory(filteredCategoryParam);
   }, [filteredCategoryParam]);
 
-  const handleCategorySelect = (c: string) => {
+  const handleCategorySelect = (c: string | null) => {
     const params = new URLSearchParams(window.location.search);
     if (c && c.length && c !== 'all') {
       params.set('category', c);
