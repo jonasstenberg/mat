@@ -32,7 +32,6 @@ export default function ImageForm() {
     }
 
     try {
-      console.log('setting loading');
       setIsLoading(true);
       const fileReader = new FileReader();
       fileReader.readAsDataURL(values.image);

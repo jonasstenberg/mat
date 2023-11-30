@@ -256,7 +256,8 @@ Omit fields that allow null values.
     recipe_yield: z.number(),
     recipe_yield_name: z
       .string()
-      .min(2, { message: 'Namnet på det receptet gör måste vara minst 2 bokstäver långt' }),
+      .min(2, { message: 'Namnet på det receptet gör måste vara minst 2 bokstäver långt' })
+      .default('portioner'),
     prep_time: z.number(),
     cook_time: z.number(),
     ingredients: z.array(ingredientSchema).min(1, { message: 'Du behöver minst 1 ingrediens' }),

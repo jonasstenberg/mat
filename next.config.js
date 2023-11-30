@@ -20,4 +20,9 @@ module.exports = {
         ]
       : undefined,
   swcMinify: true,
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '5mb',
+    },
+  },
 };

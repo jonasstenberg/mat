@@ -47,5 +47,5 @@ jobs:
           echo "${{ secrets.APP_SERVER_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H $DOMAIN >> ~/.ssh/known_hosts
-          rsync -azHd ./.next ./package.json ./node_modules root@$DOMAIN:/usr/local/bin/matv2.stenberg.io/
-          ssh -o StrictHostKeyChecking=no root@$DOMAIN 'systemctl restart matv2.service'
+          rsync -azHd ./.next ./package.json ./node_modules root@$DOMAIN:/usr/local/bin/mat.stenberg.io/
+          ssh -o StrictHostKeyChecking=no root@$DOMAIN 'systemctl restart mat.service'

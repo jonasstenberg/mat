@@ -1,6 +1,6 @@
 'use server';
 
-import { chromium, Browser, Page } from 'playwright';
+import puppeteer, { Browser, Page } from 'puppeteer';
 
 import { RecipeSchema, IngredientSchema, InstructionSchema } from '@/types/recipe';
 import { config } from '@/utils/config';
@@ -171,7 +171,7 @@ export const scrapeJsonLd = async (url: string): Promise<RecipeSchema | null> =>
   let page: Page | undefined;
 
   try {
-    browser = await chromium.launch();
+    browser = await puppeteer.launch();
     page = await browser.newPage();
     await page.goto(url, { waitUntil: 'domcontentloaded' });
 
