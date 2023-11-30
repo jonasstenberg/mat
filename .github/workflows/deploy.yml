@@ -48,4 +48,4 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H $DOMAIN >> ~/.ssh/known_hosts
           rsync -azHd ./.next ./package.json ./node_modules jonas@$DOMAIN:/usr/local/bin/mat.stenberg.io/
-          ssh -o StrictHostKeyChecking=no jonas@$DOMAIN 'systemctl restart mat.service'
+          ssh -o StrictHostKeyChecking=no jonas@$DOMAIN 'sudo systemctl restart mat.service'

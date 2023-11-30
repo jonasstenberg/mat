@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "NODE_ENV=production next build",
-    "start": "next start",
+    "start": "next start -p 4000",
     "lint:js": "next lint",
     "lint:js:fix": "next lint --fix",
     "lint:css": "stylelint \"**/*.css\"",
