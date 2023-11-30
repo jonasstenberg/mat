@@ -6,7 +6,6 @@ import dyn from 'next/dynamic';
 import { getServerSession } from 'next-auth';
 import { serialize } from 'tinyduration';
 
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { getRecipe } from '@/lib/recipes';
 import styles from './styles.module.css';
 import Ingredients from './Ingredients';
@@ -15,6 +14,7 @@ import { config } from '@/utils/config';
 import { capitalizeFirstLetter } from '@/utils/strings';
 import { RecipeSchema } from '@/types/recipe';
 import Instructions from './Instructions';
+import { authOptions } from '@/utils/nextAuthOptions';
 
 export const dynamic = 'force-dynamic';
 export const fetchCache = 'force-no-store';

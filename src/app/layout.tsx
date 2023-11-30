@@ -13,11 +13,11 @@ import styles from '@/app/page.module.css';
 import { lora } from '@/styles/fonts';
 
 import { getCategories } from '@/lib/categories';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import Providers from '@/components/Providers';
 import { theme } from '@/theme';
 import Navbar from '@/components/Navbar';
 import { getUser } from '@/actions/user';
+import { authOptions } from '@/utils/nextAuthOptions';
 
 const RecipeModal = dynamic(() => import('@/components/Modals/Recipe/RecipeModal'), {
   loading: () => <p />,

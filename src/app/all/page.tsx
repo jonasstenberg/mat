@@ -1,8 +1,8 @@
 import { getServerSession } from 'next-auth';
 import { getRecipes } from '@/lib/recipes';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import Recipes from '@/components/Recipes';
 import { getCategories } from '@/lib/categories';
+import { authOptions } from '@/utils/nextAuthOptions';
 
 export type AllProsp = {
   searchParams?: {

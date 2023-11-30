@@ -3,9 +3,9 @@ import { getServerSession } from 'next-auth';
 // import allMeasures from 'convert-units/lib/esm/definitions';
 
 import { getRecipes } from '@/lib/recipes';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import Recipes from '@/components/Recipes';
 import { getCategories } from '@/lib/categories';
+import { authOptions } from '@/utils/nextAuthOptions';
 
 export type HomeProps = {
   searchParams?: {

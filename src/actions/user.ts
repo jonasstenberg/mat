@@ -7,8 +7,8 @@ import { PasswordChangeSchema, UserSchema, UserProfileSchema } from '@/types/use
 import { config } from '@/utils/config';
 import { validateServerResponse } from '@/utils/handleServerErrors';
 import { UNKNOWN_ERROR } from '@/utils/errors';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { Result, ResultVoid } from '@/utils/result';
+import { authOptions } from '@/utils/nextAuthOptions';
 
 const getAuthorizedHeaders = () => {
   const getAuthToken = cookies().get(`${config.cookieSecurePrefix}next-auth.session-token`)?.value;
